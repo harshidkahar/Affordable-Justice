@@ -1,0 +1,99 @@
+
+@{
+    ViewData["Title"] = "Sign Up";
+
+    Layout = KTTheme.GetView("Auth.cshtml");
+
+    KTTheme.AddJavascriptFile("js/custom/authentication/sign-up/general.js");
+    
+}
+<!--begin::Form-->
+<form class="form w-100" novalidate="novalidate" id="kt_sign_up_form" data-kt-redirect-url="/register" action="#">
+    <!--begin::Heading-->
+    <div class="text-center mb-11">
+        <!--begin::Title-->
+        <h1 class="text-dark fw-bolder mb-3">
+            Sign Up
+        </h1>
+        <!--end::Title-->
+        <!--begin::Subtitle-->
+        <div class="text-gray-500 fw-semibold fs-6">
+            Affordable Justice
+        </div>
+        <!--end::Subtitle--->
+    </div>
+    <!--begin::Heading-->
+    <!--begin::Input group--->
+    <div class="fv-row mb-8">
+        <!--begin::Referral Code-->
+        <input type="text" placeholder="Referral Code" name="ReferralCode" autocomplete="off" class="form-control bg-transparent" id="ReferralCode" value="@ViewData["RefCode"]" />
+        <!--end::Referral Code-->
+    </div>
+    <!--end::Input group--->
+    <!--begin::Input group--->
+    <div class="fv-row mb-8">
+        <!--begin::Name-->
+        <input type="text" placeholder="First Name" name="first-name" autocomplete="off" class="form-control bg-transparent" />
+    </div>
+    <!--end::Input group--->
+    <!--begin::Input group--->
+    <div class="fv-row mb-8">
+        <!--begin::Name-->
+        <input type="text" placeholder="Last Name" name="last-name" autocomplete="off" class="form-control bg-transparent" />
+        <!--end::Name-->
+    </div>
+    <!--end::Input group--->
+    <!--begin::Input group--->
+    <div class="fv-row mb-8">
+        <!--begin::Email-->
+        <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+        <!--end::Email-->
+    </div>
+
+    <!--end::Input group--->
+    <div class="fv-row mb-8">
+        <!--begin::Phone Number-->
+        <input type="text" placeholder="Phone Number" name="phone" autocomplete="off" class="form-control bg-transparent" />
+        <!--end::Phone Number-->
+    </div>
+    <!--end::Input group--->
+    <!--begin::Input group-->
+    @* <div class="fv-row mb-8">
+        <div class="form-group row">
+            <label class="col-sm-5 col-form-label">Upload Emirates ID</label>
+            <div class="col-sm-7">
+                <input type="file" id="fileUpload" class="form-control">
+            </div>
+        </div>
+    </div> *@
+    <!--end::Input group-->
+    <!--begin::Accept-->
+    <div class="fv-row mb-8">
+        <label class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" name="toc" value="1" />
+            <span class="form-check-label fw-semibold text-gray-700 fs-base ms-1">
+                I Accept the <a href="#" class="ms-1 link-primary">Terms</a>
+            </span>
+        </label>
+    </div>
+    <!--end::Accept-->
+    <!--begin::Submit button-->
+    <div class="d-grid mb-10">
+        <button type="submit" id="kt_sign_up_submit" class="btn btn-primary">
+            @await Html.PartialAsync("~/Views/Partials/General/_ButtonIndicator.cshtml", new ViewDataDictionary(ViewData) {
+            { "ButtonLabel", "Sign Up" },
+            })
+        </button>
+    </div>
+    <!--end::Submit button-->
+    <!--begin::Sign up-->
+    <div class="text-gray-500 text-center fw-semibold fs-6">
+        Already have an Account?
+
+        <a href="/signin" class="link-primary fw-semibold">
+            Sign in
+        </a>
+    </div>
+    <!--end::Sign up-->
+</form>
+<!--end::Form-->

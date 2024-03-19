@@ -1,0 +1,30 @@
+﻿@{
+    ViewData["Title"] = "Dashboard";
+    KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
+}
+
+<!--begin::Row-->
+<div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+    <!--begin::Col-->
+    <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
+        <partial name='~/Views/Partials/Widgets/Cards/_Widget20.cshtml' />
+        <partial name='~/Views/Partials/Widgets/Cards/_Widget7.cshtml' />
+    </div>
+    <!--end::Col-->
+    <!--begin::Col-->
+    @* <div class="col-md-6 col-lg-6 col-xl-6 col-xxl-3 mb-md-5 mb-xl-10">
+    <partial name='~/Views/Partials/Widgets/Cards/_Widget17.cshtml' />
+    <partial name='~/Views/Partials/Widgets/Lists/_Widget26.cshtml' />
+    </div> *@
+    <!--end::Col-->
+    <!--begin::Col-->
+    <div class="col-xxl-6">
+        <partial name='~/Views/Partials/Widgets/Engage/_Widget10.cshtml' />
+    </div>
+    <!--end::Col-->
+</div>
+<!--end::Row-->
+
+<div class="row g-5 g-xl-10 mb-5 mb-xl-10">
+    <partial name='~/Views/Partials/Widgets/Cards/_WidgetServices.cshtml' />
+</div>

@@ -1,0 +1,355 @@
+﻿
+<!--begin::Modal - Support Center - Create Ticket-->
+<div class="modal fade" id="kt_modal_create_case" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-750px">
+        <!--begin::Modal content-->
+        <div class="modal-content rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <i class="ki-duotone ki-cross fs-1">
+                        <span class="path1"></span>
+                        <span class="path2"></span>
+                    </i>
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                <!--begin:Form-->
+                <form id="kt_modal_create_case" class="form" action="#" data-kt-redirect-url="#kt_modal_manage_documents">
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-3">Create Case</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-gray-400 fw-semibold fs-5">
+                            If you need more info, please check
+                            <a href="" class="fw-bold link-primary">Case Guidelines</a>.
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold mb-2">Case Type</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true">
+                                <option value="1" selected="selected">COMPLAINANT</option>
+                                <option value="2">RESPONDENT</option>
+                            </select>
+                            <!--end::Label-->
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold mb-2">Case Type</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" id="caseType1">
+                                <option value="CIVIL" selected="selected">CIVIL</option>
+                                <option value="CRIMINAL">CRIMINAL</option>
+                                <option value="OTHERS">OTHERS</option>
+                                <option value="PERSONAL STATUS">PERSONAL STATUS</option>
+                            </select>
+                            <!--end::Label-->
+                        </div>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="required fs-6 fw-semibold mb-2">Case Type</label>
+                        <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" id="caseType2">
+                            <option value="CIVIL">INDIVIDUAL CONTRACT DISPUTE</option>
+                            <option value="CIVIL">PERSONAL INJURY CLAIMS</option>
+                            <option value="CIVIL">REAL ESTATE DISPUTES</option>
+                            <option value="CIVIL">EMPLOYMENT DISPUTE</option>
+                            <option value="CIVIL">ACCIDENTAL CLAIM DISPUTE</option>
+                            <option value="CIVIL">BANKING & FINANCIAL DISPUTE</option>
+                            <option value="CIVIL">INSURANCE DISPUTE</option>
+                            <option value="CIVIL">LABOUR DISPUTE</option>
+                            <option value="CIVIL">CONSUMER DISPUTE</option>
+                            <option value="CIVIL">CYBER CRIME</option>
+                            <option value="CIVIL">TAXES</option>
+                            <option value="CRIMINAL">DEFAMATION</option>
+                            <option value="CRIMINAL">CHEQUE BOUNCING</option>
+                            <option value="CRIMINAL">DRUGS</option>
+                            <option value="CRIMINAL">THEFT</option>
+                            <option value="CRIMINAL">ROBBERY</option>
+                            <option value="CRIMINAL">HUMAN TRAFFICKING</option>
+                            <option value="CRIMINAL">EXTRADITION</option>
+                            <option value="CRIMINAL">BODILY CRIME</option>
+                            <option value="CRIMINAL">CRIME AGAINST STATE</option>
+                            <option value="CRIMINAL">SEXUAL CRIME</option>
+                            <option value="CRIMINAL">FINANCIAL FRAUD</option>
+                            <option value="CRIMINAL">INTERPOL</option>
+                            <option value="CRIMINAL">SMUGGLING</option>
+                            <option value="OTHERS">NOTICES</option>
+                            <option value="OTHERS">AGREEMENTS</option>
+                            <option value="OTHERS">CONTRACTS</option>
+                            <option value="OTHERS">CONSULTATIONS</option>
+                            <option value="OTHERS">FINES</option>
+                            <option value="PERSONAL STATUS">ADULTERY</option>
+                            <option value="PERSONAL STATUS">ALIMONY</option>
+                            <option value="PERSONAL STATUS">CHILD CUSTODY</option>
+                            <option value="PERSONAL STATUS">DIVORCE</option>
+                            <option value="PERSONAL STATUS">INHERITANCE</option>
+                        </select>
+                        <!--end::Label-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <label class="required fs-6 fw-semibold mb-2">Any proceedings yet</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true">
+                                <option value="1" selected="selected">Yes</option>
+                                <option value="2">No</option>
+                            </select>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <label class="required fs-6 fw-semibold mb-2">Date commenced</label>
+                            <!--begin::Input-->
+                            <div class="position-relative d-flex align-items-center">
+                                <!--begin::Icon-->
+                                <div class="symbol symbol-20px me-4 position-absolute ms-4">
+                                    <span class="symbol-label bg-secondary">
+                                        <i class="ki-duotone ki-element-11">
+                                            <span class="path1"></span>
+                                            <span class="path2"></span>
+                                            <span class="path3"></span>
+                                            <span class="path4"></span>
+                                        </i>
+                                    </span>
+                                </div>
+                                <!--end::Icon-->
+                                <!--begin::Datepicker-->
+                                <input class="form-control form-control-solid ps-12" placeholder="Select a date" name="date_commenced" />
+                                <!--end::Datepicker-->
+                            </div>
+                            <!--end::Input-->
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="fv-row mb-8">
+                        <label class="fs-6 fw-semibold mb-2">Documents</label>
+                        <!--begin::Dropzone-->
+                        <div class="dropzone" id="kt_modal_create_ticket_attachments">
+                            <!--begin::Message-->
+                            <div class="dz-message needsclick align-items-center">
+                                <!--begin::Icon-->
+                                <i class="ki-duotone ki-file-up fs-3hx text-primary">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                                <!--end::Icon-->
+                                <!--begin::Info-->
+                                <div class="ms-4">
+                                    <h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop files here or click to upload.</h3>
+                                    <span class="fw-semibold fs-7 text-gray-400">Upload all files related to case</span>
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                        </div>
+                        <!--end::Dropzone-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span>Previous Case Number</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Write your Previous Case Number">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write your Previous Case Number" name="previous_case_number" />
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Current Case Number</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Current Case Number">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write your Current Case Number" name="current_case_number" />
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Label-->
+                            <label class="required fs-6 fw-semibold mb-2">Any legal advice inferred</label>
+                            <!--end::Label-->
+                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true">
+                                <option value="1">Yes</option>
+                                <option value="2" selected="selected">No</option>
+                            </select>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Which Court</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Which Court">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write your in which court your case is registered" name="which_court" />
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <div class="py-5">
+                        <h3>Opposition Details</h3>
+
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Full Name</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition full name">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition full name" name="fullname" />
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Email Address</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Email Address">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Email Address" name="email" />
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span class="required">Phone Number</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Phone Number">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Phone Number" name="phone" />
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span>Emirates ID</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Emirates ID">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Emirates ID" name="emiratesId" />
+                        </div>
+                        <!--end::Input group-->
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column mb-8 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-semibold mb-2">
+                                <span>Passport Number</span>
+                                <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Passport Number">
+                                    <i class="ki-duotone ki-information fs-7">
+                                        <span class="path1"></span>
+                                        <span class="path2"></span>
+                                        <span class="path3"></span>
+                                    </i>
+                                </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Passport Number" name="emiratesId" />
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <label class="fs-6 fw-semibold mb-2"><span class="required">Description</span> </label>
+                        <textarea class="form-control form-control-solid" rows="4" name="case_description" placeholder="Type your case description"></textarea>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Actions-->
+                    <div class="text-center">
+                        <button type="reset" id="kt_modal_new_ticket_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="submit" id="kt_modal_create_case_submit" class="btn btn-primary" data-bs-target="#kt_modal_manage_documents">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                            </span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - Support Center - Create Ticket-->

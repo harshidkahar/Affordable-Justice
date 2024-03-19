@@ -1,0 +1,812 @@
+﻿@{
+    ViewData["Title"] = "View Case List";
+    // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
+
+    KTTheme.AddJavascriptFile("plugins/custom/datatables/datatables.bundle.js");
+}
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <!--begin::Products-->
+        <div class="card card-flush">
+            <!--begin::Card header-->
+            <div class="card-header align-items-center py-5 gap-2 gap-md-5">
+                <!--begin::Card title-->
+                <div class="card-title">
+                    <!--begin::Search-->
+                    <div class="d-flex align-items-center position-relative my-1">
+                        <i class="ki-duotone ki-magnifier fs-3 position-absolute ms-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                        <input type="text" data-kt-ecommerce-order-filter="search" class="form-control form-control-solid w-250px ps-12" placeholder="Search Case" />
+                    </div>
+                    <!--end::Search-->
+                    <!--begin::Export buttons-->
+                    <div id="kt_ecommerce_report_shipping_export" class="d-none"></div>
+                    <!--end::Export buttons-->
+                </div>
+                <!--end::Card title-->
+                <!--begin::Card toolbar-->
+                <div class="card-toolbar flex-row-fluid justify-content-end gap-5">
+                    <!--begin::Daterangepicker-->
+                    <input class="form-control form-control-solid w-100 mw-250px" placeholder="Pick date range" id="kt_ecommerce_report_shipping_daterangepicker" />
+                    <!--end::Daterangepicker-->
+                    <!--begin::Filter-->
+                    <div class="w-150px">
+                        <!--begin::Select2-->
+                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Status" data-kt-ecommerce-order-filter="status">
+                            <option></option>
+                            <option value="all">All</option>
+                            <option value="Completed">Completed</option>
+                            <option value="In Transit">In Transit</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Cancelled">Cancelled</option>
+                        </select>
+                        <!--end::Select2-->
+                    </div>
+                    <!--end::Filter-->
+                    <!--begin::Export dropdown-->
+                    <button type="button" class="btn btn-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                        <i class="ki-duotone ki-exit-up fs-2">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>Export Report
+                    </button>
+                    <!--begin::Menu-->
+                    <div id="kt_ecommerce_report_shipping_export_menu" class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-200px py-4" data-kt-menu="true">
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3" data-kt-ecommerce-export="copy">Copy to clipboard</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3" data-kt-ecommerce-export="excel">Export as Excel</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3" data-kt-ecommerce-export="csv">Export as CSV</a>
+                        </div>
+                        <!--end::Menu item-->
+                        <!--begin::Menu item-->
+                        <div class="menu-item px-3">
+                            <a href="#" class="menu-link px-3" data-kt-ecommerce-export="pdf">Export as PDF</a>
+                        </div>
+                        <!--end::Menu item-->
+                    </div>
+                    <!--end::Menu-->
+                    <!--end::Export dropdown-->
+                </div>
+                <!--end::Card toolbar-->
+            </div>
+            <!--end::Card header-->
+            <!--begin::Card body-->
+            <div class="card-body pt-0">
+                <!--begin::Table-->
+                <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_report_shipping_table">
+                    <thead>
+                        <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
+                            <th class="min-w-100px">Date</th>
+                            <th class="min-w-100px">Date Commenced</th>
+                            <th class="min-w-100px">Case Type</th>
+                            <th class="min-w-100px">Status</th>
+                            <th class="min-w-100px">Previous Case Number</th>
+                            <th class="min-w-100px">Current Case Number</th>
+                        </tr>
+                    </thead>
+                    <tbody class="fw-semibold text-gray-600">
+                        <tr>
+                            <td>Oct 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0029176</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">8</td>
+                            <td class="text-end">$581.00</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0058811</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">10</td>
+                            <td class="text-end">$146.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0067302</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$461.00</td>
+                        </tr>
+                        <tr>
+                            <td>Apr 15, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0028509</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-warning">Pending</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">1</td>
+                            <td class="text-end">$343.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0068556</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-primary">In Transit</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">15</td>
+                            <td class="text-end">$65.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0035754</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">11</td>
+                            <td class="text-end">$114.00</td>
+                        </tr>
+                        <tr>
+                            <td>Sep 22, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0033003</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$35.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jul 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0032450</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">5</td>
+                            <td class="text-end">$301.00</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0061505</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">15</td>
+                            <td class="text-end">$374.00</td>
+                        </tr>
+                        <tr>
+                            <td>Apr 15, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0042938</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">12</td>
+                            <td class="text-end">$235.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0045999</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">2</td>
+                            <td class="text-end">$462.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0052936</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$456.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 10, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0041681</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">18</td>
+                            <td class="text-end">$364.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0055960</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">9</td>
+                            <td class="text-end">$436.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0038854</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">1</td>
+                            <td class="text-end">$520.00</td>
+                        </tr>
+                        <tr>
+                            <td>Apr 15, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0037374</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">8</td>
+                            <td class="text-end">$477.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jul 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0031343</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">19</td>
+                            <td class="text-end">$136.00</td>
+                        </tr>
+                        <tr>
+                            <td>Sep 22, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0063643</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">1</td>
+                            <td class="text-end">$203.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0065766</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">6</td>
+                            <td class="text-end">$512.00</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0062752</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">10</td>
+                            <td class="text-end">$499.00</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0034158</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">6</td>
+                            <td class="text-end">$79.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0045667</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-warning">Pending</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">5</td>
+                            <td class="text-end">$132.00</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0049108</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">2</td>
+                            <td class="text-end">$30.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0042122</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">6</td>
+                            <td class="text-end">$327.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0056636</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">15</td>
+                            <td class="text-end">$42.00</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0040323</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">5</td>
+                            <td class="text-end">$524.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0052352</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-primary">In Transit</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">12</td>
+                            <td class="text-end">$526.00</td>
+                        </tr>
+                        <tr>
+                            <td>Oct 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0039980</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$414.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0049878</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">7</td>
+                            <td class="text-end">$163.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 10, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0025934</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">3</td>
+                            <td class="text-end">$260.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0027407</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">11</td>
+                            <td class="text-end">$506.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 10, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0049151</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">12</td>
+                            <td class="text-end">$87.00</td>
+                        </tr>
+                        <tr>
+                            <td>Sep 22, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0041836</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$222.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jul 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0065638</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">11</td>
+                            <td class="text-end">$199.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0029339</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-warning">Pending</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">7</td>
+                            <td class="text-end">$372.00</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0061123</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">15</td>
+                            <td class="text-end">$370.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 10, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0025237</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">16</td>
+                            <td class="text-end">$542.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0061324</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">11</td>
+                            <td class="text-end">$389.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0058296</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">11</td>
+                            <td class="text-end">$502.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0041499</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-warning">Pending</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">1</td>
+                            <td class="text-end">$145.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0043832</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">7</td>
+                            <td class="text-end">$157.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 21, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0043274</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">4</td>
+                            <td class="text-end">$301.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0036855</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">11</td>
+                            <td class="text-end">$440.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jul 25, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0058980</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-primary">In Transit</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$121.00</td>
+                        </tr>
+                        <tr>
+                            <td>Aug 19, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0037744</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-danger">Cancelled</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">17</td>
+                            <td class="text-end">$349.00</td>
+                        </tr>
+                        <tr>
+                            <td>Mar 10, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0042558</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">10</td>
+                            <td class="text-end">$325.00</td>
+                        </tr>
+                        <tr>
+                            <td>Feb 21, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0026538</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$400.00</td>
+                        </tr>
+                        <tr>
+                            <td>Dec 20, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0030318</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">1</td>
+                            <td class="text-end">$364.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0028975</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-success">Completed</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">13</td>
+                            <td class="text-end">$354.00</td>
+                        </tr>
+                        <tr>
+                            <td>Jun 24, 2023</td>
+                            <td>Flat Shipping Rate</td>
+                            <td>
+                                <a href="../../demo1/dist/apps/ecommerce/sales/details.html" class="text-dark text-hover-primary">#SHP-0062086</a>
+                            </td>
+                            <td>
+                                <!--begin::Badges-->
+                                <div class="badge badge-light-primary">In Transit</div>
+                                <!--end::Badges-->
+                            </td>
+                            <td class="text-end pe-0">4</td>
+                            <td class="text-end">$500.00</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <!--end::Table-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Products-->
+    </div>
+    <!--end::Content container-->
+</div>
+<!--end::Content-->

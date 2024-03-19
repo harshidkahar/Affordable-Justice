@@ -1,0 +1,1222 @@
+﻿@{
+    // Master layout
+    Layout = "~/Views/Layout/Master.cshtml";
+
+    // Layout options
+    KTTheme.AddHtmlClass("body", "app-blank");
+}
+<!--begin::Root-->
+<div class="d-flex flex-column flex-root" id="kt_app_root">
+    <!--begin::Header Section-->
+    <div class="mb-0" id="home">
+        <!--begin::Wrapper-->
+        <div class="bgi-no-repeat bgi-size-contain bgi-position-x-center bgi-position-y-bottom landing-dark-bg" style="background-image: url(assets/media/svg/illustrations/dubai.svg)">
+            <!--begin::Header-->
+            <div class="landing-header" data-kt-sticky="true" data-kt-sticky-name="landing-header" data-kt-sticky-offset="{default: '200px', lg: '300px'}">
+                <!--begin::Container-->
+                <div class="container">
+                    <!--begin::Wrapper-->
+                    <div class="d-flex align-items-center justify-content-between">
+                        <!--begin::Logo-->
+                        <div class="d-flex align-items-center flex-equal">
+                            <!--begin::Mobile menu toggle-->
+                            <button class="btn btn-icon btn-active-color-primary me-3 d-flex d-lg-none" id="kt_landing_menu_toggle">
+                                <i class="ki-duotone ki-abstract-14 fs-2hx">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </button>
+                            <!--end::Mobile menu toggle-->
+                            <!--begin::Logo image-->
+                            <a href="/">
+                                <img alt="Logo" src="assets/media/logos/logo.png" class="logo-default h-25px h-lg-30px" />
+                                <img alt="Logo" src="assets/media/logos/logo.png" class="logo-sticky h-20px h-lg-25px" />
+                            </a>
+                            <!--end::Logo image-->
+                        </div>
+                        <!--end::Logo-->
+                        <!--begin::Menu wrapper-->
+                        <div class="d-lg-block" id="kt_header_nav_wrapper">
+                            <div class="d-lg-block p-5 p-lg-0" data-kt-drawer="true" data-kt-drawer-name="landing-menu" data-kt-drawer-activate="{default: true, lg: false}" data-kt-drawer-overlay="true" data-kt-drawer-width="200px" data-kt-drawer-direction="start" data-kt-drawer-toggle="#kt_landing_menu_toggle" data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_body', lg: '#kt_header_nav_wrapper'}">
+                                <!--begin::Menu-->
+                                <div class="menu menu-column flex-nowrap menu-rounded menu-lg-row menu-title-gray-600 menu-state-title-primary nav nav-flush fs-5 fw-semibold" id="kt_landing_menu">
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Home</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#how-it-works" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it Works</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#achievements" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Achievements</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#team" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Team</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#portfolio" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Portfolio</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item">
+                                        <!--begin::Menu link-->
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#pricing" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Pricing</a>
+                                        <!--end::Menu link-->
+                                    </div>
+                                    <!--end::Menu item-->
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                        </div>
+                        <!--end::Menu wrapper-->
+                        <!--begin::Toolbar-->
+                        <div class="flex-equal text-end ms-1">
+                            <a href="signin/" class="btn btn-success">Sign In</a>
+                        </div>
+                        <!--end::Toolbar-->
+                    </div>
+                    <!--end::Wrapper-->
+                </div>
+                <!--end::Container-->
+            </div>
+            <!--end::Header-->
+            <!--begin::Landing hero-->
+            <div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+                <!--begin::Heading-->
+                <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
+                    <!--begin::Title-->
+                    <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">
+                        Happy to serve you,
+                        <br />with
+                        <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                            <span id="kt_landing_hero_text">
+                                High quality and less cost
+                            </span>
+                        </span>
+                        <div class="fs-5 text-light fw-bold">
+                            We are pleased to be your first choice for direct legal services, <br />our high quality service at a lower cost. <br />While maintaining the confidentiality and privacy of our valued clients.
+                        </div>
+                    </h1>
+                    <!--end::Title-->
+                    <!--begin::Action-->
+                    <a href="signup/" class="btn btn-primary">Join Us Now</a>
+                    <!--end::Action-->
+                </div>
+                <!--end::Heading-->
+                <!--begin::Clients-->
+                <div class="d-flex flex-center flex-wrap position-relative px-5">
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6 text-white" data-bs-toggle="tooltip" title="Confidence">
+                        <i class="ki-solid ki-check text-white fs-3x"></i>Confidence
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6 text-white" data-bs-toggle="tooltip" title="Perfection">
+                        <i class="ki-solid ki-check text-white fs-2x"></i>Perfection
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6 text-white" data-bs-toggle="tooltip" title="Excellence">
+                        <i class="ki-solid ki-check text-white fs-2x"></i>Excellence
+                    </div>
+                    <!--end::Client-->
+                    <!--begin::Client-->
+                    <div class="d-flex flex-center m-3 m-md-6 text-white" data-bs-toggle="tooltip" title="Services">
+                        <i class="ki-solid ki-check text-white fs-2x"></i>Services
+                    </div>
+                    <!--end::Client-->
+                </div>
+                <!--end::Clients-->
+            </div>
+            <!--end::Landing hero-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Curve bottom-->
+        <div class="landing-curve landing-dark-color mb-10 mb-lg-20">
+            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve bottom-->
+    </div>
+    <!--end::Header Section-->
+    <!--begin::Team Section-->
+    <div class="py-10 py-lg-20">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-12">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-dark mb-5" id="team" data-kt-scroll-offset="{default: 100, lg: 150}">Explore Our Services</h3>
+                <!--end::Title-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Slider-->
+            <div class="tns tns-default">
+                <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_court.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Courts</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_police.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Police</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/united_arab_emirates_misnistry_of_labour.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Ministry Of Labour & Tasheel</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_economy.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Department Of Economics</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                </div>
+                <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/fedral_authority.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Immigration Department</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_municipality.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Municipality</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class=" mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/fedral_authority.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Emirates ID Authority</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/rta.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Road and Transport Authority</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                </div>
+
+                <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/emigration_clerance.jpg')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Emigration Clearance</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_health_authority.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Health Authority</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/account.png')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Accounting & Book Keeping</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1"></div>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                    <div class="col-md-3 col-xxl-3">
+                        <div class="card">
+                            <!--begin::Card body-->
+                            <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                                <!--begin::Item-->
+                                <div class="text-center">
+                                    <!--begin::Photo-->
+                                    <div class="circle mx-auto mb-5 d-flex w-100px h-100px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/court_hammer.jpeg')"></div>
+                                    <!--end::Photo-->
+                                    <!--begin::Person-->
+                                    <div class="mb-0">
+                                        <!--begin::Name-->
+                                        <h1>New Here</h1>
+                                        <a href="signup/" class="text-dark fw-bold text-hover-primary fs-3">Sign Up Now</a>
+                                        <!--end::Name-->
+                                        <!--begin::Position-->
+                                        <div class="text-muted fs-6 fw-semibold mt-1">Already a Coustomer</div>
+                                        <a href="signin/" class="text-dark fw-bold text-hover-primary fs-5">Login</a>
+                                        <!--begin::Position-->
+                                    </div>
+                                    <!--end::Person-->
+                                </div>
+                                <!--end::Item-->
+                            </div>
+                            <!--begin::Card body-->
+                        </div>
+                        <!--begin::Card-->
+                    </div>
+                </div>
+            </div>
+            <!--end::Slider-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Team Section-->
+    <!--begin::How It Works Section-->
+    <div class="mb-n10 mb-xl-3  z-index-2">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            @* <div class="text-center mb-17">
+            <!--begin::Title-->
+            <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">How it Works</h3>
+            <!--end::Title-->
+            <!--begin::Text-->
+            <div class="fs-5 text-muted fw-bold">
+            Save thousands to millions of bucks by using single tool
+            <br />for different amazing and great useful admin
+            </div>
+            <!--end::Text-->
+            </div> *@
+            <!--end::Heading-->
+            <!--begin::Row-->
+            <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
+                <!--begin::Followers-->
+                <!--begin::Col-->
+                <div class="col-md-3 col-xxl-3">
+                    <!--begin::Card-->
+                    <div class="card">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                <img src="assets/media//avatars/300-11.jpg" alt="image" />
+                                <div class="bg-success position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-body h-15px w-15px ms-n3 mt-n3"></div>
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Company Formation</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fw-semibold text-gray-400 mb-6 text-center">Our experts will understand your requirements, advice you and then register a company for you.</div>
+                            <!--end::Position-->
+                            <!--begin::Follow-->
+
+                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">Main Land (DED)</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">Free Zone</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">RENEWAL</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Follow-->
+                        </div>
+                        <!--begin::Card body-->
+                    </div>
+                    <!--begin::Card-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3 col-xxl-3">
+                    <!--begin::Card-->
+                    <div class="card">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                <img src="assets/media//avatars/300-32.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Audit Company</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fw-semibold text-gray-400 mb-6">UAE has been making constant changes on the tax lawas. To help the company's grow. Our tax consultants constantly upgrading themselves.</div>
+                            <!--end::Position-->
+                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">Company Audit</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">Individual Audit</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">TAX Advise</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--begin::Card body-->
+                    </div>
+                    <!--begin::Card-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3 col-xxl-3">
+                    <!--begin::Card-->
+                    <div class="card">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                <img src="assets/media//avatars/300-31.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">LEGAL CONSULTATION</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fw-semibold text-gray-400 mb-6">Language barrier is the major issue faced by experts. To cater to the same our experts speak ARABIC, ENGLISH, HINDI, RUSSIAN, UKRAINIAN.</div>
+                            <!--end::Position-->
+                            <!--begin::Follow-->
+
+                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">CIVIL</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">CRIMINAL</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">TAX</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Follow-->
+                        </div>
+                        <!--begin::Card body-->
+                    </div>
+                    <!--begin::Card-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3 col-xxl-3">
+                    <!--begin::Card-->
+                    <div class="card">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                <img src="assets/media//avatars/300-6.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">BUSINESS CONSULTATION</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fw-semibold text-gray-400 mb-6">Our experts will understand your business ideas and requirements and accordingly line up meetings for your specific needs. We bridge between two entities.</div>
+                            <!--end::Position-->
+                            <!--begin::Follow-->
+
+                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">FINANCE</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">CONSTRUCTION</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start">
+                                            <span class="fs-4 fw-bold">TRADING</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Follow-->
+                        </div>
+                        <!--begin::Card body-->
+                    </div>
+                    <!--begin::Card-->
+                </div>
+                <!--end::Col-->
+                <!--end::Followers-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row w-100 gy-10 mb-md-20">
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="assets/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9" alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Public Prosecution Services</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+                            We provide prosecution services for all prosecutions of the United Arab Emirates (Federal – Abu Dhabi – Dubai – Ajman – Sharjah – Umm Al Quwain – Ras Al Khaimah – Fujairah).
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="assets/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9" alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Registration of judicial cases</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+                            We provide services of registering cases before all state courts of all kinds, including (Commercial, civil, labor, personal status for Muslims, personal status for non-Muslims, urgent orders) courts of all degrees (First Instance, Appeal, Cassation, and Supreme Federal).
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="assets/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9" alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bold text-dark">Notary Public Services</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+                            Through the services of documenting and certifying customary documents by the government notary or through the private notary.
+                            Additionally, Tadween Centers provide the service of moving private notary at special prices.
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::How It Works Section-->
+    <!--begin::Statistics Section-->
+    <div class="mt-sm-n10 top-50">
+        <!--begin::Curve top-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve top-->
+        <!--begin::Wrapper-->
+        <div class="pb-15 pt-18 landing-dark-bg">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Heading-->
+                <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
+                    <!--begin::Title-->
+                    <h3 class="fs-2hx text-white fw-bold mb-5">WHO WE ARE</h3>
+                    <!--end::Title-->
+                    <!--begin::Description-->
+                    <div class="fs-2 fw-semibold text-muted text-center mb-3">
+                        General Manager Mr. Ali Alalawi, opened the first specialized center providing direct legal services in the United Arab Emirates and abroad.
+                        <br /><br />
+                        Our aim to provide the best legal services to our clients, through the developments of digital that includes all accepts of legal fields.
+
+                        <br /><br />
+                        The Tadween Centers were established to keep up with the developments and pace of the world.
+
+                        <br /><br />
+                        Tadween Centers has a group of specialized legal personnel, trained and distinguished legal cadres, along with experience in state courts.
+                    </div>
+                    <!--end::Description-->
+                </div>
+                <!--end::Heading-->
+                <!--begin::Testimonial-->
+                <h3 class="fs-2hx text-white fw-bold mb-5 text-center">How we proceed in Affordable Justice</h3>
+                <div class="fs-2 fw-semibold text-muted text-center mb-3">
+                    We have an elite team of lawyers, who are specialized and trained
+                    <br />
+                    to provide
+                    the best legal service. Additionally, providing a 24-hour service.
+                </div>
+                <!--end::Testimonial-->
+                <!--begin::Statistics-->
+                <div class="d-flex flex-center">
+                    <!--begin::Items-->
+                    <div class="d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px">
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-phone fs-2tx text-white mb-3">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px">Contact Us</div>
+                                </div>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-information fs-2tx text-white mb-3">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                                <span class="path3"></span>
+                            </i>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px">Inform Us</div>
+                                </div>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain" style="background-image: url('assets/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <i class="ki-duotone ki-file-up fs-2tx text-white mb-3">
+                                <span class="path1"></span>
+                                <span class="path2"></span>
+                            </i>
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
+                            <div class="mb-0">
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bold text-white d-flex flex-center">
+                                    <div class="min-w-70px">We Follow Up</div>
+                                </div>
+                                <!--end::Value-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Item-->
+                    </div>
+                    <!--end::Items-->
+                </div>
+                <!--end::Statistics-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Wrapper-->
+        <!--begin::Curve bottom-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve bottom-->
+    </div>
+    <!--end::Statistics Section-->
+    <!--begin::Testimonials Section-->
+    <div class="mt-20 mb-n20 position-relative z-index-2">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-17">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What Our Clients Say</h3>
+                <!--end::Title-->
+                <!--begin::Description-->
+                <div class="fs-5 text-muted fw-bold">
+                    Save thousands to millions of bucks by using single tool
+                    <br />for different amazing and great useful admin
+                </div>
+                <!--end::Description-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Row-->
+            <div class="row g-lg-10 mb-10 mb-lg-20">
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Rating-->
+                            <div class="rating mb-6">
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                            </div>
+                            <!--end::Rating-->
+                            <!--begin::Title-->
+                            <div class="fs-2 fw-bold text-dark mb-3">
+                                This is by far the cleanest template
+                                <br />and the most well structured
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Author-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-circle symbol-50px me-5">
+                                <img src="assets/media/avatars/300-1.jpg" class="" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <div class="flex-grow-1">
+                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Paul Miles</a>
+                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                            </div>
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Author-->
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Rating-->
+                            <div class="rating mb-6">
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                            </div>
+                            <!--end::Rating-->
+                            <!--begin::Title-->
+                            <div class="fs-2 fw-bold text-dark mb-3">
+                                This is by far the cleanest template
+                                <br />and the most well structured
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Author-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-circle symbol-50px me-5">
+                                <img src="assets/media/avatars/300-2.jpg" class="" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <div class="flex-grow-1">
+                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Janya Clebert</a>
+                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                            </div>
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Author-->
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Rating-->
+                            <div class="rating mb-6">
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                                <div class="rating-label me-2 checked">
+                                    <i class="ki-duotone ki-star fs-5"></i>
+                                </div>
+                            </div>
+                            <!--end::Rating-->
+                            <!--begin::Title-->
+                            <div class="fs-2 fw-bold text-dark mb-3">
+                                This is by far the cleanest template
+                                <br />and the most well structured
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                        <!--begin::Author-->
+                        <div class="d-flex align-items-center">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-circle symbol-50px me-5">
+                                <img src="assets/media/avatars/300-16.jpg" class="" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <div class="flex-grow-1">
+                                <a href="#" class="text-dark fw-bold text-hover-primary fs-6">Steave Brown</a>
+                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                            </div>
+                            <!--end::Name-->
+                        </div>
+                        <!--end::Author-->
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Highlight-->
+            <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13" style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
+                <!--begin::Content-->
+                <div class="my-2 me-5">
+                    <!--begin::Title-->
+                    <div class="fs-1 fs-lg-2qx fw-bold text-white mb-2">
+                        You have a law case?
+                        <span class="fw-normal">
+                            Let’s Get To Work
+                        </span>
+                    </div>
+                    <!--end::Title-->
+                </div>
+                <!--end::Content-->
+                <!--begin::Link-->
+                <a href="signup/" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Join Us Now</a>
+                <!--end::Link-->
+            </div>
+            <!--end::Highlight-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Testimonials Section-->
+    <!--begin::Footer Section-->
+    <div class="mb-0">
+        <!--begin::Curve top-->
+        <div class="landing-curve landing-dark-color">
+            <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 48C4.93573 47.6644 8.85984 47.3311 12.7725 47H1489.16C1493.1 47.3311 1497.04 47.6644 1501 48V47H1489.16C914.668 -1.34764 587.282 -1.61174 12.7725 47H1V48Z" fill="currentColor"></path>
+            </svg>
+        </div>
+        <!--end::Curve top-->
+        <!--begin::Wrapper-->
+        <div class="landing-dark-bg pt-20">
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Row-->
+                <!--end::Row-->
+            </div>
+            <!--end::Container-->
+            <!--begin::Separator-->
+            <div class="landing-dark-separator"></div>
+            <!--end::Separator-->
+            <!--begin::Container-->
+            <div class="container">
+                <!--begin::Wrapper-->
+                <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
+                    <!--begin::Copyright-->
+                    <div class="d-flex align-items-center order-2 order-md-1">
+                        <!--begin::Logo-->
+                        <a href="/">
+                            <img alt="Logo" src="assets/media/logos/logo.png" class="h-15px h-md-20px" />
+                        </a>
+                        <!--end::Logo image-->
+                        <!--begin::Logo image-->
+                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="#">&copy; 2023 Affordable Justice.</span>
+                        <!--end::Logo image-->
+                    </div>
+                    <!--end::Copyright-->
+                    <!--begin::Menu-->
+                    <ul class="menu menu-gray-600 menu-hover-primary fw-semibold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
+                        <li class="menu-item">
+                            <a href="#" target="_blank" class="menu-link px-2">About</a>
+                        </li>
+                        <li class="menu-item mx-5">
+                            <a href="#" target="_blank" class="menu-link px-2">Support</a>
+                        </li>
+                    </ul>
+                    <!--end::Menu-->
+                </div>
+                <!--end::Wrapper-->
+            </div>
+            <!--end::Container-->
+        </div>
+        <!--end::Wrapper-->
+    </div>
+    <!--end::Footer Section-->
+    <!--begin::Scrolltop-->
+    <div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+        <i class="ki-duotone ki-arrow-up">
+            <span class="path1"></span>
+            <span class="path2"></span>
+        </i>
+    </div>
+    <!--end::Scrolltop-->
+</div>
+<!--end::Root-->
+<!--begin::Scrolltop-->
+<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
+    <i class="ki-duotone ki-arrow-up">
+        <span class="path1"></span>
+        <span class="path2"></span>
+    </i>
+</div>
+<!--end::Scrolltop-->
