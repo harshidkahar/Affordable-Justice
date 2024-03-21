@@ -1,0 +1,1172 @@
+﻿
+@{
+    ViewData["Title"] = "createCompany";
+	KTTheme.AddJavascriptFile("js/custom/case/budget.js");
+	KTTheme.AddJavascriptFile("js/custom/case/complete.js");
+	KTTheme.AddJavascriptFile("js/custom/case/exstep10.js");
+	KTTheme.AddJavascriptFile("js/custom/case/exstep11.js");
+	KTTheme.AddJavascriptFile("js/custom/case/exstep12.js");
+	KTTheme.AddJavascriptFile("js/custom/case/exstep13.js");
+	KTTheme.AddJavascriptFile("js/custom/case/exstep8.js");
+	KTTheme.AddJavascriptFile("js/custom/case/exstep9.js");
+	KTTheme.AddJavascriptFile("js/custom/case/files.js");
+	KTTheme.AddJavascriptFile("js/custom/case/main.js");
+	KTTheme.AddJavascriptFile("js/custom/case/settings.js");
+	KTTheme.AddJavascriptFile("js/custom/case/step1-50.js");
+	KTTheme.AddJavascriptFile("js/custom/case/targets.js");
+	KTTheme.AddJavascriptFile("js/custom/case/stepper.js");
+	KTTheme.AddJavascriptFile("js/custom/case/team.js");
+	KTTheme.AddJavascriptFile("js/custom/case/type.js");
+
+
+}
+
+<h1>Create Company</h1>
+
+<div class="modal-content modal-rounded" id="kt_modal_create_project">
+	<!--begin::Modal header-->
+	<div class="modal-header justify-content-center">
+		<!--begin::Modal title-->
+		<h2>Company Setup</h2>
+		<!--end::Modal title-->
+	</div>
+	<!--end::Modal header-->
+	<!--begin::Modal body-->
+	<div class="modal-body scroll-y m-5">
+		<!--begin::Stepper-->
+		<div class="stepper stepper-links d-flex flex-column" id="kt_modal_create_project_stepper">
+			<!--begin::Container-->
+			<div class="container">
+				<!--begin::Nav-->
+				<div class="stepper-nav justify-content-center py-2 border-gray-300 border-bottom border-top">
+					<!--begin::Step 1-->
+					<div class="stepper-item me-5 me-md-15 current" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">1</h3>
+					</div>
+					<!--end::Step 1-->
+					<!--begin::Step 2-->
+					<div class="stepper-item me-5 me-md-15 " data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">2</h3>
+					</div>
+					<!--end::Step 2-->
+					<!--begin::Step 3-->
+					<div class="stepper-item me-5 me-md-15 " data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">3</h3>
+					</div>
+					<!--end::Step 3-->
+					<!--begin::Step 4-->
+					<div class="stepper-item me-5 me-md-15 " data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">4</h3>
+					</div>
+					<!--end::Step 4-->
+					<!--begin::Step 5-->
+					<div class="stepper-item me-5 me-md-15 " data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">5</h3>
+					</div>
+					<!--end::Step 5-->
+					<!--begin::Step 6-->
+					<div class="stepper-item me-5 me-md-15 " data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">6</h3>
+					</div>
+					<!--end::Step 6-->
+					<!--begin::Step 7-->
+					<div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">7</h3>
+					</div>
+					<!--end::Step 7-->
+					<!--begin::Step 8-->
+					<div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">8</h3>
+					</div>
+					<!--end::Step 8-->
+					<!--begin::Step 9-->
+					<div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">9</h3>
+					</div>
+					<!--end::Step -->
+					<!--begin::Step 10-->
+					<div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">10</h3>
+					</div>
+					<!--end::Step 10-->
+					<!--begin::Step 11-->
+					<div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">11</h3>
+					</div>
+					<!--end::Step 11-->
+					<!--begin::Step 13-->
+					<div class="stepper-item me-5 me-md-15" data-kt-stepper-element="nav">
+						<h3 class="stepper-title ">12</h3>
+					</div>
+					<!--end::Step 13-->
+
+				</div>
+				<!--end::Nav-->
+				<!--begin::Form-->
+				<form class="mx-auto w-100 mw-600px pt-15 pb-10" novalidate="novalidate" id="kt_modal_create_project_form" method="post">
+					<!--begin::Type-->
+					<div class="current" data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+
+
+
+							<!--begin::Input group-->
+							<div class="mb-10">
+								<!--begin::Label-->
+								<label class="required fw-semibold fs-6 mb-5">Choose the application type</label>
+								<!--end::Label-->
+								<!--begin::Input row-->
+								<div class="d-flex flex-column fv-row">
+									<!--begin::Radio-->
+									<div class="form-check form-check-custom form-check-solid mb-5">
+										<!--begin::Input-->
+										<input class="form-check-input me-3" name="radio_input" type="radio" value="new" id="kt_docs_formvalidation_radio_option _1" />
+										<!--end::Input-->
+										<!--begin::Label-->
+										<label class="form-check-label" for="kt_docs_formvalidation_radio_option _1">
+											<div class="fw-semibold text-gray-800">New</div>
+										</label>
+										<!--end::Label-->
+									</div>
+									<!--end::Radio-->
+									<!--begin::Radio-->
+									<div class="form-check form-check-custom form-check-solid mb-5">
+										<!--begin::Input-->
+										<input class="form-check-input me-3" name="radio_input" type="radio" value="renew" id="kt_docs_formvalidation_radio_option _2" />
+										<!--end::Input-->
+										<!--begin::Label-->
+										<label class="form-check-label" for="kt_docs_formvalidation_radio_option _2">
+											<div class="fw-semibold text-gray-800">Renew</div>
+										</label>
+										<!--end::Label-->
+									</div>
+									<!--end::Radio-->
+									<!--begin::Radio-->
+									<div class="form-check form-check-custom form-check-solid">
+										<!--begin::Input-->
+										<input class="form-check-input me-3" name="radio_input" type="radio" value="others" id="kt_docs_formvalidation_radio_option _3" />
+										<!--end::Input-->
+										<!--begin::Label-->
+										<label class="form-check-label" for="kt_docs_formvalidation_radio_option _3">
+											<div class="fw-semibold text-gray-800">Others</div>
+										</label>
+										<!--end::Label-->
+									</div>
+									<!--end::Radio-->
+								</div>
+								<!--end::Input row-->
+							</div>
+							<!--end::Input group-->
+
+							<br>
+
+
+							<!--begin::Actions-->
+							<div class="d-flex justify-content-end">
+								<button type="button" class="btn btn-lg btn-secondary-active " data-kt-element="type-next" id="kt_docs_formvalidation_radio_submit">
+									<span class="indicator-label btn btn-lg btn-light me-3 border border-gray-500 ">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Type-->
+					<!--begin::Settings-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Input group-->
+							<div class="fv-row mb-8" id="kt_modal_create_project_settings_logo">
+								<!--begin::Label-->
+								<label class="required fs-6 fw-semibold mb-2">02. Choose Company type</label>
+								<!--end::Label-->
+								<!--begin::Input-->
+								<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select..." name="businessactivity" id="companyType">
+									<option></option>
+									<option value="FreeZone">FreeZone</option>
+									<option value="Mainland">Mainland</option>
+									<option value="OffShoreCompany">OffShore Company</option>
+								</select>
+								<!--end::Input-->
+							</div>
+							<br>
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light border border-gray-500" data-kt-element="settings-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light border border-gray-500" data-kt-element="settings-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+
+
+					<!--end::Settings-->
+					<!--begin::Budget-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+
+							<!--begin::Input group-->
+							<div class="fv-row mb-8">
+								<!--begin::Label-->
+
+								<div class="fv-row mb-8" id="mainlandForm" style="display:;">
+									<div class="mb-10" id="mainlandDetails" style="display: ;">
+
+										<label for="Businesscate" class="required form-label">Select the City MainLand</label>
+
+										<!--begin::Input-->
+										<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select MainLand" name="mainlandcity" id="mainlandCity">
+											<option></option>
+											<option value="Abu Dhabi">Abu Dhabi</option>
+											<option value="Dubai">Dubai</option>
+											<option value="Sharjah">Sharjah</option>
+											<option value="Ajman">Ajman</option>
+											<option value="Sharjah">Sharjah</option>
+											<option value="Ras Al Khaimah (RAK)">Ras Al Khaimah (RAK)</option>
+											<option value="Fujairah">Fujairah</option>
+											<option value="Umm Al Quwain (UAQ)">Umm Al Quwain (UAQ)</option>
+
+										</select>
+
+										<!--end::Input-->
+									</div>
+								</div>
+
+
+
+								<div class="fv-row mb-8" id="freezoneForm" style="display: ;">
+									<div class="mb-100" id="freezoneDetails" style="display: ;">
+										<!--begin::Label-->
+										<label class="required fs-6 fw-semibold mb-2">Select Freezone City</label>
+										<!--end::Label-->
+										<!--begin::Input-->
+										<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select City" name="fzcity" id="city">
+											<option></option>
+											<option value="abudhabi">Abu Dhabi</option>
+											<option value="dubai">Dubai</option>
+											<option value="sharjah">Sharjah</option>
+											<option value="ajman">Ajman</option>
+											<option value="rak">Ras Al Khaimah (RAK)</option>
+											<option value="fujairah">Fujairah</option>
+											<option value="uaq">Umm Al Quwain (UAQ)</option>
+										</select>
+
+										<!--end::Input-->
+
+										<br><br><br>
+										<!--begin::Label-->
+										<label class="required fs-6 fw-semibold mb-2">Choose Freezone Location</label>
+										<!--end::Label-->
+
+										<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Choose location" name="fzlocation" id="location">
+											<option></option>
+											<optgroup label="Dubai">
+												<option value="Dubai Maritime City">Dubai Maritime City</option>
+												<option value="Dubai Commercity">Dubai Commercity</option>
+												<option value="Dubai South">Dubai South</option>
+												<option value="Dubai World Trade Centre">Dubai World Trade Centre</option>
+												<option value="Dubai Design District">Dubai Design District</option>
+												<option value="Dubai Science Park">Dubai Science Park</option>
+												<option value="International Humanitarian City">International Humanitarian City</option>
+												<option value="Dubai Multi Commodities Centre">Dubai Multi Commodities Centre</option>
+												<option value="Dubai Outsource City">Dubai Outsource City</option>
+												<option value="Dubai Silicon Oasis">Dubai Silicon Oasis</option>
+												<option value="Dubai International Financial Centre">Dubai International Financial Centre</option>
+												<option value="Dubai Internet City">Dubai Internet City</option>
+												<option value="Meydan Free Zone">Meydan Free Zone</option>
+												<option value="Dubai Healthcare City">Dubai Healthcare City</option>
+												<option value="Dubai International Academic City">Dubai International Academic City</option>
+												<option value="Dubai Production City">Dubai Production City</option>
+												<option value="Dubai Studio City">Dubai Studio City</option>
+												<option value="Dubai Media City">Dubai Media City</option>
+												<option value="DAFZ INDUSTRIAL PARK">DAFZ INDUSTRIAL PARK</option>
+												<option value="Dubai Financial Services Authority (DFSA)">Dubai Financial Services Authority (DFSA)</option>
+												<option value="Gold & Diamond Park">Gold & Diamond Park</option>
+												<option value="DUBAI AIRPORT FREEZONE">DUBAI AIRPORT FREEZONE</option>
+												<option value="Dubai Expo City">Dubai Expo City</option>
+												<option value="Dubai Knowledge Park">Dubai Knowledge Park</option>
+												<option value="Dubai Auto Zone (DAZ)">Dubai Auto Zone (DAZ)</option>
+												<option value="Jebel Ali Free Zone">Jebel Ali Free Zone</option>
+											</optgroup>
+											<optgroup label="Sharjah">
+												<option value="Sharjah Publishing City">Sharjah Publishing City</option>
+												<option value="Hamriyah Free Zone">Hamriyah Free Zone</option>
+												<option value="Sharjah Media City - Shams">Sharjah Media City - Shams</option>
+												<option value="Sharjah Airport International Free Zone">Sharjah Airport International Free Zone</option>
+												<option value="The Sharjah Research, Technology, and Innovation Park">The Sharjah Research, Technology, and Innovation Park</option>
+												<option value="Sharjah Oasis for Technology and Innovation (SOTI)">Sharjah Oasis for Technology and Innovation (SOTI)</option>
+												<option value="Sharjah Healthcare City">Sharjah Healthcare City</option>
+											</optgroup>
+											<optgroup label="Adu Dhabi">
+												<option value="Masdar City Free Zone">Masdar City Free Zone</option>
+												<option value="Khalifa Port Free Trade Zone">Khalifa Port Free Trade Zone</option>
+												<option value="Abu Dhabi Airports Free Zone">Abu Dhabi Airports Free Zone</option>
+												<option value="Abu Dhabi Global Market">Abu Dhabi Global Market</option>
+												<option value="twofour54">twofour54</option>
+												<option value="The Free zone dedicated to the military and security sector in Tawazun Industrial Park">The Free zone dedicated to the military and security sector in Tawazun Industrial Park</option>
+											</optgroup>
+											<optgroup label="Ajman">
+												<option value="Ajman Free Zone">Ajman Free Zone</option>
+												<option value="Ajman Media City Free Zone">Ajman Media City Free Zone</option>
+											</optgroup>
+											<optgroup label="Ras Al-Khaimah">
+												<option value="Ras AlKhaimah Maritime">Ras AlKhaimah Maritime</option>
+												<option value="Ras Al Khaimah Economic Zones (RAKEZ)">Ras Al Khaimah Economic Zones (RAKEZ)</option>
+											</optgroup>
+											<optgroup label="Fujairah">
+												<option value="Creative City Free Zone">Creative City Free Zone</option>
+												<option value="Fujairah Free Zone">Fujairah Free Zone</option>
+											</optgroup>
+											<optgroup label="Umn Al-Quwain">
+												<option value="Umm Al-Quwain Free Zone">Umm Al-Quwain Free Zone</option>
+											</optgroup>
+										</select>
+									</div>
+								</div>
+
+
+
+
+								<!--begin::Dialer-->
+								<div class="position-relative w-lg-250px" id="kt_modal_create_project_budget_setup" data-kt-dialer="true" data-kt-dialer-min="50" data-kt-dialer-max="50000" data-kt-dialer-step="100" data-kt-dialer-prefix="$" data-kt-dialer-decimals="2">
+									<!--begin::Decrease control-->
+									<button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 start-0" data-kt-dialer-control="decrease">
+									</button>
+									<!--end::Decrease control-->
+									<!--begin::Input control-->
+									<input type="text" class="form-control form-control-solid border-0 ps-12" data-kt-dialer-control="input" placeholder="Amount" name="budget_setup" value="$50" />
+									<!--end::Input control-->
+									<!--begin::Increase control-->
+									<button type="button" class="btn btn-icon btn-active-color-gray-700 position-absolute translate-middle-y top-50 end-0" data-kt-dialer-control="increase">
+									</button>
+									<!--end::Increase control-->
+								</div>
+								<!--end::Dialer-->
+
+
+
+							</div>
+							<!--end::Input group-->
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="budget-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="budget-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Budget-->
+					<!--begin::Team-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Notice-->
+							<div class="d-flex flex-stack mb-15">
+
+								<!--begin::Input group-->
+								<div class="fv-row mb-8">
+									<!--begin::Label-->
+
+									<div class="fv-row mb-8" id="mainlandbussForm" style="display: ;">
+
+										<div class="mb-10" id="mainlandbussDetails" style="display: ;">
+											<label for="Businesscate" class="required form-label">Choose Bussiness Category for Mainland</label>
+
+
+											<!--begin::Input-->
+											<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select business Category" name="mainlandbusscity" id="mainlandbusscity">
+												<option></option>
+												<option value="sole-proprietorship">Sole Proprietorship</option>
+												<option value="civil-company">Civil Company</option>
+												<option value="limited-liability-company">Limited Liability Company</option>
+												<option value="limited-partnership">Limited Partnership</option>
+												<option value="public-joint-stock-company">Public Joint Stock Company</option>
+												<option value="private-joint-stock-company">Private Joint Stock Company</option>
+												<option value="gcc-company-branch">GCC Company Branch</option>
+												<option value="local-company-branch">Local Company Branch</option>
+												<option value="holding-companies">Holding Companies</option>
+												<option value="partnership">Partnership</option>
+											</select>
+											<!--end::Input-->
+										</div>
+									</div>
+
+
+									<div class="fv-row mb-8" id="freezonebussForm" style="display:;">
+										<div class="mb-100" id="freezonebussDetails" style="display:;">
+											<!--begin::Label-->
+											<label class="required fs-6 fw-semibold mb-2">Choose Bussiness Category for Freezone</label>
+											<!--end::Label-->
+											<!--begin::Input-->
+											<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select business Category" name="fzzcity" id="freezonebusscity">
+												<option></option>
+												<option value="fz-llc">Free Zone Limited Liability Company (FZ LLC)</option>
+												<option value="fz-co">Free Zone Company (FZ Co.)</option>
+												<option value="fze">Free Zone Establishment (FZE)</option>
+											</select>
+
+											<!--end::Input-->
+
+
+										</div>
+									</div>
+
+
+
+
+
+
+								</div>
+								<!--end::Input group-->
+
+							</div>
+
+							<br>
+
+							<!--end::Notice-->
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="team-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="team-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Team-->
+					<!--begin::Targets-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Input group-->
+							<div class="row g-9 mb-8">
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+									<label class="required fs-6 fw-semibold mb-2">05. How Many Residence Visas Will You Need ? </label>
+									<select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select a Number" name="target_assign">
+										<option></option>
+										<option value="0">0</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+										<option value="5">5</option>
+										<option value="morethan6">More than 6</option>
+									</select>
+								</div>
+								<!--end::Col-->
+
+								<div class="fs-7 fw-semibold text-muted">In addition to residence visas for your shareholders, you can apply for residence visas for your employees and family members.</div>
+								<br>
+
+								<!--begin::Col-->
+								<div class="col-md-6 fv-row">
+
+									<div class="position-relative d-flex align-items-center">
+									</div>
+								</div>
+								<!--end::Col-->
+
+
+							</div>
+							<!--end::Input group-->
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="targets-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="targets-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Targets-->
+					<!--begin::Files-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Input group-->
+							<div class="fv-row mb-8" id="kt_modal_create_project_files_upload">
+
+								<div class="mb-10">
+									<label for="visadep" class="required form-label">06. Would You Require Visas For Your Dependents ?</label>
+								</div>
+								<div class="form-check form-check-custom form-check-solid form-check-lg">
+									<input class="form-check-input" type="radio" name="visadependent" id="flexCheckboxLg" value="yes" />
+									<label class="form-check-label text-dark" for="flexCheckboxLg">
+										Yes
+									</label>
+								</div>
+								<br>
+								<div class="form-check form-check-custom form-check-solid form-check-lg">
+									<input class="form-check-input" type="radio" name="visadependent" id="flexCheckboxLg" value="no" />
+									<label class="form-check-label text-dark" for="flexCheckboxLg">
+										No
+									</label>
+								</div>
+							</div>
+
+							<!--end::Input group-->
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="files-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="files-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+							</div>
+							<!--end::Actions-->
+						</div>
+						<!--end::Wrapper-->
+					</div>
+					<!--end::Files-->
+					<!--begin::Complete-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Type-->
+							<!--begin::Input group-->
+							<div class="mb-8">
+
+
+								<div class="fv-row mb-10">
+									<!--begin::Label-->
+									<label class="required fw-semibold fs-6 mb-5">07. What Type Of Office Space ?</label>
+									<!--end::Label-->
+									<!--begin::Input row-->
+									<div class="d-flex flex-column fv-row">
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="VirtualOffice" id="kt_docs_formvalidation_radio_option _1" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_1">
+												<div class="fw-semibold text-gray-800">Virtual Office</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="SharedOffice" id="kt_docs_formvalidation_radio_option _2" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_2">
+												<div class="fw-semibold text-gray-800">Shared Office</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="PrivateOffice" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_3">
+												<div class="fw-semibold text-gray-800">Private Office</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="Warehouse" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_4">
+												<div class="fw-semibold text-gray-800">Warehouse</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+
+
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="Storage" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_5">
+												<div class="fw-semibold text-gray-800">Storage</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="ShopFront" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_6">
+												<div class="fw-semibold text-gray-800">Shop Front</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+
+										<br>
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="NotNeeded" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_7">
+												<div class="fw-semibold text-gray-800">Not Needed</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+
+										<br>
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="officespace" type="radio" value="Others" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_8">
+												<div class="fw-semibold text-gray-800">Others</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+
+										<br>
+
+
+									</div>
+									<!--end::Input row-->
+								</div>
+								<!--end::Input group-->
+							</div>
+
+							<br>
+							<div class="fs-7 fw-semibold text-muted">Depending on the nature of your business, will you need a flexi-desk, a co-working space or an entire office space? This is an important factor in calculating your total setup cost.</div>
+							<br>
+
+
+
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="complete-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="complete-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+
+
+							</div>
+							<!--end::Actions-->
+
+
+
+
+						</div>
+
+
+					</div>
+					<!--end::Complete-->
+					<!--begin::Complete-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Type-->
+							<!--begin::Input group-->
+							<div class="mb-8">
+
+
+								<div class="fv-row mb-10">
+									<!--begin::Label-->
+									<label class="required fw-semibold fs-6 mb-5">08. Select Your Preferred Type Of Jurisdiction</label>
+									<!--end::Label-->
+									<!--begin::Input row-->
+									<div class="d-flex flex-column fv-row">
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="jurdtype" type="radio" value="FreeZone" id="kt_docs_formvalidation_radio_option _1" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_1">
+												<div class="fw-semibold text-gray-800">Free Zone</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="jurdtype" type="radio" value="Mainland" id="kt_docs_formvalidation_radio_option _2" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_2">
+												<div class="fw-semibold text-gray-800">Mainland</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="jurdtype" type="radio" value="Not Sure" id="kt_docs_formvalidation_radio_option _3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_3">
+												<div class="fw-semibold text-gray-800">Not Sure</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+									</div>
+									<!--end::Input row-->
+								</div>
+								<!--end::Input group-->
+							</div>
+
+							<br>
+
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="jurd-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="jurd-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+
+							</div>
+							<!--end::Actions-->
+
+						</div>
+
+					</div>
+					<!--end::Complete-->
+					<!--begin::Complete-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Type-->
+							<!--begin::Input group-->
+							<div class="mb-8">
+
+
+								<div class="fv-row mb-10">
+									<!--begin::Label-->
+									<label class="required fw-semibold fs-6 mb-5">09. When Do You Plan To Start Your Business ?</label>
+									<!--end::Label-->
+									<!--begin::Input row-->
+									<div class="d-flex flex-column fv-row">
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="bussplan" type="radio" value="immediately" id="kt_docs_formvalidation_radio_option_1" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_1">
+												<div class="fw-semibold text-gray-800">Immediately</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="bussplan" type="radio" value="This Month" id="kt_docs_formvalidation_radio_option_2" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_2">
+												<div class="fw-semibold text-gray-800">This Month</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="bussplan" type="radio" value="1 Month" id="kt_docs_formvalidation_radio_option_3" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_3">
+												<div class="fw-semibold text-gray-800">1 Month</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="bussplan" type="radio" value="3 Month" id="kt_docs_formvalidation_radio_option_4" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_3">
+												<div class="fw-semibold text-gray-800">3 Month</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="bussplan" type="radio" value="6 Month" id="kt_docs_formvalidation_radio_option_5" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_3">
+												<div class="fw-semibold text-gray-800">6 Month</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<br>
+
+									</div>
+									<!--end::Input row-->
+								</div>
+								<!--end::Input group-->
+							</div>
+
+							<br>
+
+
+
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="plan-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="plan-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+
+
+							</div>
+							<!--end::Actions-->
+
+
+
+
+						</div>
+
+
+					</div>
+					<!--end::Complete-->
+					<!--begin::Complete-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Type-->
+							<!--begin::Input group-->
+							<div class="mb-8">
+
+
+								<div class="fv-row mb-10">
+									<!--begin::Label-->
+									<label class="required fw-semibold fs-6 mb-5">10. Do You Have Business Name In Mind ?</label>
+									<!--end::Label-->
+									<!--begin::Input row-->
+									<div class="d-flex flex-column fv-row">
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="busmind" type="radio" value="Yes" id="kt_docs_formvalidation_radio_option _1" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_1">
+												<div class="fw-semibold text-gray-800">Yes</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+										<!--begin::Radio-->
+										<div class="form-check form-check-custom form-check-solid mb-5">
+											<!--begin::Input-->
+											<input class="form-check-input me-3" name="busmind" type="radio" value="No" id="kt_docs_formvalidation_radio_option _2" />
+											<!--end::Input-->
+											<!--begin::Label-->
+											<label class="form-check-label" for="kt_docs_radio_option_2">
+												<div class="fw-semibold text-gray-800">No</div>
+											</label>
+											<!--end::Label-->
+										</div>
+										<!--end::Radio-->
+
+
+									</div>
+									<!--end::Input row-->
+								</div>
+								<!--end::Input group-->
+							</div>
+
+							<br>
+
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="bmind-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="bmind-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+
+							</div>
+							<!--end::Actions-->
+
+						</div>
+
+					</div>
+					<!--end::Complete-->
+					<!--begin::Complete-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Type-->
+							<!--begin::Input group-->
+							<div class="mb-8">
+
+
+								<div class="fv-row mb-10">
+									<!--begin::Label-->
+									<label class="required fw-semibold fs-6 mb-5">11. What Other Services You Need Assistance With ?</label>
+									<!--end::Label-->
+									<!--begin::Input row-->
+									<div class="d-flex flex-column fv-row">
+										<input type="text" name="services" class="form-control form-control-flush" placeholder="Enter Input Here" />
+
+									</div>
+									<!--end::Input row-->
+								</div>
+								<!--end::Input group-->
+							</div>
+							<!--begin::Label-->
+							<label class="fw-bold fs-6 mb-5">
+								e.g. PRO Services, Bank Account Opening, Golden Visa, Accounting, VAT and Consultancy, Tourist Visa, Logo Design, Website Design, and Development, etc.
+							</label>
+							<!--end::Label-->
+
+							<br>
+							<div class="fs-7 fw-semibold text-muted">Choose the business activity that you would like to carry out in the UAE. Aside from helping you identify the location and licence that best suit your company, this will also help you get a better estimate of the cost of your company setup.</div>
+							<br>
+
+
+
+							<br>
+
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="serv-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="serv-next">
+									<span class="indicator-label">Next</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+
+							</div>
+							<!--end::Actions-->
+
+						</div>
+
+					</div>
+					<!--end::Complete-->
+					<!--begin::Complete-->
+					<div data-kt-stepper-element="content">
+						<!--begin::Wrapper-->
+						<div class="w-100">
+							<!--begin::Type-->
+							<!--begin::Input group-->
+							<div class="mb-8">
+
+
+								<div class="fv-row mb-10">
+									<input type="text" class="form-control form-control-lg" placeholder="Enter Your Name" name="name" />
+									<br>
+									<input type="email" class="form-control" placeholder="Enter Email Address" name="email" />
+									<br>
+									<input type="text" class="form-control" placeholder="Enter UAE Contact Details" name="phoneno" />
+									<br>
+									<textarea class="form-control" data-kt-autosize="true" placeholder="Residence Address" name="raddress"></textarea>
+									<br>
+									<!--begin::Dropzone-->
+									<div class="dropzone" id="kt_dropzonejs_example_1">
+										<!--begin::Message-->
+										<div class="dz-message needsclick">
+											<i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+
+											<!--begin::Info-->
+											<div class="ms-4">
+												<h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop Copy of Passport.</h3>
+												<span class="fs-7 fw-semibold text-gray-500">Upload up to 10 files</span>
+											</div>
+											<!--end::Info-->
+										</div>
+									</div>
+									<!--end::Dropzone-->
+									<br>
+									<!--begin::Dropzone-->
+									<div class="dropzone" id="kt_dropzonejs_example_2">
+										<!--begin::Message-->
+										<div class="dz-message needsclick">
+											<i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+
+											<!--begin::Info-->
+											<div class="ms-4">
+												<h3 class="fs-5 fw-bold text-gray-900 mb-1">Drop Copy of Passport-size-photo.</h3>
+												<span class="fs-7 fw-semibold text-gray-500">Upload up to 10 files</span>
+											</div>
+											<!--end::Info-->
+										</div>
+									</div>
+									<!--end::Dropzone-->
+
+									<br>
+									<select class="form-select" aria-label="Select Nationality" name="nationality">
+										<option>Select Your Nationality</option>
+										<option value="afghanistan">Afghanistan</option>
+										<option value="albania">Albania</option>
+										<option value="algeria">Algeria</option>
+										<option value="andorra">Andorra</option>
+										<option value="angola">Angola</option>
+										<option value="antigua_and_barbuda">Antigua and Barbuda</option>
+										<option value="argentina">Argentina</option>
+										<option value="armenia">Armenia</option>
+										<option value="australia">Australia</option>
+										<option value="austria">Austria</option>
+										<option value="azerbaijan">Azerbaijan</option>
+										<option value="zimbabwe">Zimbabwe</option>
+									</select>
+									<br>
+								</div>
+								<!--end::Input group-->
+							</div>
+							<br>
+
+
+							<!--begin::Actions-->
+							<div class="d-flex flex-stack">
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="13-previous">Previous</button>
+								<button type="button" class="btn btn-lg btn-light me-3 border border-gray-500" data-kt-element="13-next">
+									<span class="indicator-label">Completed</span>
+									<span class="indicator-progress">
+										Please wait...
+										<span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+									</span>
+								</button>
+
+							</div>
+							<!--end::Actions-->
+
+						</div>
+
+					</div>
+					<!--end::Complete-->
+
+
+
+
+
+
+				</form>
+				<!--end::Form-->
+			</div>
+			<!--begin::Container-->
+		</div>
+		<!--end::Stepper-->
+	</div>
+	<!--end::Modal body-->
+</div>
+
+<script src="~/assets/plugins/global/plugins.bundle.js"></script>
+<script src="~/assets/js/scripts.bundle.js"></script>
+<!--end::Global Javascript Bundle-->
+<!--begin::Vendors Javascript(used for this page only)-->
+<script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
+<script src="~/assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
+<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
+
+<script src="~/assets/js/widgets.bundle.js"></script>
+<script src="~/assets/js/custom/widgets.js"></script>
+<script src="~/assets/js/custom/apps/chat/chat.js"></script>
+<script src="~/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/type.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/budget.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/settings.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/team.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/targets.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/files.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/complete.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/main.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-app.js"></script>
+<script src="~/assets/js/custom/utilities/modals/new-address.js"></script>
+<script src="~/assets/js/custom/utilities/modals/users-search.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/step1-5.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/exstep8.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/exstep9.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/exstep10.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/exstep11.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/exstep12.js"></script>
+<script src="~/assets/js/custom/utilities/modals/create-project/exstep13.js"></script>
+
