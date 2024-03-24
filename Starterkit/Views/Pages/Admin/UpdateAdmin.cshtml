@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateAdmin";
+}
+
+<h1>Update Admin</h1>
+
+<div class="d-flex p-l vh-100">
+    <form action="#" method="post">
+
+        <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Admin ID</label>
+            <input type="text" class="form-control form-control-solid" placeholder="Admin Id" readonly />
+        </div>
+
+
+        <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Full Name</label>
+            <input type="text" class="form-control form-control-solid" placeholder="Full Name" value="admin1" />
+        </div>
+
+
+
+        <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Date of Birth</label>
+            <input type="date" class="form-control form-control-solid" placeholder="Date Of Birth" value="23-02-2006" />
+        </div>
+
+
+
+        <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Email</label>
+            <input type="email" class="form-control form-control-solid" placeholder="Email Address" value="admin@gmail.com" />
+        </div>
+
+
+
+        <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Contact No.</label>
+            <input type="text" class="form-control form-control-solid" placeholder="Contact No." value="+97145682305" />
+        </div>
+
+
+
+        <div class="mb-10">
+            <label for="exampleFormControlInput1" class="required form-label">Username</label>
+            <input type="text" class="form-control form-control-solid" placeholder="Username" value="admin123" />
+        </div>
+
+
+
+        <!--begin::Main wrapper-->
+        <div class="fv-row" data-kt-password-meter="true">
+            <!--begin::Wrapper-->
+            <div class="mb-1">
+                <!--begin::Label-->
+                <label class="form-label fw-semibold fs-6 mb-2">
+                    New Password
+                </label>
+                <!--end::Label-->
+                <!--begin::Input wrapper-->
+                <div class="position-relative mb-3">
+                    <input class="form-control form-control-lg form-control-solid"
+                           type="password" placeholder="" name="new_password" autocomplete="off" value="admin@123" />
+
+                    <!--begin::Visibility toggle-->
+                    <span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+                          data-kt-password-meter-control="visibility">
+                        <i class="ki-duotone ki-eye-slash fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+                        <i class="ki-duotone ki-eye d-none fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+                    </span>
+                    <!--end::Visibility toggle-->
+                </div>
+                <!--end::Input wrapper-->
+                <!--begin::Highlight meter-->
+                <div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+                    <div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+                </div>
+                <!--end::Highlight meter-->
+            </div>
+            <!--end::Wrapper-->
+            <!--begin::Hint-->
+            <div class="text-muted">
+                Use 8 or more characters with a mix of letters, numbers & symbols.
+            </div>
+            <!--end::Hint-->
+        </div>
+        <!--end::Main wrapper-->
+
+        <br>
+
+        <a href="#" class="btn btn-primary hover-scale">Update Admin</a>
+
+    </form>
+
+
+</div>
+
