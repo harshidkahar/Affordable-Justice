@@ -15,17 +15,27 @@ namespace Starterkit.Controllers
 			return View("Views/Pages/Lawyer/lawyerProfileSetting.cshtml");
 		}
 
-		[HttpGet("lawyerAssignedCases/")]
-		public IActionResult LawyerAssignedCases()
+		
+		[HttpGet("ViewCases/")]
+		public IActionResult ViewCases()
 		{
-			return View("Views/Pages/Lawyer/lawyerAssignedCases.cshtml");
+			return View("Views/Pages/Lawyer/ViewCases.cshtml");
 		}
+
+
 
 		[HttpGet("lawyerCaseDetails/")]
 		public IActionResult LawyerCaseDetails()
 		{
 			return View("Views/Pages/Lawyer/lawyerCaseDetails.cshtml");
 		}
+
+		[HttpGet("lawyerCompanyDetails/")]
+		public IActionResult LawyerCompanyDetails()
+		{
+			return View("Views/Pages/Lawyer/lawyerCompanyDetails.cshtml");
+		}
+
 
 	}
 }

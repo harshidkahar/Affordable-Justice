@@ -1,12 +1,10 @@
 ﻿
 @{
-    ViewData["Title"] = "lawyerCaseDetails";
-	KTTheme.AddJavascriptFile("js/custom/lawyer/lawyerdropzone.js");
+    ViewData["Title"] = "lawyerCompanyDetails";
+    KTTheme.AddJavascriptFile("js/custom/lawyer/lawyerdropzone.js");
 }
 
-
-<h1>lawyer Case Details</h1>
-
+<h1>lawyer Company Details</h1>
 
 
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -58,18 +56,17 @@
 
                                 <h3>Case Details</h3>
                                 <!--begin::Input group-->
-                                <div class="row mb-0 mb-xl-6 ">
+                                <div class="row mb-0 mb-xl-6">
                                     <!--begin::Row-->
                                     <div class="row">
                                         <!--begin::Col-->
-                                        <div class="col-lg-6 col-md-12  fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6 ">CASE_ID : </label>
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_ID : </label>
                                             C001
-
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
-                                        <div class="col-lg-6 col-md-12 fv-row ">
+                                        <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_NUMBER : </label>
                                             8021032407
                                         </div>
@@ -79,14 +76,13 @@
                                 </div>
                                 <!--end::Input group-->
                                 <!--begin::Input group-->
-                                <div class="row mb-0 mb-xl-6">
+                                <div class="row mb-2 mb-xl-6">
                                     <!--begin::Row-->
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
-
                                             <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_TYPE : </label>
-                                            Sale Property
+                                            Company Setup
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
@@ -99,23 +95,12 @@
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row mb-2 mb-xl-6">
-                                    <!--begin::Row-->
-                                    <div class="row">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_DESCRIPTION </label>
-                                            I am the Owner of that Property.
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                </div>
-                                <!--end::Input group-->
+
+
+
                                 <br>
 
-                                <h3>Client Details</h3>
+                                <h3>Company Details</h3>
                                 <!--begin::Input group-->
                                 <div class="row mb-0 mb-xl-6">
                                     <!--begin::Row-->
@@ -123,8 +108,35 @@
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
 
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FULL_NAME : </label>
-                                            John Doe
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">APPLICATION_TYPE : </label>
+                                            New
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">COMPANY_TYPE : </label>
+                                            Mainland
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">MAINLAND_CITY : </label>
+                                            Sharjah
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ML_BUSINESS_TYPE : </label>
+                                            Civil Company
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -137,16 +149,79 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">EMAIL : </label>
-                                            John@gmail.com
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FREEZONE_CITY : </label>
+                                            -
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CONTACT_NO : </label>
-                                            +971 258 965 1220
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FREEZONE_LOCATION : </label>
+                                            -
                                         </div>
                                         <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FZ_BUSINESS_TYPE:</label>
+
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">RESIDENCE_VISA : </label>
+                                            2
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">VISA_DEPENDENTS : </label>
+                                            No
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">OFFICE_TYPE : </label>
+                                            Shared Office
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">JURISDICTION_TYPE : </label>
+                                            Mainland
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">BUSINESS_STARTUP : </label>
+                                            This Month
+                                        </div>
+                                        <!--end::Col-->
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -157,14 +232,14 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ADDRESS : </label>
-                                            123, Black Street
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ANY_OTHER_BUSINESS : </label>
+                                            NO
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">NATIONALITY : </label>
-                                            UAE
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">OTHER_SERVICES : </label>
+                                            PRO Services
                                         </div>
                                         <!--end::Col-->
 
@@ -172,9 +247,14 @@
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Input group-->
+
+
+
+
+
                                 <br>
 
-                                <h3>Opposition Details</h3>
+                                <h3>Personal Details</h3>
                                 <!--begin::Input group-->
                                 <div class="row mb-0 mb-xl-6">
                                     <!--begin::Row-->
@@ -209,6 +289,26 @@
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ADDRESS : </label>
                                             97, White Street
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">PASSPORT : </label>
+                                            Uploaded
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">PASSPORT_PHOTO : </label>
+                                            Uploaded
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -258,33 +358,3 @@
 
 </div>
 
-
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="~/assets/plugins/global/plugins.bundle.js"></script>
-<script src="~/assets/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<script src="~/assets/plugins/custom/vis-timeline/vis-timeline.bundle.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/index.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/xy.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/percent.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/radar.js"></script>
-<script src="https://cdn.amcharts.com/lib/5/themes/Animated.js"></script>
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="~/assets/js/widgets.bundle.js"></script>
-<script src="~/assets/js/custom/widgets.js"></script>
-<script src="~/assets/js/custom/apps/chat/chat.js"></script>
-<script src="~/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/type.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/budget.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/settings.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/team.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/targets.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/files.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/complete.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-project/main.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-app.js"></script>
-<script src="~/assets/js/custom/utilities/modals/new-address.js"></script>
-<script src="~/assets/js/custom/utilities/modals/users-search.js"></script>
