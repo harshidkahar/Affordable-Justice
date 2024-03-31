@@ -3,98 +3,218 @@
     ViewData["Title"] = "CreateAdmin";
 }
 
-<h1>Create Admin</h1>
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+	<br>
+	<!--begin::Content wrapper-->
+	<div class="d-flex flex-column flex-column-fluid">
 
-<div class="d-flex p-l vh-100">
-	<form action="#" method="post">
+		<!--begin::Content-->
+		<div id="kt_app_content" class="app-content flex-column-fluid">
+			<!--begin::Content container-->
+			<div id="kt_app_content_container" class="app-container container-xxl">
 
-		<div class="mb-10">
-			<label for="exampleFormControlInput1" class="required form-label">Admin ID</label>
-			<input type="text" class="form-control form-control-solid" placeholder="Admin Id" />
-		</div>
-
-
-		<div class="mb-10">
-			<label for="exampleFormControlInput1" class="required form-label">Full Name</label>
-			<input type="text" class="form-control form-control-solid" placeholder="Full Name" />
-		</div>
-
-
-
-		<div class="mb-10">
-			<label for="exampleFormControlInput1" class="required form-label">Date of Birth</label>
-			<input type="date" class="form-control form-control-solid" placeholder="Date Of Birth" />
-		</div>
-
-
-
-		<div class="mb-10">
-			<label for="exampleFormControlInput1" class="required form-label">Email</label>
-			<input type="email" class="form-control form-control-solid" placeholder="Email Address" />
-		</div>
+				<!--begin::Basic info-->
+				<div class="card mb-5 mb-xl-10">
+					<!--begin::Card header-->
+					<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+						<!--begin::Card title-->
+						<div class="card-title m-0">
+							<h3 class="fw-bold m-0">CREATE ADMIN</h3>
+						</div>
+						<!--end::Card title-->
+					</div>
+					<!--begin::Card header-->
+					<!--begin::Content-->
+					<div id="kt_account_settings_profile_details" class="collapse show">
+						<!--begin::Form-->
+						<form id="kt_account_profile_details_form" class="form">
+							<!--begin::Card body-->
+							<div class="card-body border-top p-9">
 
 
 
-		<div class="mb-10">
-			<label for="exampleFormControlInput1" class="required form-label">Contact No.</label>
-			<input type="text" class="form-control form-control-solid" placeholder="Contact No." />
-		</div>
+
+								<!--begin::Input group-->
+								<div class="row mb-0 mb-xl-6 ">
+									<!--begin::Row-->
+									<div class="row">
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12  fv-row">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6 ">ADMIN_ID : </label>
+											<input type="text" class="form-control form-control-solid" placeholder="Admin Id" />
+
+
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row ">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FULL_NAME : </label>
+											<input type="text" class="form-control form-control-solid" placeholder="Full Name" />
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row mb-0 mb-xl-6">
+									<!--begin::Row-->
+									<div class="row">
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
+
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">DATE_OF_BIRTH : </label>
+											<input type="date" class="form-control form-control-solid" placeholder="Date of Birth" />
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">EMAIL :  </label>
+											<input type="email" class="form-control form-control-solid" placeholder="Email" />
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row mb-2 mb-xl-6">
+									<!--begin::Row-->
+									<div class="row">
+										
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ADDRESS : </label>
+											<!--begin::solid autosize textarea-->
+												<textarea class="form-control form-control form-control-solid" data-kt-autosize="true"></textarea>
+											<!--end::solid autosize textarea-->
+										
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Input group-->
+
+								<!--begin::Input group-->
+								<div class="row mb-2 mb-xl-6">
+									<!--begin::Row-->
+									<div class="row">
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CONTACT_NO :  </label>
+											<input type="text" class="form-control form-control-solid" placeholder="Contact No" />
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
+
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">NATIONALITY : </label>
+											<select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select a Country" name="nationality">
+												<option></option>
+												<option value="afghanistan">Afghanistan</option>
+												<option value="albania">Albania</option>
+												<option value="algeria">Algeria</option>
+												<option value="andorra">Andorra</option>
+												<option value="angola">Angola</option>
+												<option value="antigua_and_barbuda">Antigua and Barbuda</option>
+												<option value="argentina">Argentina</option>
+												<option value="armenia">Armenia</option>
+												<option value="australia">Australia</option>
+												<option value="austria">Austria</option>
+												<option value="azerbaijan">Azerbaijan</option>
+												<option value="zimbabwe">Zimbabwe</option>
+											</select>
+
+										</div>
+										<!--end::Col-->
+
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row mb-0 mb-xl-6">
+									<!--begin::Row-->
+									<div class="row">
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
+
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">USERNAME : </label>
+											<input type="text" class="form-control form-control-solid" placeholder="Username" />
+										</div>
+										<!--end::Col-->
+
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
 
 
 
-		<div class="mb-10">
-			<label for="exampleFormControlInput1" class="required form-label">Username</label>
-			<input type="text" class="form-control form-control-solid" placeholder="Username" />
-		</div>
+										<!--begin::Main wrapper-->
+										<div class="fv-row" data-kt-password-meter="true">
+											<!--begin::Wrapper-->
+
+											<div class="mb-1">
+												
+													<!--begin::Label-->
+													<label class="form-label fw-bold fs-6 mb-2 required">
+														PASSWORD
+													</label>
+													<!--end::Label-->
+													<!--begin::Input wrapper-->
+													<div class="position-relative mb-3">
+														<input type="password" class="form-control form-control-solid" placeholder="Password" name="new_password" autocomplete="off" />
+														<!--begin::Visibility toggle-->
+														<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+															  data-kt-password-meter-control="visibility">
+															<i class="ki-duotone ki-eye-slash fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
+															<i class="ki-duotone ki-eye d-none fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
+														</span>
+														<!--end::Visibility toggle-->
+													</div>
+													<!--end::Input wrapper-->
+													<!--begin::Highlight meter-->
+													<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
+														<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+														<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+														<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
+														<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
+													</div>
+													<!--end::Highlight meter-->
+												</div>
+												<!--end::Wrapper-->
+											</div>
+											<!--begin::Hint-->
+											<div class="text-muted">
+												Use 8 or more characters with a mix of letters, numbers & symbols.
+											</div>
+											<!--end::Hint-->
+										</div>
+										<!--end::Main wrapper-->
+
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Input group-->
+								
 
 
 
-		<!--begin::Main wrapper-->
-		<div class="fv-row" data-kt-password-meter="true">
-			<!--begin::Wrapper-->
-			<div class="mb-1">
-				<!--begin::Label-->
-				<label class="form-label fw-semibold fs-6 mb-2">
-					New Password
-				</label>
-				<!--end::Label-->
-				<!--begin::Input wrapper-->
-				<div class="position-relative mb-3">
-					<input class="form-control form-control-lg form-control-solid"
-						   type="password" placeholder="" name="new_password" autocomplete="off" />
-
-					<!--begin::Visibility toggle-->
-					<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
-						  data-kt-password-meter-control="visibility">
-						<i class="ki-duotone ki-eye-slash fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span></i>
-						<i class="ki-duotone ki-eye d-none fs-1"><span class="path1"></span><span class="path2"></span><span class="path3"></span></i>
-					</span>
-					<!--end::Visibility toggle-->
+							</div>
+							<!--end::Card body-->
+							<!--begin::Actions-->
+							<div class="card-footer d-flex justify-content-end py-6 px-9">
+								<button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Register</button>
+							</div>
+							<!--end::Actions-->
+						</form>
+						<!--end::Form-->
+					</div>
+					<!--end::Content-->
 				</div>
-				<!--end::Input wrapper-->
-				<!--begin::Highlight meter-->
-				<div class="d-flex align-items-center mb-3" data-kt-password-meter-control="highlight">
-					<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-					<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-					<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px me-2"></div>
-					<div class="flex-grow-1 bg-secondary bg-active-success rounded h-5px"></div>
-				</div>
-				<!--end::Highlight meter-->
+				<!--end::Basic info-->
+
 			</div>
-			<!--end::Wrapper-->
-			<!--begin::Hint-->
-			<div class="text-muted">
-				Use 8 or more characters with a mix of letters, numbers & symbols.
-			</div>
-			<!--end::Hint-->
+			<!--end::Content container-->
 		</div>
-		<!--end::Main wrapper-->
-
-		<br>
-
-		<a href="#" class="btn btn-primary hover-scale">Create Admin</a>
-
-	</form>
-
+		<!--end::Content-->
+	</div>
+	<!--end::Content wrapper-->
 
 </div>

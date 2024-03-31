@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "UpdateAdmin";
+    ViewData["Title"] = "CreateLawyer";
 }
 
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
@@ -19,7 +19,7 @@
 					<div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
 						<!--begin::Card title-->
 						<div class="card-title m-0">
-							<h3 class="fw-bold m-0">UPDATE ADMIN</h3>
+							<h3 class="fw-bold m-0">CREATE LAWYER</h3>
 						</div>
 						<!--end::Card title-->
 					</div>
@@ -40,8 +40,8 @@
 									<div class="row">
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12  fv-row">
-											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6 ">ADMIN_ID : </label>
-											<input type="text" class="form-control form-control-solid" placeholder="Admin Id" value="AD001"/>
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6 ">LAWYER_ID : </label>
+											<input type="text" class="form-control form-control-solid" placeholder="lawyer Id" />
 
 
 										</div>
@@ -49,7 +49,7 @@
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12 fv-row ">
 											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FULL_NAME : </label>
-											<input type="text" class="form-control form-control-solid" placeholder="Full Name" value="Admin1" />
+											<input type="text" class="form-control form-control-solid" placeholder="Full Name" />
 										</div>
 										<!--end::Col-->
 									</div>
@@ -57,22 +57,52 @@
 								</div>
 								<!--end::Input group-->
 								<!--begin::Input group-->
+								<div class="row mb-0 mb-xl-6 ">
+									<!--begin::Row-->
+									<div class="row">
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12  fv-row">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6 ">LISENCE NO : </label>
+											<input type="text" class="form-control form-control-solid" placeholder="lisence no" />
+
+
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row ">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">LAWYER_TYPE : </label>
+											<select class="form-select form-select-solid" aria-label="Select Lawyer_Type" data-control="select2" data-placeholder="Select Lawyer_Type" name="lawyer type">
+												<option></option>
+												<option value="Civil Law">Civil Law</option>
+												<option value="Criminal Law">Criminal Law</option>
+												<option value="Defence Law">Defence Law</option>
+												</select>
+										</div>
+										<!--end::Col-->
+									</div>
+									<!--end::Row-->
+								</div>
+								<!--end::Input group-->
+
+
+								<!--begin::Input group-->
 								<div class="row mb-0 mb-xl-6">
 									<!--begin::Row-->
 									<div class="row">
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12 fv-row">
-
-											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">DATE_OF_BIRTH : </label>
-											<input type="date" class="form-control form-control-solid" placeholder="Date of Birth" value="05/03/2004"/>
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">LAWYER_COMPANY:</label>
+											<input type="email" class="form-control form-control-solid" placeholder="lawyer Company" />
 										</div>
 										<!--end::Col-->
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12 fv-row">
-											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">EMAIL :  </label>
-											<input type="email" class="form-control form-control-solid" placeholder="Email" value="admin1@gmail.com" />
+
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">DATE_OF_BIRTH : </label>
+											<input type="date" class="form-control form-control-solid" placeholder="Date of Birth" />
 										</div>
 										<!--end::Col-->
+										
 									</div>
 									<!--end::Row-->
 								</div>
@@ -81,12 +111,23 @@
 								<div class="row mb-2 mb-xl-6">
 									<!--begin::Row-->
 									<div class="row">
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">EMAIL:</label>
+											<input type="email" class="form-control form-control-solid" placeholder="Email" />
+										</div>
+										<!--end::Col-->
+										<!--begin::Col-->
+										<div class="col-lg-6 col-md-12 fv-row">
 
-										<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ADDRESS : </label>
+											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ADDRESS : </label>
 										<!--begin::solid autosize textarea-->
-										<textarea class="form-control form-control form-control-solid" data-kt-autosize="true" placeholder="Black Street, Sharjah"></textarea>
-										<!--end::solid autosize textarea-->
+										<textarea class="form-control form-control form-control-solid" data-kt-autosize="true"></textarea>
+										</div>
 
+										<!--end::Col-->
+
+										
 									</div>
 									<!--end::Row-->
 								</div>
@@ -98,16 +139,16 @@
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12 fv-row">
 											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CONTACT_NO :  </label>
-											<input type="text" class="form-control form-control-solid" placeholder="Contact No" value="+971 693 258 7779" />
+											<input type="text" class="form-control form-control-solid" placeholder="Contact No" />
 										</div>
 										<!--end::Col-->
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12 fv-row">
 
 											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">NATIONALITY : </label>
-											<select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select a Country" name="nationality" >
+											<select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select a Country" name="nationality">
 												<option></option>
-												<option value="afghanistan" selected>Afghanistan</option>
+												<option value="afghanistan">Afghanistan</option>
 												<option value="albania">Albania</option>
 												<option value="algeria">Algeria</option>
 												<option value="andorra">Andorra</option>
@@ -120,7 +161,7 @@
 												<option value="azerbaijan">Azerbaijan</option>
 												<option value="zimbabwe">Zimbabwe</option>
 											</select>
-
+											<br />
 										</div>
 										<!--end::Col-->
 
@@ -136,12 +177,13 @@
 										<div class="col-lg-6 col-md-12 fv-row">
 
 											<label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">USERNAME : </label>
-											<input type="text" class="form-control form-control-solid" placeholder="Username" value="Admin@1" />
+											<input type="text" class="form-control form-control-solid" placeholder="Username" />
 										</div>
 										<!--end::Col-->
+										<br />
 										<!--begin::Col-->
 										<div class="col-lg-6 col-md-12 fv-row">
-
+<br />
 
 
 											<!--begin::Main wrapper-->
@@ -157,7 +199,7 @@
 													<!--end::Label-->
 													<!--begin::Input wrapper-->
 													<div class="position-relative mb-3">
-														<input type="password" class="form-control form-control-solid" placeholder="Password" name="new_password" autocomplete="off" value="Admin@001" />
+														<input type="password" class="form-control form-control-solid" placeholder="Password" name="new_password" autocomplete="off" />
 														<!--begin::Visibility toggle-->
 														<span class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
 															  data-kt-password-meter-control="visibility">
@@ -182,9 +224,11 @@
 											<div class="text-muted">
 												Use 8 or more characters with a mix of letters, numbers & symbols.
 											</div>
+											
 											<!--end::Hint-->
 										</div>
 										<!--end::Main wrapper-->
+										
 
 									</div>
 									<!--end::Row-->
@@ -198,7 +242,7 @@
 							<!--end::Card body-->
 							<!--begin::Actions-->
 							<div class="card-footer d-flex justify-content-end py-6 px-9">
-								<button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Update</button>
+								<button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Register</button>
 							</div>
 							<!--end::Actions-->
 						</form>
