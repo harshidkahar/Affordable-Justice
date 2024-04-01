@@ -4,19 +4,19 @@ namespace Starterkit.Controllers
 {
 	public class LawyerController1 : Controller
 	{
-		[HttpGet("lawyer/lawyerProfileOverview/")]
+		[HttpGet("lawyerProfileOverview/")]
 		public IActionResult Index()
 		{
 			return View("Views/Pages/Lawyer/lawyerProfileOverview.cshtml");
 		}
-		[HttpGet("lawyer/lawyerProfileSetting/")]
+		[HttpGet("lawyerProfileSetting/")]
 		public IActionResult lawyerProfileSetting()
 		{
 			return View("Views/Pages/Lawyer/lawyerProfileSetting.cshtml");
 		}
 
 		
-		[HttpGet("lawyer/ViewCases/")]
+		[HttpGet("ViewCases/")]
 		public IActionResult ViewCases()
 		{
 			return View("Views/Pages/Lawyer/ViewCases.cshtml");
@@ -24,13 +24,13 @@ namespace Starterkit.Controllers
 
 
 
-		[HttpGet("lawyer/lawyerCaseDetails/")]
+		[HttpGet("lawyerCaseDetails/")]
 		public IActionResult LawyerCaseDetails()
 		{
 			return View("Views/Pages/Lawyer/lawyerCaseDetails.cshtml");
 		}
 
-		[HttpGet("lawyer/lawyerCompanyDetails/")]
+		[HttpGet("lawyerCompanyDetails/")]
 		public IActionResult LawyerCompanyDetails()
 		{
 			return View("Views/Pages/Lawyer/lawyerCompanyDetails.cshtml");

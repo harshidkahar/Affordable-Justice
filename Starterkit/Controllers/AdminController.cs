@@ -5,105 +5,105 @@ namespace Starterkit.Controllers
 	public class AdminController : Controller
 	{
 
-		[HttpGet("admin/CreateAdmin/")]
+		[HttpGet("CreateAdmin/")]
 		public IActionResult Index()
 		{
 			return View("Views/Pages/Admin/CreateAdmin.cshtml");
 		}
 
-		[HttpGet("admin/ViewAdmin/")]
+		[HttpGet("ViewAdmin/")]
 		public IActionResult ViewAdmin()
 		{
 			return View("Views/Pages/Admin/ViewAdmin.cshtml");
 		}
 
-		[HttpGet("admin/UpdateAdmin/")]
+		[HttpGet("UpdateAdmin/")]
 		public IActionResult UpdateAdmin()
 		{
 			return View("Views/Pages/Admin/UpdateAdmin.cshtml");
 		}
 
-		[HttpGet("admin/DeleteAdmin/")]
+		[HttpGet("DeleteAdmin/")]
 		public IActionResult DeleteAdmin()
 		{
 			return View("Views/Pages/Admin/DeleteAdmin.cshtml");
 		}
 
-		[HttpGet("admin/CreateAgent/")]
+		[HttpGet("CreateAgent/")]
 		public IActionResult CreateAgent()
 		{
 			return View("Views/Pages/Admin/CreateAgent.cshtml");
 		}
 
-		[HttpGet("admin/UpdateAgent/")]
+		[HttpGet("UpdateAgent/")]
 		public IActionResult UpdateAgent()
 		{
 			return View("Views/Pages/Admin/UpdateAgent.cshtml");
 		}
 
-		[HttpGet("admin/DeleteAgent/")]
+		[HttpGet("DeleteAgent/")]
 		public IActionResult DeleteAgent()
 		{
 			return View("Views/Pages/Admin/DeleteAgent.cshtml");
 		}
 
-		[HttpGet("admin/ViewAgent/")]
+		[HttpGet("ViewAgent/")]
 		public IActionResult ViewAgent()
 		{
 			return View("Views/Pages/Admin/ViewAgent.cshtml");
 		}
 
-		[HttpGet("admin/CreateLawyer/")]
+		[HttpGet("CreateLawyer/")]
 		public IActionResult CreateLawyer()
 		{
 			return View("Views/Pages/Admin/CreateLawyer.cshtml");
 		}
 
-		[HttpGet("admin/ViewLawyer/")]
+		[HttpGet("ViewLawyer/")]
 		public IActionResult ViewLawyer()
 		{
 			return View("Views/Pages/Admin/ViewLawyer.cshtml");
 		}
 
-		[HttpGet("admin/UpdateLawyer/")]
+		[HttpGet("UpdateLawyer/")]
 		public IActionResult UpdateLawyer()
 		{
 			return View("Views/Pages/Admin/UpdateLawyer.cshtml");
 		}
 
-		[HttpGet("admin/DeleteLawyer/")]
+		[HttpGet("DeleteLawyer/")]
 		public IActionResult DeleteLawyer()
 		{
 			return View("Views/Pages/Admin/DeleteLawyer.cshtml");
 		}
 
-        [HttpGet("admin/ProfileOverview/")]
+        [HttpGet("ProfileOverview/")]
         public IActionResult ProfileOverview()
         {
             return View("Views/Pages/Admin/ProfileOverview.cshtml");
         }
 
-        [HttpGet("admin/ProfileSetting/")]
+        [HttpGet("ProfileSetting/")]
         public IActionResult ProfileSetting()
         {
             return View("Views/Pages/Admin/ProfileSetting.cshtml");
         }
 
-		[HttpGet("admin/CreateRole/")]
+		[HttpGet("CreateRole/")]
 		public IActionResult CreateRole()
 		{
 			return View("Views/Pages/Admin/CreateRole.cshtml");
 		}
 
 
-		[HttpGet("admin/ViewRole/")]
+		[HttpGet("ViewRole/")]
 		public IActionResult ViewRole()
 		{
 			return View("Views/Pages/Admin/ViewRole.cshtml");
 		}
 
 
-		[HttpGet("admin/RoleDetail/")]
+		[HttpGet("RoleDetail/")]
 		public IActionResult RoleDetail()
 		{
 			return View("Views/Pages/Admin/RoleDetail.cshtml");
