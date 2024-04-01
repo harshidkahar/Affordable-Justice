@@ -1,7 +1,8 @@
 ﻿
 @{
-    ViewData["Title"] = "lawyerProfileOverview";
+    ViewData["Title"] = "ProfileOverView";
 }
+
 
 <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
 	<!--begin::Content wrapper-->
@@ -13,7 +14,7 @@
 				<!--begin::Page title-->
 				<div class="page-title d-flex flex-column justify-content-center flex-wrap me-3">
 					<!--begin::Title-->
-					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Lawyer Account Overview</h1>
+					<h1 class="page-heading d-flex text-dark fw-bold fs-3 flex-column justify-content-center my-0">Admin Account Overview</h1>
 					<!--end::Title-->
 					<!--begin::Breadcrumb-->
 					<ul class="breadcrumb breadcrumb-separatorless fw-semibold fs-7 my-0 pt-1">
@@ -56,7 +57,7 @@
 									<div class="d-flex flex-column">
 										<!--begin::Name-->
 										<div class="d-flex align-items-center mb-2">
-											<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">Lawyer 1</a>
+											<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">Admin Name</a>
 
 										</div>
 										<!--end::Name-->
@@ -67,7 +68,7 @@
 													<span class="path1"></span>
 													<span class="path2"></span>
 													<span class="path3"></span>
-												</i>Lawyer Type
+												</i>Admin -
 											</a>
 											<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 												<i class="ki-duotone ki-geolocation fs-4 me-1">
@@ -79,7 +80,7 @@
 												<i class="ki-duotone ki-sms fs-4">
 													<span class="path1"></span>
 													<span class="path2"></span>
-												</i>max@kt.com
+												</i>admin1@kt.com
 											</a>
 										</div>
 										<!--end::Info-->
@@ -105,12 +106,12 @@
 						<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="lawyerProfileOverview">Overview</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="ProfileOverview">Overview</a>
 							</li>
 							<!--end::Nav item-->
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="lawyerProfileSetting">Settings</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="ProfileSetting">Settings</a>
 							</li>
 							<!--end::Nav item-->
 
@@ -138,11 +139,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">LAWYER_ID</label>
+							<label class="col-lg-4 fw-semibold text-muted">ADMIN_ID</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-								<span class="fw-semibold text-gray-800 fs-6">L001</span>
+								<span class="fw-semibold text-gray-800 fs-6">AD001</span>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -154,7 +155,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">Lawyer 1</span>
+								<span class="fw-bold fs-6 text-gray-800">Admin 1</span>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -162,45 +163,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">LAWYER_TYPE</label>
+							<label class="col-lg-4 fw-semibold text-muted">DATE_OF_BIRTH</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-								<span class="fw-semibold text-gray-800 fs-6">Civil Lawyer</span>
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-7">
-							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">LAWYER_COMPANY</label>
-							<!--end::Label-->
-							<!--begin::Col-->
-							<div class="col-lg-8 fv-row">
-								<span class="fw-semibold text-gray-800 fs-6">XYZ Co.</span>
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-7">
-							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">
-								LISENCE NO
-								<span class="ms-1" data-bs-toggle="tooltip" title="License number must be active">
-									<i class="ki-duotone ki-information fs-7">
-										<span class="path1"></span>
-										<span class="path2"></span>
-										<span class="path3"></span>
-									</i>
-								</span>
-							</label>
-							<!--end::Label-->
-							<!--begin::Col-->
-							<div class="col-lg-8 d-flex align-items-center">
-								<span class="fw-bold fs-6 text-gray-800 me-2">ABC123456</span>
-								<span class="badge badge-success">Verified</span>
+								<span class="fw-semibold text-gray-800 fs-6">05/03/2004</span>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -212,7 +179,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">lawyer1@gmail.com</a>
+								<a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">Admin1@gmail.com</a>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -220,47 +187,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">DATE_OF_BIRTH</label>
-							<!--end::Label-->
-							<!--begin::Col-->
-							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">11/09/1987</span>
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-7">
-							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">CONTACT</label>
+							<label class="col-lg-4 fw-semibold text-muted">CONTACT NO</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
 								<span class="fw-bold fs-6 text-gray-800">+9712589632</span>
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-10">
-							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">YEARS_OF_EXPERIENCE</label>
-							<!--begin::Label-->
-							<!--begin::Label-->
-							<div class="col-lg-8">
-								<span class="fw-semibold fs-6 text-gray-800">09</span>
-							</div>
-							<!--begin::Label-->
-						</div>
-						<!--end::Input group-->
-						<!--begin::Input group-->
-						<div class="row mb-7">
-							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">ADDRESS</label>
-							<!--end::Label-->
-							<!--begin::Col-->
-							<div class="col-lg-8">
-								Yellow Street
 							</div>
 							<!--end::Col-->
 						</div>
@@ -272,7 +203,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								lawyer@01
+								<span class="fw-bold fs-6 text-gray-800">Admin@01</span>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -292,8 +223,20 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
+							<label class="col-lg-4 fw-semibold text-muted">ADDRESS</label>
+							<!--end::Label-->
+							<!--begin::Col-->
+							<div class="col-lg-8">
+								<span class="fw-bold fs-6 text-gray-800">Yellow Street, Sharjah</span>
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-7">
+							<!--begin::Label-->
 							<label class="col-lg-4 fw-semibold text-muted">
-								COUNTRY
+								NATIONALITY
 								<span class="ms-1" data-bs-toggle="tooltip" title="Country of origination">
 									<i class="ki-duotone ki-information fs-7">
 										<span class="path1"></span>
@@ -305,12 +248,13 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">UAE</span>
+								<span class="fw-bold fs-6 text-gray-800">Sharjah</span>
 							</div>
 							<!--end::Col-->
 						</div>
 						<!--end::Input group-->
-						
+
+
 					</div>
 					<!--end::Card body-->
 				</div>
@@ -345,3 +289,6 @@
 <script src="~/assets/js/custom/utilities/modals/offer-a-deal/complete.js"></script>
 <script src="~/assets/js/custom/utilities/modals/offer-a-deal/main.js"></script>
 <script src="~/assets/js/custom/utilities/modals/users-search.js"></script>
+
+
+

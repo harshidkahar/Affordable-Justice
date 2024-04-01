@@ -5,25 +5,25 @@ namespace Starterkit.Controllers
 	public class AdminController : Controller
 	{
 
-		[HttpGet("CreateAdmin/")]
+		[HttpGet("admin/CreateAdmin/")]
 		public IActionResult Index()
 		{
 			return View("Views/Pages/Admin/CreateAdmin.cshtml");
 		}
 
-		[HttpGet("ViewAdmin/")]
+		[HttpGet("admin/ViewAdmin/")]
 		public IActionResult ViewAdmin()
 		{
 			return View("Views/Pages/Admin/ViewAdmin.cshtml");
 		}
 
-		[HttpGet("UpdateAdmin/")]
+		[HttpGet("admin/UpdateAdmin/")]
 		public IActionResult UpdateAdmin()
 		{
 			return View("Views/Pages/Admin/UpdateAdmin.cshtml");
 		}
 
-		[HttpGet("DeleteAdmin/")]
+		[HttpGet("admin/DeleteAdmin/")]
 		public IActionResult DeleteAdmin()
 		{
 			return View("Views/Pages/Admin/DeleteAdmin.cshtml");
@@ -76,6 +76,39 @@ namespace Starterkit.Controllers
 		{
 			return View("Views/Pages/Admin/DeleteLawyer.cshtml");
 		}
+
+        [HttpGet("admin/ProfileOverview/")]
+        public IActionResult ProfileOverview()
+        {
+            return View("Views/Pages/Admin/ProfileOverview.cshtml");
+        }
+
+        [HttpGet("admin/ProfileSetting/")]
+        public IActionResult ProfileSetting()
+        {
+            return View("Views/Pages/Admin/ProfileSetting.cshtml");
+        }
+
+		[HttpGet("admin/CreateRole/")]
+		public IActionResult CreateRole()
+		{
+			return View("Views/Pages/Admin/CreateRole.cshtml");
+		}
+
+
+		[HttpGet("admin/ViewRole/")]
+		public IActionResult ViewRole()
+		{
+			return View("Views/Pages/Admin/ViewRole.cshtml");
+		}
+
+
+		[HttpGet("admin/RoleDetail/")]
+		public IActionResult RoleDetail()
+		{
+			return View("Views/Pages/Admin/RoleDetail.cshtml");
+		}
+
 
 	}
 }

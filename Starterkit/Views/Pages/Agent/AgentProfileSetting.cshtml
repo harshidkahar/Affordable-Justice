@@ -135,7 +135,7 @@
 								<!--begin::Input group-->
 								<div class="row mb-6">
 									<!--begin::Label-->
-									<label class="col-lg-4 col-form-label required fw-semibold fs-6">Full Name</label>
+									<label class="col-lg-4 col-form-label required fw-semibold fs-6">FULL_NAME</label>
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8">
@@ -161,7 +161,7 @@
 								<div class="row mb-6">
 									<!--begin::Label-->
 									<label class="col-lg-4 col-form-label fw-semibold fs-6">
-										<span class="required">Contact Phone</span>
+										<span class="required">CONTACT_NO</span>
 										<span class="ms-1" data-bs-toggle="tooltip" title="Phone number must be active">
 											<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
 												<span class="path1"></span>
@@ -182,7 +182,7 @@
 								<div class="row mb-6">
 									<!--begin::Label-->
 									<label class="col-lg-4 col-form-label fw-semibold fs-6">
-										<span class="required">Date of Birth.</span>
+										<span class="required">DATE_OF_BIRTH.</span>
 										<span class="ms-1" data-bs-toggle="tooltip" title="Date Should be Valid">
 											<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
 												<span class="path1"></span>
@@ -203,7 +203,7 @@
 								<div class="row mb-6">
 									<!--begin::Label-->
 									<label class="col-lg-4 col-form-label fw-semibold fs-6">
-										<span class="required">Email.</span>
+										<span class="required">EMAIL.</span>
 										<span class="ms-1" data-bs-toggle="tooltip" title="Date Should be Valid">
 											<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
 												<span class="path1"></span>
@@ -224,8 +224,29 @@
 								<div class="row mb-6">
 									<!--begin::Label-->
 									<label class="col-lg-4 col-form-label fw-semibold fs-6">
-										<span class="required">Password</span>
-										<span class="ms-1" data-bs-toggle="tooltip" title="Date Should be Valid">
+										<span class="required">USERNAME</span>
+										<span class="ms-1" data-bs-toggle="tooltip" title="Username Should be Valid">
+											<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+												<span class="path1"></span>
+												<span class="path2"></span>
+												<span class="path3"></span>
+											</i>
+										</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Col-->
+									<div class="col-lg-8 fv-row">
+										<input type="text" name="username" class="form-control form-control-lg form-control-solid" placeholder="Enter Username." value="agent@01" />
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row mb-6">
+									<!--begin::Label-->
+									<label class="col-lg-4 col-form-label fw-semibold fs-6">
+										<span class="required">PASSWORD</span>
+										<span class="ms-1" data-bs-toggle="tooltip" title="Password Should be Valid">
 											<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
 												<span class="path1"></span>
 												<span class="path2"></span>
@@ -245,7 +266,29 @@
 								<div class="row mb-6">
 									<!--begin::Label-->
 									<label class="col-lg-4 col-form-label fw-semibold fs-6">
-										<span class="required">Country</span>
+										<span class="required">
+											ADDRESS</span>
+											<span class="ms-1" data-bs-toggle="tooltip" title="Address Should be Valid">
+												<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
+													<span class="path1"></span>
+													<span class="path2"></span>
+													<span class="path3"></span>
+												</i>
+											</span>
+									</label>
+									<!--end::Label-->
+									<!--begin::Col-->
+									<div class="col-lg-8 fv-row">
+										<textarea class="form-control form-control form-control-solid" data-kt-autosize="true" placeholder="Yellow Street, Sharjah"></textarea>
+									</div>
+									<!--end::Col-->
+								</div>
+								<!--end::Input group-->
+								<!--begin::Input group-->
+								<div class="row mb-6">
+									<!--begin::Label-->
+									<label class="col-lg-4 col-form-label fw-semibold fs-6">
+										<span class="required">COUNTRY</span>
 										<span class="ms-1" data-bs-toggle="tooltip" title="Country of origination">
 											<i class="ki-duotone ki-information-5 text-gray-500 fs-6">
 												<span class="path1"></span>
@@ -471,7 +514,7 @@
 											<option data-kt-flag="flags/tuvalu.svg" value="TV">Tuvalu</option>
 											<option data-kt-flag="flags/uganda.svg" value="UG">Uganda</option>
 											<option data-kt-flag="flags/ukraine.svg" value="UA">Ukraine</option>
-											<option data-kt-flag="flags/united-arab-emirates.svg" value="AE">United Arab Emirates</option>
+											<option data-kt-flag="flags/united-arab-emirates.svg" value="AE" selected>United Arab Emirates</option>
 											<option data-kt-flag="flags/united-kingdom.svg" value="GB">United Kingdom</option>
 											<option data-kt-flag="flags/united-states.svg" value="US">United States</option>
 											<option data-kt-flag="flags/uruguay.svg" value="UY">Uruguay</option>
