@@ -22,8 +22,8 @@ namespace Starterkit.Controllers
 			return View("Views/Pages/Agent/RegisteredCaseList.cshtml");
 		}
 
-		[HttpGet("AgentViewRegisteredCompanyList/")]
-		public IActionResult AgentViewRegisteredCompanyList()
+		[HttpGet("RegisteredCompanyList/")]
+		public IActionResult egisteredCompanyList()
 		{
 			return View("Views/Pages/Agent/AgentViewRegisteredCompanyList.cshtml");
 		}
