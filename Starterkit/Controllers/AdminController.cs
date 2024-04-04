@@ -109,6 +109,25 @@ namespace Starterkit.Controllers
 			return View("Views/Pages/Admin/RoleDetail.cshtml");
 		}
 
+        [HttpGet("ViewCustomer/")]
+        public IActionResult ViewCustomer()
+        {
+            return View("Views/Pages/Admin/ViewCustomer.cshtml");
+        }
 
-	}
+        [HttpGet("UpdateCustomer/")]
+        public IActionResult UpdateCustomer()
+        {
+            return View("Views/Pages/Admin/UpdateCustomer.cshtml");
+        }
+
+        [HttpGet("DeleteCustomer/")]
+        public IActionResult DeleteCustomer()
+        {
+            return View("Views/Pages/Admin/DeleteCustomer.cshtml");
+        }
+
+
+
+    }
 }
