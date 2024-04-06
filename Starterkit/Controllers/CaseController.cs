@@ -17,7 +17,7 @@ namespace Starterkit.Controllers
         [HttpGet("uploadCaseDocuments/")]
         public IActionResult UploadCaseDocuments()
         {
-            return View("Views/Pages/Cases/_UploadCaseDocuments.cshtml");
+            return View("Views/Pages/Cases/UploadCaseDocuments.cshtml");
         }
 
 		[HttpGet("createCompany/")]
