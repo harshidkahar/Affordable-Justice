@@ -25,31 +25,22 @@ var KTAccountSettingsSigninMethods = function () {
     }
 
     // Private functions
-    var initSettings = function () {  
+    var initSettings = function () {
         if (!signInMainEl) {
             return;
-        }        
+        }
 
         // toggle UI
         signInChangeEmail.querySelector('button').addEventListener('click', function () {
             toggleChangeEmail();
         });
 
-        signInCancelEmail.addEventListener('click', function () {
-            toggleChangeEmail();
-        });
 
-        passwordChange.querySelector('button').addEventListener('click', function () {
-            toggleChangePassword();
-        });
 
-        passwordCancel.addEventListener('click', function () {
-            toggleChangePassword();
-        });
     }
 
     var handleChangeEmail = function (e) {
-        var validation;        
+        var validation;
 
         if (!signInForm) {
             return;
@@ -70,13 +61,7 @@ var KTAccountSettingsSigninMethods = function () {
                         }
                     },
 
-                    confirmemailpassword: {
-                        validators: {
-                            notEmpty: {
-                                message: 'Password is required'
-                            }
-                        }
-                    }
+
                 },
 
                 plugins: { //Learn more: https://formvalidation.io/guide/plugins
@@ -91,21 +76,30 @@ var KTAccountSettingsSigninMethods = function () {
         signInForm.querySelector('#kt_signin_submit').addEventListener('click', function (e) {
             e.preventDefault();
             console.log('click');
+            document.querySelector('#kt_signin_cancel').style.display = 'block';
+            document.querySelector('#confirmemailpassword').style.display = 'block';
+            document.querySelector('#kt_otp_timer_msg').style.display = 'block';
+            document.querySelector('#kt_sing_in_two_factor_submit').style.display = 'block';
+
+            var btn = document.querySelector('#kt_signin_submit');
+            btn.disabled = true;
 
             validation.validate().then(function (status) {
                 if (status == 'Valid') {
+
                     swal.fire({
-                        text: "Sent password reset. Please check your email",
+                        text: "OTP Sent Sucessfully. Please check your email",
                         icon: "success",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
                         customClass: {
                             confirmButton: "btn font-weight-bold btn-light-primary"
                         }
-                    }).then(function(){
+                    }).then(function () {
                         signInForm.reset();
-                        validation.resetForm(); // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
-                        toggleChangeEmail();
+                        validation.resetForm();
+                        // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
+
                     });
                 } else {
                     swal.fire({
@@ -119,6 +113,102 @@ var KTAccountSettingsSigninMethods = function () {
                     });
                 }
             });
+
+        });
+
+    }
+
+    var signincancel = function (e) {
+
+        signInCancelEmail.addEventListener('click', function (e) {
+            e.preventDefault();
+            console.log('click');
+
+            swal.fire({
+                text: "OTP Sent Sucessfully again. Please check your email",
+                icon: "success",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn font-weight-bold btn-light-primary"
+                }
+            }).then(function () {
+                console.log('signincancel run'); // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
+
+            });
+
+            // Disable the button after it is clicked
+            signInCancelEmail.disabled = true;
+
+            // Use setTimeout to enable the button again after 30 seconds (30000 milliseconds)
+            setTimeout(function () {
+                signInCancelEmail.disabled = false;
+                console.log('Button enabled again after 30 seconds');
+            }, 30000);
+        });
+
+
+
+    }
+
+    var handleType = function () {
+        var input1 = signInForm.querySelector("[name=code_1]");
+        var input2 = signInForm.querySelector("[name=code_2]");
+        var input3 = signInForm.querySelector("[name=code_3]");
+        var input4 = signInForm.querySelector("[name=code_4]");
+        var input5 = signInForm.querySelector("[name=code_5]");
+        var input6 = signInForm.querySelector("[name=code_6]");
+
+        input1.focus();
+
+        input1.addEventListener("keyup", function () {
+            if (this.value.length === 1) {
+                input2.focus();
+            }
+        });
+
+        input2.addEventListener("keyup", function () {
+            if (this.value.length === 1) {
+                input3.focus();
+            }
+        });
+
+        input3.addEventListener("keyup", function () {
+            if (this.value.length === 1) {
+                input4.focus();
+            }
+        });
+
+        input4.addEventListener("keyup", function () {
+            if (this.value.length === 1) {
+                input5.focus();
+            }
+        });
+
+        input5.addEventListener("keyup", function () {
+            if (this.value.length === 1) {
+                input6.focus();
+            }
+        });
+
+        input6.addEventListener("keyup", function () {
+            if (this.value.length === 1) {
+                input6.blur();
+            }
+        });
+        const inputs = document.getElementById("inputs");
+        inputs.addEventListener("keyup", function (e) {
+            const target = e.target;
+            const key = e.key.toLowerCase();
+
+            if (key == "backspace" || key == "delete") {
+                target.value = "";
+                const prev = target.previousElementSibling;
+                if (prev) {
+                    prev.focus();
+                }
+                return;
+            }
         });
     }
 
@@ -158,7 +248,7 @@ var KTAccountSettingsSigninMethods = function () {
                                 message: 'Confirm Password is required'
                             },
                             identical: {
-                                compare: function() {
+                                compare: function () {
                                     return passwordForm.querySelector('[name="newpassword"]').value;
                                 },
                                 message: 'The password and its confirm are not the same'
@@ -190,7 +280,7 @@ var KTAccountSettingsSigninMethods = function () {
                         customClass: {
                             confirmButton: "btn font-weight-bold btn-light-primary"
                         }
-                    }).then(function(){
+                    }).then(function () {
                         passwordForm.reset();
                         validation.resetForm(); // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
                         toggleChangePassword();
@@ -225,12 +315,14 @@ var KTAccountSettingsSigninMethods = function () {
 
             initSettings();
             handleChangeEmail();
+            signincancel();
+            handleType();
             handleChangePassword();
         }
     }
 }();
 
 // On document ready
-KTUtil.onDOMContentLoaded(function() {
+KTUtil.onDOMContentLoaded(function () {
     KTAccountSettingsSigninMethods.init();
 });

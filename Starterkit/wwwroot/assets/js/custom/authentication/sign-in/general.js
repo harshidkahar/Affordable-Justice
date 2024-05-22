@@ -18,7 +18,7 @@ var KTSigninGeneral = function () {
                         validators: {
                             regexp: {
                                 regexp: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                                message: 'The value is not a valid email address',
+                                message: 'Invalid email address',
                             },
                             notEmpty: {
                                 message: 'Email address is required'
@@ -79,26 +79,85 @@ var KTSigninGeneral = function () {
                         submitButton.disabled = false;
 
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                        Swal.fire({
-                            text: "You have successfully logged in!",
-                            icon: "success",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        }).then(function (result) {
-                            if (result.isConfirmed) {
-                                form.querySelector('[name="email"]').value = "";
-                                form.querySelector('[name="mobile"]').value = "";
+                        jsonPostData = {
+                            Email: form.querySelector('[name="email"]').value
+                        }
+                        //RegisterUser(jsonPostData); 
 
-                                //form.submit(); // submit form
-                                var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                if (redirectUrl) {
-                                    location.href = redirectUrl;
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "SignUp.aspx/GetData",
+                        //    data: JSON.stringify(jsonPostData),
+                        //    contentType: "application/json; charset=utf-8",
+                        //    dataType: "json",
+                        //    success: function (response) {
+                        //        alert(response.d);
+                        //    },
+                        //});  
+                        $.ajax({
+                            type: "POST",
+                            url: "SignIn.aspx/SendOTP",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(jsonPostData),
+                            dataType: "json",
+                            success: function (data) {
+                                if (data.d == "done") {
+                                    Swal.fire({
+                                        text: "An OTP is send to your email!",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    }).then(function (result) {
+                                        if (result.isConfirmed) {
+                                            form.querySelector('[name="email"]').value = "";
+
+                                            //form.submit(); // submit form
+                                            var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                            if (redirectUrl) {
+                                                location.href = redirectUrl;
+                                            }
+                                        }
+                                    });
                                 }
+                                else if (data.d == "invalid-Email") {
+                                    Swal.fire({
+                                        text: "Invalid Email Address.. Please enter valid e-mail address.",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        text: "Sorry, looks like there are some errors detected, please try again.",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                }
+                            },
+                            error: function (xhr) {
+                                Swal.fire({
+                                    text: "Invalid Email id.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
                             }
                         });
+                        
                     }, 2000);
                 } else {
                     // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/

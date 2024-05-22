@@ -4,64 +4,72 @@
 	KTTheme.AddJavascriptFile("js/custom/authentication/sign-in/general.js");
 }
 
-<!--begin::Form-->
-<form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="/twoFactor" action="#">
-    <!--begin::Heading-->
-    <div class="text-center mb-11">
-        <!--begin::Title-->
-        <h1 class="text-dark fw-bolder mb-3">
-            Sign In
-        </h1>
-        <!--end::Title-->
 
-        @* <!--begin::Subtitle-->
-        <div class="text-gray-500 fw-semibold fs-6">
-            Your Social Campaigns
-        </div>
-        <!--end::Subtitle---> *@
-    </div>
-    <!--begin::Heading-->
+        <!--begin::Form-->
+        <form class="form w-100" novalidate="novalidate" id="kt_sign_in_form" data-kt-redirect-url="twoFactor" action="#">
+            <!--begin::Heading-->
+            <div class="text-center mb-11">
+                <!--begin::Title-->
+                <h1 class="text-dark fw-bolder mb-3">Welcome Back</h1>
+                <h1 class="text-dark fw-bolder mb-3">Sign In</h1>
+                <!--end::Title-->
+                <!--                              
+                <div class="text-gray-500 fw-semibold fs-6">
+                    Your Social Campaigns
+
+                </div>
+                <!--end::Subtitle--->
+                -->
+            </div>
+            <!--begin::Heading-->
+            <!--begin::Input group--->
+            <div class="fv-row mb-8">
+                <!--begin::Email-->
+                <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent" />
+                <!--end::Email-->
+            </div>
+
+            <!--begin::Separator-->
+            <!--<div class="separator separator-content my-14">
+                <span class="w-125px text-gray-500 fw-semibold fs-7">Or with phone</span>
+            </div>-->
+            <!--end::Separator-->
+            <!--end::Input group--->
+            <!-- <div class="fv-row mb-3">
+                <input type="text" placeholder="Mobile" name="mobile" autocomplete="off" class="form-control bg-transparent" />
+                </div>-->
+            <!--end::Input group--->
+            <!--begin::Submit button-->
+            <div class="d-grid mb-10">
+                <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
+                    <!--begin::Indicator label-->
+                    <span class="indicator-label">Sign In</span>
+                    <!--end::Indicator label-->
+                    <!--begin::Indicator progress-->
+                    <span class="indicator-progress">
+                        Please wait...
+
+                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                    </span>
+                    <!--end::Indicator progress-->
+                </button>
+            </div>
+            <!--end::Submit button-->
+            <!--begin::Sign up-->
+            <div class="text-gray-500 text-center fw-semibold fs-6">
+                Not a Member yet?
+                <a href="signup" class="link-primary">Sign up</a>
+            </div>
+            <!--end::Sign up-->
+        </form>
+        <!--end::Form-->
     
-    
-
-    <!--begin::Input group--->
-    <div class="fv-row mb-8">
-        <!--begin::Email-->
-        <input type="text" placeholder="Email" name="email" autocomplete="off" class="form-control bg-transparent"/> 
-        <!--end::Email-->
+<!--begin::Footer-->
+<div class="w-lg-500px d-flex flex-stack px-10 mx-auto">
+    <!--begin::Links-->
+    <div class="d-flex fw-semibold text-primary fs-base gap-5">
+        <a href="#">Help</a>
     </div>
-
-    <!--begin::Separator-->
-    <div class="separator separator-content my-14">
-        <span class="w-125px text-gray-500 fw-semibold fs-7">Or with phone</span>
-    </div>
-    <!--end::Separator-->
-    <!--end::Input group--->
-    <div class="fv-row mb-3">    
-        <!--begin::Password-->
-        <input type="text" placeholder="Mobile" name="mobile" autocomplete="off" class="form-control bg-transparent"/>
-        <!--end::Password-->
-    </div>
-    <!--end::Input group--->
-    
-    <!--begin::Submit button-->
-    <div class="d-grid mb-10">
-        <button type="submit" id="kt_sign_in_submit" class="btn btn-primary">
-            @await Html.PartialAsync("~/Views/Partials/General/_ButtonIndicator.cshtml", new ViewDataDictionary(ViewData) {
-        		{ "ButtonLabel", "Get OTP" },
-        	})
-        </button>
-    </div>
-    <!--end::Submit button-->
-
-    <!--begin::Sign up-->
-    <div class="text-gray-500 text-center fw-semibold fs-6">
-        Not a Member yet?
-
-        <a href="/signup" class="link-primary">
-            Sign up
-        </a>
-    </div>
-    <!--end::Sign up-->
-</form>
-<!--end::Form--> 
+    <!--end::Links-->
+</div>
+<!--end::Footer-->

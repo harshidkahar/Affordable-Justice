@@ -103,7 +103,8 @@ var KTSignupGeneral = function () {
                             LastName: form.querySelector('[name="last-name"]').value,
                             Email: form.querySelector('[name="email"]').value,
                             ContactNo: form.querySelector('[name="phone"]').value,
-                            SponsorId: form.querySelector('[name="ReferralCode"]').value
+                            SponsorId: form.querySelector('[name="ReferralCode"]').value,
+                            CountryCode: form.querySelector('[name="country-code"]').value
                         }
                         //RegisterUser(jsonPostData);  
                         var FirstName = form.querySelector('[name="first-name"]').value;
@@ -112,13 +113,24 @@ var KTSignupGeneral = function () {
                         var ContactNo = form.querySelector('[name="phone"]').value;
                         var SponsorId = form.querySelector('[name="ReferralCode"]').value;
 
+                        //$.ajax({
+                        //    type: "POST",
+                        //    url: "SignUp.aspx/GetData",
+                        //    data: JSON.stringify(jsonPostData),
+                        //    contentType: "application/json; charset=utf-8",
+                        //    dataType: "json",
+                        //    success: function (response) {
+                        //        alert(response.d);
+                        //    },
+                        //});  
                         $.ajax({
-                            type: 'POST',
-                            url: '/Auth/RegisterUser/',
-                            contentType: 'application/json; charset=utf-8',
+                            type: "POST",
+                            url: "SignUp.aspx/RegisterUser",
+                            contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(jsonPostData),
+                            dataType: "json",
                             success: function (data) {
-                                if (data == "done") {
+                                if (data.d == "done") {
                                     Swal.fire({
                                         text: "You have successfully registered!",
                                         icon: "success",
@@ -130,7 +142,60 @@ var KTSignupGeneral = function () {
                                     }).then(function (result) {
                                             if (result.isConfirmed) {
                                                 form.reset();
-                                                location.href = "/signin";
+                                                $.ajax({
+                                                    type: "POST",
+                                                    url: "SignIn.aspx/SendOTP",
+                                                    contentType: "application/json; charset=utf-8",
+                                                    data: JSON.stringify(jsonPostData),
+                                                    dataType: "json",
+                                                    success: function (data) {
+                                                        if (data.d == "done") {
+                                                            Swal.fire({
+                                                                text: "An OTP is send to your email!",
+                                                                icon: "success",
+                                                                buttonsStyling: false,
+                                                                confirmButtonText: "Ok, got it!",
+                                                                customClass: {
+                                                                    confirmButton: "btn btn-primary"
+                                                                }
+                                                            }).then(function (result) {
+                                                                if (result.isConfirmed) {
+                                                                    form.querySelector('[name="email"]').value = "";
+
+                                                                    //form.submit(); // submit form
+                                                                    var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                                                    if (redirectUrl) {
+                                                                        location.href = redirectUrl;
+                                                                    }
+                                                                }
+                                                            });
+                                                        }
+                                                        else {
+                                                            Swal.fire({
+                                                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                                                icon: "error",
+                                                                buttonsStyling: false,
+                                                                confirmButtonText: "Ok, got it!",
+                                                                customClass: {
+                                                                    confirmButton: "btn btn-primary"
+                                                                }
+                                                            });
+                                                        }
+                                                    },
+                                                    error: function (xhr) {
+                                                        Swal.fire({
+                                                            text: "Invalid Email id.",
+                                                            icon: "error",
+                                                            buttonsStyling: false,
+                                                            confirmButtonText: "Ok, got it!",
+                                                            customClass: {
+                                                                confirmButton: "btn btn-primary"
+                                                            }
+                                                        });
+                                                    }
+                                                });
+
+                                                //location.href = "/welcome";
                                             }
                                         });
                                 }
@@ -220,19 +285,19 @@ var KTSignupGeneral = function () {
                             }
                         }
                     }
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger({
-                        event: {
-                            password: false
-                        }
-                    }),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',  // comment to enable invalid state icons
-                        eleValidClass: '' // comment to enable valid state icons
-                    })
-                }
+                }//,
+                //plugins: {
+                //    trigger: new FormValidation.plugins.Trigger({
+                //        event: {
+                //            password: false
+                //        }
+                //    }),
+                //    bootstrap: new FormValidation.plugins.Bootstrap5({
+                //        rowSelector: '.fv-row',
+                //        eleInvalidClass: '',  // comment to enable invalid state icons
+                //        eleValidClass: '' // comment to enable valid state icons
+                //    })
+                //}
             }
         );
 
@@ -307,11 +372,11 @@ var KTSignupGeneral = function () {
         });
 
         // Handle password input
-        form.querySelector('input[name="password"]').addEventListener('input', function () {
-            if (this.value.length > 0) {
-                validator.updateFieldStatus('password', 'NotValidated');
-            }
-        });
+        //form.querySelector('input[name="password"]').addEventListener('input', function () {
+        //    if (this.value.length > 0) {
+        //        validator.updateFieldStatus('password', 'NotValidated');
+        //    }
+        //});
     }
 
 

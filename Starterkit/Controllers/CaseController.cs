@@ -20,7 +20,27 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Cases/UploadCaseDocuments.cshtml");
         }
 
-		[HttpGet("createCompany/")]
+        [HttpGet("caseDetails/")]
+        public IActionResult CaseDetails()
+        {
+            return View("Views/Pages/Cases/caseDetails.cshtml");
+        }
+
+        [HttpGet("viewCaseDocuments/")]
+        public IActionResult ViewCaseDocuments()
+        {
+            return View("Views/Pages/Cases/ViewCaseDocuments.cshtml");
+        }
+
+        [HttpGet("addDocDescription/")]
+        public IActionResult ViewDocument()
+        {
+            return View("Views/Pages/Cases/ViewDocument.cshtml");
+        }
+
+
+
+        [HttpGet("createCompany/")]
 		public IActionResult createCompany()
 		{
 			return View("Views/Pages/Cases/createCompany.cshtml");
