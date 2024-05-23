@@ -1622,15 +1622,25 @@ var KTCreateAccount = function () {
                             document.querySelector('#mainlandDetails').style.display = 'none';
                             document.querySelector('#mainlandForm').style.display = 'none';
 
+                            document.querySelector('#offshoreForm').style.display = 'none';
+                            document.querySelector('#offshoreDetails').style.display = 'none';
+
+
                             if (companyTypeInput) {
                                 if (companyTypeInput === 'Mainland') {
                                     document.querySelector('#mainlandDetails').style.display = 'block';
                                     document.querySelector('#mainlandForm').style.display = 'block';
+                                    document.querySelector('#offshoreForm').style.display = 'none';
+                                    document.querySelector('#offshoreDetails').style.display = 'none';
+
                                 }
 
                                 if (companyTypeInput === 'FreeZone') {
                                     document.querySelector('#freezoneDetails').style.display = 'block';
                                     document.querySelector('#freezoneForm').style.display = 'block';
+                                    document.querySelector('#offshoreForm').style.display = 'none';
+                                    document.querySelector('#offshoreDetails').style.display = 'none';
+
                                 }
                                 if (companyTypeInput === 'OffShore Company') {
                                     document.querySelector('#offshoreForm').style.display = 'block';
