@@ -5,7 +5,6 @@
     // Layout options
     KTTheme.AddHtmlClass("body", "app-blank");
 }
-<!--begin::Root-->
 <div class="d-flex flex-column flex-root" id="kt_app_root">
     <!--begin::Header Section-->
     <div class="mb-0" id="home">
@@ -30,7 +29,7 @@
                             <!--begin::Logo image-->
                             <a href="/">
                                 <img alt="Logo" src="assets/media/logos/logo.png" class="logo-default h-25px h-lg-30px" />
-                                <img alt="Logo" src="assets/media/logos/logo.png" class="logo-sticky h-20px h-lg-25px" />
+                                <img alt="Logo" src="assets/media/logos/logo-blue.png" class="logo-sticky h-20px h-lg-25px" />
                             </a>
                             <!--end::Logo image-->
                         </div>
@@ -50,35 +49,28 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#how-it-works" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it Works</a>
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#explore-our-services" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Explore Our Services</a>
                                         <!--end::Menu link-->
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#achievements" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Achievements</a>
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#who-we-are" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Who We Are</a>
                                         <!--end::Menu link-->
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#team" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Team</a>
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#why-us" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Why Us</a>
                                         <!--end::Menu link-->
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#portfolio" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Portfolio</a>
-                                        <!--end::Menu link-->
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item">
-                                        <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#pricing" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Pricing</a>
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#clients" data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Clients</a>
                                         <!--end::Menu link-->
                                     </div>
                                     <!--end::Menu item-->
@@ -89,7 +81,7 @@
                         <!--end::Menu wrapper-->
                         <!--begin::Toolbar-->
                         <div class="flex-equal text-end ms-1">
-                            <a href="signin/" class="btn btn-success">Sign In</a>
+                            <a href="signin" class="btn btn-success">Sign In</a>
                         </div>
                         <!--end::Toolbar-->
                     </div>
@@ -105,19 +97,24 @@
                     <!--begin::Title-->
                     <h1 class="text-white lh-base fw-bold fs-2x fs-lg-3x mb-15">
                         Happy to serve you,
-                        <br />with
-                        <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                        <br />
+                        with
+                        <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
                             <span id="kt_landing_hero_text">
                                 High quality and less cost
                             </span>
                         </span>
                         <div class="fs-5 text-light fw-bold">
-                            We are pleased to be your first choice for direct legal services, <br />our high quality service at a lower cost. <br />While maintaining the confidentiality and privacy of our valued clients.
+                            We are pleased to be your first choice for direct legal services,
+                            <br />
+                            our high quality service at a lower cost.
+                            <br />
+                            While maintaining the confidentiality and privacy of our valued clients.
                         </div>
                     </h1>
                     <!--end::Title-->
                     <!--begin::Action-->
-                    <a href="signup/" class="btn btn-primary">Join Us Now</a>
+                    <a href="signup" class="btn btn-primary hover-scale">Join Us Now</a>
                     <!--end::Action-->
                 </div>
                 <!--end::Heading-->
@@ -150,7 +147,7 @@
         </div>
         <!--end::Wrapper-->
         <!--begin::Curve bottom-->
-        <div class="landing-curve landing-dark-color mb-10 mb-lg-20">
+        <div class="landing-curve landing-dark-color">
             <svg viewBox="15 12 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0 11C3.93573 11.3356 7.85984 11.6689 11.7725 12H1488.16C1492.1 11.6689 1496.04 11.3356 1500 11V12H1488.16C913.668 60.3476 586.282 60.6117 11.7725 12H0V11Z" fill="currentColor"></path>
             </svg>
@@ -163,10 +160,19 @@
         <!--begin::Container-->
         <div class="container">
             <!--begin::Heading-->
-            <div class="text-center mb-12">
-                <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="team" data-kt-scroll-offset="{default: 100, lg: 150}">Explore Our Services</h3>
-                <!--end::Title-->
+            <div class="text-center mt-15" id="explore-our-services" data-kt-scroll-offset="{default: 100, lg: 150}">
+                <!--begin::Underline-->
+                <span class="d-inline-block position-relative ms-2 mb-10">
+                    <!--begin::Label-->
+                    <span class="d-inline-block mb-2 fs-2tx fw-bold">
+                        Explore Our Services
+                    </span>
+                    <!--end::Label-->
+                    <!--begin::Line-->
+                    <span class="d-inline-block position-absolute h-8px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                    <!--end::Line-->
+                </span>
+                <!--end::Underline-->
             </div>
             <!--end::Heading-->
             <!--begin::Slider-->
@@ -179,12 +185,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_court.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/dubai_court.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Courts</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Dubai Courts</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -205,12 +211,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_police.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/dubai_police.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Police</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Dubai Police</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -231,12 +237,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/united_arab_emirates_misnistry_of_labour.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/united_arab_emirates_misnistry_of_labour.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Ministry Of Labour & Tasheel</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Ministry Of Labour & Tasheel</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -257,12 +263,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_economy.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/dubai_economy.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Department Of Economics</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Department Of Economics</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -285,12 +291,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/fedral_authority.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/fedral_authority.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Immigration Department</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Immigration Department</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -311,12 +317,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_municipality.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/dubai_municipality.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Municipality</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Dubai Municipality</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -337,12 +343,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class=" mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/fedral_authority.png')"></div>
+                                    <div class=" mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/fedral_authority.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Emirates ID Authority</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Emirates ID Authority</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -363,12 +369,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/rta.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/rta.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Road and Transport Authority</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Road and Transport Authority</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -392,12 +398,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/emigration_clerance.jpg')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/emigration_clerance.jpg')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Emigration Clearance</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Emigration Clearance</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -418,12 +424,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/dubai_health_authority.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/dubai_health_authority.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Dubai Health Authority</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Dubai Health Authority</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -444,12 +450,12 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/account.png')"></div>
+                                    <div class="mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/account.png')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
-                                        <a href="#" class="text-dark fw-bold text-hover-primary fs-3">Accounting & Book Keeping</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Accounting & Book Keeping</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1"></div>
@@ -470,17 +476,17 @@
                                 <!--begin::Item-->
                                 <div class="text-center">
                                     <!--begin::Photo-->
-                                    <div class="circle mx-auto mb-5 d-flex w-100px h-100px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image:url('assets/media/landing_page/court_hammer.jpeg')"></div>
+                                    <div class="circle mx-auto mb-5 d-flex w-100px h-100px bgi-no-repeat bgi-size-contain bgi-position-center" style="background-image: url('assets/media/landing_page/court_hammer.jpeg')"></div>
                                     <!--end::Photo-->
                                     <!--begin::Person-->
                                     <div class="mb-0">
                                         <!--begin::Name-->
                                         <h1>New Here</h1>
-                                        <a href="signup/" class="text-dark fw-bold text-hover-primary fs-3">Sign Up Now</a>
+                                        <a href="/signin" class="text-dark fw-bold text-hover-primary fs-3">Sign Up Now</a>
                                         <!--end::Name-->
                                         <!--begin::Position-->
                                         <div class="text-muted fs-6 fw-semibold mt-1">Already a Coustomer</div>
-                                        <a href="signin/" class="text-dark fw-bold text-hover-primary fs-5">Login</a>
+                                        <a href="signin" class="text-dark fw-bold text-hover-primary fs-5">Sign In</a>
                                         <!--begin::Position-->
                                     </div>
                                     <!--end::Person-->
@@ -502,57 +508,39 @@
     <div class="mb-n10 mb-xl-3  z-index-2">
         <!--begin::Container-->
         <div class="container">
-            <!--begin::Heading-->
-            @* <div class="text-center mb-17">
-            <!--begin::Title-->
-            <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">How it Works</h3>
-            <!--end::Title-->
-            <!--begin::Text-->
-            <div class="fs-5 text-muted fw-bold">
-            Save thousands to millions of bucks by using single tool
-            <br />for different amazing and great useful admin
-            </div>
-            <!--end::Text-->
-            </div> *@
-            <!--end::Heading-->
             <!--begin::Row-->
             <div class="row g-6 mb-6 g-xl-9 mb-xl-9">
                 <!--begin::Followers-->
                 <!--begin::Col-->
-                <div class="col-md-3 col-xxl-3">
+                <div class="col-md-3">
                     <!--begin::Card-->
                     <div class="card">
                         <!--begin::Card body-->
                         <div class="card-body d-flex flex-center flex-column py-9 px-5">
                             <!--begin::Avatar-->
                             <div class="symbol symbol-65px symbol-circle mb-5">
-                                <img src="assets/media//avatars/300-11.jpg" alt="image" />
-                                <div class="bg-success position-absolute rounded-circle translate-middle start-100 top-100 border border-4 border-body h-15px w-15px ms-n3 mt-n3"></div>
+                                <img src="/assets/media//avatars/legal-consultation.jpg" alt="image" />
                             </div>
                             <!--end::Avatar-->
                             <!--begin::Name-->
-                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Company Formation</a>
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Legal Consultation</a>
                             <!--end::Name-->
                             <!--begin::Position-->
-                            <div class="fw-semibold text-gray-400 mb-6 text-center">Our experts will understand your requirements, advice you and then register a company for you.</div>
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">Language barrier is the major issue faced by experts. To cater to the same our experts speak ARABIC, ENGLISH, HINDI, RUSSIAN, UKRAINIAN.</div>
                             <!--end::Position-->
-                            <!--begin::Follow-->
-
                             <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
                                 <li class="nav-item w-100 me-0 mb-md-2">
                                     <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">Main Land (DED)</span>
-
+                                        <span class="d-flex flex-column align-items-start w-100 ">
+                                            <span class="fs-4 fw-bold w-100 text-center">Civil</span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="nav-item w-100 me-0 mb-md-2">
                                     <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
 
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">Free Zone</span>
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Criminal</span>
 
                                         </span>
                                     </a>
@@ -560,8 +548,112 @@
                                 <li class="nav-item w-100">
                                     <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
 
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">RENEWAL</span>
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Tax</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <!--begin::Card body-->
+                    </div>
+                    <!--begin::Card-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3">
+                    <!--begin::Card-->
+                    <div class="card">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                <img src="assets/media//avatars/company-formation.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Company Formation</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">Our experts will understand your requirements, advice you and then register a company for you.</div>
+                            <!--end::Position-->
+                            <!--begin::Follow-->
+
+                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Main Land</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Free Zone</span>
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Offshore Company</span>
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                            <!--end::Follow-->
+                        </div>
+                        <!--begin::Card body-->
+                    </div>
+                    <!--begin::Card-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3">
+                    <!--begin::Card-->
+                    <div class="card">
+                        <!--begin::Card body-->
+                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-65px symbol-circle mb-5">
+                                <img src="assets/media//avatars/business-consultation.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Name-->
+                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Business Consultation</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">Our experts will understand your business ideas and requirements and accordingly line up meetings for your specific needs. We bridge between two entities.</div>
+                            <!--end::Position-->
+                            <!--begin::Follow-->
+
+                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Finance</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100 me-0 mb-md-2">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
+
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Construction</span>
+
+                                        </span>
+                                    </a>
+                                </li>
+                                <li class="nav-item w-100">
+                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
+
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Trading</span>
 
                                         </span>
                                     </a>
@@ -575,7 +667,7 @@
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-3 col-xxl-3">
+                <div class="col-md-3">
                     <!--begin::Card-->
                     <div class="card">
                         <!--begin::Card body-->
@@ -589,23 +681,21 @@
                             <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">Audit Company</a>
                             <!--end::Name-->
                             <!--begin::Position-->
-                            <div class="fw-semibold text-gray-400 mb-6">UAE has been making constant changes on the tax lawas. To help the company's grow. Our tax consultants constantly upgrading themselves.</div>
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">UAE has been making constant changes on the tax lawas. To help the company's grow. Our tax consultants constantly upgrading themselves.</div>
                             <!--end::Position-->
                             <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
                                 <li class="nav-item w-100 me-0 mb-md-2">
                                     <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">Company Audit</span>
-
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Company Audit</span>
                                         </span>
                                     </a>
                                 </li>
                                 <li class="nav-item w-100 me-0 mb-md-2">
                                     <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
 
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">Individual Audit</span>
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Individual Audit</span>
 
                                         </span>
                                     </a>
@@ -613,124 +703,14 @@
                                 <li class="nav-item w-100">
                                     <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
 
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">TAX Advise</span>
+                                        <span class="d-flex flex-column align-items-start w-100">
+                                            <span class="fs-4 fw-bold w-100 text-center">Tax Advise</span>
 
                                         </span>
                                     </a>
                                 </li>
                             </ul>
 
-                        </div>
-                        <!--begin::Card body-->
-                    </div>
-                    <!--begin::Card-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 col-xxl-3">
-                    <!--begin::Card-->
-                    <div class="card">
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
-                            <!--begin::Avatar-->
-                            <div class="symbol symbol-65px symbol-circle mb-5">
-                                <img src="assets/media//avatars/300-31.jpg" alt="image" />
-                            </div>
-                            <!--end::Avatar-->
-                            <!--begin::Name-->
-                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">LEGAL CONSULTATION</a>
-                            <!--end::Name-->
-                            <!--begin::Position-->
-                            <div class="fw-semibold text-gray-400 mb-6">Language barrier is the major issue faced by experts. To cater to the same our experts speak ARABIC, ENGLISH, HINDI, RUSSIAN, UKRAINIAN.</div>
-                            <!--end::Position-->
-                            <!--begin::Follow-->
-
-                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
-                                <li class="nav-item w-100 me-0 mb-md-2">
-                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">CIVIL</span>
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item w-100 me-0 mb-md-2">
-                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">CRIMINAL</span>
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item w-100">
-                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">TAX</span>
-
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!--end::Follow-->
-                        </div>
-                        <!--begin::Card body-->
-                    </div>
-                    <!--begin::Card-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 col-xxl-3">
-                    <!--begin::Card-->
-                    <div class="card">
-                        <!--begin::Card body-->
-                        <div class="card-body d-flex flex-center flex-column py-9 px-5">
-                            <!--begin::Avatar-->
-                            <div class="symbol symbol-65px symbol-circle mb-5">
-                                <img src="assets/media//avatars/300-6.jpg" alt="image" />
-                            </div>
-                            <!--end::Avatar-->
-                            <!--begin::Name-->
-                            <a href="#" class="fs-4 text-gray-800 text-hover-primary fw-bold mb-0">BUSINESS CONSULTATION</a>
-                            <!--end::Name-->
-                            <!--begin::Position-->
-                            <div class="fw-semibold text-gray-400 mb-6">Our experts will understand your business ideas and requirements and accordingly line up meetings for your specific needs. We bridge between two entities.</div>
-                            <!--end::Position-->
-                            <!--begin::Follow-->
-
-                            <ul class="nav nav-tabs nav-pills flex-row border-0 flex-md-column me-5 mb-3 mb-md-0 fs-6 min-w-lg-200px">
-                                <li class="nav-item w-100 me-0 mb-md-2">
-                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">FINANCE</span>
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item w-100 me-0 mb-md-2">
-                                    <a class="nav-link w-100 btn btn-flex btn-active-light-info" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">CONSTRUCTION</span>
-
-                                        </span>
-                                    </a>
-                                </li>
-                                <li class="nav-item w-100">
-                                    <a class="nav-link w-100 btn btn-flex btn-active-light-danger" href="#">
-
-                                        <span class="d-flex flex-column align-items-start">
-                                            <span class="fs-4 fw-bold">TRADING</span>
-
-                                        </span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <!--end::Follow-->
                         </div>
                         <!--begin::Card body-->
                     </div>
@@ -757,7 +737,7 @@
                         </div>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+                        <div class="fs-4 text-dark text-center mb-3 mt-10">
                             We provide prosecution services for all prosecutions of the United Arab Emirates (Federal – Abu Dhabi – Dubai – Ajman – Sharjah – Umm Al Quwain – Ras Al Khaimah – Fujairah).
                         </div>
                         <!--end::Description-->
@@ -780,7 +760,7 @@
                         </div>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+                        <div class="fs-4 text-dark text-center mb-3 mt-10">
                             We provide services of registering cases before all state courts of all kinds, including (Commercial, civil, labor, personal status for Muslims, personal status for non-Muslims, urgent orders) courts of all degrees (First Instance, Appeal, Cassation, and Supreme Federal).
                         </div>
                         <!--end::Description-->
@@ -803,7 +783,7 @@
                         </div>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-semibold fs-6 fs-lg-4 text-muted">
+                        <div class="fs-4 text-dark text-center mb-3 mt-10">
                             Through the services of documenting and certifying customary documents by the government notary or through the private notary.
                             Additionally, Tadween Centers provide the service of moving private notary at special prices.
                         </div>
@@ -832,34 +812,57 @@
             <!--begin::Container-->
             <div class="container">
                 <!--begin::Heading-->
-                <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
-                    <!--begin::Title-->
-                    <h3 class="fs-2hx text-white fw-bold mb-5">WHO WE ARE</h3>
-                    <!--end::Title-->
+                <div class="text-center mt-15" id="who-we-are" data-kt-scroll-offset="{default: 100, lg: 150}">
+                    <!--begin::Underline-->
+                    <span class="d-inline-block position-relative ms-2">
+                        <!--begin::Label-->
+                        <span class="d-inline-block mb-2 fs-2tx fw-bold text-white">
+                            WHO WE ARE
+                        </span>
+                        <!--end::Label-->
+                        <!--begin::Line-->
+                        <span class="d-inline-block position-absolute h-8px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                        <!--end::Line-->
+                    </span>
+                    <!--end::Underline-->
                     <!--begin::Description-->
-                    <div class="fs-2 fw-semibold text-muted text-center mb-3">
+
+                    <div class="fs-4 text-white text-center mb-3 mt-10">
                         General Manager Mr. Ali Alalawi, opened the first specialized center providing direct legal services in the United Arab Emirates and abroad.
-                        <br /><br />
+                        <br />
+                        <br />
                         Our aim to provide the best legal services to our clients, through the developments of digital that includes all accepts of legal fields.
 
-                        <br /><br />
+                        <br />
+                        <br />
                         The Tadween Centers were established to keep up with the developments and pace of the world.
 
-                        <br /><br />
+                        <br />
+                        <br />
                         Tadween Centers has a group of specialized legal personnel, trained and distinguished legal cadres, along with experience in state courts.
                     </div>
                     <!--end::Description-->
+                    <!--end::Heading-->
+                    <!--begin::Testimonial-->
+                    <span class="d-inline-block position-relative ms-2  mt-18">
+                        <!--begin::Label-->
+                        <span class="d-inline-block mb-2 fs-2tx fw-bold text-white">
+                            How we proceed in Affordable Justice
+                        </span>
+                        <!--end::Label-->
+                        <!--begin::Line-->
+                        <span class="d-inline-block position-absolute h-8px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                        <!--end::Line-->
+                    </span>
+                    <div class="fs-4 text-white text-center mb-3 mt-10">
+                        We have an elite team of lawyers, who are specialized and trained
+                        <br />
+                        to provide
+                        the best legal service. Additionally, providing a 24-hour service.
+                    </div>
+                    <!--end::Testimonial-->
+
                 </div>
-                <!--end::Heading-->
-                <!--begin::Testimonial-->
-                <h3 class="fs-2hx text-white fw-bold mb-5 text-center">How we proceed in Affordable Justice</h3>
-                <div class="fs-2 fw-semibold text-muted text-center mb-3">
-                    We have an elite team of lawyers, who are specialized and trained
-                    <br />
-                    to provide
-                    the best legal service. Additionally, providing a 24-hour service.
-                </div>
-                <!--end::Testimonial-->
                 <!--begin::Statistics-->
                 <div class="d-flex flex-center">
                     <!--begin::Items-->
@@ -939,21 +942,128 @@
         <!--end::Curve bottom-->
     </div>
     <!--end::Statistics Section-->
-    <!--begin::Testimonials Section-->
-    <div class="mt-20 mb-n20 position-relative z-index-2">
+    <!--begin::Why Us Section-->
+    <div class="mt-20 mb-n27 position-relative z-index-2">
         <!--begin::Container-->
         <div class="container">
             <!--begin::Heading-->
-            <div class="text-center mb-17">
-                <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What Our Clients Say</h3>
-                <!--end::Title-->
-                <!--begin::Description-->
-                <div class="fs-5 text-muted fw-bold">
-                    Save thousands to millions of bucks by using single tool
-                    <br />for different amazing and great useful admin
+            <div class="text-center mb-17" id="why-us" data-kt-scroll-offset="{default: 100, lg: 150}">
+                <span class="d-inline-block position-relative ms-2">
+                    <!--begin::Label-->
+                    <span class="d-inline-block mb-2 fs-2tx fw-bold text-dark">
+                        Why Us?
+                    </span>
+                    <!--end::Label-->
+                    <!--begin::Line-->
+                    <span class="d-inline-block position-absolute h-8px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                    <!--end::Line-->
+                </span>
+            </div>
+            <!--end::Heading-->
+            <!--begin::Row-->
+            <div class="row g-lg-10 mb-10 mb-lg-20">
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-150px symbol-circle mb-5 d-flex flex-center">
+                                <img src="assets/media//avatars/300-32.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Title-->
+                            <div class="fs-1 fw-bold text-dark mb-10 mt-2 text-center">
+                                Disputes Happen
+                            </div>
+
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">Disagreements can always arise – whether it’s with your employer, landlord or business partner. With Affordable Justice you don’t have to worry about the costs of resolving these disputes.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+                    </div>
+                    <!--end::Testimonial-->
                 </div>
-                <!--end::Description-->
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-150px symbol-circle mb-5 d-flex flex-center">
+                                <img src="assets/media//avatars/300-30.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Title-->
+                            <div class=" fs-1 fw-bold text-dark mb-10 mt-2 text-center">
+                                Don't let money hold you back!
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">Don't let money stand in the way of justice! At Affordable Justice, we make sure that we provide our clients with high quality services at affordable prices.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-lg-4">
+                    <!--begin::Testimonial-->
+                    <div class="d-flex flex-column justify-content-between h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0">
+                        <!--begin::Wrapper-->
+                        <div class="mb-7">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-150px symbol-circle mb-5 d-flex flex-center">
+                                <img src="assets/media//avatars/300-31.jpg" alt="image" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Title-->
+                            <div class="fs-1 fw-bold text-dark mb-10 mt-2 text-center">
+                                We've Got Your Back!
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Feedback-->
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">We've got your back when it comes to sorting things out. Count on us to be by your side, resolving disputes together.</div>
+                            <!--end::Feedback-->
+                        </div>
+                        <!--end::Wrapper-->
+
+                    </div>
+                    <!--end::Testimonial-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Why Us Section-->
+    <!--begin::Testimonials Section-->
+    <div class="mb-n20 position-relative z-index-2">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-17" id="clients" data-kt-scroll-offset="{default: 100, lg: 150}">
+                <span class="d-inline-block position-relative ms-2">
+                    <!--begin::Label-->
+                    <span class="d-inline-block mb-2 fs-2tx fw-bold text-dark">
+                        What Our Clients Say
+                    </span>
+                    <!--end::Label-->
+                    <!--begin::Line-->
+                    <span class="d-inline-block position-absolute h-8px bottom-0 end-0 start-0 bg-primary translate rounded"></span>
+                    <!--end::Line-->
+                </span>
+
             </div>
             <!--end::Heading-->
             <!--begin::Row-->
@@ -986,11 +1096,12 @@
                             <!--begin::Title-->
                             <div class="fs-2 fw-bold text-dark mb-3">
                                 This is by far the cleanest template
-                                <br />and the most well structured
+                                <br />
+                                and the most well structured
                             </div>
                             <!--end::Title-->
                             <!--begin::Feedback-->
-                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
                             <!--end::Feedback-->
                         </div>
                         <!--end::Wrapper-->
@@ -1041,11 +1152,12 @@
                             <!--begin::Title-->
                             <div class="fs-2 fw-bold text-dark mb-3">
                                 This is by far the cleanest template
-                                <br />and the most well structured
+                                <br />
+                                and the most well structured
                             </div>
                             <!--end::Title-->
                             <!--begin::Feedback-->
-                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
                             <!--end::Feedback-->
                         </div>
                         <!--end::Wrapper-->
@@ -1096,11 +1208,12 @@
                             <!--begin::Title-->
                             <div class="fs-2 fw-bold text-dark mb-3">
                                 This is by far the cleanest template
-                                <br />and the most well structured
+                                <br />
+                                and the most well structured
                             </div>
                             <!--end::Title-->
                             <!--begin::Feedback-->
-                            <div class="text-gray-500 fw-semibold fs-4">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
+                            <div class="fs-4 text-dark text-center mb-3 mt-10">The most well thought out design theme I have ever used. The codes are up to tandard. The css styles are very clean. In fact the cleanest and the most up to standard I have ever seen.</div>
                             <!--end::Feedback-->
                         </div>
                         <!--end::Wrapper-->
@@ -1140,7 +1253,7 @@
                 </div>
                 <!--end::Content-->
                 <!--begin::Link-->
-                <a href="signup/" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Join Us Now</a>
+                <a href="signup" class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2 hover-scale">Join Us Now</a>
                 <!--end::Link-->
             </div>
             <!--end::Highlight-->
@@ -1180,7 +1293,7 @@
                         </a>
                         <!--end::Logo image-->
                         <!--begin::Logo image-->
-                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="#">&copy; 2023 Affordable Justice.</span>
+                        <span class="mx-5 fs-6 fw-semibold text-gray-600 pt-1" href="#">&copy; 2024 Affordable Justice.</span>
                         <!--end::Logo image-->
                     </div>
                     <!--end::Copyright-->
@@ -1212,11 +1325,3 @@
     <!--end::Scrolltop-->
 </div>
 <!--end::Root-->
-<!--begin::Scrolltop-->
-<div id="kt_scrolltop" class="scrolltop" data-kt-scrolltop="true">
-    <i class="ki-duotone ki-arrow-up">
-        <span class="path1"></span>
-        <span class="path2"></span>
-    </i>
-</div>
-<!--end::Scrolltop-->
