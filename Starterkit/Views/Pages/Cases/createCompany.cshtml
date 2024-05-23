@@ -1,6 +1,6 @@
 ﻿
 @{
-    ViewData["Title"] = "createCompany";
+    ViewData["Title"] = "Create Company";
     <!--begin::Custom Javascript(used for this page only)-->
 	
     KTTheme.AddJavascriptFile("js/custom/create-company.js");
@@ -329,7 +329,7 @@
                                                     <option value="Umm Al-Quwain Free Zone">Umm Al-Quwain Free Zone</option>
                                                 </select>
                                             </div>
-                                            <%-- <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Choose location" name="fzlocation" id="fzlocation">
+                                            <!-- <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Choose location" name="fzlocation" id="fzlocation">
                                                 <optgroup label="Dubai" id="ddlDubai" hidden="hidden" style="display:none;">
                                                     <option value="Dubai Maritime City">Dubai Maritime City</option>
                                                     <option value="Dubai Commercity">Dubai Commercity</option>
@@ -390,7 +390,7 @@
                                                 <optgroup label="Umn Al-Quwain" id="ddlUAQ"  hidden="hidden">
                                                     <option value="Umm Al-Quwain Free Zone">Umm Al-Quwain Free Zone</option>
                                                 </optgroup>
-                                            </select>--%>
+                                            </select>-->
                                         </div>
                                     </div>
 
@@ -452,7 +452,7 @@
                                                 <label class="required fs-6 fw-semibold mb-2">Choose Bussiness Category for Freezone</label>
                                                 <!--end::Label-->
                                                 <!--begin::Input-->
-                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select business Category" name="fzbuscate" id="freezonebusscity">
+                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select business Category" name="fzbuscate" onchange="selectpatnerFreeZone();" id="freezonebusscity">
                                                     <option></option>
                                                     <option value="fz-llc">Free Zone Limited Liability Company (FZ LLC)</option>
                                                     <option value="fz-co">Free Zone Company (FZ Co.)</option>
@@ -2808,12 +2808,12 @@
                                         <input type="text" class="form-control form-control-solid" autocomplete="off" placeholder="Company3" name="namesOfBusiness2" id="namesbusiness2" />
                                     </div>
                                         <!--End::Input-->
-                                
-                                    <div class="mb-8" name="autogenbusinessname" id="autogenrated_busname" style="display: none;">
+                            </div>
+                            <div class="mb-8" name="autogenbusinessname" id="autogenrated_busname" style="display: none;">
                                     <label for="bus_names" class="required form-label">Choose One Business Name </label>
-                                    <p>A, B, C, D</p>
+                                    <p class="text-hover-primary">A, B, C, D</p>
                                 </div>
-                               </div>
+                               
                             </div>
                             <!--end::Wrapper-->
                         </div>
@@ -3974,15 +3974,15 @@
 
         console.log(selectedOption);
 
-        if (selectedOption === 'limited-partnership' || selectedOption === 'partnership') {
-            document.querySelector('#NewPartner').style.display = 'block';
-            //document.querySelector('#Patnerdetails').style.display = 'block';
-        }
-        else {
+        if (selectedOption === 'sole-proprietorship') {
             document.querySelector('#NewPartner').style.display = 'none';
             document.querySelector('#Patnerdetails').style.display = 'none';
             document.querySelector('#addpatner').style.display = 'none';
+            //document.querySelector('#Patnerdetails').style.display = 'block';
         }
+        else {
+            document.querySelector('#NewPartner').style.display = 'block';
+             }
     }
 
 
@@ -3991,7 +3991,8 @@
         var selectedOption = filterbus_cate.value;
 
         console.log(selectedOption);
-        document.querySelector('#Patnerdetails').style.display = 'block';
+         document.querySelector('#NewPartner').style.display = 'block';
+         //document.querySelector('#Patnerdetails').style.display = 'block';
     }
 
     function ResidenceVisa() {
