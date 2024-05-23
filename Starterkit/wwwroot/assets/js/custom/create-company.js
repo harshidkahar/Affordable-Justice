@@ -1087,7 +1087,10 @@ var KTCreateAccount = function () {
                 var filterbusiness_cate = document.querySelector('[name="mainlandbusscity"]');
                 var selectedOption1 = filterbusiness_cate.value;
 
+                var filterbusiness_cate1 = document.querySelector('[name="fzbuscate"]');
+                var selectedOption2 = filterbusiness_cate1.value;
                 console.log(selectedOption1);
+
 
                 if (name && percent) {
                     const newRow = document.createElement('tr');
@@ -1133,23 +1136,15 @@ var KTCreateAccount = function () {
         `;
                     tableBody.appendChild(newRow);
 
-
-
                     // Patner Detail count is there.
-
-
-
-                    if (selectedOption1 === 'partnership') {
+                    if (selectedOption2 || selectedOption1 === 'civil-company' || selectedOption1 === 'limited-liability-company' || selectedOption1 === 'limited-partnership' || selectedOption1 === 'public-joint-stock-company' || selectedOption1 === 'private-joint-stock-company' || selectedOption1 === 'gcc-company-branch' || selectedOption1 === 'local-company-branch' || selectedOption1 === 'holding-companies' || selectedOption1 === 'partnership') 
+                        //if (selectedOption1 === 'partnership')
+                        {
 
                         document.querySelector('#patnerDETAILSarea').style.display = 'block';
-
                       
                         const patarea = document.querySelector('#patnerDETAILSarea');
-
                         ptcount();
-
-                     
-
 
                         // Patner is residence of UAE or not
                         let div1 = document.createElement('div');
@@ -1280,7 +1275,7 @@ var KTCreateAccount = function () {
 
                     }
 
-                    else if (selectedOption1 === 'limited-partnership') {
+                 /*   else if (selectedOption1 === 'limited-partnership') {
                         document.querySelector('#patnerDETAILSarea').style.display = 'block';
                         ptcount();
 
@@ -1420,7 +1415,7 @@ var KTCreateAccount = function () {
 
 
 
-                    }
+                    }   */
                     else {
                         document.querySelector('#patnerDETAILSarea').style.display = 'none';
                         document.querySelector('#Patnerdetails').style.display = 'none';
