@@ -135,12 +135,14 @@ var KTCreateAccount = function () {
 
         // Step - 9 Business Name handler(Event listener)
         //if yes is selected
+
         form.querySelector('#bmindyes').addEventListener('change', function () {
             document.querySelector('#bussiness_name').style.display = 'block';
             document.querySelector('#autogenrated_busname').style.display = 'none';
         });
 
         //if no is selected
+
         form.querySelector('#bmindno').addEventListener('change', function () {
             document.querySelector('#autogenrated_busname').style.display = 'block';
             document.querySelector('#bussiness_name').style.display = 'none';
