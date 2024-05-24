@@ -25,6 +25,10 @@ namespace Starterkit.Data.Base
             {
                 case DataAccessType.Customer:
                     return new CustomerDA();
+                case DataAccessType.Email:
+                    return new EmailDA();
+                case DataAccessType.Common:
+                    return new CommonDA();
                 default:
                     //If we get to this point, no logic has bee defined and the code 'SHOULD' fail...
                     throw new ArgumentException("No Logic defined for requested type: '" + daType + "'");
@@ -34,6 +38,8 @@ namespace Starterkit.Data.Base
 
     public enum DataAccessType
     {
-        Customer
+        Customer,
+        Email,
+        Common
     }
 }

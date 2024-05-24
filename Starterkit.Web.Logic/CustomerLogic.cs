@@ -10,6 +10,7 @@ using System.Configuration;
 using Starterkit.Model;
 using Starterkit.Data;
 using Starterkit.Data.Base;
+using Starterkit.Web.Logic.Base;
 
 namespace Starterkit.Web.Logic
 {
@@ -21,6 +22,15 @@ namespace Starterkit.Web.Logic
             CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
             return customerDA.InsertCustomer(p_Customer);
         }
+
+        //Validate Email
+
+        public string ValidateEmail(string email)
+        {
+            CommonLogic commonLogic = (CommonLogic)LogicFactory.GetLogic(LogicType.Common);
+            return commonLogic.GetValue(0, email, "ValidateEmail"); 
+        }
+
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{
         //    var isAuthenticated = false;

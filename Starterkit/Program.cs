@@ -59,12 +59,18 @@ AppSettings.init(appSettingsConfiguration);
     //services.AddScoped<IUserRepository, UserRepository>();
     //services.AddScoped<IUserService, UserService>();
 }
-builder.Host.ConfigureAppConfiguration(config =>
-{
-    config.AddJsonFile("appsettings.json");
-});
+builder.Host.ConfigureAppConfiguration(config =>{config.AddJsonFile("appsettings.json");});
+
 builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("FileUploadLocation"));
 
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 var app = builder.Build();
 
 app.Use(async (context, next) =>
@@ -88,6 +94,7 @@ if (!app.Environment.IsDevelopment())
 app.UseDefaultFiles();
 app.UseStaticFiles();
 app.UseHttpsRedirection();
+app.UseSession();
 
 app.UseRouting();
 
