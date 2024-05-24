@@ -1621,7 +1621,7 @@ var KTCreateAccount = function () {
 
                             document.querySelector('#offshoreForm').style.display = 'none';
                             document.querySelector('#offshoreDetails').style.display = 'none';
-
+                            document.querySelector('#NewPartner').style.display = 'none';
 
                             if (companyTypeInput) {
                                 if (companyTypeInput === 'Mainland') {
