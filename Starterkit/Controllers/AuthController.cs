@@ -7,6 +7,7 @@ using Starterkit.Models;
 using Starterkit.Web.Logic;
 using Starterkit.Web.Logic.Base;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 
 
 
@@ -16,11 +17,13 @@ public class AuthController : Controller
 {
     private readonly ILogger<AuthController> _logger;
     private readonly IKTTheme _theme;
+    private readonly IWebHostEnvironment _env;
 
-    public AuthController(ILogger<AuthController> logger, IKTTheme theme)
+    public AuthController(ILogger<AuthController> logger, IKTTheme theme, IWebHostEnvironment env)
     {
         _logger = logger;
         _theme = theme;
+        _env = env;
     }
 
     [HttpGet("/signin")]
@@ -101,30 +104,30 @@ public class AuthController : Controller
         return Json(register.FirstName);
     }
 
-    [AllowAnonymous]
-    [HttpGet]
-    public static string SendOTP(string Email)
+
+    [HttpPost]
+    public string SendOTP([FromBody] SendOtpModel otpModel)
     {
         string returnValue = string.Empty;
         try
         {
             CustomerLogic customerLogic = new CustomerLogic();
             SendEmailLogic sendEmailLogic = new SendEmailLogic();
-            string validateEmail = customerLogic.ValidateEmail(Email);
+            string validateEmail = customerLogic.ValidateEmail(otpModel.Email);
             if (validateEmail != "invalid" && validateEmail != "" && validateEmail != string.Empty)
             {
                 string subject = validateEmail + " is the OTP for your login.";
 
                 string body = string.Empty;
-
-                using (StreamReader reader = new StreamReader("/EmailTemplate/SendOtp.html"))
+                string path = Path.Combine(_env.WebRootPath, "EmailTemplate/SendOtp.html");
+                using (StreamReader reader = new StreamReader(path))
                 {
                     body = reader.ReadToEnd();
                 }
                 body = body.Replace("{OTP}", validateEmail);
-                sendEmailLogic.SendEmail(Email, subject, body);
+                sendEmailLogic.SendEmail(otpModel.Email, subject, body);
                 //HttpContent   ["OtpEmail"] = Email;
-                returnValue = Email;
+                returnValue = "done";//otpModel.Email;
             }
             else if (validateEmail == "invalid")
             {

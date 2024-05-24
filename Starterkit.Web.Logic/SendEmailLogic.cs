@@ -26,7 +26,7 @@ namespace Starterkit.Web.Logic
                 EmailSettingsModel settings = new EmailSettingsModel(); 
                
                 EmailDA emailDA = (EmailDA)DataAccessFactory.GetDataAccess(DataAccessType.Email);
-                settings = emailDA.GetEnailSettings();
+                settings = emailDA.GetEmailSettings();
 
                 MailMessage m = new MailMessage(settings.EmailFrom, emailTo);
                 m.Subject = subject;
