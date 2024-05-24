@@ -51,7 +51,7 @@ namespace Starterkit.Data
                 SqlDataAdapter dap = new SqlDataAdapter();
                 dap.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
-
+                con.Close();
                 return _Result="done";
             }
             catch (Exception _Exception)
@@ -60,6 +60,24 @@ namespace Starterkit.Data
                 //throw _Exception;
             }
         }
-        
+
+        public DataSet GetLoginId(string phone, string email, string otp)
+        {
+            try
+            {
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[GetLoginId]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+                cmd.Parameters.Add("@Phone", SqlDbType.VarChar).Value = phone;
+                cmd.Parameters.Add("@Otp", SqlDbType.VarChar).Value = otp;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                // try { ds.Tables[opt].Clear(); } catch { }
+                da.Fill(ds, "UserDetails");
+                con.Close();
+            }
+            catch { }
+            return ds;
+        }
     }
 }
