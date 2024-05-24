@@ -6,6 +6,9 @@ using Starterkit.Model;
 using Starterkit.Models;
 using Starterkit.Web.Logic;
 using Starterkit.Web.Logic.Base;
+using Microsoft.AspNetCore.Http;
+
+
 
 namespace Starterkit.Controllers;
 
@@ -96,5 +99,42 @@ public class AuthController : Controller
     public JsonResult RegisterUserN([FromBody] RegisterUser register)
     {
         return Json(register.FirstName);
+    }
+
+    [AllowAnonymous]
+    [HttpGet]
+    public static string SendOTP(string Email)
+    {
+        string returnValue = string.Empty;
+        try
+        {
+            CustomerLogic customerLogic = new CustomerLogic();
+            SendEmailLogic sendEmailLogic = new SendEmailLogic();
+            string validateEmail = customerLogic.ValidateEmail(Email);
+            if (validateEmail != "invalid" && validateEmail != "" && validateEmail != string.Empty)
+            {
+                string subject = validateEmail + " is the OTP for your login.";
+
+                string body = string.Empty;
+
+                using (StreamReader reader = new StreamReader("/EmailTemplate/SendOtp.html"))
+                {
+                    body = reader.ReadToEnd();
+                }
+                body = body.Replace("{OTP}", validateEmail);
+                sendEmailLogic.SendEmail(Email, subject, body);
+                //HttpContent   ["OtpEmail"] = Email;
+                returnValue = Email;
+            }
+            else if (validateEmail == "invalid")
+            {
+                returnValue = "invalid-Email";
+            }
+        }
+        catch (Exception ex)
+        {
+            returnValue = "invalid-Email";
+        }
+        return returnValue;
     }
 }
