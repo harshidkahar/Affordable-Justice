@@ -100,7 +100,7 @@ var KTSigninGeneral = function () {
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(jsonPostData),
                             success: function (data) {
-                                if (data.d == "done") {
+                                if (data == "done") {
                                     Swal.fire({
                                         text: "An OTP is send to your email!",
                                         icon: "success",

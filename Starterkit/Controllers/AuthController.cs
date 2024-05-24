@@ -90,11 +90,25 @@ public class AuthController : Controller
     }
 
 	[HttpGet("twoFactor/")]
-	// GET: HomeController/Details/5
-	public ActionResult TwoFactor(int id)
+	public ActionResult TwoFactor()
 	{
 		return View("Views/Auth/TwoFactor.cshtml");
 	}
+
+    [HttpPost("twoFactor/")]
+    public JsonResult TwoFactor(TfOtpModel otpModel)
+    {
+        string _Result = string.Empty;
+        try
+        {
+            
+        }
+        catch
+        {
+
+        }
+        return Json(_Result);
+    }
 
     //[HttpPost("/register")]
     [AllowAnonymous]
