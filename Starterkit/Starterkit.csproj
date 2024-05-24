@@ -23,4 +23,9 @@
     <Folder Include="Documents\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\EmailTemplate\SendOtp.html" />
+    <None Include="wwwroot\EmailTemplate\verify-email.html" />
+  </ItemGroup>
+
 </Project>
