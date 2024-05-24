@@ -15,21 +15,13 @@ namespace Starterkit.Data
     public class EmailDA :IDataAccess
     {
         public SqlConnection con = new SqlConnection();
-        public EmailSettingsModel GetEnailSettings()
+        public EmailSettingsModel GetEmailSettings()
         {
             EmailSettingsModel emailSettings = new EmailSettingsModel();
             try
             {
-                string _Result = string.Empty;
-                con = DataAccess.OpenConnection();
-                SqlCommand cmd = new SqlCommand("[dbo].[Common_Fill]", con);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = 0;
-                cmd.Parameters.Add("@Searchtxt", SqlDbType.VarChar).Value = "";
-                cmd.Parameters.Add("@Opt", SqlDbType.NVarChar).Value = "EmailSettings";
-                SqlDataAdapter da = new SqlDataAdapter(cmd);
-                DataSet ds = new DataSet();
-                da.Fill(ds, "EmailSettings");
+                CommonDA commonDA = (CommonDA)DataAccessFactory.GetDataAccess(DataAccessType.Common);
+                DataSet ds = commonDA.GetCommonFillData(0, "", "EmailSettings");
 
                 emailSettings.Host = ds.Tables[0].Rows[0]["SMTP"].ToString();
                 emailSettings.SSL = Convert.ToBoolean(ds.Tables[0].Rows[0]["SSL"]);

@@ -96,10 +96,9 @@ var KTSigninGeneral = function () {
                         //});  
                         $.ajax({
                             type: "POST",
-                            url: "SignIn.aspx/SendOTP",
+                            url: "/Auth/SendOtp/",
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(jsonPostData),
-                            dataType: "json",
                             success: function (data) {
                                 if (data.d == "done") {
                                     Swal.fire({
