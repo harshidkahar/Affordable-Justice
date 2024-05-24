@@ -135,12 +135,14 @@ var KTCreateAccount = function () {
 
         // Step - 9 Business Name handler(Event listener)
         //if yes is selected
+
         form.querySelector('#bmindyes').addEventListener('change', function () {
             document.querySelector('#bussiness_name').style.display = 'block';
             document.querySelector('#autogenrated_busname').style.display = 'none';
         });
 
         //if no is selected
+
         form.querySelector('#bmindno').addEventListener('change', function () {
             document.querySelector('#autogenrated_busname').style.display = 'block';
             document.querySelector('#bussiness_name').style.display = 'none';
@@ -1085,7 +1087,10 @@ var KTCreateAccount = function () {
                 var filterbusiness_cate = document.querySelector('[name="mainlandbusscity"]');
                 var selectedOption1 = filterbusiness_cate.value;
 
+                var filterbusiness_cate1 = document.querySelector('[name="fzbuscate"]');
+                var selectedOption2 = filterbusiness_cate1.value;
                 console.log(selectedOption1);
+
 
                 if (name && percent) {
                     const newRow = document.createElement('tr');
@@ -1131,23 +1136,15 @@ var KTCreateAccount = function () {
         `;
                     tableBody.appendChild(newRow);
 
-
-
                     // Patner Detail count is there.
-
-
-
-                    if (selectedOption1 === 'partnership') {
+                    if (selectedOption2 || selectedOption1 === 'civil-company' || selectedOption1 === 'limited-liability-company' || selectedOption1 === 'limited-partnership' || selectedOption1 === 'public-joint-stock-company' || selectedOption1 === 'private-joint-stock-company' || selectedOption1 === 'gcc-company-branch' || selectedOption1 === 'local-company-branch' || selectedOption1 === 'holding-companies' || selectedOption1 === 'partnership') 
+                        //if (selectedOption1 === 'partnership')
+                        {
 
                         document.querySelector('#patnerDETAILSarea').style.display = 'block';
-
                       
                         const patarea = document.querySelector('#patnerDETAILSarea');
-
                         ptcount();
-
-                     
-
 
                         // Patner is residence of UAE or not
                         let div1 = document.createElement('div');
@@ -1278,7 +1275,7 @@ var KTCreateAccount = function () {
 
                     }
 
-                    else if (selectedOption1 === 'limited-partnership') {
+                 /*   else if (selectedOption1 === 'limited-partnership') {
                         document.querySelector('#patnerDETAILSarea').style.display = 'block';
                         ptcount();
 
@@ -1418,7 +1415,7 @@ var KTCreateAccount = function () {
 
 
 
-                    }
+                    }   */
                     else {
                         document.querySelector('#patnerDETAILSarea').style.display = 'none';
                         document.querySelector('#Patnerdetails').style.display = 'none';
@@ -1622,15 +1619,25 @@ var KTCreateAccount = function () {
                             document.querySelector('#mainlandDetails').style.display = 'none';
                             document.querySelector('#mainlandForm').style.display = 'none';
 
+                            document.querySelector('#offshoreForm').style.display = 'none';
+                            document.querySelector('#offshoreDetails').style.display = 'none';
+
+
                             if (companyTypeInput) {
                                 if (companyTypeInput === 'Mainland') {
                                     document.querySelector('#mainlandDetails').style.display = 'block';
                                     document.querySelector('#mainlandForm').style.display = 'block';
+                                    document.querySelector('#offshoreForm').style.display = 'none';
+                                    document.querySelector('#offshoreDetails').style.display = 'none';
+
                                 }
 
                                 if (companyTypeInput === 'FreeZone') {
                                     document.querySelector('#freezoneDetails').style.display = 'block';
                                     document.querySelector('#freezoneForm').style.display = 'block';
+                                    document.querySelector('#offshoreForm').style.display = 'none';
+                                    document.querySelector('#offshoreDetails').style.display = 'none';
+
                                 }
                                 if (companyTypeInput === 'OffShore Company') {
                                     document.querySelector('#offshoreForm').style.display = 'block';
