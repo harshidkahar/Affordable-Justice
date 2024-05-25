@@ -15,6 +15,30 @@
                 <!--begin::Details-->
                 <partial name='~/Views/Layout/Demo1/Partials/Account/_AccountHeader.cshtml' />
                 <!--end::Details-->
+                <!--begin::Navs-->
+                <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="overview">Overview</a>
+                    </li>
+                    <!--end::Nav item-->
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="kyc">KYC</a>
+                    </li>
+                    <!--end::Nav item-->
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="settings">Edit Profile</a>
+                    </li>
+                    <!--end::Nav item-->
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="changeEmail">Change Email</a>
+                    </li>
+                    <!--end::Nav item-->
+                </ul>
+                <!--begin::Navs-->
             </div>
         </div>
         <!--end::Navbar-->
@@ -37,11 +61,11 @@
                 <!--begin::Row-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">Full Name</label>
+                    <label class="col-lg-2 fw-semibold text-muted">Full Name</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800" id="lblFullName" runat="server"></span>
+                        <span class="fw-bold fs-6 text-gray-800" id="lblFullName"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -49,11 +73,11 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">Date Of Birth</label>
+                    <label class="col-lg-2 fw-semibold text-muted">Date Of Birth</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8 fv-row">
-                        <span class="fw-semibold text-gray-800 fs-6" id="lblDob" runat="server"></span>
+                        <span class="fw-semibold text-gray-800 fs-6" id="lblDob"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -61,11 +85,11 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">Email</label>
+                    <label class="col-lg-2 fw-semibold text-muted">Email</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary" id="lblEmailId" runat="server"></a>
+                        <a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary" id="lblEmailId"></a>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -73,11 +97,11 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">Contact Number</label>
+                    <label class="col-lg-2 fw-semibold text-muted">Contact Number</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800" id="lblContactNo" runat="server"></span>
+                        <span class="fw-bold fs-6 text-gray-800" id="lblContactNo"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -85,11 +109,11 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">Address</label>
+                    <label class="col-lg-2 fw-semibold text-muted">Address</label>
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800" id="lblCAddress" runat="server"></span>
+                        <span class="fw-bold fs-6 text-gray-800" id="lblCAddress"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -97,7 +121,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">
+                    <label class="col-lg-2 fw-semibold text-muted">
                         Country
                         <span class="ms-1" data-bs-toggle="tooltip" title="Country of origination">
                             <i class="ki-duotone ki-information fs-7">
@@ -110,7 +134,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800" id="lblCountry" runat="server"></span>
+                        <span class="fw-bold fs-6 text-gray-800" id="lblCountry"></span>
                     </div>
                     <!--end::Col-->
                 </div>
@@ -118,7 +142,7 @@
                 <!--begin::Input group-->
                 <div class="row mb-7">
                     <!--begin::Label-->
-                    <label class="col-lg-4 fw-semibold text-muted">
+                    <label class="col-lg-2 fw-semibold text-muted">
                         Nationality
                         <span class="ms-1" data-bs-toggle="tooltip" title="Home Country">
                             <i class="ki-duotone ki-information fs-7">
@@ -131,7 +155,7 @@
                     <!--end::Label-->
                     <!--begin::Col-->
                     <div class="col-lg-8">
-                        <span class="fw-bold fs-6 text-gray-800" id="lblNationality" runat="server"></span>
+                        <span class="fw-bold fs-6 text-gray-800" id="lblNationality"></span>
                     </div>
                     <!--end::Col-->
                 </div>

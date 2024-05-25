@@ -25,7 +25,7 @@
 
                         <div class="row mb-6">
                             <!--begin::Files-->
-                            <form runat="server">
+                            <form>
                                 <div id="doc_playe" class="card mb-xl-8">
                                     <div class="row">
                                         <!--begin::Label-->
@@ -33,7 +33,7 @@
                                         <!--end::Label-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" class="form-control form-control-solid" placeholder="Type your document description" id="txtDocName" runat="server" />
+                                            <input type="text" class="form-control form-control-solid" placeholder="Type your document description" id="txtDocName" />
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -43,29 +43,29 @@
                                         <!--end::Label-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" id="txtDocDescription" runat="server"></textarea>
+                                            <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" id="txtDocDescription"></textarea>
                                         </div>
                                         <!--end::Col-->
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-3 fv-row">
-                                            <!-- <Button ID="Button1" runat="server" Text="Save Changes" class="btn btn-primary" OnClick="btnSaveDescription_Click" /> -->
-                                            <button Id="Button1" runat="server"  class="btn btn-primary" OnClick="btnSaveDescription_Click">Save Changes</button>
+                                            <!-- <Button ID="Button1" Text="Save Changes" class="btn btn-primary" OnClick="btnSaveDescription_Click" /> -->
+                                            <button Id="Button1"  class="btn btn-primary" OnClick="btnSaveDescription_Click">Save Changes</button>
                                             <a href="viewCaseDocuments" class="btn btn-lg btn-light me-3">Cancel</a>
                                         </div>
                                     </div>
                                     <!--end::Row-->
                                 </div>
                                 <div id="doc_player" class="card mb-5 mb-xl-8">
-                                    <div class="text-center pb-15 px-5" id="doc_img_div" style="visibility: hidden;" runat="server">
-                                        <img src="~/assets/media/illustrations/sketchy-1/6.png" alt="" class="mw-100 h-200px h-sm-325px" id="doc_image" runat="server" />
+                                    <div class="text-center pb-15 px-5" id="doc_img_div" style="visibility: hidden;">
+                                        <img src="~/assets/media/illustrations/sketchy-1/6.png" alt="" class="mw-100 h-200px h-sm-325px" id="doc_image" />
                                     </div>
                                     <!--end::Image-->
-                                    <div class="mb-5" id="doc_video_div" runat="server" style="visibility: hidden;">
-                                        <%-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video" runat="server"></iframe>--%>
+                                    <div class="mb-5" id="doc_video_div" style="visibility: hidden;">
+                                        <%-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video"></iframe>--%>
 
                                         <video controls width="640" height="360" id="videoPlayer" autoplay="autoplay">
-                                            <source id="videoSource" src="#" runat="server">
+                                            <source id="videoSource" src="#">
                                             <!-- Add additional source elements for different video formats -->
                                             Your browser does not support the video tag.
                                         </video>
@@ -74,7 +74,7 @@
 
                                 </div>
 
-                                <asp:HiddenField ID="hdnDocId" runat="server" />
+                                <asp:HiddenField ID="hdnDocId" />
                             </form>
                             <!--end::Files-->
                         </div>

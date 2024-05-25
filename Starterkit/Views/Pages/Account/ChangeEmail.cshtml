@@ -1,0 +1,148 @@
+﻿@{
+    ViewData["Title"] = "KYC";
+    // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
+    KTTheme.AddJavascriptFile("js/custom/account/settings/profile-details.js");
+    KTTheme.AddJavascriptFile("js/custom/account/settings/IDfileUpload.js");
+}
+
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" class="app-container container-xxl">
+        <!--begin::Navbar-->
+        <div class="card mb-5 mb-xl-10">
+            <div class="card-body pt-9 pb-0">
+                <!--begin::Details-->
+                <partial name='~/Views/Layout/Demo1/Partials/Account/_AccountHeader.cshtml' />
+                <!--end::Details-->
+                <!--begin::Navs-->
+                <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 " href="overview">Overview</a>
+                    </li>
+                    <!--end::Nav item-->
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="kyc">KYC</a>
+                    </li>
+                    <!--end::Nav item-->
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="settings">Edit Profile</a>
+                    </li>
+                    <!--end::Nav item-->
+                    <!--begin::Nav item-->
+                    <li class="nav-item mt-2">
+                        <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="changeEmail">Change Email</a>
+                    </li>
+                    <!--end::Nav item-->
+                </ul>
+                <!--begin::Navs-->
+            </div>
+        </div>
+        <!--end::Navbar-->
+        <!--begin::details View-->
+        <!--begin::Sign-in Method-->
+        <div class="card mb-5 mb-xl-10">
+            <!--begin::Card header-->
+            <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#change_email_address">
+                <div class="card-title m-0">
+                    <h3 class="fw-bold m-0">Change Email Address</h3>
+                </div>
+            </div>
+            <!--end::Card header-->
+            <!--begin::Content-->
+            <div id="kt_account_settings_signin_method" class="collapse show">
+                <!--begin::Card body-->
+                <div class="card-body border-top p-9">
+                    <!--begin::Email Address-->
+                    <div class="d-flex flex-wrap align-items-center">
+                        <!--begin::Label-->
+                        <div id="kt_signin_email">
+                            <div class="fs-6 fw-bold mb-1">Email Address</div>
+                            <div class="fw-semibold text-gray-600">a@b.com</div>
+                        </div>
+                        <!--end::Label-->
+                        <!--begin::Edit-->
+                        <div id="kt_signin_email_edit" class="flex-row-fluid d-none">
+                            <!--begin::Form-->
+                            <form id="kt_signin_change_email" class="form" novalidate="novalidate">
+                                <div class="row mb-6">
+                                    <div class="col-lg-6 mb-4 mb-lg-0">
+                                        <div class="fv-row mb-0">
+                                            <label for="emailaddress" class="form-label fs-6 fw-bold mb-3">Enter New Email Address</label>
+                                            <input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="" />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="fv-row mb-0">
+                                            <!--begin::Section-->
+                                            <div class="mb-0" id="confirmemailpassword" name="confirmemailpassword" style="display: none;">
+                                                <!--begin::Label-->
+                                                <div class="fw-bold text-start text-dark fs-6 mb-1 ms-1">Type your 6 digit security code</div>
+                                                <!--end::Label-->
+                                                <!--begin::Input group-->
+                                                <div class="d-flex flex-wrap flex-stack" id="inputs">
+                                                    <input type="text" name="code_1" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" />
+                                                    <input type="text" name="code_2" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" />
+                                                    <input type="text" name="code_3" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" />
+                                                    <input type="text" name="code_4" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" />
+                                                    <input type="text" name="code_5" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" />
+                                                    <input type="text" name="code_6" data-inputmask="'mask': '9', 'placeholder': ''" maxlength="1" class="form-control bg-transparent h-60px w-60px fs-2qx text-center mx-1 my-2" value="" />
+                                                </div>
+                                                <!--begin::Input group-->
+                                            </div>
+                                            <!--end::Section-->
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex mb-3">
+                                    <button type="button" id="kt_signin_submit" class="btn btn-lg btn-primary fw-bold me-3">
+                                        <span class="indicator-label">Get OTP</span>
+                                        <span class="indicator-progress">
+                                            Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+
+                                    <button id="kt_signin_cancel" type="button" class="btn btn-color-gray-400 btn-active-light-primary px-6 mb-4" style="display: none;">Resend OTP</button>
+                                </div>
+
+                                <div class="fw-semibold fs-6 mb-3 text-muted" id="kt_otp_timer_msg" style="display: none;">
+                                    <span class="me-1">Didn’t get the code ? click on Resend OTP in</span> <span class="text-primary">20 seconds</span>
+
+                                </div>
+
+                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                    <button type="button" id="kt_sing_in_two_factor_submit" class="btn btn-lg btn-primary fw-bold" style="display: none;">
+                                        <span class="indicator-label">Submit</span>
+                                        <span class="indicator-progress">
+                                            Please wait...
+                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                            <!--end::Form-->
+                        </div>
+                        <!--end::Edit-->
+                        <!--begin::Action-->
+                        <div id="kt_change_email_button" class="ms-auto">
+                            <button class="btn btn-light btn-active-light-primary">Change Email</button>
+                        </div>
+                        <!--end::Action-->
+                    </div>
+                    <!--end::Email Address-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Sign-in Method-->
+    </div>
+    <!--end::Content container-->
+</div>
