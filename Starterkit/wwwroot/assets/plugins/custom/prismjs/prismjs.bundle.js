@@ -3276,7 +3276,7 @@ Prism.languages.insertBefore('aspnet', 'comment', {
 	}
 });
 
-// script runat="server" contains csharp, not javascript
+// script contains csharp, not javascript
 Prism.languages.insertBefore('aspnet', Prism.languages.javascript ? 'script' : 'tag', {
 	'asp-script': {
 		pattern: /(<script(?=.*runat=['"]?server\b)[^>]*>)[\s\S]*?(?=<\/script>)/i,

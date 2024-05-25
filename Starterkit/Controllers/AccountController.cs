@@ -34,5 +34,10 @@ namespace Starterkit.Controllers
         {
             return View("Views/Pages/Account/KYC.cshtml");
         }
+        [HttpGet("/changeEmail")]
+        public IActionResult ChangeEmail()
+        {
+            return View("Views/Pages/Account/ChangeEmail.cshtml");
+        }
     }
 }
