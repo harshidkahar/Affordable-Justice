@@ -1,11 +1,12 @@
-﻿using System.Web.SessionState;
-using System;
+﻿using System;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Starterkit
+namespace Starterkit.Helper
 {
-	public class SessionCheck
+    public class SessionCheck
 	{
-		static public bool CheckSession(HttpSessionState session, String sessionName)
+		static public bool CheckSession(httpSess HttpSessionState session, String sessionName)
 		{
 			if (session[sessionName] == null || session[sessionName].ToString() == String.Empty || session[sessionName] == "")
 				return false;

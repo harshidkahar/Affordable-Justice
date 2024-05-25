@@ -49,12 +49,15 @@ var KTSigninTwoFactor = function() {
                     }
                     $.ajax({
                         type: "POST",
+<<<<<<< Updated upstream
+                        url: "/Auth/ValidateOtp/",
+=======
                         url: "Auth/ValidateOtp",
+>>>>>>> Stashed changes
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(jsonPostData),
-                        dataType: "json",
                         success: function (data) {
-                            if (data.d == "done") {
+                            if (data == "done") {
                                 Swal.fire({
                                     text: "You have been successfully verified",
                                     icon: "success",
@@ -96,7 +99,7 @@ var KTSigninTwoFactor = function() {
                         },
                         error: function (xhr) {
                             Swal.fire({
-                                text: "Invalid Email id.",
+                                text: "Invalid OTP.",
                                 icon: "error",
                                 buttonsStyling: false,
                                 confirmButtonText: "Ok, got it!",
