@@ -8,7 +8,7 @@ using Starterkit.Web.Logic;
 using Starterkit.Web.Logic.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
-
+using Starterkit.Helper;
 
 
 namespace Starterkit.Controllers;
@@ -103,7 +103,7 @@ public class AuthController : Controller
     {
         CustomerLogic customerLogic = new CustomerLogic();
         string _Result = string.Empty;
-        string email = HttpContext.Session.GetString("OtpEmail");
+        string email = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
         string phone = ""; // You need to add code to get phone number from session or wherever it is stored
 
         // Call your logic to validate OTP
@@ -111,17 +111,21 @@ public class AuthController : Controller
 
         if (userModel != null)
         {
-            _Result = "OTP validation successful.";
+            _contextAccessor.HttpContext.Session.SetString("Name", userModel.FirstName + " " + userModel.LastName);
+
+            _contextAccessor.HttpContext.Session.SetString("Id", userModel.Id.ToString());
+
+            _contextAccessor.HttpContext.Session.SetString("UserName", userModel.Email);
+
+            _contextAccessor.HttpContext.Session.SetString("UserEmail", userModel.Email);
+
+            _contextAccessor.HttpContext.Session.SetString("CustomerGUID",userModel.CustomerGUID.ToString());
+
+            return "done";
 
         }
-        else
-        {
-            // OTP validation failed
-            _Result = "OTP validation failed.";
 
-        }
-
-        return _Result;
+        return "invalid";
     }
 
     //[HttpPost("/register")]
