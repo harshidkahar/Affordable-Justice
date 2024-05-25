@@ -97,27 +97,12 @@ public class AuthController : Controller
         return View("Views/Auth/TwoFactor.cshtml");
 	}
 
-<<<<<<< Updated upstream
+
     [HttpPost]
     public string ValidateOtp([FromBody] TfOtpModel otpModel)
     {
         string _Result = string.Empty;
         return _Result;
-=======
-    [HttpPost("twoFactor/")]
-    public string ValidateOtp(TfOtpModel otpModel)
-    {
-        string _Result = string.Empty;
-        try
-        {
-            
-        }
-        catch
-        {
-
-        }
-        return (_Result);
->>>>>>> Stashed changes
     }
 
     //[HttpPost("/register")]
