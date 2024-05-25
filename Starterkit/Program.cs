@@ -15,7 +15,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<IKTTheme, KTTheme>();
 builder.Services.AddSingleton<IKTBootstrapBase, KTBootstrapBase>();
-
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>(); //added for session management
 IConfiguration themeConfiguration = new ConfigurationBuilder()
                             .AddJsonFile("_keenthemes/config/themesettings.json")
                             .Build();
@@ -63,14 +63,18 @@ builder.Host.ConfigureAppConfiguration(config =>{config.AddJsonFile("appsettings
 
 builder.Services.Configure<AppSettingsModel>(builder.Configuration.GetSection("FileUploadLocation"));
 
-builder.Services.AddDistributedMemoryCache();
 
+#region Session and Cookie mangement
+
+builder.Services.AddDistributedMemoryCache();
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromSeconds(10);
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });
+
+#endregion
 var app = builder.Build();
 
 app.Use(async (context, next) =>

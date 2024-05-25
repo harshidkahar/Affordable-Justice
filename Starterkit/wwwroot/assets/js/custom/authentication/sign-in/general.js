@@ -82,18 +82,6 @@ var KTSigninGeneral = function () {
                         jsonPostData = {
                             Email: form.querySelector('[name="email"]').value
                         }
-                        //RegisterUser(jsonPostData); 
-
-                        //$.ajax({
-                        //    type: "POST",
-                        //    url: "SignUp.aspx/GetData",
-                        //    data: JSON.stringify(jsonPostData),
-                        //    contentType: "application/json; charset=utf-8",
-                        //    dataType: "json",
-                        //    success: function (response) {
-                        //        alert(response.d);
-                        //    },
-                        //});  
                         $.ajax({
                             type: "POST",
                             url: "/Auth/SendOtp/",
