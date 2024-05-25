@@ -49,7 +49,7 @@ var KTSigninTwoFactor = function() {
                     }
                     $.ajax({
                         type: "POST",
-                        url: "TwoFactor.aspx/ValidateOtp",
+                        url: "Auth/ValidateOtp",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(jsonPostData),
                         dataType: "json",

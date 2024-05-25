@@ -96,7 +96,7 @@ public class AuthController : Controller
 	}
 
     [HttpPost("twoFactor/")]
-    public JsonResult TwoFactor(TfOtpModel otpModel)
+    public string ValidateOtp(TfOtpModel otpModel)
     {
         string _Result = string.Empty;
         try
@@ -107,7 +107,7 @@ public class AuthController : Controller
         {
 
         }
-        return Json(_Result);
+        return (_Result);
     }
 
     //[HttpPost("/register")]
