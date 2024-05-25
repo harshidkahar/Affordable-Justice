@@ -101,7 +101,26 @@ public class AuthController : Controller
     [HttpPost]
     public string ValidateOtp([FromBody] TfOtpModel otpModel)
     {
+        CustomerLogic customerLogic = new CustomerLogic();
         string _Result = string.Empty;
+        string email = HttpContext.Session.GetString("OtpEmail");
+        string phone = ""; // You need to add code to get phone number from session or wherever it is stored
+
+        // Call your logic to validate OTP
+        var userModel = customerLogic.ValidateOtp(phone, email, otpModel.otp);
+
+        if (userModel != null)
+        {
+            _Result = "OTP validation successful.";
+
+        }
+        else
+        {
+            // OTP validation failed
+            _Result = "OTP validation failed.";
+
+        }
+
         return _Result;
     }
 

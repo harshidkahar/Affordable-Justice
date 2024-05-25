@@ -49,11 +49,8 @@ var KTSigninTwoFactor = function() {
                     }
                     $.ajax({
                         type: "POST",
-<<<<<<< Updated upstream
                         url: "/Auth/ValidateOtp/",
-=======
                         url: "Auth/ValidateOtp",
->>>>>>> Stashed changes
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(jsonPostData),
                         success: function (data) {
