@@ -18,12 +18,14 @@ public class AuthController : Controller
     private readonly ILogger<AuthController> _logger;
     private readonly IKTTheme _theme;
     private readonly IWebHostEnvironment _env;
+    private readonly IHttpContextAccessor _contextAccessor;
 
-    public AuthController(ILogger<AuthController> logger, IKTTheme theme, IWebHostEnvironment env)
+    public AuthController(ILogger<AuthController> logger, IKTTheme theme, IWebHostEnvironment env, IHttpContextAccessor contextAccessor)
     {
         _logger = logger;
         _theme = theme;
         _env = env;
+        _contextAccessor = contextAccessor;
     }
 
     [HttpGet("/signin")]
@@ -91,23 +93,15 @@ public class AuthController : Controller
 
 	[HttpGet("twoFactor/")]
 	public ActionResult TwoFactor()
-	{
-		return View("Views/Auth/TwoFactor.cshtml");
+	{        
+        return View("Views/Auth/TwoFactor.cshtml");
 	}
 
-    [HttpPost("twoFactor/")]
-    public JsonResult TwoFactor(TfOtpModel otpModel)
+    [HttpPost]
+    public string ValidateOtp([FromBody] TfOtpModel otpModel)
     {
         string _Result = string.Empty;
-        try
-        {
-            
-        }
-        catch
-        {
-
-        }
-        return Json(_Result);
+        return _Result;
     }
 
     //[HttpPost("/register")]
@@ -140,7 +134,8 @@ public class AuthController : Controller
                 }
                 body = body.Replace("{OTP}", validateEmail);
                 sendEmailLogic.SendEmail(otpModel.Email, subject, body);
-                //HttpContent   ["OtpEmail"] = Email;
+               _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
+                 
                 returnValue = "done";//otpModel.Email;
             }
             else if (validateEmail == "invalid")
@@ -155,3 +150,7 @@ public class AuthController : Controller
         return returnValue;
     }
 }
+
+
+// Add data to session _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
+// Get data from session string otpEmail = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
