@@ -8,7 +8,7 @@ using Starterkit.Web.Logic;
 using Starterkit.Web.Logic.Base;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Hosting;
-
+using Starterkit.Helper;
 
 
 namespace Starterkit.Controllers;
@@ -97,11 +97,35 @@ public class AuthController : Controller
         return View("Views/Auth/TwoFactor.cshtml");
 	}
 
+
     [HttpPost]
     public string ValidateOtp([FromBody] TfOtpModel otpModel)
     {
+        CustomerLogic customerLogic = new CustomerLogic();
         string _Result = string.Empty;
-        return _Result;
+        string email = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
+        string phone = ""; // You need to add code to get phone number from session or wherever it is stored
+
+        // Call your logic to validate OTP
+        var userModel = customerLogic.ValidateOtp(phone, email, otpModel.otp);
+
+        if (userModel != null)
+        {
+            _contextAccessor.HttpContext.Session.SetString("Name", userModel.FirstName + " " + userModel.LastName);
+
+            _contextAccessor.HttpContext.Session.SetString("Id", userModel.Id.ToString());
+
+            _contextAccessor.HttpContext.Session.SetString("UserName", userModel.Email);
+
+            _contextAccessor.HttpContext.Session.SetString("UserEmail", userModel.Email);
+
+            _contextAccessor.HttpContext.Session.SetString("CustomerGUID",userModel.CustomerGUID.ToString());
+
+            return "done";
+
+        }
+
+        return "invalid";
     }
 
     //[HttpPost("/register")]

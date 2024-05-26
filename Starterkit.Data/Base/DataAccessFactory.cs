@@ -29,7 +29,7 @@ namespace Starterkit.Data.Base
                     return new EmailDA();
                 case DataAccessType.Common:
                     return new CommonDA();
-                default:
+               default:
                     //If we get to this point, no logic has bee defined and the code 'SHOULD' fail...
                     throw new ArgumentException("No Logic defined for requested type: '" + daType + "'");
             }
@@ -40,6 +40,6 @@ namespace Starterkit.Data.Base
     {
         Customer,
         Email,
-        Common
+        Common,
     }
 }
