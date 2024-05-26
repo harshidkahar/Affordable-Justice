@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "ViewCaseDocuments";
 }
 
@@ -87,132 +86,106 @@
                     </div>
                     <!--begin::Card header-->
                     <!--begin::Card body-->
-                    <form>
-
-                        <asp:ScriptManager ID="ScriptManager1"></asp:ScriptManager>
-                        <div class="card-body p-9">
-                            <div class="row mb-6">
-                                <asp:UpdatePanel ID="UpdatePanel3">
-                                    <ContentTemplate>
-                                        <asp:Repeater ID="rptData" OnItemCommand="rptData_ItemCommand">
-                                            <HeaderTemplate>
-                                                <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
-                                                    <thead>
-                                                        <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
-                                                            <th>File Name</th>
-                                                            <th>File Size</th>
-                                                            <th>Document Name</th>
-                                                            <th>Description</th>
-                                                            <th>Last Modified</th>
-                                                            <th class="text-end min-w-100px">Actions</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody class="text-gray-600 fw-semibold">
-                                            </HeaderTemplate>
-                                            <ItemTemplate>
-                                                <tr class="odd">
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <i class="ki-duotone ki-files fs-2x text-primary me-4"></i>
-                                                            <a href="#" class="text-gray-800 text-hover-primary"><%#Eval("FileName") %></a>
-                                                        </div>
-                                                    </td>
-                                                    <td><%#Eval("Size") %></td>
-                                                    <td><%#Eval("DocName") %></td>
-                                                    <td><%#Eval("Description") %></td>
-                                                    <td><%#Eval("TimeStamp") %></td>
-                                                    <td class="text-end" data-kt-filemanager-table="action_dropdown">
-                                                        <a href='addDocDescription?DocId=<%#Eval("Id") %>'>Add Description</a>
-                                                        <%--<a href="#" class="openButton" onclick='<%# string.Format("return openForm(\"{0}\");", Eval("Id"))%>'><strong>Assign Workforce</strong></a>--%>
-                                                        <%--                                                        <asp:LinkButton ID="LinkButton1" CommandArgument='<%#Eval("Id") %>' CommandName="Update" data-bs-toggle="modal" data-bs-target="#kt_modal_Add_Doc_Description">Update Description</asp:LinkButton>--%>
-                                                    </td>
-                                                </tr>
-                                            </ItemTemplate>
-                                            <FooterTemplate>
-                                                </tbody>
-                                                </table>
-                                            </FooterTemplate>
-                                        </asp:Repeater>
-                                    </ContentTemplate>
-                                </asp:UpdatePanel>
+                    <div class="card-body p-9">
+                        <div class="row mb-6">
+                            <table id="kt_datatable_example_1" class="table align-middle table-row-dashed fs-6 gy-5">
+                                <thead>
+                                    <tr class="text-start text-gray-500 fw-bold fs-7 text-uppercase gs-0">
+                                        <th>File Name</th>
+                                        <th>File Size</th>
+                                        <th>Document Name</th>
+                                        <th>Description</th>
+                                        <th>Last Modified</th>
+                                        <th class="text-end min-w-100px">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-gray-600 fw-semibold">
+                                    <tr class="odd">
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <i class="ki-duotone ki-files fs-2x text-primary me-4"></i>
+                                                <a href="#" class="text-gray-800 text-hover-primary"></a>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td class="text-end" data-kt-filemanager-table="action_dropdown">
+                                            <a href='addDocDescription?DocId='>Add Description</a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row mb-6">
+                            <div class="d-flex flex-stack">
+                                <a href="/viewCaseList" class="btn btn-lg btn-light me-3">Case List</a>
+                                <a href="/caseDetails" class="btn btn-lg btn-primary" data-kt-element="files-next">Complete</a>
+                                @* <button type="button" class="btn btn-lg btn-primary" data-kt-element="files-next">
+                                <span class="indicator-label">Complete</span>
+                                <span class="indicator-progress">
+                                Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                </span>
+                                </button> *@
                             </div>
-                            <div class="row mb-6">
-                                <div class="d-flex flex-stack">
-                                    <a href="My-CaseList" class="btn btn-lg btn-light me-3">Case List</a>
-                                    <a href="caseDetails" class="btn btn-lg btn-primary" data-kt-element="files-next">Complete</a>
-                                    <%--<button type="button" class="btn btn-lg btn-primary" data-kt-element="files-next">
-                                        <span class="indicator-label">Complete</span>
-                                        <span class="indicator-progress">
-                                            Please wait...
-                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                        </span>
-                                    </button>--%>
+                        </div>
+                    </div>
+                    <!--end::Card body-->
+
+                    <div class="modal" tabindex="-1" id="kt_modal_Add_Doc_Description">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Document Description</h3>
+
+                                    <!--begin::Close-->
+                                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm()">
+                                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
+                                    </div>
+                                    <!--end::Close-->
+                                </div>
+
+                                <div class="modal-body">
+                                    <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" id="txtDocDescription"></textarea>
+
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" onclick="closeForm()">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <asp:HiddenField ID="hdnDocId" Value="" />
                                 </div>
                             </div>
                         </div>
-                        <!--end::Card body-->
+                    </div>
+                    <div class="modal" tabindex="-1" id="kt_model_view_Doc">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title">Add Document Description</h3>
 
-                        <asp:UpdatePanel ID="UpdatePanel1">
-                            <ContentTemplate>
-                                <div class="modal" tabindex="-1" id="kt_modal_Add_Doc_Description">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title">Document Description</h3>
-
-                                                <!--begin::Close-->
-                                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close" onclick="closeForm()">
-                                                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                                                </div>
-                                                <!--end::Close-->
-                                            </div>
-
-                                            <div class="modal-body">
-                                                <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" id="txtDocDescription"></textarea>
-
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" onclick="closeForm()">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                                <asp:HiddenField ID="hdnDocId" Value="" />
-                                            </div>
-                                        </div>
+                                    <!--begin::Close-->
+                                    <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
+                                        <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
                                     </div>
+                                    <!--end::Close-->
                                 </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                        <asp:UpdatePanel ID="UpdatePanel2">
-                            <ContentTemplate>
-                                <div class="modal" tabindex="-1" id="kt_model_view_Doc">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title">Add Document Description</h3>
 
-                                                <!--begin::Close-->
-                                                <div class="btn btn-icon btn-sm btn-active-light-primary ms-2" data-bs-dismiss="modal" aria-label="Close">
-                                                    <i class="ki-duotone ki-cross fs-1"><span class="path1"></span><span class="path2"></span></i>
-                                                </div>
-                                                <!--end::Close-->
-                                            </div>
+                                <div class="modal-body">
+                                    <input type="text" class="form-control" aria-label="Add document description here." aria-describedby="inputGroup-sizing-default" />
 
-                                            <div class="modal-body">
-                                                <input type="text" class="form-control" aria-label="Add document description here." aria-describedby="inputGroup-sizing-default" />
-
-                                            </div>
-
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-light" onclick="closeForm()">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                                <asp:HiddenField ID="HiddenField1" Value="" />
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                            </ContentTemplate>
-                        </asp:UpdatePanel>
-                    </form>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-light" onclick="closeForm()">Close</button>
+                                    <button type="button" class="btn btn-primary">Save changes</button>
+                                    <asp:HiddenField ID="HiddenField1" Value="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!--end::Content container-->
