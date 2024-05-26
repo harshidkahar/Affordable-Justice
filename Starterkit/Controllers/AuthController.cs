@@ -47,8 +47,33 @@ public class AuthController : Controller
         return View("Views/Auth/SignUp.cshtml");
     }
 
-    //[HttpPost("/register")]
-    [AllowAnonymous]
+	[HttpGet("/signout")]
+	public IActionResult SignOut()
+	{
+		string req = "";
+		try
+		{
+			if (!String.IsNullOrEmpty(HttpContext.Request.Query["logout"]))
+				req = HttpContext.Request.Query["logout"];
+			if (req == "logout")
+			{
+                _contextAccessor.HttpContext.Session.Clear();
+				//_contextAccessor.HttpContext.Session.SetString("Name", null);
+
+				//_contextAccessor.HttpContext.Session.SetString("Id", null);
+
+				//_contextAccessor.HttpContext.Session.SetString("UserName", null);
+
+				//_contextAccessor.HttpContext.Session.SetString("UserEmail", null);
+
+				//_contextAccessor.HttpContext.Session.SetString("CustomerGUID", null);
+			};
+		}
+		catch { }
+		return View("Views/Auth/SignIn.cshtml");
+	}
+	//[HttpPost("/register")]
+	[AllowAnonymous]
     [HttpPost]
     public JsonResult RegisterUser([FromBody] RegisterUser register)//, string LastName, string Email, string ContactNo, string SponsorId)
     {
