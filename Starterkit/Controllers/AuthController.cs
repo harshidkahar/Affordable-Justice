@@ -58,15 +58,6 @@ public class AuthController : Controller
 			if (req == "logout")
 			{
                 _contextAccessor.HttpContext.Session.Clear();
-				//_contextAccessor.HttpContext.Session.SetString("Name", null);
-
-				//_contextAccessor.HttpContext.Session.SetString("Id", null);
-
-				//_contextAccessor.HttpContext.Session.SetString("UserName", null);
-
-				//_contextAccessor.HttpContext.Session.SetString("UserEmail", null);
-
-				//_contextAccessor.HttpContext.Session.SetString("CustomerGUID", null);
 			};
 		}
 		catch { }
