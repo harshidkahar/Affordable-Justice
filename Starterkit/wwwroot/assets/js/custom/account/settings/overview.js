@@ -3,9 +3,11 @@
 // Class definition
 var KTAccountSettingsOverview = function () {
     // Private functions
-    var initSettings = function() {
+    var initSettings = function () {
+
 
     }
+
 
     // Public methods
     return {

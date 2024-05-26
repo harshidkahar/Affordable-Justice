@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Starterkit.Model;
+using Starterkit.Web.Logic;
 
 namespace Starterkit.Controllers
 {
@@ -38,8 +41,6 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Cases/ViewDocument.cshtml");
         }
 
-
-
         [HttpGet("createCompany/")]
 		public IActionResult createCompany()
 		{
@@ -52,6 +53,23 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Cases/CompanyList.cshtml");
         }
 
+        [HttpGet]
+        public JsonResult GetCaseList()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = 17; // Replace with actual logic to fetch user ID
+                var caseList = _customerLogic.GetCaseList(userId);
+                var result = new { success = true, caseList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case list." };
+                return Json(errorResult);
+            }
+        }
 
     }
 }

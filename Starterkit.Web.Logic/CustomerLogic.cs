@@ -11,6 +11,7 @@ using Starterkit.Model;
 using Starterkit.Data;
 using Starterkit.Data.Base;
 using Starterkit.Web.Logic.Base;
+using System.Data;
 
 namespace Starterkit.Web.Logic
 {
@@ -37,6 +38,39 @@ namespace Starterkit.Web.Logic
             CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
             return userModel=customerDA.GetLoginId(phone,email,otp);
         }
+
+
+        public List<ViewCaseListModel> GetCaseList(int userId)
+        {
+            List<ViewCaseListModel> caseList = new List<ViewCaseListModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, "", "UserCaseList");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        ViewCaseListModel caseModel = new ViewCaseListModel
+                        {
+                            CaseKey = Convert.ToInt32(row["CaseKey"]),
+                            PrimaryCaseType = row["PrimaryCaseType"].ToString(),
+                            ThirdCaseType = row["ThirdCaseType"].ToString(),
+                            DateCommenced = Convert.ToDateTime(row["DateCommenced"]),
+                            Status = Convert.ToInt32(row["Status"])
+                        };
+                        caseList.Add(caseModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return caseList;
+        }
+
 
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{

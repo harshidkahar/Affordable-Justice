@@ -189,35 +189,49 @@ namespace Starterkit.Model
             set { _WatchWord = value; }
         }
 
+        private string _Country;
+        public string Country
+        {
+            get { return _Country; }
+            set { _Country = value; }
+        }
 
-        //public UserModel(int Id_, Guid CustomerGUID_, string FullName_, string FirstName_, string LastName_, string Gender_, int Age_, string MaritialStatus_, string Profession_, string IdProof_, string IdProofNumber_, string IdProofUrl_, string Nationality_, string Address_, DateTime TimeStamp_, bool IsActive_, int SponsorId_, int RoleId_, int PremiumUser_, string Email_, string ContactNo_, int CreatedBy_, DateTime CreatedDate_, int ModifiedBy_, DateTime ModifiedDate_, string WatchWord_)
-        //{
-        //    this.Id = Id_;
-        //    this.CustomerGUID = CustomerGUID_;
-        //    this.FullName = FullName_;
-        //    this.FirstName = FirstName_;
-        //    this.LastName = LastName_;
-        //    this.Gender = Gender_;
-        //    this.Age = Age_;
-        //    this.MaritialStatus = MaritialStatus_;
-        //    this.Profession = Profession_;
-        //    this.IdProof = IdProof_;
-        //    this.IdProofNumber = IdProofNumber_;
-        //    this.IdProofUrl = IdProofUrl_;
-        //    this.Nationality = Nationality_;
-        //    this.Address = Address_;
-        //    this.TimeStamp = TimeStamp_;
-        //    this.IsActive = IsActive_;
-        //    this.SponsorId = SponsorId_;
-        //    this.RoleId = RoleId_;
-        //    this.PremiumUser = PremiumUser_;
-        //    this.Email = Email_;
-        //    this.ContactNo = ContactNo_;
-        //    this.CreatedBy = CreatedBy_;
-        //    this.CreatedDate = CreatedDate_;
-        //    this.ModifiedBy = ModifiedBy_;
-        //    this.ModifiedDate = ModifiedDate_;
-        //    this.WatchWord = WatchWord_;
-        //}
-    }
+        private DateTime _DateOfBirth;
+        public DateTime DateOfBirth
+        {
+            get { return _DateOfBirth; }
+            set { _DateOfBirth = value; }
+        }
+
+       
+    //public UserModel(int Id_, Guid CustomerGUID_, string FullName_, string FirstName_, string LastName_, string Gender_, int Age_, string MaritialStatus_, string Profession_, string IdProof_, string IdProofNumber_, string IdProofUrl_, string Nationality_, string Address_, DateTime TimeStamp_, bool IsActive_, int SponsorId_, int RoleId_, int PremiumUser_, string Email_, string ContactNo_, int CreatedBy_, DateTime CreatedDate_, int ModifiedBy_, DateTime ModifiedDate_, string WatchWord_)
+    //{
+    //    this.Id = Id_;
+    //    this.CustomerGUID = CustomerGUID_;
+    //    this.FullName = FullName_;
+    //    this.FirstName = FirstName_;
+    //    this.LastName = LastName_;
+    //    this.Gender = Gender_;
+    //    this.Age = Age_;
+    //    this.MaritialStatus = MaritialStatus_;
+    //    this.Profession = Profession_;
+    //    this.IdProof = IdProof_;
+    //    this.IdProofNumber = IdProofNumber_;
+    //    this.IdProofUrl = IdProofUrl_;
+    //    this.Nationality = Nationality_;
+    //    this.Address = Address_;
+    //    this.TimeStamp = TimeStamp_;
+    //    this.IsActive = IsActive_;
+    //    this.SponsorId = SponsorId_;
+    //    this.RoleId = RoleId_;
+    //    this.PremiumUser = PremiumUser_;
+    //    this.Email = Email_;
+    //    this.ContactNo = ContactNo_;
+    //    this.CreatedBy = CreatedBy_;
+    //    this.CreatedDate = CreatedDate_;
+    //    this.ModifiedBy = ModifiedBy_;
+    //    this.ModifiedDate = ModifiedDate_;
+    //    this.WatchWord = WatchWord_;
+    //}
+}
 }
