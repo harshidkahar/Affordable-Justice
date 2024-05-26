@@ -61,8 +61,9 @@ namespace Starterkit.Data
             }
         }
 
-        public DataSet GetLoginId(string phone, string email, string otp)
+        public UserModel GetLoginId(string phone, string email, string otp)
         {
+            UserModel userModel = new UserModel();
             try
             {
                 con = DataAccess.OpenConnection();
@@ -75,9 +76,20 @@ namespace Starterkit.Data
                 // try { ds.Tables[opt].Clear(); } catch { }
                 da.Fill(ds, "UserDetails");
                 con.Close();
+                if (ds.Tables["UserDetails"].Rows.Count > 0)
+                {
+                    userModel.Id = Convert.ToInt32(ds.Tables["UserDetails"].Rows[0]["Id"]);
+                    userModel.FirstName = ds.Tables["UserDetails"].Rows[0]["FirstName"].ToString();
+                    userModel.LastName = ds.Tables["UserDetails"].Rows[0]["LastName"].ToString();
+                    userModel.Email = ds.Tables["UserDetails"].Rows[0]["Email"].ToString();
+                    userModel.ContactNo = ds.Tables["UserDetails"].Rows[0]["ContactNo"].ToString();
+                    userModel.SponsorId = ds.Tables["UserDetails"].Rows[0]["SponsorId"].ToString();
+                    userModel.CustomerGUID = Guid.Parse(ds.Tables["UserDetails"].Rows[0]["CustomerGUID"].ToString());
+                }   
+
             }
             catch { }
-            return ds;
+            return userModel;
         }
     }
 }

@@ -31,6 +31,13 @@ namespace Starterkit.Web.Logic
             return commonLogic.GetValue(0, email, "ValidateEmail"); 
         }
 
+        public UserModel ValidateOtp(string phone, string email, string otp)
+        {
+            UserModel userModel = new UserModel();
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return userModel=customerDA.GetLoginId(phone,email,otp);
+        }
+
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{
         //    var isAuthenticated = false;

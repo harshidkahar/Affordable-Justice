@@ -40,6 +40,7 @@ namespace Starterkit.Web.Logic.Base
         Client,
         Agent,
         Email,
-        Common
+        Common,
+       
     }
 }

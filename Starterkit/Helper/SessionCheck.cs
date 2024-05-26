@@ -5,19 +5,19 @@ using Microsoft.AspNetCore.Mvc;
 namespace Starterkit.Helper
 {
     public class SessionCheck
-	{
-		static public bool CheckSession(httpSess HttpSessionState session, String sessionName)
+    {        
+        static public bool CheckSession(IHttpContextAccessor session, String sessionName)
 		{
-			if (session[sessionName] == null || session[sessionName].ToString() == String.Empty || session[sessionName] == "")
+			if (session.HttpContext.Session.GetString(sessionName) == null || session.HttpContext.Session.GetString(sessionName).ToString() == String.Empty || session.HttpContext.Session.GetString(sessionName) == "")
 				return false;
 			else
 				return true;
 		}
-		static public void ClearSession(HttpSessionState session, String sessionName)
+		static public void ClearSession(IHttpContextAccessor session, String sessionName)
 		{
 			if (CheckSession(session, sessionName))
 			{
-				session[sessionName] = null;
+                session.HttpContext.Session.SetString(sessionName, null);
 			}
 		}
 	}
