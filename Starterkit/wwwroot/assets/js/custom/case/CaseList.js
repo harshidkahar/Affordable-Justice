@@ -11,15 +11,15 @@ var KTCaseList = function () {
             url: '/Case/GetCaseList',
             type: 'GET',
             success: function (response) {
-                const result = JSON.parse(response); // Parse the JSON string response
+                //const result = JSON.parse(response); // Parse the JSON string response
                 console.log(response)
-                console.log(result);
-                if (result.success) {
-                    caseListData = result.caseList;
+                //console.log(result);
+                if (response.success) {
+                    caseListData = response.caseList;
                     renderTable();
                 } else {
                     Swal.fire({
-                        text: result.message,
+                        text: response.message,
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -51,12 +51,37 @@ var KTCaseList = function () {
         caseListData.forEach((caseItem, index) => {
             const row = tableBody.insertRow();
 
-            row.insertCell(0).textContent = index + 1;
-            row.insertCell(1).textContent = caseItem.CaseKey;
-            row.insertCell(2).textContent = caseItem.PrimaryCaseType;
-            row.insertCell(3).textContent = caseItem.ThirdCaseType;
-            row.insertCell(4).textContent = new Date(caseItem.DateCommenced).toLocaleDateString();
-            row.insertCell(5).textContent = getStatusLabel(caseItem.Status); // Call a function to get status label
+            row.insertCell(0).textContent = caseItem.SrNo;
+            //row.insertCell(1).textContent = caseItem.CaseKey;
+            row.insertCell(1).textContent = caseItem.PrimaryCaseType;
+            row.insertCell(2).textContent = caseItem.ThirdCaseType;
+            if (caseItem.DateCommenced !== null && caseItem.DateCommenced !== undefined) {
+                row.insertCell(3).textContent = caseItem.DateCommenced;
+            } else {
+                row.insertCell(3).textContent = ""; 
+            }
+            row.insertCell(4).textContent = caseItem.Status;// getStatusLabel(caseItem.Status); // Call a function to get status label
+
+            row.insertCell(5).innerHTML = '<a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions'
+                +'<i class="ki-duotone ki-down fs-5 ms-1" ></i>'
+                                +'</a>'
+                + '<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">'
+                + '<!--begin::Menu item-->'
+                + '<div class="menu-item px-3">'
+                + '<a href="/viewCaseDocuments?CaseId' + caseItem.CaseKey +'" class="menu-link px3">View Documents</a>'
+                + '</div>'
+                + '<!--end::Menu item-->'
+                + '<!--begin::Menu item-->'
+                + '<div class="menu-item px-3">'
+                + '<a href="/uploadCaseDocuments?CaseId=' + caseItem.CaseKey+'" class="menu-link px3">Upload Documents</a>'
+                    + '</div>'
+                    + '!--end::Menu item-->'
+                    + '<!--begin::Menu item-->'
+                    + '<div class="menu-item px-3">'
+                + '<a href="caseDetails?CaseId' + caseItem.CaseKey +'"  class="menu-link px3">Case Details</a>'
+                    + '</div>'
+                    + '<!--end::Menu item-->'
+                    + '</div>';
         });
     }
 

@@ -52,14 +52,16 @@ namespace Starterkit.Web.Logic
                 {
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
-                        ViewCaseListModel caseModel = new ViewCaseListModel
+                        ViewCaseListModel caseModel = new ViewCaseListModel();
+                        caseModel.SrNo = Convert.ToInt32(row["SrNo"]);
+                        caseModel.CaseKey = Convert.ToInt32(row["Id"]);
+                        caseModel.ThirdCaseType = row["ThirdCaseType"].ToString();
+                        if (ds.Tables[0].Columns.Contains("DateCommenced") && !row["DateCommenced"].Equals(DBNull.Value)) 
                         {
-                            CaseKey = Convert.ToInt32(row["CaseKey"]),
-                            PrimaryCaseType = row["PrimaryCaseType"].ToString(),
-                            ThirdCaseType = row["ThirdCaseType"].ToString(),
-                            DateCommenced = Convert.ToDateTime(row["DateCommenced"]),
-                            Status = Convert.ToInt32(row["Status"])
-                        };
+                            caseModel.DateCommenced = Convert.ToDateTime(row["DateCommenced"]);
+                        }
+                        caseModel.Status = Convert.ToString(row["Status"]);
+                        caseModel.PrimaryCaseType = Convert.ToString(row["PrimaryCaseType"]);                        
                         caseList.Add(caseModel);
                     }
                 }

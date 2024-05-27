@@ -7,47 +7,60 @@ namespace Starterkit.Controllers
 {
 	public class CaseController : Controller
 	{
-		[HttpGet("createCase/")]
+        private readonly ILogger<CaseController> _logger;
+        private readonly IKTTheme _theme;
+        private readonly IWebHostEnvironment _env;
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public CaseController(ILogger<CaseController> logger, IKTTheme theme, IWebHostEnvironment env, IHttpContextAccessor contextAccessor)
+        {
+            _logger = logger;
+            _theme = theme;
+            _env = env;
+            _contextAccessor = contextAccessor;
+        }
+
+        [HttpGet("/createCase")]
 		public IActionResult Index()
 		{
             return View("Views/Pages/Cases/CreateCase.cshtml");
         }
-        [HttpGet("viewCaseList/")]
+        [HttpGet("/viewCaseList")]
         public IActionResult ViewCaseList()
         {
             return View("Views/Pages/Cases/ViewCaseList.cshtml");
         }
-        [HttpGet("uploadCaseDocuments/")]
+        [HttpGet("/uploadCaseDocuments")]
         public IActionResult UploadCaseDocuments()
         {
             return View("Views/Pages/Cases/UploadCaseDocuments.cshtml");
         }
 
-        [HttpGet("caseDetails/")]
+        [HttpGet("/caseDetails")]
         public IActionResult CaseDetails()
         {
             return View("Views/Pages/Cases/caseDetails.cshtml");
         }
 
-        [HttpGet("viewCaseDocuments/")]
+        [HttpGet("/viewCaseDocuments")]
         public IActionResult ViewCaseDocuments()
         {
             return View("Views/Pages/Cases/ViewCaseDocuments.cshtml");
         }
 
-        [HttpGet("addDocDescription/")]
+        [HttpGet("/addDocDescription")]
         public IActionResult ViewDocument()
         {
             return View("Views/Pages/Cases/ViewDocument.cshtml");
         }
 
-        [HttpGet("createCompany/")]
+        [HttpGet("/createCompany")]
 		public IActionResult createCompany()
 		{
 			return View("Views/Pages/Cases/createCompany.cshtml");
 		}
 
-        [HttpGet("CompanyList/")]
+        [HttpGet("/CompanyList")]
         public IActionResult CompanyList()
         {
             return View("Views/Pages/Cases/CompanyList.cshtml");
@@ -59,7 +72,7 @@ namespace Starterkit.Controllers
             try
             {
                 CustomerLogic _customerLogic = new CustomerLogic();
-                int userId = 17; // Replace with actual logic to fetch user ID
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 var caseList = _customerLogic.GetCaseList(userId);
                 var result = new { success = true, caseList };
                 return Json(result);
