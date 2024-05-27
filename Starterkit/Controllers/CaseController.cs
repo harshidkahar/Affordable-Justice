@@ -1,57 +1,166 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using Starterkit.Model;
+using Starterkit.Web.Logic;
 
 namespace Starterkit.Controllers
 {
 	public class CaseController : Controller
 	{
-		[HttpGet("createCase/")]
+        private readonly ILogger<CaseController> _logger;
+        private readonly IKTTheme _theme;
+        private readonly IWebHostEnvironment _env;
+        private readonly IHttpContextAccessor _contextAccessor;
+
+        public CaseController(ILogger<CaseController> logger, IKTTheme theme, IWebHostEnvironment env, IHttpContextAccessor contextAccessor)
+        {
+            _logger = logger;
+            _theme = theme;
+            _env = env;
+            _contextAccessor = contextAccessor;
+        }
+
+        [HttpGet("/createCase")]
 		public IActionResult Index()
 		{
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/CreateCase.cshtml");
         }
-        [HttpGet("viewCaseList/")]
+
+        [HttpGet("/viewCaseList")]
         public IActionResult ViewCaseList()
         {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CaseId", "");
+            }
+            catch {  }
             return View("Views/Pages/Cases/ViewCaseList.cshtml");
         }
-        [HttpGet("uploadCaseDocuments/")]
+        [HttpGet("/uploadCaseDocuments")]
         public IActionResult UploadCaseDocuments()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/UploadCaseDocuments.cshtml");
         }
 
-        [HttpGet("caseDetails/")]
+        [HttpGet("/caseDetails")]
         public IActionResult CaseDetails()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/caseDetails.cshtml");
         }
 
-        [HttpGet("viewCaseDocuments/")]
+        [HttpGet("/viewCaseDocuments")]
         public IActionResult ViewCaseDocuments()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/ViewCaseDocuments.cshtml");
         }
 
-        [HttpGet("addDocDescription/")]
+        [HttpGet("/addDocDescription")]
         public IActionResult ViewDocument()
         {
             return View("Views/Pages/Cases/ViewDocument.cshtml");
         }
 
-
-
-        [HttpGet("createCompany/")]
+        [HttpGet("/createCompany")]
 		public IActionResult createCompany()
 		{
 			return View("Views/Pages/Cases/createCompany.cshtml");
 		}
 
-        [HttpGet("CompanyList/")]
+        [HttpGet("/CompanyList")]
         public IActionResult CompanyList()
         {
             return View("Views/Pages/Cases/CompanyList.cshtml");
         }
 
+        [HttpGet]
+        public JsonResult GetCaseList()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CaseId", "");
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var caseList = _customerLogic.GetCaseList(userId);
+                var result = new { success = true, caseList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case list." };
+                return Json(errorResult);
+            }
+        }
+
+
+        [HttpGet]
+        public JsonResult GetCompanyList()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var companyList = _customerLogic.GetCompanyList(userId);
+                var result = new { success = true, companyList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve company list." };
+                return Json(errorResult);
+            }
+        }
+
+
+        [HttpGet]
+        public JsonResult GetDocumentList()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
+                var documentList = _customerLogic.GetDocumentList(userId,caseId);
+                var result = new { success = true, documentList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve document list." };
+                return Json(errorResult);
+            }
+        }
 
     }
 }
