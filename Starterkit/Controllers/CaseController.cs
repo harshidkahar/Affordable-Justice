@@ -53,5 +53,24 @@ namespace Starterkit.Controllers
         }
 
 
+
+        [HttpGet]
+        public JsonResult GetCompanyList()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var companyList = _customerLogic.GetCompanyList(userId);
+                var result = new { success = true, companyList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case list." };
+                return Json(errorResult);
+            }
+        }
+
     }
 }

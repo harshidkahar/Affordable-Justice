@@ -38,6 +38,39 @@ namespace Starterkit.Web.Logic
             return userModel=customerDA.GetLoginId(phone,email,otp);
         }
 
+        public List<ViewCompanyListModel> GetCompanyList(int userId)
+        {
+            List<ViewCompanyListModel> caseList = new List<ViewCompanyListModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, "", "UserCompanyList");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        ViewCompanyListModel companyModel = new ViewCompanyListModel();
+                        companyModel.SrNo = Convert.ToInt32(row["SrNo"]);
+                        companyModel.CompanyKey = Convert.ToInt32(row["Id"]);
+                        if (ds.Tables[0].Columns.Contains("Date") && !row["Date"].Equals(DBNull.Value))
+                        {
+                            companyModel.Date = Convert.ToDateTime(row["Date"]);
+                        }
+                        companyModel.Status = Convert.ToString(row["Status"]);
+                        caseList.Add(companyModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return caseList;
+        }
+
+
+
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{
         //    var isAuthenticated = false;
