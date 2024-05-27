@@ -3,6 +3,7 @@
     [Serializable]
     public class DocumentModel
     {
+        public int Id { get; set; }
         public int CaseKey { get; set; }
         public string Description { get; set; }
         public string FileName { get; set; }
@@ -14,6 +15,7 @@
     [Serializable]
     public class ViewDocument
     {
+        public int Id { get; set; }
         public int CaseKey { get; set; }
         public string DocName { get; set; }
         public string Description { get; set; }

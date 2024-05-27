@@ -89,7 +89,7 @@ namespace Starterkit.Web.Logic
         }
 
 
-          public List<ViewCompanyListModel> GetCompanyList(int userId)
+         public List<ViewCompanyListModel> GetCompanyList(int userId)
         {
             List<ViewCompanyListModel> companyList = new List<ViewCompanyListModel>();
             try
@@ -145,6 +145,10 @@ namespace Starterkit.Web.Logic
                         if (ds.Tables[0].Columns.Contains("FileName") && !row["FileName"].Equals(DBNull.Value))
                         {
                             documentModel.FileName = Convert.ToString(row["FileName"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            documentModel.Id = Convert.ToInt32(row["Id"]);
                         }
                         if (ds.Tables[0].Columns.Contains("CaseId") && !row["CaseId"].Equals(DBNull.Value))
                         {

@@ -9,9 +9,12 @@ namespace Starterkit.Model
     [Serializable]
     public class UserDocumentModel
     {
+
+        public int Id { get; set; }
         /// <summary>
         /// Represents UserId
         /// </summary>
+        /// 
         public int CaseKey { get; set; }
         public string Description { get; set; }
         /// <summary>
@@ -38,6 +41,8 @@ namespace Starterkit.Model
     [Serializable]
     public class ViewDocument
     {
+
+        public int Id { get; set; }
         ///<summary>
         ///Represents CaseKey
         /// </summary>
