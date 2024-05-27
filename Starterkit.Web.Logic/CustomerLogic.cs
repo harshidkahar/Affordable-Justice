@@ -129,13 +129,13 @@ namespace Starterkit.Web.Logic
             return companyList;
         }
 
-        public List<UserDocumentModel> GetDocumentList(int userId)
+        public List<UserDocumentModel> GetDocumentList(int userId, int CaseId)
         {
             List<UserDocumentModel> documentList = new List<UserDocumentModel>();
             try
             {
                 CommonDA commonDA = new CommonDA();
-                DataSet ds = commonDA.GetCommonFillData(userId, "", "CaseDocuments");
+                DataSet ds = commonDA.GetCommonFillData(userId, CaseId.ToString(), "CaseDocuments");
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {

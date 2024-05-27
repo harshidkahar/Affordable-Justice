@@ -23,28 +23,66 @@ namespace Starterkit.Controllers
         [HttpGet("/createCase")]
 		public IActionResult Index()
 		{
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/CreateCase.cshtml");
         }
+
         [HttpGet("/viewCaseList")]
         public IActionResult ViewCaseList()
         {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CaseId", "");
+            }
+            catch {  }
             return View("Views/Pages/Cases/ViewCaseList.cshtml");
         }
         [HttpGet("/uploadCaseDocuments")]
         public IActionResult UploadCaseDocuments()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/UploadCaseDocuments.cshtml");
         }
 
         [HttpGet("/caseDetails")]
         public IActionResult CaseDetails()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/caseDetails.cshtml");
         }
 
         [HttpGet("/viewCaseDocuments")]
         public IActionResult ViewCaseDocuments()
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
             return View("Views/Pages/Cases/ViewCaseDocuments.cshtml");
         }
 
@@ -71,6 +109,7 @@ namespace Starterkit.Controllers
         {
             try
             {
+                _contextAccessor.HttpContext.Session.SetString("CaseId", "");
                 CustomerLogic _customerLogic = new CustomerLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 var caseList = _customerLogic.GetCaseList(userId);
@@ -111,7 +150,8 @@ namespace Starterkit.Controllers
             {
                 CustomerLogic _customerLogic = new CustomerLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var documentList = _customerLogic.GetDocumentList(userId);
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
+                var documentList = _customerLogic.GetDocumentList(userId,caseId);
                 var result = new { success = true, documentList };
                 return Json(result);
             }
@@ -121,7 +161,6 @@ namespace Starterkit.Controllers
                 return Json(errorResult);
             }
         }
-
 
     }
 }
