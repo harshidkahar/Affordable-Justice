@@ -21,7 +21,7 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents FileName
         /// </summary>
-        public DateTime TimeStamp { get; set; }
+        public DateTime ?TimeStamp { get; set; }
         /// <summary>
         /// Represents Last Modified Time
         /// </summary>
