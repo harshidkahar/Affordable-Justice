@@ -1,5 +1,8 @@
 ﻿@{
     ViewData["Title"] = "ViewCaseDocuments";
+    KTTheme.AddJavascriptFile("plugins/custom/datatables/datatables.bundle.js");
+    KTTheme.AddJavascriptFile("js/custom/case/DocumentList.js");
+
 }
 
 
@@ -100,7 +103,7 @@
                                     </tr>
                                 </thead>
                                 <tbody class="text-gray-600 fw-semibold">
-                                    <tr class="odd">
+                                 <!--   <tr class="odd">
                                         <td>
                                             <div class="d-flex align-items-center">
                                                 <i class="ki-duotone ki-files fs-2x text-primary me-4"></i>
@@ -114,7 +117,7 @@
                                         <td class="text-end" data-kt-filemanager-table="action_dropdown">
                                             <a href='addDocDescription?DocId='>Add Description</a>
                                         </td>
-                                    </tr>
+                                       </tr>  -->
                                 </tbody>
                             </table>
                         </div>

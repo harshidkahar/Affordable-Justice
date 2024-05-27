@@ -13,15 +13,15 @@ namespace Starterkit.Model
         /// Represents Primary Key
         /// </summary>  
         public int CompanyKey { get; set; }
-        public string SerialNumber { get; set; }
+        public int SrNo { get; set; }
         /// <summary>
         /// Represents Serial Number
         /// </summary>
-        public bool Status { get; set; }
+        public string Status { get; set; }
         /// <summary>
         /// Represents Status Of Company
         /// </summary>
-        public DateTime Timestamp { get; set; }
+        public DateTime ? Date { get; set; }
         ///<summary>
         ///Represents Time Last Modified
         /// </summary>
