@@ -29,11 +29,11 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents SubCase-Type
         /// </summary>
-        public bool ProceedingYet { get; set; }
+        public int ProceedingYet { get; set; }
         /// <summary>
         /// Represents Proceeding Yet
         /// </summary>
-        public DateTime DateCommenced { get; set; }
+        public string DateCommenced { get; set; }
         /// <summary>
         /// Represents Date Commenced
         /// </summary>
@@ -45,7 +45,7 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Current Case Number
         /// </summary>
-        public bool LegalAdviceInferred { get; set; }
+        public int LegalAdviceInferred { get; set; }
         /// <summary>
         /// Represents Legal Advice Inferred
         /// </summary>
@@ -78,6 +78,6 @@ namespace Starterkit.Model
         ///Represents Case Description
         ///</summary>
        
-
+        public string Opt {  get; set; }
     }
 }

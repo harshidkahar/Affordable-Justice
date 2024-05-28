@@ -220,25 +220,30 @@ namespace Starterkit.Controllers
                 string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
                 CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
-                CreateCaseModel _Createcase = new CreateCaseModel
+                CreateCaseModel _createCase = new CreateCaseModel();
+
+                _createCase.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _createCase.PrimaryCaseType = registerCase.PrimaryCaseType?.Trim();
+                _createCase.SecondaryCaseType = registerCase.SecondaryCaseType?.Trim();
+                _createCase.ThirdCaseType = registerCase.ThirdCaseType?.Trim();
+                _createCase.whichCourt = registerCase.whichCourt?.Trim();
+                _createCase.opname = registerCase.opname?.Trim();
+                _createCase.opmail = registerCase.opmail?.Trim();
+                _createCase.opmob = registerCase.opmob?.Trim();
+                _createCase.emrid = registerCase.emrid?.Trim();
+                _createCase.passno = registerCase.passno?.Trim();
+                _createCase.cdesc = registerCase.cdesc?.Trim();
+                _createCase.CurrentCaseNo = registerCase.CurrentCaseNo?.Trim();
+                _createCase.PreviousCaseNo = registerCase.PreviousCaseNo?.Trim();
+                _createCase.ProceedingYet = registerCase.ProceedingYet;
+                   
+                _createCase.LegalAdviceInferred = registerCase.LegalAdviceInferred;
+               
+                if (registerCase.DateCommenced != null)
                 {
-                    UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")),
-                    PrimaryCaseType = registerCase.PrimaryCaseType?.Trim(),
-                    SecondaryCaseType = registerCase.SecondaryCaseType?.Trim(),
-                    ThirdCaseType = registerCase.ThirdCaseType?.Trim(),
-                    whichCourt = registerCase.whichCourt?.Trim(),
-                    opname = registerCase.opname?.Trim(),
-                    opmail = registerCase.opmail?.Trim(),
-                    opmob = registerCase.opmob?.Trim(),
-                    emrid = registerCase.emrid?.Trim(),
-                    passno = registerCase.passno?.Trim(),
-                    cdesc = registerCase.cdesc?.Trim(),
-                    CurrentCaseNo = registerCase.CurrentCaseNo?.Trim(),
-                    PreviousCaseNo = registerCase.PreviousCaseNo?.Trim(),
-                    ProceedingYet = registerCase.ProceedingYet?.Trim(),
-                    LegalAdviceInferred = registerCase.LegalAdviceInferred?.Trim(),
-                    DateCommenced = registerCase.DateCommenced?.Trim()
-                };
+                    _createCase.DateCommenced = registerCase.DateCommenced;
+                }
+
 
                 //_Customer.SponsorId = register.SponsorId;
                 //_Customer.FirstName = !string.IsNullOrEmpty(register.FirstName) ? register.FirstName.Trim() : register.FirstName;
@@ -248,7 +253,8 @@ namespace Starterkit.Controllers
                 //_Customer.IsActive = _Customer.IsActive.HasValue ? _Customer.IsActive.Value : false;
                 //_Customer.CustomerGUID = System.Guid.NewGuid();
 
-                _Result = customerLogic.CreateCase(_Createcase);
+                _createCase.Opt = "I";
+                _Result = customerLogic.CreateCase(_createCase);
 
                 return Json(_Result);
             }

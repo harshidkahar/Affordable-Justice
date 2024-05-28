@@ -6,11 +6,11 @@
         public string PrimaryCaseType { get; set; }
         public string SecondaryCaseType { get; set; }
         public string ThirdCaseType { get; set; }
-        public string ProceedingYet { get; set; }
+        public int ProceedingYet { get; set; }
         public string DateCommenced { get; set; }
         public string PreviousCaseNo { get; set; }
         public string CurrentCaseNo { get; set; }
-        public string LegalAdviceInferred { get; set; }
+        public int LegalAdviceInferred { get; set; }
         public string whichCourt { get; set; }
         public string opname { get; set; }
         public string opmail { get; set; }
