@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Starterkit.Model
 {
     [Serializable]
-    public class CreateCaseModel
+    public class CaseDetailModel
     {
         /// <summary>
         /// Represents Primary Key
@@ -29,11 +29,11 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents SubCase-Type
         /// </summary>
-        public bool ProceedingYet { get; set; }
+        public string ProceedingYet { get; set; }
         /// <summary>
         /// Represents Proceeding Yet
         /// </summary>
-        public DateTime DateCommenced { get; set; }
+        public DateTime? DateCommenced { get; set; }
         /// <summary>
         /// Represents Date Commenced
         /// </summary>
@@ -45,35 +45,35 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Current Case Number
         /// </summary>
-        public bool LegalAdviceInferred { get; set; }
+        public string LegalAdviceInferred { get; set; }
         /// <summary>
         /// Represents Legal Advice Inferred
         /// </summary>
-        public string whichCourt { get; set; }
+        public string WhichCourt { get; set; }
         /// <summary>
         /// Represents Which Court
         /// </summary>
-        public string opname { get; set; }
+        public string Opname { get; set; }
         /// <summary>
         /// Represents Opname
         /// </summary>
-        public string opmail { get; set; }
+        public string Opmail { get; set; }
         /// <summary>
         /// Represents Opmail
         /// </summary>
-        public string opmob { get; set; }
+        public string Opmob { get; set; }
         /// <summary>
         /// Represents Opmob
         /// </summary>
-        public string emrid { get; set; }
+        public string Emrid { get; set; }
         /// <summary>
         /// Represents Emirates Id
         /// </summary>
-        public string passno { get; set; }
+        public string Passno { get; set; }
         /// <summary>
         /// Represents Passport Number
         /// </summary>
-        public string cdesc { get; set; }
+        public string Cdesc { get; set; }
         ///<summary>
         ///Represents Case Description
         ///</summary>

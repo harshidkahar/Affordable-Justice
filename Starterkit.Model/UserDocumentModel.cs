@@ -36,7 +36,7 @@ namespace Starterkit.Model
     }
 
     [Serializable]
-    public class ViewDocument
+    public class ViewDocumentModel
     {
         ///<summary>
         ///Represents CaseKey

@@ -1,7 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Starterkit.Model;
+using Starterkit.Models;
 using Starterkit.Web.Logic;
+using Starterkit.Web.Logic.Base;
+using System.Xml.Linq;
 
 namespace Starterkit.Controllers
 {
@@ -161,6 +165,99 @@ namespace Starterkit.Controllers
                 return Json(errorResult);
             }
         }
+
+
+
+        [HttpGet]
+        public JsonResult GetDocumentDetail()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
+                var documentDetail = _customerLogic.GetDocumentDescription(userId, caseId);
+                var result = new { success = true, documentDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve document Detail." };
+                return Json(errorResult);
+            }
+        }
+
+
+
+        [HttpGet]
+        public JsonResult GetCaseDetail()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
+                var caseDetail = _customerLogic.GetCaseDetail(userId, caseId);
+
+                var result = new { success = true, caseDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case detail." };
+                return Json(errorResult);
+            }
+        }
+
+       
+        
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult CreateCase([FromBody] InsertCaseModel registerCase)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                CreateCaseModel _Createcase = new CreateCaseModel
+                {
+                    UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")),
+                    PrimaryCaseType = registerCase.PrimaryCaseType?.Trim(),
+                    SecondaryCaseType = registerCase.SecondaryCaseType?.Trim(),
+                    ThirdCaseType = registerCase.ThirdCaseType?.Trim(),
+                    whichCourt = registerCase.whichCourt?.Trim(),
+                    opname = registerCase.opname?.Trim(),
+                    opmail = registerCase.opmail?.Trim(),
+                    opmob = registerCase.opmob?.Trim(),
+                    emrid = registerCase.emrid?.Trim(),
+                    passno = registerCase.passno?.Trim(),
+                    cdesc = registerCase.cdesc?.Trim(),
+                    CurrentCaseNo = registerCase.CurrentCaseNo?.Trim(),
+                    PreviousCaseNo = registerCase.PreviousCaseNo?.Trim(),
+                    ProceedingYet = registerCase.ProceedingYet?.Trim(),
+                    LegalAdviceInferred = registerCase.LegalAdviceInferred?.Trim(),
+                    DateCommenced = registerCase.DateCommenced?.Trim()
+                };
+
+                //_Customer.SponsorId = register.SponsorId;
+                //_Customer.FirstName = !string.IsNullOrEmpty(register.FirstName) ? register.FirstName.Trim() : register.FirstName;
+                //_Customer.LastName = !string.IsNullOrEmpty(register.LastName) ? register.LastName.Trim() : register.LastName;
+                //_Customer.Email = !string.IsNullOrEmpty(register.Email) ? register.Email.Trim() : register.Email;
+                //_Customer.ContactNo = !string.IsNullOrEmpty(register.ContactNo) ? register.ContactNo.Trim() : register.ContactNo;
+                //_Customer.IsActive = _Customer.IsActive.HasValue ? _Customer.IsActive.Value : false;
+                //_Customer.CustomerGUID = System.Guid.NewGuid();
+
+                _Result = customerLogic.CreateCase(_Createcase);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            } 
+        } 
+
 
     }
 }

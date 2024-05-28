@@ -81,7 +81,9 @@ var KTCompanyList = function () {
                 + '<a href="caseDetails?CaseId' + companyItem.CompanyKey +'"  class="menu-link px3">Company Details</a>'
                     + '</div>'
                     + '<!--end::Menu item-->'
-                    + '</div>';
+                + '</div>';
+
+            KTMenu.createInstances();
         });
     }
 

@@ -97,12 +97,12 @@ var KTCreateCaseGeneral = function () {
 
                     $.ajax({
                         type: "POST",
-                        url: "Customer/Create/Case.aspx/CreateCase",
+                        url: "Case/CreateCase",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(jsonPostData),
                         dataType: "json",
                         success: function (data) {
-                            if (data.d == "done") {
+                            if (data == "done") {
                                 Swal.fire({
                                     text: "You have successfully registered!",
                                     icon: "success",

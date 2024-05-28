@@ -40,7 +40,7 @@ namespace Starterkit.Web.Logic
         }
 
 
-        public List<ViewCaseListModel> GetCaseList(int userId)
+          public List<ViewCaseListModel> GetCaseList(int userId)
         {
             List<ViewCaseListModel> caseList = new List<ViewCaseListModel>();
             try
@@ -88,7 +88,6 @@ namespace Starterkit.Web.Logic
             return caseList;
         }
 
-
           public List<ViewCompanyListModel> GetCompanyList(int userId)
         {
             List<ViewCompanyListModel> companyList = new List<ViewCompanyListModel>();
@@ -129,7 +128,7 @@ namespace Starterkit.Web.Logic
             return companyList;
         }
 
-        public List<UserDocumentModel> GetDocumentList(int userId, int CaseId)
+          public List<UserDocumentModel> GetDocumentList(int userId, int CaseId)
         {
             List<UserDocumentModel> documentList = new List<UserDocumentModel>();
             try
@@ -177,6 +176,301 @@ namespace Starterkit.Web.Logic
             return documentList;
         }
 
+          public List<ViewDocumentModel> GetDocumentDescription(int userId, int CaseId)
+        {
+            List<ViewDocumentModel> documentDetail = new List<ViewDocumentModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, CaseId.ToString(), "GetDocumentDetails");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        ViewDocumentModel documentdetailModel = new ViewDocumentModel();
+                        if (ds.Tables[0].Columns.Contains("DocName") && !row["DocName"].Equals(DBNull.Value))
+                        {
+                            documentdetailModel.DocName = Convert.ToString(row["DocName"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CaseId") && !row["CaseId"].Equals(DBNull.Value))
+                        {
+                            documentdetailModel.CaseKey = Convert.ToInt32(row["CaseId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Description") && !row["Description"].Equals(DBNull.Value))
+                        {
+                            documentdetailModel.Description = Convert.ToString(row["Description"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("DocumentUrl") && !row["DocumentUrl"].Equals(DBNull.Value))
+                        {
+                            documentdetailModel.DocumentUrl = Convert.ToString(row["DocumentUrl"]);
+                        }
+                        documentDetail.Add(documentdetailModel);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return documentDetail;
+        }
+
+
+        public List<CaseDetailModel> GetCaseDetail(int userId, int CaseId)
+        {
+            List<CaseDetailModel> casedetail = new List<CaseDetailModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, CaseId.ToString(), "GetCaseDetails");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        CaseDetailModel casedetailModel = new CaseDetailModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.CaseKey = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(casedetailModel.PrimaryCaseType))
+                        {
+                            casedetailModel.PrimaryCaseType += " ";
+                        }
+                        casedetailModel.PrimaryCaseType += (row["PrimaryCaseType"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(casedetailModel.SecondaryCaseType))
+                        {
+                            casedetailModel.SecondaryCaseType += " ";
+                        }
+                        casedetailModel.SecondaryCaseType += (row["SecondaryCaseType"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(casedetailModel.ThirdCaseType))
+                        {
+                            casedetailModel.ThirdCaseType += " ";
+                        }
+                        casedetailModel.ThirdCaseType += (row["ThirdCaseType"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("ProceedingYet") && !row["ProceedingYet"].Equals(DBNull.Value))
+                        {
+                            int proceedingYetValue = Convert.ToInt32(row["ProceedingYet"]);
+                            casedetailModel.ProceedingYet = proceedingYetValue == 1 ? "Yes" : "No";
+                        }
+
+                        if (ds.Tables[0].Columns.Contains("DateCommenced") && !row["DateCommenced"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.DateCommenced = Convert.ToDateTime(row["DateCommenced"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("PreviousCaseNo") && !row["PreviousCaseNo"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.PreviousCaseNo = Convert.ToString(row["PreviousCaseNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CurrentCaseNo") && !row["CurrentCaseNo"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.CurrentCaseNo = Convert.ToString(row["CurrentCaseNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("LegalAdviceInferred") && !row["LegalAdviceInferred"].Equals(DBNull.Value))
+                        {
+                            int legalAdviceInferredValue = Convert.ToInt32(row["LegalAdviceInferred"]);
+                            casedetailModel.LegalAdviceInferred = legalAdviceInferredValue == 1 ? "Yes" : "No";
+                        }
+                        if (ds.Tables[0].Columns.Contains("WhichCourt") && !row["WhichCourt"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.WhichCourt = Convert.ToString(row["WhichCourt"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Opname") && !row["Opname"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Opname = Convert.ToString(row["Opname"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Opmail") && !row["Opmail"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Opmail = Convert.ToString(row["Opmail"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Opmob") && !row["Opmob"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Opmob = Convert.ToString(row["Opmob"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Emrid") && !row["Emrid"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Emrid = Convert.ToString(row["Emrid"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Passno") && !row["Passno"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Passno = Convert.ToString(row["Passno"]);
+                        }
+                        casedetail.Add(casedetailModel);
+
+                       
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return casedetail;
+        }
+
+          public List<CustomerProfileModel> Overview(int userId)
+        {
+            List<CustomerProfileModel> profileoverview = new List<CustomerProfileModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, "", "UserDetails");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        CustomerProfileModel profiloverviewModel = new CustomerProfileModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.UserId = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(profiloverviewModel.FirstName))
+                        {
+                            profiloverviewModel.FirstName += " ";
+                        }
+                        profiloverviewModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(profiloverviewModel.LastName))
+                        {
+                            profiloverviewModel.LastName += " ";
+                        }
+                        profiloverviewModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("Dob") && !row["Dob"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Dob = Convert.ToDateTime(row["Dob"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Email") && !row["Email"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Email = Convert.ToString(row["Email"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("ContactNo") && !row["ContactNo"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.ContactNo = Convert.ToString(row["ContactNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address_Flat") && !row["Address_Flat"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Address_Flat = Convert.ToString(row["Address_Flat"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address_Building") && !row["Address_Building"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Address_Building = Convert.ToString(row["Address_Building"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+
+                        profileoverview.Add(profiloverviewModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return profileoverview;
+        }
+
+        public List<CustomerProfileSettingModel> Setting(int userId)
+        {
+            List<CustomerProfileSettingModel> profilesetting = new List<CustomerProfileSettingModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, "", "UserDetails");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        CustomerProfileSettingModel profilsettingModel = new CustomerProfileSettingModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.UserId = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(profilsettingModel.FirstName))
+                        {
+                            profilsettingModel.FirstName += " ";
+                        }
+                        profilsettingModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(profilsettingModel.LastName))
+                        {
+                            profilsettingModel.LastName += " ";
+                        }
+                        profilsettingModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("Dob") && !row["Dob"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Dob = Convert.ToDateTime(row["Dob"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Email") && !row["Email"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Email = Convert.ToString(row["Email"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("ContactNo") && !row["ContactNo"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.ContactNo = Convert.ToString(row["ContactNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address_Flat") && !row["Address_Flat"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Address_Flat = Convert.ToString(row["Address_Flat"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address_Building") && !row["Address_Building"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Address_Building = Convert.ToString(row["Address_Building"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+
+                        profilesetting.Add(profilsettingModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return profilesetting;
+        }
+
+        
+        public string CreateCase(CreateCaseModel _Createcase)  {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_CreateCase(_Createcase);
+       ;
+        }
 
 
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)

@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "ViewDocument";
+    KTTheme.AddJavascriptFile("js/custom/case/Documentdetail.js");
 }
 
 <!--begin::Content-->
@@ -62,7 +63,7 @@
                                     </div>
                                     <!--end::Image-->
                                     <div class="mb-5" id="doc_video_div" style="visibility: hidden;">
-                                        <%-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video"></iframe>--%>
+                                        <!-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video"></iframe>-->
 
                                         <video controls width="640" height="360" id="videoPlayer" autoplay="autoplay">
                                             <source id="videoSource" src="#">

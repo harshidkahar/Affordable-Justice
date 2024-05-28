@@ -6,8 +6,85 @@ var KTAccountSettingsProfileDetails = function () {
     var form;
     var submitButton;
     var validation;
-
+    var ProfileSetting = [];
+    //KTMenu.createInstances();
     // Private functions
+
+    var fetchprofilesetting = function () {
+        $.ajax({
+            url: '/Account/profilesetting',
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    ProfileSetting = response.profilesetting;
+                    renderData();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve case detail.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+    };
+
+
+    var renderData = function () {
+        $(document).ready(function () {
+            $('#ddlCountryCode').select2({
+                placeholder: "Select Country Code",
+                allowClear: true
+            });
+
+            $('#ddlCountry').select2({
+                placeholder: "Select Country",
+                allowClear: true
+            });
+
+            $('#ddlNationality').select2({
+                placeholder: "Select Nationality",
+                allowClear: true
+            });
+            if (ProfileSetting.length > 0) {
+                var profile = ProfileSetting[0];
+
+                // Assigning values to HTML elements
+                document.getElementById('txtFirstName').value = profile.FirstName || '';
+                document.getElementById('txtLastName').value = profile.LastName || '';
+                document.getElementById('txtPhone').value = profile.ContactNo || '';
+                document.getElementById('txtEmail').value = profile.Email || '';
+                document.getElementById('txtDob').value = profile.Dob ? new Date(profile.Dob).toISOString().substring(0, 10) : '';
+                document.getElementById('txtFlatno').value = profile.Address_Flat || '';
+                document.getElementById('txtStreetname').value = profile.Address_Building || '';
+                document.getElementById('txtAddress').value = profile.Address || '';
+
+                // Set select2 dropdown values
+                $('#ddlCountryCode').val(profile.CountryCode).trigger('change');
+                $('#ddlCountry').val(profile.Country).trigger('change');
+                $('#ddlNationality').val(profile.Nationality).trigger('change');
+                //document.getElementById('lblNationality').textContent = profile.Nationality || '';
+            }
+        });
+    };
+
+
     var initValidation = function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validation = FormValidation.formValidation(
@@ -143,8 +220,9 @@ var KTAccountSettingsProfileDetails = function () {
             }
 
             submitButton = form.querySelector('#kt_account_profile_details_submit');
-
+            fetchprofilesetting();
             initValidation();
+            
         }
     }
 }();
@@ -152,4 +230,5 @@ var KTAccountSettingsProfileDetails = function () {
 // On document ready
 KTUtil.onDOMContentLoaded(function() {
     KTAccountSettingsProfileDetails.init();
+    
 });

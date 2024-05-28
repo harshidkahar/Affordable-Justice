@@ -92,8 +92,47 @@ namespace Starterkit.Data
             return userModel;
         }
 
-       
-        
-    
+        public string DAL_CreateCase(CreateCaseModel _Createcase)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_CreateCase]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                //cmd.Parameters.Add("@Id", SqlDbType.Int).Value = createCase.CaseKey;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = _Createcase.UserId;
+                cmd.Parameters.Add("@PrimaryCaseType", SqlDbType.NVarChar).Value = _Createcase.PrimaryCaseType;
+                cmd.Parameters.Add("@SecondaryCaseType", SqlDbType.NVarChar).Value = _Createcase.SecondaryCaseType;
+                cmd.Parameters.Add("@ThirdCaseType", SqlDbType.NVarChar).Value = _Createcase.ThirdCaseType;
+                cmd.Parameters.Add("@ProceedingYet", SqlDbType.Int).Value = _Createcase.ProceedingYet;
+                cmd.Parameters.Add("@DateCommenced", SqlDbType.NVarChar).Value = _Createcase.DateCommenced;
+                cmd.Parameters.Add("@PreviousCaseNo", SqlDbType.NVarChar).Value = _Createcase.PreviousCaseNo;
+                cmd.Parameters.Add("@CurrentCaseNo", SqlDbType.NVarChar).Value = _Createcase.CurrentCaseNo;
+                cmd.Parameters.Add("@LegalAdviceInferred", SqlDbType.Int).Value = _Createcase.LegalAdviceInferred;
+                cmd.Parameters.Add("@whichCourt", SqlDbType.NVarChar).Value = _Createcase.whichCourt;
+                cmd.Parameters.Add("@opname", SqlDbType.NVarChar).Value = _Createcase.opname;
+                cmd.Parameters.Add("@opmail", SqlDbType.NVarChar).Value = _Createcase.opmail;
+                cmd.Parameters.Add("@opmob", SqlDbType.NVarChar).Value = _Createcase.opmob;
+                cmd.Parameters.Add("@emrid", SqlDbType.NVarChar).Value = _Createcase.emrid;
+                cmd.Parameters.Add("@passno", SqlDbType.NVarChar).Value = _Createcase.passno;
+                cmd.Parameters.Add("@cdesc", SqlDbType.NVarChar).Value = _Createcase.cdesc;
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = "I";
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex) {
+                return "false";
+
+            }
+        }
+
+
+
     }
 }

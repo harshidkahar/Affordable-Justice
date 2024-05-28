@@ -75,7 +75,7 @@ var KTCaseList = function () {
                 + '<div class="menu-item px-3">'
                 + '<a href="/uploadCaseDocuments?CaseId=' + caseItem.CaseKey+'" class="menu-link px3">Upload Documents</a>'
                     + '</div>'
-                    + '!--end::Menu item-->'
+                    + '<!--end::Menu item-->'
                     + '<!--begin::Menu item-->'
                     + '<div class="menu-item px-3">'
                 + '<a href="/caseDetails?CaseId=' + caseItem.CaseKey +'"  class="menu-link px3">Case Details</a>'
@@ -83,6 +83,7 @@ var KTCaseList = function () {
                     + '<!--end::Menu item-->'
                     + '</div>';
         });
+        KTMenu.createInstances();
     }
 
     // Function to get status label based on status code
