@@ -367,6 +367,11 @@ namespace Starterkit.Web.Logic
                         {
                             profiloverviewModel.Address_Building = Convert.ToString(row["Address_Building"]);
                         }
+
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Address = Convert.ToString(row["Address"]);
+                        }
                         if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
                         {
                             profiloverviewModel.Country = Convert.ToString(row["Country"]);
@@ -389,7 +394,7 @@ namespace Starterkit.Web.Logic
             return profileoverview;
         }
 
-        public List<CustomerProfileSettingModel> Setting(int userId)
+          public List<CustomerProfileSettingModel> Setting(int userId)
         {
             List<CustomerProfileSettingModel> profilesetting = new List<CustomerProfileSettingModel>();
             try
@@ -443,6 +448,11 @@ namespace Starterkit.Web.Logic
                         {
                             profilsettingModel.Address_Building = Convert.ToString(row["Address_Building"]);
                         }
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            profilsettingModel.Address = Convert.ToString(row["Address"]);
+                        }
+
                         if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
                         {
                             profilsettingModel.Country = Convert.ToString(row["Country"]);

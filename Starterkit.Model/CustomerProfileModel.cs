@@ -55,6 +55,12 @@ namespace Starterkit.Model
         /// Represents Address Building
         /// </summary>
 
+        public string Address { get; set; }
+        /// <summary>
+        /// Represents Whole Address
+        /// </summary>
+
+
         public string Watchword { get; set; }
         /// <summary>
         /// Represents Password
@@ -111,6 +117,12 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Address Building
         /// </summary>
+
+        public string Address { get; set; }
+        /// <summary>
+        /// Represents Whole Address
+        /// </summary>
+
 
         public string Watchword { get; set; }
         /// <summary>

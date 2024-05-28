@@ -57,6 +57,7 @@ var KTAccountSettingsOverview = function () {
             document.getElementById('lblCAddress').textContent = [
                 profile.Address_Flat,
                 profile.Address_Building,
+                profile.Address,
             ].filter(Boolean).join(' ') || '';
 
             document.getElementById('lblEmailId').textContent = profile.Email || '';
