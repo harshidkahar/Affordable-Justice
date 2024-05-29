@@ -29,11 +29,11 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents SubCase-Type
         /// </summary>
-        public bool ProceedingYet { get; set; }
+        public int ProceedingYet { get; set; }
         /// <summary>
         /// Represents Proceeding Yet
         /// </summary>
-        public DateTime DateCommenced { get; set; }
+        public string DateCommenced { get; set; }
         /// <summary>
         /// Represents Date Commenced
         /// </summary>
@@ -45,39 +45,39 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Current Case Number
         /// </summary>
-        public bool LegalAdviceInferred { get; set; }
+        public int LegalAdviceInferred { get; set; }
         /// <summary>
         /// Represents Legal Advice Inferred
         /// </summary>
-        public string WhichCourt { get; set; }
+        public string whichCourt { get; set; }
         /// <summary>
         /// Represents Which Court
         /// </summary>
-        public string Opname { get; set; }
+        public string opname { get; set; }
         /// <summary>
         /// Represents Opname
         /// </summary>
-        public string Opmail { get; set; }
+        public string opmail { get; set; }
         /// <summary>
         /// Represents Opmail
         /// </summary>
-        public string Opmob { get; set; }
+        public string opmob { get; set; }
         /// <summary>
         /// Represents Opmob
         /// </summary>
-        public string Emrid { get; set; }
+        public string emrid { get; set; }
         /// <summary>
         /// Represents Emirates Id
         /// </summary>
-        public string Passno { get; set; }
+        public string passno { get; set; }
         /// <summary>
         /// Represents Passport Number
         /// </summary>
-        public string Cdesc { get; set; }
+        public string cdesc { get; set; }
         ///<summary>
         ///Represents Case Description
         ///</summary>
        
-
+        public string Opt {  get; set; }
     }
 }

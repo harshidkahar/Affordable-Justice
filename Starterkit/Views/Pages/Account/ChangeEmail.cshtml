@@ -2,7 +2,8 @@
     ViewData["Title"] = "KYC";
     // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
     KTTheme.AddJavascriptFile("js/custom/account/settings/profile-details.js");
-    KTTheme.AddJavascriptFile("js/custom/account/settings/IDfileUpload.js");
+    KTTheme.AddJavascriptFile("js/custom/account/settings/signin-methods.js");
+    //KTTheme.AddJavascriptFile("js/custom/account/settings/IDfileUpload.js");
 }
 
 
@@ -73,7 +74,7 @@
                                     <div class="col-lg-6 mb-4 mb-lg-0">
                                         <div class="fv-row mb-0">
                                             <label for="emailaddress" class="form-label fs-6 fw-bold mb-3">Enter New Email Address</label>
-                                            <input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="" />
+                                            <input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="support@keenthemes.com" />
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
@@ -131,12 +132,13 @@
                         </div>
                         <!--end::Edit-->
                         <!--begin::Action-->
-                        <div id="kt_change_email_button" class="ms-auto">
+                        <div id="kt_signin_email_button" class="ms-auto">
                             <button class="btn btn-light btn-active-light-primary">Change Email</button>
                         </div>
                         <!--end::Action-->
                     </div>
                     <!--end::Email Address-->
+
                 </div>
                 <!--end::Card body-->
             </div>

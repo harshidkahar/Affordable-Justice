@@ -1,6 +1,8 @@
 ﻿
 @{
     ViewData["Title"] = "ViewDocument";
+    KTTheme.AddJavascriptFile("js/custom/case/Documentdetail.js");
+    KTTheme.AddJavascriptFile("js/custom/case/DocDetail.js");
 }
 
 <!--begin::Content-->
@@ -25,7 +27,7 @@
 
                         <div class="row mb-6">
                             <!--begin::Files-->
-                            <form>
+                            <form id="docDetail">
                                 <div id="doc_playe" class="card mb-xl-8">
                                     <div class="row">
                                         <!--begin::Label-->
@@ -33,24 +35,25 @@
                                         <!--end::Label-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <input type="text" class="form-control form-control-solid" placeholder="Type your document description" id="txtDocName" />
+                                            <input type="text" class="form-control form-control-solid" placeholder="Type your document description" name="txtDocName" id="txtDocName" />
                                         </div>
                                         <!--end::Col-->
                                     </div>
+                                    <br />
                                     <div class="row">
                                         <!--begin::Label-->
                                         <label class="col-lg-3 col-form-label fw-semibold fs-6">Document Description</label>
                                         <!--end::Label-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 fv-row">
-                                            <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" id="txtDocDescription"></textarea>
+                                            <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" name="txtDocDescription" id="txtDocDescription"></textarea>
                                         </div>
                                         <!--end::Col-->
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-3 fv-row">
                                             <!-- <Button ID="Button1" Text="Save Changes" class="btn btn-primary" OnClick="btnSaveDescription_Click" /> -->
-                                            <button Id="Button1"  class="btn btn-primary" OnClick="btnSaveDescription_Click">Save Changes</button>
+                                            <button Id="Button1"  class="btn btn-primary" >Save Changes</button>
                                             <a href="viewCaseDocuments" class="btn btn-lg btn-light me-3">Cancel</a>
                                         </div>
                                     </div>
@@ -62,7 +65,7 @@
                                     </div>
                                     <!--end::Image-->
                                     <div class="mb-5" id="doc_video_div" style="visibility: hidden;">
-                                        <%-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video"></iframe>--%>
+                                        <!-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video"></iframe>-->
 
                                         <video controls width="640" height="360" id="videoPlayer" autoplay="autoplay">
                                             <source id="videoSource" src="#">
@@ -74,7 +77,7 @@
 
                                 </div>
 
-                                <asp:HiddenField ID="hdnDocId" />
+                                <input type="hidden" id="hdnDocId" />
                             </form>
                             <!--end::Files-->
                         </div>
@@ -92,3 +95,6 @@
     <!--end::Content container-->
 </div>
 <!--end::Content-->
+<script type="text/javascript">
+    var baseUrl = '@Url.Content("~/")';
+</script>
