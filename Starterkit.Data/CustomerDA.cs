@@ -200,9 +200,9 @@ namespace Starterkit.Data
 
         }
 
-        public UserModel UpdateEmail(int Id, string email, string otp)
+        public string UpdateEmail(int Id, string email, string otp)
         {
-            UserModel userModel = new UserModel();
+            string returnValue = "invalid";
             try
             {
                 con = DataAccess.OpenConnection();
@@ -215,20 +215,13 @@ namespace Starterkit.Data
                 // try { ds.Tables[opt].Clear(); } catch { }
                 da.Fill(ds, "UserDetails");
                 con.Close();
-                if (ds.Tables["UserDetails"].Rows.Count > 0)
+                if (ds.Tables[0].Rows.Count > 0)
                 {
-                    userModel.Id = Convert.ToInt32(ds.Tables["UserDetails"].Rows[0]["Id"]);
-                    userModel.FirstName = ds.Tables["UserDetails"].Rows[0]["FirstName"].ToString();
-                    userModel.LastName = ds.Tables["UserDetails"].Rows[0]["LastName"].ToString();
-                    userModel.Email = ds.Tables["UserDetails"].Rows[0]["Email"].ToString();
-                    userModel.ContactNo = ds.Tables["UserDetails"].Rows[0]["ContactNo"].ToString();
-                    userModel.SponsorId = ds.Tables["UserDetails"].Rows[0]["SponsorId"].ToString();
-                    userModel.CustomerGUID = Guid.Parse(ds.Tables["UserDetails"].Rows[0]["CustomerGUID"].ToString());
+                    returnValue = ds.Tables[0].Rows[0]["Value"].ToString();
                 }
-
             }
             catch { }
-            return userModel;
+            return returnValue;
         }
 
     }

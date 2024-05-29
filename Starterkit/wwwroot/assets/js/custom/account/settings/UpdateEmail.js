@@ -84,7 +84,7 @@ var KTUpdateEmail = function () {
                         }
                         $.ajax({
                             type: "POST",
-                            url: "/Auth/NewSendOTP/",
+                            url: "/Auth/ChangeEmailSendOTP/",
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(jsonPostData),
                             success: function (data) {
@@ -109,9 +109,9 @@ var KTUpdateEmail = function () {
                                         }
                                     });
                                 }
-                                else if (data.d == "invalid-Email") {
+                                else if (data == "invalid-Email") {
                                     Swal.fire({
-                                        text: "Invalid Email Address.. Please enter valid e-mail address.",
+                                        text: "Email already exists... Please enter different e-mail address.",
                                         icon: "error",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, got it!",

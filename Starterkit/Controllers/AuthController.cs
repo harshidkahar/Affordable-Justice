@@ -157,27 +157,9 @@ public class AuthController : Controller
         string email = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
         
         // Call your logic to validate OTP
-        var userModel = customerLogic.UpdateEmail(Id,email, otpModel.otp);
+        string returnValue = customerLogic.UpdateEmail(Id,email, otpModel.otp);
 
-        if (userModel != null)
-        {
-            _contextAccessor.HttpContext.Session.SetString("Name", userModel.FirstName + " " + userModel.LastName);
-
-            _contextAccessor.HttpContext.Session.SetString("Id", userModel.Id.ToString());
-
-            _contextAccessor.HttpContext.Session.SetString("UserName", userModel.Email);
-
-            _contextAccessor.HttpContext.Session.SetString("UserEmail", userModel.Email);
-
-            _contextAccessor.HttpContext.Session.SetString("CustomerGUID", userModel.CustomerGUID.ToString());
-
-            //_contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
-
-            return "done";
-
-        }
-
-        return "invalid";
+        return returnValue;
     }
 
 
@@ -228,14 +210,17 @@ public class AuthController : Controller
     }
 
     [HttpPost]
-    public string NewSendOTP([FromBody] SendOtpModel otpModel)
+    public string ChangeEmailSendOTP([FromBody] SendOtpModel otpModel)
     {
         string returnValue = string.Empty;
         try
         {
             CustomerLogic customerLogic = new CustomerLogic();
             SendEmailLogic sendEmailLogic = new SendEmailLogic();
-                string subject = " is the OTP for your login.";
+            string validateEmail = customerLogic.ValidateChangeEmail(otpModel.Email, Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")));
+            if (validateEmail != "invalid" && validateEmail != "" && validateEmail != string.Empty)
+            {
+                string subject = validateEmail + " is the OTP for your login.";
 
                 string body = string.Empty;
                 string path = Path.Combine(_env.WebRootPath, "EmailTemplate/SendOtp.html");
@@ -243,11 +228,17 @@ public class AuthController : Controller
                 {
                     body = reader.ReadToEnd();
                 }
-                body = "{OTP}";
+                body = body.Replace("{OTP}", validateEmail);
                 //sendEmailLogic.SendEmail(otpModel.Email, subject, body);
                 _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
 
-             }
+                returnValue = "done";//otpModel.Email;
+            }
+            else if (validateEmail == "invalid")
+            {
+                returnValue = "invalid-Email";
+            }
+        }
         catch (Exception ex)
         {
             returnValue = "invalid-Email";
