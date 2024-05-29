@@ -39,8 +39,15 @@ namespace Starterkit.Web.Logic
             return userModel=customerDA.GetLoginId(phone,email,otp);
         }
 
+        public UserModel UpdateEmail(int Id, string email, string otp)
+        {
+            UserModel userModel = new UserModel();
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return userModel = customerDA.UpdateEmail(Id,email, otp);
+        }
 
-          public List<ViewCaseListModel> GetCaseList(int userId)
+
+        public List<ViewCaseListModel> GetCaseList(int userId)
         {
             List<ViewCaseListModel> caseList = new List<ViewCaseListModel>();
             try
