@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Starterkit.Model
 {
@@ -77,6 +78,8 @@ namespace Starterkit.Model
         /// </summary>
         public int UserId { get; set; }
 
+        public Guid CustomerGUID { get; set; }
+
         public string FirstName { get; set; }
         /// <summary>
         /// Represents First Name of Customer
@@ -122,7 +125,6 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Whole Address
         /// </summary>
-
 
         public string Watchword { get; set; }
         /// <summary>

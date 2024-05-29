@@ -141,6 +141,10 @@ namespace Starterkit.Web.Logic
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
                         UserDocumentModel documentModel = new UserDocumentModel();
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            documentModel.Id = Convert.ToInt32(row["Id"]);
+                        }
                         if (ds.Tables[0].Columns.Contains("FileName") && !row["FileName"].Equals(DBNull.Value))
                         {
                             documentModel.FileName = Convert.ToString(row["FileName"]);
@@ -176,26 +180,26 @@ namespace Starterkit.Web.Logic
             return documentList;
         }
 
-          public List<ViewDocumentModel> GetDocumentDescription(int userId, int CaseId)
+          public List<ViewDocumentModel> GetDocumentDescription(int docId, int userId, int CaseId)
         {
             List<ViewDocumentModel> documentDetail = new List<ViewDocumentModel>();
             try
             {
                 CommonDA commonDA = new CommonDA();
-                DataSet ds = commonDA.GetCommonFillData(userId, CaseId.ToString(), "GetDocumentDetails");
+                DataSet ds = commonDA.GetCommonFillData(docId, "", "GetDocumentDetails");
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
                         ViewDocumentModel documentdetailModel = new ViewDocumentModel();
-                        if (ds.Tables[0].Columns.Contains("DocName") && !row["DocName"].Equals(DBNull.Value))
-                        {
-                            documentdetailModel.DocName = Convert.ToString(row["DocName"]);
-                        }
                         if (ds.Tables[0].Columns.Contains("CaseId") && !row["CaseId"].Equals(DBNull.Value))
                         {
                             documentdetailModel.CaseKey = Convert.ToInt32(row["CaseId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("DocName") && !row["DocName"].Equals(DBNull.Value))
+                        {
+                            documentdetailModel.DocName = Convert.ToString(row["DocName"]);
                         }
                         if (ds.Tables[0].Columns.Contains("Description") && !row["Description"].Equals(DBNull.Value))
                         {
@@ -204,6 +208,10 @@ namespace Starterkit.Web.Logic
                         if (ds.Tables[0].Columns.Contains("DocumentUrl") && !row["DocumentUrl"].Equals(DBNull.Value))
                         {
                             documentdetailModel.DocumentUrl = Convert.ToString(row["DocumentUrl"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            documentdetailModel.Id = Convert.ToInt32(row["Id"]);
                         }
                         documentDetail.Add(documentdetailModel);
                     }
@@ -217,7 +225,7 @@ namespace Starterkit.Web.Logic
         }
 
 
-        public List<CaseDetailModel> GetCaseDetail(int userId, int CaseId)
+          public List<CaseDetailModel> GetCaseDetail(int userId, int CaseId)
         {
             List<CaseDetailModel> casedetail = new List<CaseDetailModel>();
             try
@@ -479,7 +487,18 @@ namespace Starterkit.Web.Logic
         public string CreateCase(CreateCaseModel _Createcase)  {
             CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
             return customerDA.DAL_CreateCase(_Createcase);
-       ;
+        }
+
+        public string UpdateCustomer(CustomerProfileSettingModel profileUpdate)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_CustomerNew(profileUpdate);
+        }
+
+        public string DocumentDetail(UserDocumentModel updateDescription)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_UserDocument(updateDescription);
         }
 
 

@@ -47,20 +47,27 @@ var KTDocDetail = function () {
             document.getElementById('txtDocDescription').value = documentDetail.Description || '';
 
             // Process the document URL
-            var url = documentDetail.DocumentUrl.replace('\\', '/');
-            var extension = url.split('.').pop().toLowerCase();
+            var url = baseUrl + documentDetail.DocumentUrl.replace(/\\/g, '/');
+            var extension = url.substring(url.lastIndexOf('.')).toLowerCase();
+            url = url.replace(/\\/g, '/'); // Replace backslashes with forward slashes
+
+            console.log(url);
+            console.log(extension);
 
             // Hide both image and video divs initially
             document.getElementById('doc_img_div').style.visibility = 'hidden';
             document.getElementById('doc_video_div').style.visibility = 'hidden';
 
-            if (['png', 'jpg', 'jpeg'].includes(extension)) {
+            // Update the image and video sources based on the file extension
+            if (['.png', '.jpg', '.jpeg'].includes(extension)) {
                 document.getElementById('doc_img_div').style.visibility = 'visible';
-                document.getElementById('doc_image').src = "~/" + url;
-            } else if (['mp4', 'mov'].includes(extension)) {
+                document.getElementById('doc_image').src = url;
+            } else if (['.mp4', '.mov'].includes(extension)) {
                 document.getElementById('doc_video_div').style.visibility = 'visible';
                 document.getElementById('videoSource').src = url;
+                document.getElementById('videoPlayer').load(); // Ensure the video element loads the new source
             }
+
 
            
         }
@@ -69,6 +76,7 @@ var KTDocDetail = function () {
     return {
         init: function () {
             fetchDocDetail();
+            
         }
     };
 }();

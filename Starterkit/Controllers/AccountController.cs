@@ -1,6 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using Starterkit.Model;
+using Starterkit.Models;
 using Starterkit.Web.Logic;
+using Starterkit.Web.Logic.Base;
 
 namespace Starterkit.Controllers
 {
@@ -71,6 +75,48 @@ namespace Starterkit.Controllers
                 return Json(errorResult);
             }
         }
+
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateCustomer([FromBody] ProfileSetting updateCustomer)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                CustomerProfileSettingModel profileUpdate = new CustomerProfileSettingModel();
+
+                string customerGuidString = _contextAccessor.HttpContext.Session.GetString("CustomerGUID");
+                Guid customerGuid = Guid.Parse(customerGuidString);
+                profileUpdate.CustomerGUID = customerGuid;
+
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                profileUpdate.UserId = userId;
+
+                profileUpdate.FirstName = updateCustomer.FirstName?.Trim();
+                profileUpdate.LastName = updateCustomer.LastName?.Trim();
+                profileUpdate.Dob = updateCustomer.Dob;
+                profileUpdate.Email = updateCustomer.Email?.Trim();
+                profileUpdate.ContactNo = updateCustomer.ContactNo?.Trim();
+                profileUpdate.CountryCode = updateCustomer.CountryCode?.Trim();
+                profileUpdate.Address = updateCustomer.Address?.Trim();
+                profileUpdate.Address_Flat = updateCustomer.Address_Flat?.Trim();
+                profileUpdate.Address_Building = updateCustomer.Address_Building?.Trim();
+                profileUpdate.Country = updateCustomer.Country?.Trim();
+                profileUpdate.Nationality = updateCustomer.Nationality?.Trim();
+
+                _Result = customerLogic.UpdateCustomer(profileUpdate);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
 
 
         [HttpGet("/billing")]

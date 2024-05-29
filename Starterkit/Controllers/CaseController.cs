@@ -93,6 +93,19 @@ namespace Starterkit.Controllers
         [HttpGet("/addDocDescription")]
         public IActionResult ViewDocument()
         {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("DocId", "");
+            }
+            catch { }
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["DocId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("DocId", HttpContext.Request.Query["DocId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("DocId", ""); }
             return View("Views/Pages/Cases/ViewDocument.cshtml");
         }
 
@@ -176,7 +189,8 @@ namespace Starterkit.Controllers
                 CustomerLogic _customerLogic = new CustomerLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
-                var documentDetail = _customerLogic.GetDocumentDescription(userId, caseId);
+                int docId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DocId"));
+                var documentDetail = _customerLogic.GetDocumentDescription(docId, userId, caseId);
                 var result = new { success = true, documentDetail };
                 return Json(result);
             }
@@ -262,8 +276,38 @@ namespace Starterkit.Controllers
             {
                 return Json("error");
             } 
-        } 
+        }
 
+      
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateDescription([FromBody] DocumentDetailModel documentUpdate)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                UserDocumentModel updateDescription = new UserDocumentModel();
+                updateDescription.Id= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DocId"));
+                updateDescription.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateDescription.CaseKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId"));
+                updateDescription.DocName = documentUpdate.DocName?.Trim();
+                updateDescription.Description = documentUpdate.Description.ToString();
+                updateDescription.DocumentUrl = "";
+                updateDescription.Size = "";
+                updateDescription.FileName = "";
+                updateDescription.Opt = "U";
+                _Result = customerLogic.DocumentDetail(updateDescription);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
 
     }
 }

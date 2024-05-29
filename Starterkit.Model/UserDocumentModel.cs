@@ -13,6 +13,10 @@ namespace Starterkit.Model
         /// Represents UserId
         /// </summary>
         public int CaseKey { get; set; }
+
+        public int UserId { get; set; }
+
+        public int Id { get; set; }
         public string Description { get; set; }
         /// <summary>
         /// Represents Description
@@ -33,6 +37,10 @@ namespace Starterkit.Model
         ///<summary>
         ///Represent Document Name
         /// </summary>
+        /// 
+
+        public string DocumentUrl { get; set; }
+        public string Opt { get; set; }
     }
 
     [Serializable]
@@ -42,6 +50,8 @@ namespace Starterkit.Model
         ///Represents CaseKey
         /// </summary>
         public int CaseKey { get; set; }
+
+        public int Id { get; set; }
         public string DocName { get; set; }
         /// <summary>
         /// Represents Document Name
@@ -55,4 +65,7 @@ namespace Starterkit.Model
         ///Represents Document Url
         /// </summary>
     }
+
+
+   
 }
