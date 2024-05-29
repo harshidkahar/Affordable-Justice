@@ -62,8 +62,7 @@ var KTDocumentList = function () {
             }
             //row.insertCell(3).textContent = documentItem.Status;// getStatusLabel(caseItem.Status); // Call a function to get status label
 
-            row.insertCell(5).innerHTML = `<td class="text-end" data-kt-filemanager-table="action_dropdown">
-                                            <a href = 'addDocDescription?DocId='> Add Description</a></td>`;
+            row.insertCell(5).innerHTML = '<td class="text-end" data-kt-filemanager-table="action_dropdown"><a href = "addDocDescription?DocId=' + documentItem.Id+ '"> Add Description</a></td>';
         });
     }
 

@@ -141,6 +141,10 @@ namespace Starterkit.Web.Logic
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
                         UserDocumentModel documentModel = new UserDocumentModel();
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            documentModel.Id = Convert.ToInt32(row["Id"]);
+                        }
                         if (ds.Tables[0].Columns.Contains("FileName") && !row["FileName"].Equals(DBNull.Value))
                         {
                             documentModel.FileName = Convert.ToString(row["FileName"]);
@@ -176,13 +180,13 @@ namespace Starterkit.Web.Logic
             return documentList;
         }
 
-          public List<ViewDocumentModel> GetDocumentDescription(int userId, int CaseId)
+          public List<ViewDocumentModel> GetDocumentDescription(int docId, int userId, int CaseId)
         {
             List<ViewDocumentModel> documentDetail = new List<ViewDocumentModel>();
             try
             {
                 CommonDA commonDA = new CommonDA();
-                DataSet ds = commonDA.GetCommonFillData(userId, CaseId.ToString(), "GetDocumentDetails");
+                DataSet ds = commonDA.GetCommonFillData(docId, "", "GetDocumentDetails");
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
