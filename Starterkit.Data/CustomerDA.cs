@@ -88,7 +88,7 @@ namespace Starterkit.Data
                 }   
 
             }
-            catch { }
+            catch (Exception ex){ }
             return userModel;
         }
 
