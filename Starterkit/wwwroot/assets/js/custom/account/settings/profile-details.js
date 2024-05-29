@@ -73,7 +73,12 @@ var KTAccountSettingsProfileDetails = function () {
                 document.getElementById('txtLastName').value = profile.LastName || '';
                 document.getElementById('txtPhone').value = profile.ContactNo || '';
                 document.getElementById('txtEmail').value = profile.Email || '';
-                document.getElementById('txtDob').value = profile.Dob ? new Date(profile.Dob).toISOString().substring(0, 10) : '';
+                try {
+                    let date = new Date(profile.Dob);
+                    document.getElementById('txtDob').value = formatDateToDDMMYYYY(date).toString();
+                }
+                catch { document.getElementById('txtDob').value = ''; }
+                //document.getElementById('txtDob').value = profile.Dob;
                 document.getElementById('txtFlatno').value = profile.Address_Flat || '';
                 document.getElementById('txtStreetname').value = profile.Address_Building || '';
                 document.getElementById('txtAddress').value = profile.Address || '';
@@ -302,3 +307,16 @@ KTUtil.onDOMContentLoaded(function() {
     KTAccountSettingsProfileDetails.init();
     
 });
+function formatDateToDDMMYYYY(date) {
+    // Get the day, month, and year from the date object
+    let day = date.getDate();
+    let month = date.getMonth() + 1; // Months are zero-based
+    let year = date.getFullYear();
+
+    // Pad day and month with leading zeros if necessary
+    day = day < 10 ? '0' + day : day;
+    month = month < 10 ? '0' + month : month;
+
+    // Return the formatted date string
+    return `${year}-${month}-${day}`;
+}

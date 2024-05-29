@@ -1,7 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Settings";
     // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
-    KTTheme.AddJavascriptFile("js/custom/account/settings/profile-details.js");
+    KTTheme.AddJavascriptFile("js/custom/account/settings/profile-details.js?v=1.0");
     //KTTheme.AddJavascriptFile("js/custom/account/settings/signin-methods.js");
 }
 
@@ -57,7 +57,7 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form id="kt_account_profile_details_form" class="form" runat="server">
+                <form id="kt_account_profile_details_form" class="form">
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
                         <!--begin::Input group-->
@@ -71,12 +71,12 @@
                                 <div class="row">
                                     <!--begin::Col-->
                                     <div class="col-lg-6 fv-row">
-                                        <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="" id="txtFirstName" runat="server" />
+                                        <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" value="" id="txtFirstName" />
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
                                     <div class="col-lg-6 fv-row">
-                                        <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="" id="txtLastName" runat="server" />
+                                        <input type="text" name="lname" class="form-control form-control-lg form-control-solid" placeholder="Last name" value="" id="txtLastName" />
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -101,7 +101,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row d-flex">
-                                <select id="ddlCountryCode" name="country-code" aria-label="Country Code" data-control="select2" data-placeholder="+971" class="form-select form-select-solid form-select-lg fw-semibold me-3 w-75" runat="server">
+                                <select id="ddlCountryCode" name="country-code" aria-label="Country Code" data-control="select2" data-placeholder="+971" class="form-select form-select-solid form-select-lg fw-semibold me-3 w-75">
                                     <option></option>
                                     <option value="+93">+93 (Afghanistan)</option>
                                     <option value="+355">+355 (Albania)</option>
@@ -316,7 +316,7 @@
                                     <option value="+263">+263 (Zimbabwe)</option>
                                 </select>
 
-                                <input type="text" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Contact No" value="" id="txtPhone" runat="server" />
+                                <input type="text" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Contact No" value="" id="txtPhone" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -338,7 +338,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <input type="text" name="email" class="form-control form-control-lg form-control-solid" placeholder="Email Id" value="" id="txtEmail" runat="server" />
+                                <input type="text" name="email" class="form-control form-control-lg form-control-solid" placeholder="Email Id" value="" id="txtEmail" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -359,7 +359,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <input type="date" name="dob" class="form-control form-control-lg form-control-solid" placeholder="Enter DOB." id="txtDob" runat="server" />
+                                <input type="date" name="dob" class="form-control form-control-lg form-control-solid" placeholder="Enter DOB." id="txtDob" />
                             </div>
                             <!--end::Col-->
                         </div>
@@ -381,13 +381,13 @@
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
                                 <div class="d-flex">
-                                    <input type="text" name="flatno" class="form-control form-control-lg form-control-solid me-3 w-75" placeholder="Flat / House no / Tower no" value="" id="txtFlatno" runat="server" />
-                                    <input type="text" name="streetname" class="form-control form-control-lg form-control-solid" placeholder="Building name / Street name" value="" id="txtStreetname" runat="server" />
+                                    <input type="text" name="flatno" class="form-control form-control-lg form-control-solid me-3 w-75" placeholder="Flat / House no / Tower no" value="" id="txtFlatno" />
+                                    <input type="text" name="streetname" class="form-control form-control-lg form-control-solid" placeholder="Building name / Street name" value="" id="txtStreetname" />
 
                                 </div>
                                 <br />
 
-                                <textarea class="form-control form-control form-control-solid" data-kt-autosize="true" placeholder="Sector / Street name / locality" id="txtAddress" runat="server"></textarea>
+                                <textarea class="form-control form-control form-control-solid" data-kt-autosize="true" placeholder="Sector / Street name / locality" id="txtAddress"></textarea>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -408,7 +408,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <select class="form-select form-select-solid" aria-label="Select Country" data-control="select2" data-placeholder="Select Country" name="country" id="ddlCountry" runat="server">
+                                <select class="form-select form-select-solid" aria-label="Select Country" data-control="select2" data-placeholder="Select Country" name="country" id="ddlCountry">
                                     <option></option>
                                     <option value="United States">United States</option>
                                     <option value="Afghanistan">Afghanistan</option>
@@ -670,7 +670,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select Nationality" name="Nationality" id="ddlNationality" runat="server">
+                                <select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select Nationality" name="Nationality" id="ddlNationality">
                                     <option></option>
                                     <option value='afghan'>Afghan</option>
                                     <option value='albanian'>Albanian</option>
@@ -906,7 +906,7 @@
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                    <!--- <asp:Button ID="btnSave" runat="server" Text="Save Changes" OnClick="btnSave_Click" CssClass="btn btn-primary" /> -->
+                    <!--- <asp:Button ID="btnSave" Text="Save Changes" OnClick="btnSave_Click" CssClass="btn btn-primary" /> -->
                         <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
                     </div>
                     <!--end::Actions-->
