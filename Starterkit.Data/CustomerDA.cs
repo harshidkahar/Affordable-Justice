@@ -132,6 +132,73 @@ namespace Starterkit.Data
             }
         }
 
+        public string DAL_CustomerNew(CustomerProfileSettingModel profileUpdate)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Customer]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@CustomerGUID", SqlDbType.UniqueIdentifier).Value = profileUpdate.CustomerGUID;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = profileUpdate.FirstName;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = profileUpdate.LastName;
+                cmd.Parameters.Add("@ContactNo", SqlDbType.NVarChar).Value = profileUpdate.ContactNo;
+                cmd.Parameters.Add("@CountryCode", SqlDbType.NVarChar).Value = profileUpdate.CountryCode;
+                cmd.Parameters.Add("@Dob", SqlDbType.NVarChar).Value = profileUpdate.Dob;
+                cmd.Parameters.Add("@Address_Flat", SqlDbType.NVarChar).Value = profileUpdate.Address_Flat;
+                cmd.Parameters.Add("@Address_Building", SqlDbType.NVarChar).Value = profileUpdate.Address_Building;
+                cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = profileUpdate.Address;
+                cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = profileUpdate.Country;
+                cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = profileUpdate.Nationality;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+        }
+
+        public string DAL_UserDocument(UserDocumentModel updateDescription)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_UserDocument]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = updateDescription.Id;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = updateDescription.UserId;
+                cmd.Parameters.Add("@CaseId", SqlDbType.Int).Value = updateDescription.CaseKey;
+                cmd.Parameters.Add("@DocumentUrl", SqlDbType.NVarChar).Value = updateDescription.DocumentUrl;
+                cmd.Parameters.Add("@Description", SqlDbType.NVarChar).Value = updateDescription.Description;
+                cmd.Parameters.Add("@FileName", SqlDbType.NVarChar).Value = updateDescription.FileName;
+                cmd.Parameters.Add("@Size", SqlDbType.NVarChar).Value = updateDescription.Size;
+                cmd.Parameters.Add("@DocName", SqlDbType.NVarChar).Value = updateDescription.DocName;
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = updateDescription.Opt;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+
+
+
+        }
 
 
     }

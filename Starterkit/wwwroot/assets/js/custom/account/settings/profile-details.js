@@ -6,6 +6,7 @@ var KTAccountSettingsProfileDetails = function () {
     var form;
     var submitButton;
     var validation;
+    var jsonPostData=null;
     var ProfileSetting = [];
     //KTMenu.createInstances();
     // Private functions
@@ -66,6 +67,8 @@ var KTAccountSettingsProfileDetails = function () {
                 var profile = ProfileSetting[0];
 
                 // Assigning values to HTML elements
+                $('#ddlCountry').val(profile.Country).trigger('change');
+                $('#ddlNationality').val(profile.Nationality).trigger('change');
                 document.getElementById('txtFirstName').value = profile.FirstName || '';
                 document.getElementById('txtLastName').value = profile.LastName || '';
                 document.getElementById('txtPhone').value = profile.ContactNo || '';
@@ -74,15 +77,21 @@ var KTAccountSettingsProfileDetails = function () {
                 document.getElementById('txtFlatno').value = profile.Address_Flat || '';
                 document.getElementById('txtStreetname').value = profile.Address_Building || '';
                 document.getElementById('txtAddress').value = profile.Address || '';
+                $('#ddlCountryCode').val(profile.CountryCode).trigger('change');
+
+               // const countrySelect = document.getElementById('#ddlCountry');
+                //countrySelect.value = profile.Country;
+                //$(countrySelect).trigger('change');
+                //const nationselect = document.getElementById('#ddlNationality');
+                //nationselect.value = profile.Nationality || '';
+                //$(nationselect).trigger('change');
 
                 // Set select2 dropdown values
-                $('#ddlCountryCode').val(profile.CountryCode).trigger('change');
-                $('#ddlCountry').val(profile.Country).trigger('change');
-                $('#ddlNationality').val(profile.Nationality).trigger('change');
                 //document.getElementById('lblNationality').textContent = profile.Nationality || '';
             }
         });
     };
+
 
 
     var initValidation = function () {
@@ -119,7 +128,7 @@ var KTAccountSettingsProfileDetails = function () {
                             }
                         }
                     },
-                    country: {
+                    countryC: {
                         validators: {
                             notEmpty: {
                                 message: 'Please select a country'
@@ -185,24 +194,84 @@ var KTAccountSettingsProfileDetails = function () {
             validation.validate().then(function (status) {
                 if (status == 'Valid') {
 
-                    swal.fire({
-                        text: "Thank you! You've updated your basic info",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-light-primary"
-                        }
-                    });
+                    setTimeout(function () {
+                        // Hide loading indication
+                        submitButton.removeAttribute('data-kt-indicator');
 
+                        // Enable button
+                        submitButton.disabled = false;
+
+                       
+
+                        // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                        jsonPostData = {
+                            FirstName: document.getElementById("txtFirstName").value.trim(),
+                            LastName: document.getElementById("txtLastName").value.trim(),
+                            Email: document.getElementById("txtEmail").value.trim(),
+                            ContactNo: document.getElementById("txtPhone").value.trim(),
+                            CountryCode: document.getElementById("ddlCountryCode").value.trim(),
+                            Address: document.getElementById("txtAddress").value.trim(),
+                            Address_Flat: document.getElementById("txtFlatno").value.trim(),
+                            Address_Building: document.getElementById("txtStreetname").value.trim(),
+                            Country: document.getElementById("ddlCountry").value.trim(),
+                            Nationality: document.getElementById("ddlNationality").value.trim(),
+                            Dob: document.getElementById("txtDob").value.trim()
+                            }
+
+
+                        $.ajax({
+                            type: "PUT",
+                            url: "/Account/UpdateCustomer",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(jsonPostData),
+                            dataType: "json",
+                            success: function (data) {
+                                if (data == "done") {
+                                    Swal.fire({
+                                        text: "You have successfully updated!",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    }).then(function (result) {
+                                        if (result.isConfirmed) {
+                                            //form.reset();
+
+                                            var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                            if (redirectUrl) {
+                                                location.href = redirectUrl;
+
+                                            }
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        text: "Sorry, looks like there are some errors detected, please try again.",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                }
+                            },
+                            error: ''
+                        });
+
+                    }, 1500);
                 } else {
-                    swal.fire({
+                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    Swal.fire({
                         text: "Sorry, looks like there are some errors detected, please try again.",
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
                         customClass: {
-                            confirmButton: "btn fw-bold btn-light-primary"
+                            confirmButton: "btn btn-primary"
                         }
                     });
                 }
@@ -222,6 +291,7 @@ var KTAccountSettingsProfileDetails = function () {
             submitButton = form.querySelector('#kt_account_profile_details_submit');
             fetchprofilesetting();
             initValidation();
+            handleForm();
             
         }
     }

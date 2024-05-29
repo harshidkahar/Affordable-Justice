@@ -19,4 +19,13 @@
         public string Description { get; set; }
         public string DocumentUrl { get; set; }
        }
+
+
+    [Serializable]
+    public class DocumentDetailModel
+    {
+        //public int Id { get; set; }
+        public string DocName { get; set; }
+        public string Description { get; set; }
+       }
 }

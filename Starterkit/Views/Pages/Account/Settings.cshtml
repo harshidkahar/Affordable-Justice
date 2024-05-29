@@ -2,7 +2,7 @@
     ViewData["Title"] = "Settings";
     // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
     KTTheme.AddJavascriptFile("js/custom/account/settings/profile-details.js");
-    KTTheme.AddJavascriptFile("js/custom/account/settings/signin-methods.js");
+    //KTTheme.AddJavascriptFile("js/custom/account/settings/signin-methods.js");
 }
 
 <!--begin::Content-->
@@ -408,232 +408,247 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select Country" name="country" id="ddlCountry" runat="server">
+                                <select class="form-select form-select-solid" aria-label="Select Country" data-control="select2" data-placeholder="Select Country" name="country" id="ddlCountry" runat="server">
                                     <option></option>
-                                    <option data-kt-flag="flags/afghanistan.svg" value="AF">Afghanistan</option>
-                                    <option data-kt-flag="flags/aland-islands.svg" value="AX">Aland Islands</option>
-                                    <option data-kt-flag="flags/albania.svg" value="AL">Albania</option>
-                                    <option data-kt-flag="flags/algeria.svg" value="DZ">Algeria</option>
-                                    <option data-kt-flag="flags/american-samoa.svg" value="AS">American Samoa</option>
-                                    <option data-kt-flag="flags/andorra.svg" value="AD">Andorra</option>
-                                    <option data-kt-flag="flags/angola.svg" value="AO">Angola</option>
-                                    <option data-kt-flag="flags/anguilla.svg" value="AI">Anguilla</option>
-                                    <option data-kt-flag="flags/antigua-and-barbuda.svg" value="AG">Antigua and Barbuda</option>
-                                    <option data-kt-flag="flags/argentina.svg" value="AR">Argentina</option>
-                                    <option data-kt-flag="flags/armenia.svg" value="AM">Armenia</option>
-                                    <option data-kt-flag="flags/aruba.svg" value="AW">Aruba</option>
-                                    <option data-kt-flag="flags/australia.svg" value="AU">Australia</option>
-                                    <option data-kt-flag="flags/austria.svg" value="AT">Austria</option>
-                                    <option data-kt-flag="flags/azerbaijan.svg" value="AZ">Azerbaijan</option>
-                                    <option data-kt-flag="flags/bahamas.svg" value="BS">Bahamas</option>
-                                    <option data-kt-flag="flags/bahrain.svg" value="BH">Bahrain</option>
-                                    <option data-kt-flag="flags/bangladesh.svg" value="BD">Bangladesh</option>
-                                    <option data-kt-flag="flags/barbados.svg" value="BB">Barbados</option>
-                                    <option data-kt-flag="flags/belarus.svg" value="BY">Belarus</option>
-                                    <option data-kt-flag="flags/belgium.svg" value="BE">Belgium</option>
-                                    <option data-kt-flag="flags/belize.svg" value="BZ">Belize</option>
-                                    <option data-kt-flag="flags/benin.svg" value="BJ">Benin</option>
-                                    <option data-kt-flag="flags/bermuda.svg" value="BM">Bermuda</option>
-                                    <option data-kt-flag="flags/bhutan.svg" value="BT">Bhutan</option>
-                                    <option data-kt-flag="flags/bolivia.svg" value="BO">Bolivia, Plurinational State of</option>
-                                    <option data-kt-flag="flags/bonaire.svg" value="BQ">Bonaire, Sint Eustatius and Saba</option>
-                                    <option data-kt-flag="flags/bosnia-and-herzegovina.svg" value="BA">Bosnia and Herzegovina</option>
-                                    <option data-kt-flag="flags/botswana.svg" value="BW">Botswana</option>
-                                    <option data-kt-flag="flags/brazil.svg" value="BR">Brazil</option>
-                                    <option data-kt-flag="flags/british-indian-ocean-territory.svg" value="IO">British Indian Ocean Territory</option>
-                                    <option data-kt-flag="flags/brunei.svg" value="BN">Brunei Darussalam</option>
-                                    <option data-kt-flag="flags/bulgaria.svg" value="BG">Bulgaria</option>
-                                    <option data-kt-flag="flags/burkina-faso.svg" value="BF">Burkina Faso</option>
-                                    <option data-kt-flag="flags/burundi.svg" value="BI">Burundi</option>
-                                    <option data-kt-flag="flags/cambodia.svg" value="KH">Cambodia</option>
-                                    <option data-kt-flag="flags/cameroon.svg" value="CM">Cameroon</option>
-                                    <option data-kt-flag="flags/canada.svg" value="CA">Canada</option>
-                                    <option data-kt-flag="flags/cape-verde.svg" value="CV">Cape Verde</option>
-                                    <option data-kt-flag="flags/cayman-islands.svg" value="KY">Cayman Islands</option>
-                                    <option data-kt-flag="flags/central-african-republic.svg" value="CF">Central African Republic</option>
-                                    <option data-kt-flag="flags/chad.svg" value="TD">Chad</option>
-                                    <option data-kt-flag="flags/chile.svg" value="CL">Chile</option>
-                                    <option data-kt-flag="flags/china.svg" value="CN">China</option>
-                                    <option data-kt-flag="flags/christmas-island.svg" value="CX">Christmas Island</option>
-                                    <option data-kt-flag="flags/cocos-island.svg" value="CC">Cocos (Keeling) Islands</option>
-                                    <option data-kt-flag="flags/colombia.svg" value="CO">Colombia</option>
-                                    <option data-kt-flag="flags/comoros.svg" value="KM">Comoros</option>
-                                    <option data-kt-flag="flags/cook-islands.svg" value="CK">Cook Islands</option>
-                                    <option data-kt-flag="flags/costa-rica.svg" value="CR">Costa Rica</option>
-                                    <option data-kt-flag="flags/ivory-coast.svg" value="CI">Côte d'Ivoire</option>
-                                    <option data-kt-flag="flags/croatia.svg" value="HR">Croatia</option>
-                                    <option data-kt-flag="flags/cuba.svg" value="CU">Cuba</option>
-                                    <option data-kt-flag="flags/curacao.svg" value="CW">Curaçao</option>
-                                    <option data-kt-flag="flags/czech-republic.svg" value="CZ">Czech Republic</option>
-                                    <option data-kt-flag="flags/denmark.svg" value="DK">Denmark</option>
-                                    <option data-kt-flag="flags/djibouti.svg" value="DJ">Djibouti</option>
-                                    <option data-kt-flag="flags/dominica.svg" value="DM">Dominica</option>
-                                    <option data-kt-flag="flags/dominican-republic.svg" value="DO">Dominican Republic</option>
-                                    <option data-kt-flag="flags/ecuador.svg" value="EC">Ecuador</option>
-                                    <option data-kt-flag="flags/egypt.svg" value="EG">Egypt</option>
-                                    <option data-kt-flag="flags/el-salvador.svg" value="SV">El Salvador</option>
-                                    <option data-kt-flag="flags/equatorial-guinea.svg" value="GQ">Equatorial Guinea</option>
-                                    <option data-kt-flag="flags/eritrea.svg" value="ER">Eritrea</option>
-                                    <option data-kt-flag="flags/estonia.svg" value="EE">Estonia</option>
-                                    <option data-kt-flag="flags/ethiopia.svg" value="ET">Ethiopia</option>
-                                    <option data-kt-flag="flags/falkland-islands.svg" value="FK">Falkland Islands (Malvinas)</option>
-                                    <option data-kt-flag="flags/fiji.svg" value="FJ">Fiji</option>
-                                    <option data-kt-flag="flags/finland.svg" value="FI">Finland</option>
-                                    <option data-kt-flag="flags/france.svg" value="FR">France</option>
-                                    <option data-kt-flag="flags/french-polynesia.svg" value="PF">French Polynesia</option>
-                                    <option data-kt-flag="flags/gabon.svg" value="GA">Gabon</option>
-                                    <option data-kt-flag="flags/gambia.svg" value="GM">Gambia</option>
-                                    <option data-kt-flag="flags/georgia.svg" value="GE">Georgia</option>
-                                    <option data-kt-flag="flags/germany.svg" value="DE">Germany</option>
-                                    <option data-kt-flag="flags/ghana.svg" value="GH">Ghana</option>
-                                    <option data-kt-flag="flags/gibraltar.svg" value="GI">Gibraltar</option>
-                                    <option data-kt-flag="flags/greece.svg" value="GR">Greece</option>
-                                    <option data-kt-flag="flags/greenland.svg" value="GL">Greenland</option>
-                                    <option data-kt-flag="flags/grenada.svg" value="GD">Grenada</option>
-                                    <option data-kt-flag="flags/guam.svg" value="GU">Guam</option>
-                                    <option data-kt-flag="flags/guatemala.svg" value="GT">Guatemala</option>
-                                    <option data-kt-flag="flags/guernsey.svg" value="GG">Guernsey</option>
-                                    <option data-kt-flag="flags/guinea.svg" value="GN">Guinea</option>
-                                    <option data-kt-flag="flags/guinea-bissau.svg" value="GW">Guinea-Bissau</option>
-                                    <option data-kt-flag="flags/haiti.svg" value="HT">Haiti</option>
-                                    <option data-kt-flag="flags/vatican-city.svg" value="VA">Holy See (Vatican City State)</option>
-                                    <option data-kt-flag="flags/honduras.svg" value="HN">Honduras</option>
-                                    <option data-kt-flag="flags/hong-kong.svg" value="HK">Hong Kong</option>
-                                    <option data-kt-flag="flags/hungary.svg" value="HU">Hungary</option>
-                                    <option data-kt-flag="flags/iceland.svg" value="IS">Iceland</option>
-                                    <option data-kt-flag="flags/india.svg" value="IN">India</option>
-                                    <option data-kt-flag="flags/indonesia.svg" value="ID">Indonesia</option>
-                                    <option data-kt-flag="flags/iran.svg" value="IR">Iran, Islamic Republic of</option>
-                                    <option data-kt-flag="flags/iraq.svg" value="IQ">Iraq</option>
-                                    <option data-kt-flag="flags/ireland.svg" value="IE">Ireland</option>
-                                    <option data-kt-flag="flags/isle-of-man.svg" value="IM">Isle of Man</option>
-                                    <option data-kt-flag="flags/israel.svg" value="IL">Israel</option>
-                                    <option data-kt-flag="flags/italy.svg" value="IT">Italy</option>
-                                    <option data-kt-flag="flags/jamaica.svg" value="JM">Jamaica</option>
-                                    <option data-kt-flag="flags/japan.svg" value="JP">Japan</option>
-                                    <option data-kt-flag="flags/jersey.svg" value="JE">Jersey</option>
-                                    <option data-kt-flag="flags/jordan.svg" value="JO">Jordan</option>
-                                    <option data-kt-flag="flags/kazakhstan.svg" value="KZ">Kazakhstan</option>
-                                    <option data-kt-flag="flags/kenya.svg" value="KE">Kenya</option>
-                                    <option data-kt-flag="flags/kiribati.svg" value="KI">Kiribati</option>
-                                    <option data-kt-flag="flags/north-korea.svg" value="KP">Democratic People's Republic of Korea</option>
-                                    <option data-kt-flag="flags/kuwait.svg" value="KW">Kuwait</option>
-                                    <option data-kt-flag="flags/kyrgyzstan.svg" value="KG">Kyrgyzstan</option>
-                                    <option data-kt-flag="flags/laos.svg" value="LA">Laos</option>
-                                    <option data-kt-flag="flags/latvia.svg" value="LV">Latvia</option>
-                                    <option data-kt-flag="flags/lebanon.svg" value="LB">Lebanon</option>
-                                    <option data-kt-flag="flags/lesotho.svg" value="LS">Lesotho</option>
-                                    <option data-kt-flag="flags/liberia.svg" value="LR">Liberia</option>
-                                    <option data-kt-flag="flags/libya.svg" value="LY">Libya</option>
-                                    <option data-kt-flag="flags/liechtenstein.svg" value="LI">Liechtenstein</option>
-                                    <option data-kt-flag="flags/lithuania.svg" value="LT">Lithuania</option>
-                                    <option data-kt-flag="flags/luxembourg.svg" value="LU">Luxembourg</option>
-                                    <option data-kt-flag="flags/macao.svg" value="MO">Macao</option>
-                                    <option data-kt-flag="flags/madagascar.svg" value="MG">Madagascar</option>
-                                    <option data-kt-flag="flags/malawi.svg" value="MW">Malawi</option>
-                                    <option data-kt-flag="flags/malaysia.svg" value="MY">Malaysia</option>
-                                    <option data-kt-flag="flags/maldives.svg" value="MV">Maldives</option>
-                                    <option data-kt-flag="flags/mali.svg" value="ML">Mali</option>
-                                    <option data-kt-flag="flags/malta.svg" value="MT">Malta</option>
-                                    <option data-kt-flag="flags/marshall-island.svg" value="MH">Marshall Islands</option>
-                                    <option data-kt-flag="flags/martinique.svg" value="MQ">Martinique</option>
-                                    <option data-kt-flag="flags/mauritania.svg" value="MR">Mauritania</option>
-                                    <option data-kt-flag="flags/mauritius.svg" value="MU">Mauritius</option>
-                                    <option data-kt-flag="flags/mexico.svg" value="MX">Mexico</option>
-                                    <option data-kt-flag="flags/micronesia.svg" value="FM">Micronesia</option>
-                                    <option data-kt-flag="flags/moldova.svg" value="MD">Moldova</option>
-                                    <option data-kt-flag="flags/monaco.svg" value="MC">Monaco</option>
-                                    <option data-kt-flag="flags/mongolia.svg" value="MN">Mongolia</option>
-                                    <option data-kt-flag="flags/montenegro.svg" value="ME">Montenegro</option>
-                                    <option data-kt-flag="flags/montserrat.svg" value="MS">Montserrat</option>
-                                    <option data-kt-flag="flags/morocco.svg" value="MA">Morocco</option>
-                                    <option data-kt-flag="flags/mozambique.svg" value="MZ">Mozambique</option>
-                                    <option data-kt-flag="flags/myanmar.svg" value="MM">Myanmar</option>
-                                    <option data-kt-flag="flags/namibia.svg" value="NA">Namibia</option>
-                                    <option data-kt-flag="flags/nauru.svg" value="NR">Nauru</option>
-                                    <option data-kt-flag="flags/nepal.svg" value="NP">Nepal</option>
-                                    <option data-kt-flag="flags/netherlands.svg" value="NL">Netherlands</option>
-                                    <option data-kt-flag="flags/new-zealand.svg" value="NZ">New Zealand</option>
-                                    <option data-kt-flag="flags/nicaragua.svg" value="NI">Nicaragua</option>
-                                    <option data-kt-flag="flags/niger.svg" value="NE">Niger</option>
-                                    <option data-kt-flag="flags/nigeria.svg" value="NG">Nigeria</option>
-                                    <option data-kt-flag="flags/niue.svg" value="NU">Niue</option>
-                                    <option data-kt-flag="flags/norfolk-island.svg" value="NF">Norfolk Island</option>
-                                    <option data-kt-flag="flags/northern-mariana-islands.svg" value="MP">Northern Mariana Islands</option>
-                                    <option data-kt-flag="flags/norway.svg" value="NO">Norway</option>
-                                    <option data-kt-flag="flags/oman.svg" value="OM">Oman</option>
-                                    <option data-kt-flag="flags/pakistan.svg" value="PK">Pakistan</option>
-                                    <option data-kt-flag="flags/palau.svg" value="PW">Palau</option>
-                                    <option data-kt-flag="flags/palestine.svg" value="PS">Palestinian Territory, Occupied</option>
-                                    <option data-kt-flag="flags/panama.svg" value="PA">Panama</option>
-                                    <option data-kt-flag="flags/papua-new-guinea.svg" value="PG">Papua New Guinea</option>
-                                    <option data-kt-flag="flags/paraguay.svg" value="PY">Paraguay</option>
-                                    <option data-kt-flag="flags/peru.svg" value="PE">Peru</option>
-                                    <option data-kt-flag="flags/philippines.svg" value="PH">Philippines</option>
-                                    <option data-kt-flag="flags/poland.svg" value="PL">Poland</option>
-                                    <option data-kt-flag="flags/portugal.svg" value="PT">Portugal</option>
-                                    <option data-kt-flag="flags/puerto-rico.svg" value="PR">Puerto Rico</option>
-                                    <option data-kt-flag="flags/qatar.svg" value="QA">Qatar</option>
-                                    <option data-kt-flag="flags/romania.svg" value="RO">Romania</option>
-                                    <option data-kt-flag="flags/russia.svg" value="RU">Russian Federation</option>
-                                    <option data-kt-flag="flags/rwanda.svg" value="RW">Rwanda</option>
-                                    <option data-kt-flag="flags/st-barts.svg" value="BL">Saint Barthélemy</option>
-                                    <option data-kt-flag="flags/saint-kitts-and-nevis.svg" value="KN">Saint Kitts and Nevis</option>
-                                    <option data-kt-flag="flags/st-lucia.svg" value="LC">Saint Lucia</option>
-                                    <option data-kt-flag="flags/sint-maarten.svg" value="MF">Saint Martin (French part)</option>
-                                    <option data-kt-flag="flags/st-vincent-and-the-grenadines.svg" value="VC">Saint Vincent and the Grenadines</option>
-                                    <option data-kt-flag="flags/samoa.svg" value="WS">Samoa</option>
-                                    <option data-kt-flag="flags/san-marino.svg" value="SM">San Marino</option>
-                                    <option data-kt-flag="flags/sao-tome-and-prince.svg" value="ST">Sao Tome and Principe</option>
-                                    <option data-kt-flag="flags/saudi-arabia.svg" value="SA">Saudi Arabia</option>
-                                    <option data-kt-flag="flags/senegal.svg" value="SN">Senegal</option>
-                                    <option data-kt-flag="flags/serbia.svg" value="RS">Serbia</option>
-                                    <option data-kt-flag="flags/seychelles.svg" value="SC">Seychelles</option>
-                                    <option data-kt-flag="flags/sierra-leone.svg" value="SL">Sierra Leone</option>
-                                    <option data-kt-flag="flags/singapore.svg" value="SG">Singapore</option>
-                                    <option data-kt-flag="flags/sint-maarten.svg" value="SX">Sint Maarten (Dutch part)</option>
-                                    <option data-kt-flag="flags/slovakia.svg" value="SK">Slovakia</option>
-                                    <option data-kt-flag="flags/slovenia.svg" value="SI">Slovenia</option>
-                                    <option data-kt-flag="flags/solomon-islands.svg" value="SB">Solomon Islands</option>
-                                    <option data-kt-flag="flags/somalia.svg" value="SO">Somalia</option>
-                                    <option data-kt-flag="flags/south-africa.svg" value="ZA">South Africa</option>
-                                    <option data-kt-flag="flags/south-korea.svg" value="KR">South Korea</option>
-                                    <option data-kt-flag="flags/south-sudan.svg" value="SS">South Sudan</option>
-                                    <option data-kt-flag="flags/spain.svg" value="ES">Spain</option>
-                                    <option data-kt-flag="flags/sri-lanka.svg" value="LK">Sri Lanka</option>
-                                    <option data-kt-flag="flags/sudan.svg" value="SD">Sudan</option>
-                                    <option data-kt-flag="flags/suriname.svg" value="SR">Suriname</option>
-                                    <option data-kt-flag="flags/swaziland.svg" value="SZ">Swaziland</option>
-                                    <option data-kt-flag="flags/sweden.svg" value="SE">Sweden</option>
-                                    <option data-kt-flag="flags/switzerland.svg" value="CH">Switzerland</option>
-                                    <option data-kt-flag="flags/syria.svg" value="SY">Syrian Arab Republic</option>
-                                    <option data-kt-flag="flags/taiwan.svg" value="TW">Taiwan, Province of China</option>
-                                    <option data-kt-flag="flags/tajikistan.svg" value="TJ">Tajikistan</option>
-                                    <option data-kt-flag="flags/tanzania.svg" value="TZ">Tanzania</option>
-                                    <option data-kt-flag="flags/thailand.svg" value="TH">Thailand</option>
-                                    <option data-kt-flag="flags/togo.svg" value="TG">Togo</option>
-                                    <option data-kt-flag="flags/tokelau.svg" value="TK">Tokelau</option>
-                                    <option data-kt-flag="flags/tonga.svg" value="TO">Tonga</option>
-                                    <option data-kt-flag="flags/trinidad-and-tobago.svg" value="TT">Trinidad and Tobago</option>
-                                    <option data-kt-flag="flags/tunisia.svg" value="TN">Tunisia</option>
-                                    <option data-kt-flag="flags/turkey.svg" value="TR">Turkey</option>
-                                    <option data-kt-flag="flags/turkmenistan.svg" value="TM">Turkmenistan</option>
-                                    <option data-kt-flag="flags/turks-and-caicos.svg" value="TC">Turks and Caicos Islands</option>
-                                    <option data-kt-flag="flags/tuvalu.svg" value="TV">Tuvalu</option>
-                                    <option data-kt-flag="flags/uganda.svg" value="UG">Uganda</option>
-                                    <option data-kt-flag="flags/ukraine.svg" value="UA">Ukraine</option>
-                                    <option data-kt-flag="flags/united-arab-emirates.svg" value="AE">United Arab Emirates</option>
-                                    <option data-kt-flag="flags/united-kingdom.svg" value="GB">United Kingdom</option>
-                                    <option data-kt-flag="flags/united-states.svg" value="US">United States of America</option>
-                                    <option data-kt-flag="flags/uruguay.svg" value="UY">Uruguay</option>
-                                    <option data-kt-flag="flags/uzbekistan.svg" value="UZ">Uzbekistan</option>
-                                    <option data-kt-flag="flags/vanuatu.svg" value="VU">Vanuatu</option>
-                                    <option data-kt-flag="flags/venezuela.svg" value="VE">Venezula</option>
-                                    <option data-kt-flag="flags/vietnam.svg" value="VN">Vietnam</option>
-                                    <option data-kt-flag="flags/virgin-islands.svg" value="VI">Virgin Islands</option>
-                                    <option data-kt-flag="flags/yemen.svg" value="YE">Yemen</option>
-                                    <option data-kt-flag="flags/zambia.svg" value="ZM">Zambia</option>
-                                    <option data-kt-flag="flags/zimbabwe.svg" value="ZW">Zimbabwe</option>
+                                    <option value="United States">United States</option>
+                                    <option value="Afghanistan">Afghanistan</option>
+                                    <option value="Albania">Albania</option>
+                                    <option value="Algeria">Algeria</option>
+                                    <option value="American Samoa">American Samoa</option>
+                                    <option value="Andorra">Andorra</option>
+                                    <option value="Angola">Angola</option>
+                                    <option value="Anguilla">Anguilla</option>
+                                    <option value="Antartica">Antarctica</option>
+                                    <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                                    <option value="Argentina">Argentina</option>
+                                    <option value="Armenia">Armenia</option>
+                                    <option value="Aruba">Aruba</option>
+                                    <option value="Australia">Australia</option>
+                                    <option value="Austria">Austria</option>
+                                    <option value="Azerbaijan">Azerbaijan</option>
+                                    <option value="Bahamas">Bahamas</option>
+                                    <option value="Bahrain">Bahrain</option>
+                                    <option value="Bangladesh">Bangladesh</option>
+                                    <option value="Barbados">Barbados</option>
+                                    <option value="Belarus">Belarus</option>
+                                    <option value="Belgium">Belgium</option>
+                                    <option value="Belize">Belize</option>
+                                    <option value="Benin">Benin</option>
+                                    <option value="Bermuda">Bermuda</option>
+                                    <option value="Bhutan">Bhutan</option>
+                                    <option value="Bolivia">Bolivia</option>
+                                    <option value="Bosnia and Herzegowina">Bosnia and Herzegowina</option>
+                                    <option value="Botswana">Botswana</option>
+                                    <option value="Bouvet Island">Bouvet Island</option>
+                                    <option value="Brazil">Brazil</option>
+                                    <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                                    <option value="Brunei Darussalam">Brunei Darussalam</option>
+                                    <option value="Bulgaria">Bulgaria</option>
+                                    <option value="Burkina Faso">Burkina Faso</option>
+                                    <option value="Burundi">Burundi</option>
+                                    <option value="Cambodia">Cambodia</option>
+                                    <option value="Cameroon">Cameroon</option>
+                                    <option value="Canada">Canada</option>
+                                    <option value="Cape Verde">Cape Verde</option>
+                                    <option value="Cayman Islands">Cayman Islands</option>
+                                    <option value="Central African Republic">Central African Republic</option>
+                                    <option value="Chad">Chad</option>
+                                    <option value="Chile">Chile</option>
+                                    <option value="China">China</option>
+                                    <option value="Christmas Island">Christmas Island</option>
+                                    <option value="Cocos Islands">Cocos (Keeling) Islands</option>
+                                    <option value="Colombia">Colombia</option>
+                                    <option value="Comoros">Comoros</option>
+                                    <option value="Congo">Congo</option>
+                                    <option value="Congo">Congo, the Democratic Republic of the</option>
+                                    <option value="Cook Islands">Cook Islands</option>
+                                    <option value="Costa Rica">Costa Rica</option>
+                                    <option value="Cota D'Ivoire">Cote d'Ivoire</option>
+                                    <option value="Croatia">Croatia (Hrvatska)</option>
+                                    <option value="Cuba">Cuba</option>
+                                    <option value="Cyprus">Cyprus</option>
+                                    <option value="Czech Republic">Czech Republic</option>
+                                    <option value="Denmark">Denmark</option>
+                                    <option value="Djibouti">Djibouti</option>
+                                    <option value="Dominica">Dominica</option>
+                                    <option value="Dominican Republic">Dominican Republic</option>
+                                    <option value="East Timor">East Timor</option>
+                                    <option value="Ecuador">Ecuador</option>
+                                    <option value="Egypt">Egypt</option>
+                                    <option value="El Salvador">El Salvador</option>
+                                    <option value="Equatorial Guinea">Equatorial Guinea</option>
+                                    <option value="Eritrea">Eritrea</option>
+                                    <option value="Estonia">Estonia</option>
+                                    <option value="Ethiopia">Ethiopia</option>
+                                    <option value="Falkland Islands">Falkland Islands (Malvinas)</option>
+                                    <option value="Faroe Islands">Faroe Islands</option>
+                                    <option value="Fiji">Fiji</option>
+                                    <option value="Finland">Finland</option>
+                                    <option value="France">France</option>
+                                    <option value="France Metropolitan">France, Metropolitan</option>
+                                    <option value="French Guiana">French Guiana</option>
+                                    <option value="French Polynesia">French Polynesia</option>
+                                    <option value="French Southern Territories">French Southern Territories</option>
+                                    <option value="Gabon">Gabon</option>
+                                    <option value="Gambia">Gambia</option>
+                                    <option value="Georgia">Georgia</option>
+                                    <option value="Germany">Germany</option>
+                                    <option value="Ghana">Ghana</option>
+                                    <option value="Gibraltar">Gibraltar</option>
+                                    <option value="Greece">Greece</option>
+                                    <option value="Greenland">Greenland</option>
+                                    <option value="Grenada">Grenada</option>
+                                    <option value="Guadeloupe">Guadeloupe</option>
+                                    <option value="Guam">Guam</option>
+                                    <option value="Guatemala">Guatemala</option>
+                                    <option value="Guinea">Guinea</option>
+                                    <option value="Guinea-Bissau">Guinea-Bissau</option>
+                                    <option value="Guyana">Guyana</option>
+                                    <option value="Haiti">Haiti</option>
+                                    <option value="Heard and McDonald Islands">Heard and Mc Donald Islands</option>
+                                    <option value="Holy See">Holy See (Vatican City State)</option>
+                                    <option value="Honduras">Honduras</option>
+                                    <option value="Hong Kong">Hong Kong</option>
+                                    <option value="Hungary">Hungary</option>
+                                    <option value="Iceland">Iceland</option>
+                                    <option value="India">India</option>
+                                    <option value="Indonesia">Indonesia</option>
+                                    <option value="Iran">Iran (Islamic Republic of)</option>
+                                    <option value="Iraq">Iraq</option>
+                                    <option value="Ireland">Ireland</option>
+                                    <option value="Israel">Israel</option>
+                                    <option value="Italy">Italy</option>
+                                    <option value="Jamaica">Jamaica</option>
+                                    <option value="Japan">Japan</option>
+                                    <option value="Jordan">Jordan</option>
+                                    <option value="Kazakhstan">Kazakhstan</option>
+                                    <option value="Kenya">Kenya</option>
+                                    <option value="Kiribati">Kiribati</option>
+                                    <option value="Democratic People's Republic of Korea">Korea, Democratic People's Republic of</option>
+                                    <option value="Korea">Korea, Republic of</option>
+                                    <option value="Kuwait">Kuwait</option>
+                                    <option value="Kyrgyzstan">Kyrgyzstan</option>
+                                    <option value="Lao">Lao People's Democratic Republic</option>
+                                    <option value="Latvia">Latvia</option>
+                                    <option value="Lebanon">Lebanon</option>
+                                    <option value="Lesotho">Lesotho</option>
+                                    <option value="Liberia">Liberia</option>
+                                    <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                                    <option value="Liechtenstein">Liechtenstein</option>
+                                    <option value="Lithuania">Lithuania</option>
+                                    <option value="Luxembourg">Luxembourg</option>
+                                    <option value="Macau">Macau</option>
+                                    <option value="Macedonia">Macedonia, The Former Yugoslav Republic of</option>
+                                    <option value="Madagascar">Madagascar</option>
+                                    <option value="Malawi">Malawi</option>
+                                    <option value="Malaysia">Malaysia</option>
+                                    <option value="Maldives">Maldives</option>
+                                    <option value="Mali">Mali</option>
+                                    <option value="Malta">Malta</option>
+                                    <option value="Marshall Islands">Marshall Islands</option>
+                                    <option value="Martinique">Martinique</option>
+                                    <option value="Mauritania">Mauritania</option>
+                                    <option value="Mauritius">Mauritius</option>
+                                    <option value="Mayotte">Mayotte</option>
+                                    <option value="Mexico">Mexico</option>
+                                    <option value="Micronesia">Micronesia, Federated States of</option>
+                                    <option value="Moldova">Moldova, Republic of</option>
+                                    <option value="Monaco">Monaco</option>
+                                    <option value="Mongolia">Mongolia</option>
+                                    <option value="Montserrat">Montserrat</option>
+                                    <option value="Morocco">Morocco</option>
+                                    <option value="Mozambique">Mozambique</option>
+                                    <option value="Myanmar">Myanmar</option>
+                                    <option value="Namibia">Namibia</option>
+                                    <option value="Nauru">Nauru</option>
+                                    <option value="Nepal">Nepal</option>
+                                    <option value="Netherlands">Netherlands</option>
+                                    <option value="Netherlands Antilles">Netherlands Antilles</option>
+                                    <option value="New Caledonia">New Caledonia</option>
+                                    <option value="New Zealand">New Zealand</option>
+                                    <option value="Nicaragua">Nicaragua</option>
+                                    <option value="Niger">Niger</option>
+                                    <option value="Nigeria">Nigeria</option>
+                                    <option value="Niue">Niue</option>
+                                    <option value="Norfolk Island">Norfolk Island</option>
+                                    <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                                    <option value="Norway">Norway</option>
+                                    <option value="Oman">Oman</option>
+                                    <option value="Pakistan">Pakistan</option>
+                                    <option value="Palau">Palau</option>
+                                    <option value="Panama">Panama</option>
+                                    <option value="Papua New Guinea">Papua New Guinea</option>
+                                    <option value="Paraguay">Paraguay</option>
+                                    <option value="Peru">Peru</option>
+                                    <option value="Philippines">Philippines</option>
+                                    <option value="Pitcairn">Pitcairn</option>
+                                    <option value="Poland">Poland</option>
+                                    <option value="Portugal">Portugal</option>
+                                    <option value="Puerto Rico">Puerto Rico</option>
+                                    <option value="Qatar">Qatar</option>
+                                    <option value="Reunion">Reunion</option>
+                                    <option value="Romania">Romania</option>
+                                    <option value="Russia">Russian Federation</option>
+                                    <option value="Rwanda">Rwanda</option>
+                                    <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                                    <option value="Saint Lucia">Saint LUCIA</option>
+                                    <option value="Saint Vincent">Saint Vincent and the Grenadines</option>
+                                    <option value="Samoa">Samoa</option>
+                                    <option value="San Marino">San Marino</option>
+                                    <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                                    <option value="Saudi Arabia">Saudi Arabia</option>
+                                    <option value="Senegal">Senegal</option>
+                                    <option value="Seychelles">Seychelles</option>
+                                    <option value="Sierra">Sierra Leone</option>
+                                    <option value="Singapore">Singapore</option>
+                                    <option value="Slovakia">Slovakia (Slovak Republic)</option>
+                                    <option value="Slovenia">Slovenia</option>
+                                    <option value="Solomon Islands">Solomon Islands</option>
+                                    <option value="Somalia">Somalia</option>
+                                    <option value="South Africa">South Africa</option>
+                                    <option value="South Georgia">South Georgia and the South Sandwich Islands</option>
+                                    <option value="Span">Spain</option>
+                                    <option value="Sri Lanka">Sri Lanka</option>
+                                    <option value="St. Helena">St. Helena</option>
+                                    <option value="St. Pierre and Miguelon">St. Pierre and Miquelon</option>
+                                    <option value="Sudan">Sudan</option>
+                                    <option value="Suriname">Suriname</option>
+                                    <option value="Svalbard">Svalbard and Jan Mayen Islands</option>
+                                    <option value="Swaziland">Swaziland</option>
+                                    <option value="Sweden">Sweden</option>
+                                    <option value="Switzerland">Switzerland</option>
+                                    <option value="Syria">Syrian Arab Republic</option>
+                                    <option value="Taiwan">Taiwan, Province of China</option>
+                                    <option value="Tajikistan">Tajikistan</option>
+                                    <option value="Tanzania">Tanzania, United Republic of</option>
+                                    <option value="Thailand">Thailand</option>
+                                    <option value="Togo">Togo</option>
+                                    <option value="Tokelau">Tokelau</option>
+                                    <option value="Tonga">Tonga</option>
+                                    <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                                    <option value="Tunisia">Tunisia</option>
+                                    <option value="Turkey">Turkey</option>
+                                    <option value="Turkmenistan">Turkmenistan</option>
+                                    <option value="Turks and Caicos">Turks and Caicos Islands</option>
+                                    <option value="Tuvalu">Tuvalu</option>
+                                    <option value="Uganda">Uganda</option>
+                                    <option value="Ukraine">Ukraine</option>
+                                    <option value="United Arab Emirates">United Arab Emirates</option>
+                                    <option value="United Kingdom">United Kingdom</option>
+                                    <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                                    <option value="Uruguay">Uruguay</option>
+                                    <option value="Uzbekistan">Uzbekistan</option>
+                                    <option value="Vanuatu">Vanuatu</option>
+                                    <option value="Venezuela">Venezuela</option>
+                                    <option value="Vietnam">Viet Nam</option>
+                                    <option value="Virgin Islands (British)">Virgin Islands (British)</option>
+                                    <option value="Virgin Islands (U.S)">Virgin Islands (U.S.)</option>
+                                    <option value="Wallis and Futana Islands">Wallis and Futuna Islands</option>
+                                    <option value="Western Sahara">Western Sahara</option>
+                                    <option value="Yemen">Yemen</option>
+                                    <option value="Serbia">Serbia</option>
+                                    <option value="Zambia">Zambia</option>
+                                    <option value="Zimbabwe">Zimbabwe</option>
                                 </select>
                             </div>
                             <!--end::Col-->
@@ -749,7 +764,7 @@
                                     <option value='hong-konger'>Hong Konger</option>
                                     <option value='hungarian'>Hungarian</option>
                                     <option value='icelandic'>Icelandic</option>
-                                    <option value='indian'>Indian</option>
+                                    <option value='Indian'>Indian</option>
                                     <option value='indonesian'>Indonesian</option>
                                     <option value='iranian'>Iranian</option>
                                     <option value='iraqi'>Iraqi</option>

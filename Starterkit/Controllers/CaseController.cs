@@ -262,8 +262,37 @@ namespace Starterkit.Controllers
             {
                 return Json("error");
             } 
-        } 
+        }
 
+      
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateDescription([FromBody] DocumentDetailModel documentUpdate)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                UserDocumentModel updateDescription = new UserDocumentModel();
+                updateDescription.Id= Convert.ToInt32(_contextAccessor.HttpContext.Request.Query["Id"]);
+                updateDescription.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                //updateDescription.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("UserId"));
+                updateDescription.CaseKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId"));
+                updateDescription.DocName = documentUpdate.DocName?.Trim();
+                updateDescription.Description = documentUpdate.Description?.Trim();
+               
+                updateDescription.Opt = "U";
+                _Result = customerLogic.DocumentDetail(updateDescription);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
 
     }
 }
