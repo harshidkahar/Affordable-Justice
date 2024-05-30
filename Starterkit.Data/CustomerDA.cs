@@ -205,6 +205,7 @@ namespace Starterkit.Data
             string returnValue = "invalid";
             try
             {
+                ds.Tables.Clear();
                 con = DataAccess.OpenConnection();
                 SqlCommand cmd = new SqlCommand("[dbo].[UpdateEmail]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -213,11 +214,11 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@Otp", SqlDbType.VarChar).Value = otp;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
                 // try { ds.Tables[opt].Clear(); } catch { }
-                da.Fill(ds, "UserDetails");
+                da.Fill(ds, "UpdateEmail");
                 con.Close();
-                if (ds.Tables[0].Rows.Count > 0)
+                if (ds.Tables["UpdateEmail"].Rows.Count > 0)
                 {
-                    returnValue = ds.Tables[0].Rows[0]["Value"].ToString();
+                    returnValue = ds.Tables["UpdateEmail"].Rows[0]["Value"].ToString();
                 }
             }
             catch { }
