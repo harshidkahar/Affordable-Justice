@@ -70,6 +70,7 @@ var KTChangeEmailTwoFactor = function() {
                                 document.querySelector('#kt_signin_email').classList.toggle('d-none');
                                 document.querySelector('#kt_signin_email_edit').classList.toggle('d-none');
                                 document.querySelector('#kt_signin_email_button').classList.toggle('d-none');
+                                document.querySelector('#kt_changeEmail_cancel').style.display = 'none';  
                                 document.querySelector('#confirmemailpassword').style.display = "none";
                                 document.querySelector('#kt_otp_timer_msg').style.display = "none";
                                 document.querySelector('#kt_emailTF_form_submit').style.display = "none";
