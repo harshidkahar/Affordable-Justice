@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "KYC";
+    ViewData["Title"] = "Change Email";
     // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
     KTTheme.AddJavascriptFile("js/custom/account/settings/signin-methods.js");
     KTTheme.AddJavascriptFile("js/custom/account/settings/UpdateEmail.js");
@@ -65,7 +65,11 @@
                         <!--begin::Label-->
                         <div id="kt_signin_email">
                             <div class="fs-6 fw-bold mb-1">Email Address</div>
-                            <div class="fw-semibold text-gray-600">a@b.com</div>
+                            <div class="fw-semibold text-gray-600">
+                                <label id="lblemail">
+                                    
+                                </label>
+                            </div>
                         </div>
                         <!--end::Label-->
                         <!--begin::Edit-->
@@ -76,7 +80,7 @@
                                     <div class="col-lg-6 mb-4 mb-lg-0">
                                         <div class="fv-row mb-0">
                                             <label for="emailaddress" class="form-label fs-6 fw-bold mb-3">Enter New Email Address</label>
-                                            <input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" value="support@keenthemes.com" />
+                                            <input type="email" class="form-control form-control-lg form-control-solid" id="emailaddress" placeholder="Email Address" name="emailaddress" />
                                         </div>
                                     </div>
                                    </div>
@@ -94,10 +98,9 @@
                                 </div>
 
                                 <div class="fw-semibold fs-6 mb-3 text-muted" id="kt_otp_timer_msg" style="display: none;">
-                                    <span class="me-1">Didn’t get the code ? click on Resend OTP in</span> <span class="text-primary">20 seconds</span>
-
+                                    <span class="me-1">Didn’t get the code ? click on Resend OTP in</span>  <span id="timer" class="text-primary">30 seconds</span>
                                 </div>
-
+                                <br>
                                 </form>
                                 <form id="kt_emailTF_form">
                                 <div class="col-lg-6">
@@ -153,3 +156,42 @@
     </div>
     <!--end::Content container-->
 </div>
+<script>
+    var timerInterval;
+
+    function startTimer() {
+        var timerMsg = document.getElementById('kt_otp_timer_msg');
+        var resendOtpButton = document.getElementById('kt_signin_cancel');
+        var timerSpan = document.getElementById('timer');
+        var secondsLeft = 30;
+
+        // Show the timer message and disable the resend button
+        timerMsg.style.display = 'block';
+        resendOtpButton.style.display = 'block';
+        resendOtpButton.classList.add('disabled');
+
+        // Update the timer every second
+        timerInterval = setInterval(function () {
+            secondsLeft--;
+            timerSpan.textContent = secondsLeft + ' seconds';
+
+            if (secondsLeft <= 0) {
+                clearInterval(timerInterval);
+                timerMsg.style.display = 'none';
+                resendOtpButton.classList.remove('disabled');
+            }
+        }, 1000);
+    }
+
+    document.getElementById('kt_signin_changeEmail_submit').addEventListener('click', function () {
+        clearInterval(timerInterval); // Clear any existing timer
+        startTimer();
+    });
+
+    document.getElementById('kt_signin_cancel').addEventListener('click', function () {
+        if (!this.classList.contains('disabled')) {
+            clearInterval(timerInterval); // Clear any existing timer
+            startTimer();
+        }
+    });
+</script>

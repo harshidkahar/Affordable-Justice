@@ -5,6 +5,7 @@ var KTUpdateEmail = function () {
     // Elements
     var form;
     var submitButton;
+    var resendOtpButton;
     var validator;
     var jsonPostData = null;
     // Handle form
@@ -99,7 +100,8 @@ var KTUpdateEmail = function () {
                                         }
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
-                                            form.querySelector('[name="email"]').value = "";
+                                            form.querySelector('[name="emailaddress"]').value = "";
+                                            document.querySelector('#kt_signin_changeEmail_submit').style.display = 'none';
 
                                             //form.submit(); // submit form
                                             var redirectUrl = form.getAttribute('data-kt-redirect-url');
@@ -160,7 +162,108 @@ var KTUpdateEmail = function () {
                 }
             });
         });
+
+      
     }
+
+    var ResendOtp = function (e) {
+        //Resend Otp Button.
+        resendOtpButton.addEventListener('click', function (e) {
+            // Prevent button default action
+            e.preventDefault();
+
+            // Validate form
+            validator.validate().then(function (status) {
+                if (status == 'Valid') {
+
+
+
+                    // Simulate ajax request
+                    setTimeout(function () {
+
+
+                        // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                        jsonPostData = {
+                            Email: form.querySelector('[name="emailaddress"]').value
+                        }
+                        $.ajax({
+                            type: "POST",
+                            url: "/Auth/ChangeEmailSendOTP/",
+                            contentType: "application/json; charset=utf-8",
+                            data: JSON.stringify(jsonPostData),
+                            success: function (data) {
+                                if (data == "done") {
+                                    Swal.fire({
+                                        text: "An OTP is send to your email!",
+                                        icon: "success",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    }).then(function (result) {
+                                        if (result.isConfirmed) {
+                                            form.querySelector('[name="emailaddress"]').value = "";
+
+
+                                        }
+                                    });
+                                }
+                                else if (data == "invalid-Email") {
+                                    Swal.fire({
+                                        text: "Email already exists... Please enter different e-mail address.",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                }
+                                else {
+                                    Swal.fire({
+                                        text: "Sorry, looks like there are some errors detected, please try again.",
+                                        icon: "error",
+                                        buttonsStyling: false,
+                                        confirmButtonText: "Ok, got it!",
+                                        customClass: {
+                                            confirmButton: "btn btn-primary"
+                                        }
+                                    });
+                                }
+                            },
+                            error: function (xhr) {
+                                Swal.fire({
+                                    text: "Invalid Email id.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            }
+                        });
+
+                    }, 2000);
+                } else {
+                    // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
+        });
+
+
+    }
+
 
     var handleSubmitAjax = function (e) {
         // Handle form submit
@@ -253,14 +356,17 @@ var KTUpdateEmail = function () {
         init: function () {
             form = document.querySelector('#kt_signin_change_email');
             submitButton = document.querySelector('#kt_signin_changeEmail_submit');
+            resendOtpButton = document.querySelector('kt_signin_cancel');
 
             handleValidation();
 
             if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
                 handleSubmitAjax(); // use for ajax submit
             } else {
-                handleSubmitDemo(); // used for demo purposes only
+             handleSubmitDemo(); 
             }
+            ResendOtp();
+           
         }
     };
 }();
