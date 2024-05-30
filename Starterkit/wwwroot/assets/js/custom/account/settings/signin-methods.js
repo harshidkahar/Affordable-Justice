@@ -73,13 +73,13 @@ var KTAccountSettingsSigninMethods = function () {
             }
         );
 
-        signInForm.querySelector('#kt_signin_changeEmail_submit').addEventListener('click', function (e) {
+       signInForm.querySelector('#kt_signin_changeEmail_submit').addEventListener('click', function (e) {
             e.preventDefault();
             console.log('click');
-            //document.querySelector('#kt_signin_cancel').style.display = 'block';
+       /*     document.querySelector('#kt_signin_cancel').style.display = 'block';
             document.querySelector('#confirmemailpassword').style.display = 'block';
             //document.querySelector('#kt_otp_timer_msg').style.display = 'block';
-            document.querySelector('#kt_emailTF_form_submit').style.display = 'block';
+            document.querySelector('#kt_emailTF_form_submit').style.display = 'block'; */
             
             var btn = document.querySelector('#kt_signin_submit');
             btn.disabled = true;

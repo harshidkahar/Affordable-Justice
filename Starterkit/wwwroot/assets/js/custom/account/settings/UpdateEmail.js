@@ -55,6 +55,35 @@ var KTUpdateEmail = function () {
         );
     }
 
+
+    //function of Timer in resend OTP.
+    var timerInterval;
+    function startTimer() {
+        var timerMsg = document.getElementById('kt_otp_timer_msg');
+        var resendOtpButton = document.getElementById('kt_signin_cancel');
+        var timerSpan = document.getElementById('timer');
+        var secondsLeft = 30;
+
+        // Show the timer message and disable the resend button
+        //timerMsg.style.display = 'block';
+        //resendOtpButton.style.display = 'none'; // Hide the resend button
+        resendOtpButton.classList.add('disabled');
+
+        // Update the timer every second
+        timerInterval = setInterval(function () {
+            secondsLeft--;
+            timerSpan.textContent = secondsLeft + ' seconds';
+
+            if (secondsLeft <= 0) {
+                clearInterval(timerInterval);
+                resendOtpButton.style.display = 'block'; // Show the resend button
+                //timerMsg.style.display = 'none'; // Hide the timer message
+                resendOtpButton.classList.remove('disabled');
+            }
+        }, 1000);
+    }
+
+    //function of Get OTP
     var handleSubmitDemo = function (e) {
         // Handle form submit
         submitButton.addEventListener('click', function (e) {
@@ -100,8 +129,17 @@ var KTUpdateEmail = function () {
                                         }
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
-                                            form.querySelector('[name="emailaddress"]').value = "";
+                                            //unhide the otp field and timer after Otp is send.
+                                            //form.querySelector('[name="emailaddress"]').value = "";
                                             document.querySelector('#kt_signin_changeEmail_submit').style.display = 'none';
+                                            document.querySelector('#kt_changeEmail_cancel').style.display = 'block';                                         
+                                            document.querySelector('#confirmemailpassword').style.display = "block";
+                                            document.querySelector('#kt_otp_timer_msg').style.display = "block";
+                                            document.querySelector('#kt_emailTF_form_submit').style.display = "block";
+                                            document.querySelector('#kt_otp_timer_msg').style.display = "block";
+                                            clearInterval(timerInterval); // Clear any existing timer
+                                            startTimer();
+
 
                                             //form.submit(); // submit form
                                             var redirectUrl = form.getAttribute('data-kt-redirect-url');
@@ -121,6 +159,11 @@ var KTUpdateEmail = function () {
                                             confirmButton: "btn btn-primary"
                                         }
                                     });
+                                    //hide the otp field and timer if email already exist.
+                                    document.querySelector('#confirmemailpassword').style.display = "none";
+                                    document.querySelector('#kt_otp_timer_msg').style.display = "none";
+                                    document.querySelector('#kt_emailTF_form_submit').style.display = "none";
+
                                 }
                                 else {
                                     Swal.fire({
@@ -166,6 +209,7 @@ var KTUpdateEmail = function () {
       
     }
 
+    //function of resend OTP.
     var ResendOtp = function (e) {
         //Resend Otp Button.
         resendOtpButton.addEventListener('click', function (e) {
@@ -203,7 +247,7 @@ var KTUpdateEmail = function () {
                                         }
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
-                                            form.querySelector('[name="emailaddress"]').value = "";
+                                            //form.querySelector('[name="emailaddress"]').value = "";
 
 
                                         }
@@ -264,7 +308,22 @@ var KTUpdateEmail = function () {
 
     }
 
+    //Resend Otp Button Event Listener.
+    document.getElementById('kt_signin_cancel').addEventListener('click', function () {
+        if (!this.classList.contains('disabled')) {
+            clearInterval(timerInterval); // Clear any existing timer
+            startTimer();
+        }
+    });
 
+    //Cancel Button Event Listener.
+    document.querySelector('#kt_changeEmail_cancel').addEventListener('click', function () {
+        //sessionStorage.removeItem('OtpEmail');
+        console.log('might removed');
+    });
+
+
+    //unnessescery function.
     var handleSubmitAjax = function (e) {
         // Handle form submit
         submitButton.addEventListener('click', function (e) {
@@ -356,7 +415,7 @@ var KTUpdateEmail = function () {
         init: function () {
             form = document.querySelector('#kt_signin_change_email');
             submitButton = document.querySelector('#kt_signin_changeEmail_submit');
-            resendOtpButton = document.querySelector('kt_signin_cancel');
+            resendOtpButton = document.querySelector('#kt_signin_cancel');
 
             handleValidation();
 

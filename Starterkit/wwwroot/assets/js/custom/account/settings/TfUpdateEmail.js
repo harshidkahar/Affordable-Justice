@@ -10,6 +10,7 @@ var KTChangeEmailTwoFactor = function() {
     // Handle form
     var handleForm = function(e) {        
         // Handle form submit
+       const email= document.querySelector('[name="emailaddress"]').value;
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
 
@@ -56,26 +57,25 @@ var KTChangeEmailTwoFactor = function() {
                         success: function (data) {
                             if (data == "done") {
                                 Swal.fire({
-                                    text: "You have been successfully verified",
+                                    text: "Your Email have been successfully Updated to " + email,
                                     icon: "success",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok, got it!",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
-                                }).then(function (result) {
-                                    if (result.isConfirmed) {
 
-                                        var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                        if (redirectUrl) {
-                                            location.href = redirectUrl;
-                                        }
-                                        inputs.map(function (input) {
-                                            input.value = '';
-                                        });
-                                    }
-                                });
-                            }
+                                })
+                                //Toogle of Email code after succesfull update.
+                                document.querySelector('#kt_signin_email').classList.toggle('d-none');
+                                document.querySelector('#kt_signin_email_edit').classList.toggle('d-none');
+                                document.querySelector('#kt_signin_email_button').classList.toggle('d-none');
+                                document.querySelector('#confirmemailpassword').style.display = "none";
+                                document.querySelector('#kt_otp_timer_msg').style.display = "none";
+                                document.querySelector('#kt_emailTF_form_submit').style.display = "none";
+                                document.querySelector('#kt_signin_changeEmail_submit').style.display = "block";
+                                document.querySelector('[name="emailaddress"]').value = "";
+                               }
                             else {
                                 Swal.fire({
                                     text: "Please enter valid securtiy code and try again.",
