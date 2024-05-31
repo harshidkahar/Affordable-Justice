@@ -138,7 +138,7 @@ public class AuthController : Controller
 
             _contextAccessor.HttpContext.Session.SetString("CustomerGUID", userModel.CustomerGUID.ToString());
 
-            //_contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
+            _contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
 
             return "done";
 

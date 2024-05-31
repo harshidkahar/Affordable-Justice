@@ -9,6 +9,7 @@ const kyc = document.getElementById("acc_nav_kyc");
 const billing = document.getElementById("acc_nav_billing");
 const statements = document.getElementById("acc_nav_statements");
 const referrals = document.getElementById("acc_nav_referrals");
+const changeEmail = document.getElementById("acc_nav_change_email"); 
 
 try {
     overview.classList.remove("active");
@@ -17,6 +18,7 @@ try {
     statements.classList.remove("active");
     referrals.classList.remove("active");
     kyc.classList.remove("active");
+    changeEmail.classList.remove("active");
 }
 catch { }
 
@@ -38,7 +40,7 @@ switch (page) {
     case "kyc":
         pageTitle = "KYC";
         pageBreadcrum = "Account";
-        settings.classList.add("active");
+        kyc.classList.add("active");
         break;
     case "billing":
         pageTitle = "Account Billing";
@@ -54,6 +56,11 @@ switch (page) {
         pageTitle = "Referrals";
         pageBreadcrum = "Account";
         referrals.classList.add("active");
+        break;
+    case "changeEmail":
+        pageTitle = "Change Email";
+        pageBreadcrum = "Account";
+        changeEmail.classList.add("active");
         break;
     case "createCase":
         pageTitle = "Create Case";
