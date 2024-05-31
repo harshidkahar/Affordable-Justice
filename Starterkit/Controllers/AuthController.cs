@@ -38,33 +38,34 @@ public class AuthController : Controller
     public IActionResult SignUp()
     {
         string refCode = "";
-        try {
-             if (!String.IsNullOrEmpty(HttpContext.Request.Query["refCode"]))
+        try
+        {
+            if (!String.IsNullOrEmpty(HttpContext.Request.Query["refCode"]))
                 refCode = HttpContext.Request.Query["refCode"];
-             ViewData["RefCode"] = refCode;
+            ViewData["RefCode"] = refCode;
         }
         catch { }
         return View("Views/Auth/SignUp.cshtml");
     }
 
-	[HttpGet("/signout")]
-	public IActionResult SignOut()
-	{
-		string req = "";
-		try
-		{
-			if (!String.IsNullOrEmpty(HttpContext.Request.Query["logout"]))
-				req = HttpContext.Request.Query["logout"];
-			if (req == "logout")
-			{
+    [HttpGet("/signout")]
+    public IActionResult SignOut()
+    {
+        string req = "";
+        try
+        {
+            if (!String.IsNullOrEmpty(HttpContext.Request.Query["logout"]))
+                req = HttpContext.Request.Query["logout"];
+            if (req == "logout")
+            {
                 _contextAccessor.HttpContext.Session.Clear();
-			};
-		}
-		catch { }
-		return View("Views/Auth/SignIn.cshtml");
-	}
-	//[HttpPost("/register")]
-	[AllowAnonymous]
+            };
+        }
+        catch { }
+        return View("Views/Auth/SignIn.cshtml");
+    }
+    //[HttpPost("/register")]
+    [AllowAnonymous]
     [HttpPost]
     public JsonResult RegisterUser([FromBody] RegisterUser register)//, string LastName, string Email, string ContactNo, string SponsorId)
     {
@@ -107,11 +108,11 @@ public class AuthController : Controller
         return View(_theme.GetPageView("Auth", "NewPassword.cshtml"));
     }
 
-	[HttpGet("twoFactor/")]
-	public ActionResult TwoFactor()
-	{        
+    [HttpGet("twoFactor/")]
+    public ActionResult TwoFactor()
+    {
         return View("Views/Auth/TwoFactor.cshtml");
-	}
+    }
 
 
     [HttpPost]
@@ -135,7 +136,7 @@ public class AuthController : Controller
 
             _contextAccessor.HttpContext.Session.SetString("UserEmail", userModel.Email);
 
-            _contextAccessor.HttpContext.Session.SetString("CustomerGUID",userModel.CustomerGUID.ToString());
+            _contextAccessor.HttpContext.Session.SetString("CustomerGUID", userModel.CustomerGUID.ToString());
 
             //_contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
 
@@ -153,11 +154,11 @@ public class AuthController : Controller
     {
         CustomerLogic customerLogic = new CustomerLogic();
         string _Result = string.Empty;
-        int Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); 
+        int Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
         string email = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
-        
+
         // Call your logic to validate OTP
-        string returnValue = customerLogic.UpdateEmail(Id,email, otpModel.otp);
+        string returnValue = customerLogic.UpdateEmail(Id, email, otpModel.otp);
 
         return returnValue;
     }
@@ -193,8 +194,8 @@ public class AuthController : Controller
                 }
                 body = body.Replace("{OTP}", validateEmail);
                 //sendEmailLogic.SendEmail(otpModel.Email, subject, body);
-               _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
-                 
+                _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
+
                 returnValue = "done";//otpModel.Email;
             }
             else if (validateEmail == "invalid")
@@ -246,7 +247,20 @@ public class AuthController : Controller
         return returnValue;
     }
 
+    [HttpPost]
+    public string CancelEmail([FromBody] SendOtpModel otpModel)
+    {
+        try
+        {
+            _contextAccessor.HttpContext.Session.SetString("OtpEmail", string.Empty);
 
+            return "done";
+        }
+        catch (Exception)
+        {
+            return "invalid-Email";
+        }
+    }
 
 }
 

@@ -6,6 +6,7 @@ var KTUpdateEmail = function () {
     var form;
     var submitButton;
     var resendOtpButton;
+    var cancelButton;
     var validator;
     var jsonPostData = null;
     // Handle form
@@ -205,8 +206,6 @@ var KTUpdateEmail = function () {
                 }
             });
         });
-
-      
     }
 
     //function of resend OTP.
@@ -304,9 +303,78 @@ var KTUpdateEmail = function () {
                 }
             });
         });
-
-
     }
+
+
+    var Cancelbtn = function () {
+        cancelButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            // Simulate ajax request
+            setTimeout(function () {
+                // Prepare the data to send
+                var jsonPostData = {
+                    Email: form.querySelector('[name="emailaddress"]').value
+                };
+
+                // Make an AJAX POST request to cancel the email
+                $.ajax({
+                    type: "POST",
+                    url: "/Auth/CancelEmail/",
+                    contentType: "application/json; charset=utf-8",
+                    data: JSON.stringify(jsonPostData),
+                    success: function (data) {
+                        if (data == "done") {
+                            Swal.fire({
+                                text: "Email has been cancelled.",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            }).then(function (result) {
+                                if (result.isConfirmed) {
+                                    document.querySelector('#kt_signin_email').classList.toggle('d-none');
+                                    document.querySelector('#kt_signin_email_edit').classList.toggle('d-none');
+                                    document.querySelector('#kt_signin_email_button').classList.toggle('d-none');
+                                    document.querySelector('#kt_changeEmail_cancel').style.display = 'none';
+                                    document.querySelector('#confirmemailpassword').style.display = "none";
+                                    document.querySelector('#kt_otp_timer_msg').style.display = "none";
+                                    document.querySelector('#kt_emailTF_form_submit').style.display = "none";
+                                    document.querySelector('#kt_signin_changeEmail_submit').style.display = "block";
+                                    // Clear the email address field
+                                    form.querySelector('[name="emailaddress"]').value = "";
+
+                                }
+                            });
+                        } else {
+                            Swal.fire({
+                                text: "An error occurred while cancelling the email.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
+                        Swal.fire({
+                            text: "There was an error processing your request.",
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+                    }
+                });
+            }, 2000);
+        });
+    };
+
 
     //Resend Otp Button Event Listener.
     document.getElementById('kt_signin_cancel').addEventListener('click', function () {
@@ -416,6 +484,7 @@ var KTUpdateEmail = function () {
             form = document.querySelector('#kt_signin_change_email');
             submitButton = document.querySelector('#kt_signin_changeEmail_submit');
             resendOtpButton = document.querySelector('#kt_signin_cancel');
+            cancelButton = document.querySelector('#kt_changeEmail_cancel');
 
             handleValidation();
 
@@ -425,6 +494,7 @@ var KTUpdateEmail = function () {
              handleSubmitDemo(); 
             }
             ResendOtp();
+            Cancelbtn();
            
         }
     };
