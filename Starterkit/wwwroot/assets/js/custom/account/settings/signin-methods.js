@@ -73,14 +73,14 @@ var KTAccountSettingsSigninMethods = function () {
             }
         );
 
-        signInForm.querySelector('#kt_signin_submit').addEventListener('click', function (e) {
+       signInForm.querySelector('#kt_signin_changeEmail_submit').addEventListener('click', function (e) {
             e.preventDefault();
             console.log('click');
-            document.querySelector('#kt_signin_cancel').style.display = 'block';
+       /*     document.querySelector('#kt_signin_cancel').style.display = 'block';
             document.querySelector('#confirmemailpassword').style.display = 'block';
-            document.querySelector('#kt_otp_timer_msg').style.display = 'block';
-            document.querySelector('#kt_sing_in_two_factor_submit').style.display = 'block';
-
+            //document.querySelector('#kt_otp_timer_msg').style.display = 'block';
+            document.querySelector('#kt_emailTF_form_submit').style.display = 'block'; */
+            
             var btn = document.querySelector('#kt_signin_submit');
             btn.disabled = true;
 
@@ -118,38 +118,7 @@ var KTAccountSettingsSigninMethods = function () {
 
     }
 
-    var signincancel = function (e) {
-
-        signInCancelEmail.addEventListener('click', function (e) {
-            e.preventDefault();
-            console.log('click');
-
-            swal.fire({
-                text: "OTP Sent Sucessfully again. Please check your email",
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn font-weight-bold btn-light-primary"
-                }
-            }).then(function () {
-                console.log('signincancel run'); // Reset formvalidation --- more info: https://formvalidation.io/guide/api/reset-form/
-
-            });
-
-            // Disable the button after it is clicked
-            signInCancelEmail.disabled = true;
-
-            // Use setTimeout to enable the button again after 30 seconds (30000 milliseconds)
-            setTimeout(function () {
-                signInCancelEmail.disabled = false;
-                console.log('Button enabled again after 30 seconds');
-            }, 30000);
-        });
-
-
-
-    }
+    
 
     var handleType = function () {
         var input1 = signInForm.querySelector("[name=code_1]");
@@ -315,7 +284,6 @@ var KTAccountSettingsSigninMethods = function () {
 
             initSettings();
             handleChangeEmail();
-            signincancel();
             handleType();
             handleChangePassword();
         }

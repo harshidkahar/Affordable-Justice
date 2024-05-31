@@ -32,6 +32,12 @@ namespace Starterkit.Web.Logic
             return commonLogic.GetValue(0, email, "ValidateEmail"); 
         }
 
+        public string ValidateChangeEmail(string email, int id)
+        {
+            CommonLogic commonLogic = (CommonLogic)LogicFactory.GetLogic(LogicType.Common);
+            return commonLogic.GetValue(id, email, "ValidateChangeEmail");
+        }
+
         public UserModel ValidateOtp(string phone, string email, string otp)
         {
             UserModel userModel = new UserModel();
@@ -39,8 +45,14 @@ namespace Starterkit.Web.Logic
             return userModel=customerDA.GetLoginId(phone,email,otp);
         }
 
+        public string UpdateEmail(int Id, string email, string otp)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.UpdateEmail(Id,email, otp);
+        }
 
-          public List<ViewCaseListModel> GetCaseList(int userId)
+
+        public List<ViewCaseListModel> GetCaseList(int userId)
         {
             List<ViewCaseListModel> caseList = new List<ViewCaseListModel>();
             try

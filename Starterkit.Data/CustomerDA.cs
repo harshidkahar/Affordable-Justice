@@ -200,6 +200,30 @@ namespace Starterkit.Data
 
         }
 
+        public string UpdateEmail(int Id, string email, string otp)
+        {
+            string returnValue = "invalid";
+            try
+            {
+                ds.Tables.Clear();
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[UpdateEmail]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value=Id;
+                cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+                cmd.Parameters.Add("@Otp", SqlDbType.VarChar).Value = otp;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                // try { ds.Tables[opt].Clear(); } catch { }
+                da.Fill(ds, "UpdateEmail");
+                con.Close();
+                if (ds.Tables["UpdateEmail"].Rows.Count > 0)
+                {
+                    returnValue = ds.Tables["UpdateEmail"].Rows[0]["Value"].ToString();
+                }
+            }
+            catch { }
+            return returnValue;
+        }
 
     }
 }
