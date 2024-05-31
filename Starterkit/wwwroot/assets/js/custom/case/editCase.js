@@ -39,6 +39,13 @@ var KTCaseDetail = function () {
         });
     };
 
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
     var renderData = function () {
         if (caseDetailData.length > 0) {
             var caseDetail = caseDetailData[0];
@@ -55,11 +62,16 @@ var KTCaseDetail = function () {
             } else if (caseDetail.SecondaryCaseType === "PERSONAL STATUS") {
                 document.querySelector('[name="personal-status-case"]').value = caseDetail.ThirdCaseType || '';
             }
-
+            const proceedingyet = caseDetail.ProceedingYet ? '1' : '2';
+            console.log(proceedingyet);
             document.getElementById('any-proceedings').value = caseDetail.ProceedingYet ? '1' : '2';
+            if (proceedingyet === '1') {
+                document.querySelector('#yes-proceedings').style.display = 'block';
+               
+            }
             document.querySelector('[name="which-court"]').value = caseDetail.WhichCourt || '';
             document.querySelector('[name="legal-advice-inferred"]').value = caseDetail.LegalAdviceInferred ? '1' : '2';
-            document.getElementById('kt_datepicker_2').value = caseDetail.DateCommenced ? new Date(caseDetail.DateCommenced).toISOString().split('T')[0] : '';
+            document.getElementById('kt_datepicker_2').value = caseDetail.DateCommenced ? formatDate(caseDetail.DateCommenced) : '';
             document.querySelector('[name="previous_case_number"]').value = caseDetail.PreviousCaseNo || '';
             document.querySelector('[name="current_case_number"]').value = caseDetail.CurrentCaseNo || '';
             document.querySelector('[name="opposition-fullname"]').value = caseDetail.Opname || '';
@@ -67,6 +79,7 @@ var KTCaseDetail = function () {
             document.querySelector('[name="opposition-phone"]').value = caseDetail.Opmob || '';
             document.querySelector('[name="opposition-emiratesId"]').value = caseDetail.Emrid || '';
             document.querySelector('[name="opposition-passport"]').value = caseDetail.Passno || '';
+            document.querySelector('[name="case_description"]').value = caseDetail.Cdesc || '';
         }
     };
 
