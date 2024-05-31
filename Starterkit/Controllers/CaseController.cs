@@ -34,7 +34,8 @@ namespace Starterkit.Controllers
                     _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
                 }
             }
-            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); 
+            }
             return View("Views/Pages/Cases/CreateCase.cshtml");
         }
 
@@ -76,6 +77,7 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Cases/caseDetails.cshtml");
         }
 
+     
         [HttpGet("/viewCaseDocuments")]
         public IActionResult ViewCaseDocuments()
         {
@@ -200,6 +202,29 @@ namespace Starterkit.Controllers
                 return Json(errorResult);
             }
         }
+
+
+        [HttpGet]
+        public JsonResult EditCase()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
+                var caseDetail = _customerLogic.GetCaseDetail(userId, caseId);
+
+                var result = new { success = true, caseDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case detail." };
+                return Json(errorResult);
+            }
+        }
+
+
 
 
 
