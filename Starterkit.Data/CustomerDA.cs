@@ -21,30 +21,12 @@ namespace Starterkit.Data
             try
             {
                 string _Result = string.Empty;
-                //List<DataType> _ListOfDataType = new List<DataType>();
-
-                //_ListOfDataType.Add(new DataType("@FirstName", DbType.String, p_Customer.FirstName, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@LastName", DbType.String, p_Customer.LastName, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@Email", DbType.String, p_Customer.Email, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@CustomerGUID", DbType.Guid, p_Customer.CustomerGUID, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@ContactNo", DbType.String, p_Customer.ContactNo, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@IsActive", DbType.Boolean, p_Customer.IsActive, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@IdProof", DbType.String, p_Customer.IdProof, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@IdProofNumber", DbType.String, p_Customer.IdProofNumber, ParameterDirection.Input));
-                //_ListOfDataType.Add(new DataType("@IdProofUrl", DbType.String, p_Customer.IdProofUrl, ParameterDirection.Input));
-
-                ////_Result = Convert.ToString(DataAccess.ExecuteScalar("lf_Customer_Register", _ListOfDataType));
-                //_Result = Convert.ToString(DataAccess.ExecuteNonQuery("lf_Customer_Register", _ListOfDataType, true));
-
                 con = DataAccess.OpenConnection();
                 SqlCommand cmd = new SqlCommand("lf_Customer_Register",con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@CustomerGUID", SqlDbType.UniqueIdentifier).Value = p_Customer.CustomerGUID;
                 cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = p_Customer.FirstName;
                 cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = p_Customer.LastName;
-                //cmd.Parameters.Add("@IdProof", SqlDbType.NVarChar).Value = "Emirates ID";// p_Customer.IdProof;
-                //cmd.Parameters.Add("@IdProofNumber", SqlDbType.NVarChar).Value ="testId";//p_Customer.IdProofNumber;
-                //cmd.Parameters.Add("@IdProofUrl", SqlDbType.NVarChar).Value = "Test URL";//p_Customer.IdProofUrl;
                 cmd.Parameters.Add("@SponsorEmail", SqlDbType.NVarChar).Value = p_Customer.SponsorId;
                 cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = p_Customer.Email;
                 cmd.Parameters.Add("@ContactNo", SqlDbType.NVarChar).Value = p_Customer.ContactNo;
@@ -57,7 +39,6 @@ namespace Starterkit.Data
             catch (Exception _Exception)
             {
                 return "false";
-                //throw _Exception;
             }
         }
 
@@ -73,7 +54,6 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@Phone", SqlDbType.VarChar).Value = phone;
                 cmd.Parameters.Add("@Otp", SqlDbType.VarChar).Value = otp;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
-                // try { ds.Tables[opt].Clear(); } catch { }
                 da.Fill(ds, "UserDetails");
                 con.Close();
                 if (ds.Tables["UserDetails"].Rows.Count > 0)
@@ -85,10 +65,10 @@ namespace Starterkit.Data
                     userModel.ContactNo = ds.Tables["UserDetails"].Rows[0]["ContactNo"].ToString();
                     userModel.SponsorId = ds.Tables["UserDetails"].Rows[0]["SponsorId"].ToString();
                     userModel.CustomerGUID = Guid.Parse(ds.Tables["UserDetails"].Rows[0]["CustomerGUID"].ToString());
-                }   
-
+                    userModel.Country = ds.Tables["UserDetails"].Rows[0]["Country"].ToString();
+                }
             }
-            catch { }
+            catch (Exception ex){ }
             return userModel;
         }
 
@@ -128,7 +108,6 @@ namespace Starterkit.Data
             }
             catch (Exception ex) {
                 return "false";
-
             }
         }
 
@@ -193,13 +172,33 @@ namespace Starterkit.Data
             catch (Exception ex)
             {
                 return "false";
-
             }
-
-
-
         }
 
+        public string UpdateEmail(int Id, string email, string otp)
+        {
+            string returnValue = "invalid";
+            try
+            {
+                ds.Tables.Clear();
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[UpdateEmail]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value=Id;
+                cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+                cmd.Parameters.Add("@Otp", SqlDbType.VarChar).Value = otp;
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                // try { ds.Tables[opt].Clear(); } catch { }
+                da.Fill(ds, "UpdateEmail");
+                con.Close();
+                if (ds.Tables["UpdateEmail"].Rows.Count > 0)
+                {
+                    returnValue = ds.Tables["UpdateEmail"].Rows[0]["Value"].ToString();
+                }
+            }
+            catch { }
+            return returnValue;
+        }
 
     }
 }
