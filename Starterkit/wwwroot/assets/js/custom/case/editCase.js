@@ -52,14 +52,29 @@ var KTCaseDetail = function () {
 
             document.getElementById('ddlCT0').value = caseDetail.PrimaryCaseType || '';
             document.getElementById('caseType1').value = caseDetail.SecondaryCaseType || '';
-
             if (caseDetail.SecondaryCaseType === "CIVIL") {
+                document.querySelector('#ddlCivilCase').style.display = 'block';
+                document.querySelector('#ddlCriminalCase').style.display = 'none';
+                document.querySelector('#ddlOtherCase').style.display = 'none';
+                document.querySelector('#ddlPersonalStatus').style.display = 'none';
                 document.querySelector('[name="civil-case"]').value = caseDetail.ThirdCaseType || '';
             } else if (caseDetail.SecondaryCaseType === "CRIMINAL") {
+                document.querySelector('#ddlCriminalCase').style.display = 'block';
+                document.querySelector('#ddlCivilCase').style.display = 'none';
+                document.querySelector('#ddlOtherCase').style.display = 'none';
+                document.querySelector('#ddlPersonalStatus').style.display = 'none';
                 document.querySelector('[name="criminal-case"]').value = caseDetail.ThirdCaseType || '';
             } else if (caseDetail.SecondaryCaseType === "OTHERS") {
+                document.querySelector('#ddlOtherCase').style.display = 'block';
+                document.querySelector('#ddlCivilCase').style.display = 'none';
+                document.querySelector('#ddlCriminalCase').style.display = 'none';
+                document.querySelector('#ddlPersonalStatus').style.display = 'none';
                 document.querySelector('[name="other-case"]').value = caseDetail.ThirdCaseType || '';
             } else if (caseDetail.SecondaryCaseType === "PERSONAL STATUS") {
+                document.querySelector('#ddlPersonalStatus').style.display = 'block';
+                document.querySelector('#ddlCivilCase').style.display = 'none';
+                document.querySelector('#ddlCriminalCase').style.display = 'none';
+                document.querySelector('#ddlOtherCase').style.display = 'none';
                 document.querySelector('[name="personal-status-case"]').value = caseDetail.ThirdCaseType || '';
             }
             const proceedingyet = caseDetail.ProceedingYet ? '1' : '2';
@@ -83,10 +98,24 @@ var KTCaseDetail = function () {
         }
     };
 
+
+    // Function to get URL parameters
+    function getUrlParameter(name) {
+        name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+        var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+        var results = regex.exec(location.search);
+        return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+    }
+
+
     return {
         init: function () {
-            fetchCaseDetail();
-        }
+            var caseId = getUrlParameter('CaseId');
+            if (caseId) {
+                fetchCaseDetail();
+            } else {
+                console.log('CaseId not found in URL');
+            } }
     };
 }();
 

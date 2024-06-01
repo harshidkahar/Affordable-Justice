@@ -87,7 +87,15 @@ var KTDocumentList = function () {
         // Initialization
         init: function () {
             table = document.querySelector('#kt_datatable_example_1');
-            fetchDocumentList();
+            // Check if the URL contains 'createCase' and 'CaseId' parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseId = urlParams.get('CaseId');
+            const url = window.location.href;
+
+            if (url.includes('viewCaseDocuments') && caseId !== null) {
+                fetchDocumentList();
+            }
+            
         }
     };
 }();
