@@ -52,6 +52,7 @@ namespace Starterkit.Controllers
         [HttpGet("/uploadCaseDocuments")]
         public IActionResult UploadCaseDocuments()
         {
+            _contextAccessor.HttpContext.Session.SetString("CaseId", "");
             try
             {
                 if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
