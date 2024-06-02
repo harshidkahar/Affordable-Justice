@@ -225,5 +225,77 @@ namespace Starterkit.Data
             return returnValue;
         }
 
+
+        public string DAL_UpdateCase(CaseUpdateModel caseUpdate)
+        {
+            try
+            {
+                string _Result = string.Empty;
+
+                using (SqlConnection con = DataAccess.OpenConnection())
+                {
+                    using (SqlCommand cmd = new SqlCommand("[dbo].[DAL_UpdateCase]", con))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+
+                        cmd.Parameters.Add("@Id", SqlDbType.Int).Value = caseUpdate.CaseKey;
+                        //cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = caseUpdate.UserId;
+                        cmd.Parameters.Add("@PrimaryCaseType", SqlDbType.NVarChar).Value =caseUpdate.PrimaryCaseType;
+                        cmd.Parameters.Add("@SecondaryCaseType", SqlDbType.NVarChar).Value= caseUpdate.SecondaryCaseType;
+                        cmd.Parameters.Add("@ThirdCaseType", SqlDbType.NVarChar).Value = caseUpdate.ThirdCaseType;
+                        cmd.Parameters.Add("@ProceedingYet", SqlDbType.Int).Value = caseUpdate.ProceedingYet;
+                        cmd.Parameters.Add("@DateCommenced", SqlDbType.NVarChar).Value = caseUpdate.DateCommenced;
+                        cmd.Parameters.Add("@PreviousCaseNo", SqlDbType.NVarChar).Value = caseUpdate.PreviousCaseNo;
+                        cmd.Parameters.Add("@CurrentCaseNo", SqlDbType.NVarChar).Value = caseUpdate.CurrentCaseNo;
+                        cmd.Parameters.Add("@LegalAdviceInferred", SqlDbType.Int).Value = caseUpdate.LegalAdviceInferred;
+                        cmd.Parameters.Add("@whichCourt", SqlDbType.NVarChar).Value = caseUpdate.whichCourt;
+                        cmd.Parameters.Add("@opname", SqlDbType.NVarChar).Value = caseUpdate.opname;
+                        cmd.Parameters.Add("@opmail", SqlDbType.NVarChar).Value = caseUpdate.opmail;
+                        cmd.Parameters.Add("@opmob", SqlDbType.NVarChar).Value = caseUpdate.opmob;
+                        cmd.Parameters.Add("@emrid", SqlDbType.NVarChar).Value = caseUpdate.emrid;
+                        cmd.Parameters.Add("@passno", SqlDbType.NVarChar).Value = caseUpdate.passno;
+                        cmd.Parameters.Add("@cdesc", SqlDbType.NVarChar).Value = caseUpdate.cdesc;
+
+
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+            }
+        }
+
+        public string DAL_KycDocument(KycModel kycDocument)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Kyc]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = kycDocument.Id;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = kycDocument.UserId;
+                cmd.Parameters.Add("@EmiratesId", SqlDbType.NVarChar).Value = kycDocument.EmiratesId;
+                cmd.Parameters.Add("@PassportNo", SqlDbType.NVarChar).Value = kycDocument.PassportNo;
+                cmd.Parameters.Add("@PassportFrontUrl", SqlDbType.NVarChar).Value = kycDocument.PassportFrontUrl;
+                cmd.Parameters.Add("@PassportBackUrl", SqlDbType.NVarChar).Value = kycDocument.PassportBackUrl;
+                cmd.Parameters.Add("@KycDocumentUrl", SqlDbType.NVarChar).Value = kycDocument.KycDocumentUrl;
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = kycDocument.Opt;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+            }
+        }
+
     }
 }
