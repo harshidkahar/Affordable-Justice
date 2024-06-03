@@ -1,16 +1,18 @@
-"use strict";
+﻿"use strict";
 
 // Class definition
-var KTAccountSettingsProfileDetails = function () {
+var KTKyc = function () {
     // Private variables
     var form;
     var submitButton;
     var validation;
-    var jsonPostData=null;
-    var ProfileSetting = [];
+    var jsonPostData = null;
+    var Status = [];
+    //var ProfileSetting = [];
     //KTMenu.createInstances();
     // Private functions
 
+/*
     var fetchprofilesetting = function () {
         $.ajax({
             url: '/Account/profilesetting',
@@ -45,7 +47,9 @@ var KTAccountSettingsProfileDetails = function () {
             }
         });
     };
+*/
 
+/*
     var renderData = function () {
         $(document).ready(function () {
             $('#ddlCountryCode').select2({
@@ -83,7 +87,7 @@ var KTAccountSettingsProfileDetails = function () {
                 document.getElementById('txtAddress').value = profile.Address || '';
                 $('#ddlCountryCode').val(profile.CountryCode).trigger('change');
 
-               // const countrySelect = document.getElementById('#ddlCountry');
+                // const countrySelect = document.getElementById('#ddlCountry');
                 //countrySelect.value = profile.Country;
                 //$(countrySelect).trigger('change');
                 //const nationselect = document.getElementById('#ddlNationality');
@@ -95,7 +99,7 @@ var KTAccountSettingsProfileDetails = function () {
             }
         });
     };
-
+*/
     var initValidation = function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         validation = FormValidation.formValidation(
@@ -173,22 +177,22 @@ var KTAccountSettingsProfileDetails = function () {
         );
 
         // Select2 validation integration
-        $(form.querySelector('[name="country"]')).on('change', function() {
+        $(form.querySelector('[name="country"]')).on('change', function () {
             // Revalidate the color field when an option is chosen
             validation.revalidateField('country');
         });
 
-        $(form.querySelector('[name="language"]')).on('change', function() {
+        $(form.querySelector('[name="language"]')).on('change', function () {
             // Revalidate the color field when an option is chosen
             validation.revalidateField('language');
         });
 
-        $(form.querySelector('[name="timezone"]')).on('change', function() {
+        $(form.querySelector('[name="timezone"]')).on('change', function () {
             // Revalidate the color field when an option is chosen
             validation.revalidateField('timezone');
         });
     }
-
+    
     var handleForm = function () {
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
@@ -203,34 +207,25 @@ var KTAccountSettingsProfileDetails = function () {
                         // Enable button
                         submitButton.disabled = false;
 
-                       
+
 
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         jsonPostData = {
-                            FirstName: document.getElementById("txtFirstName").value.trim(),
-                            LastName: document.getElementById("txtLastName").value.trim(),
-                            Email: document.getElementById("txtEmail").value.trim(),
-                            ContactNo: document.getElementById("txtPhone").value.trim(),
-                            CountryCode: document.getElementById("ddlCountryCode").value.trim(),
-                            Address: document.getElementById("txtAddress").value.trim(),
-                            Address_Flat: document.getElementById("txtFlatno").value.trim(),
-                            Address_Building: document.getElementById("txtStreetname").value.trim(),
-                            Country: document.getElementById("ddlCountry").value.trim(),
-                            Nationality: document.getElementById("ddlNationality").value.trim(),
-                            Dob: document.getElementById("txtDob").value.trim()
-                            }
+                            EmiratesId: document.getElementById("EmiratesId").value.trim(),
+                            PassportNo: document.getElementById("PassportNo").value.trim(),
+                        }
 
 
                         $.ajax({
-                            type: "PUT",
-                            url: "/Account/UpdateCustomer",
+                            type: "POST",
+                            url: "/Account/KycDocumentUpload",
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(jsonPostData),
                             dataType: "json",
                             success: function (data) {
                                 if (data == "done") {
                                     Swal.fire({
-                                        text: "You have successfully updated!",
+                                        text: "Your Kyc Details is Submitted!",
                                         icon: "success",
                                         buttonsStyling: false,
                                         confirmButtonText: "Ok, got it!",
@@ -240,12 +235,12 @@ var KTAccountSettingsProfileDetails = function () {
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
                                             //form.reset();
+                                            document.querySelector('#kt_account_kyc_details_form').style.display = 'none';
+                                            document.querySelector('#kt_account_kyc_details_Update').style.display = 'block';
+                                            document.querySelector('#StatusKYC').style.display = 'block';
 
-                                            var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                            if (redirectUrl) {
-                                                location.href = redirectUrl;
+                                            fetchData();
 
-                                            }
                                         }
                                     });
                                 }
@@ -281,29 +276,86 @@ var KTAccountSettingsProfileDetails = function () {
         });
     }
 
-   
+    function fetchData() {
+    
+        $.ajax({
+            url: '/Account/GetStatus',
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    Status = response.getstatus;
+                    renderData();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve Status of KYC.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+
+
+
+    }
+
+
+    var renderData = function () {
+            
+            if (Status.length > 0) {
+                var profile = Status[0];
+                document.querySelector('#kt_landing_hero_text').textContent = profile.StatusMessage;
+                console.log(profile.StatusMessage);
+                //if (profile.statusKYC === 0) {
+                   // document.querySelector('#kt_landing_hero_text').textContent = 'Your KYC is in process';
+                //} else if (profile.statusKYC === 1) {
+                //    document.querySelector('#kt_landing_hero_text').textContent = 'Approved';
+                //} else {
+                //    document.querySelector('#kt_landing_hero_text').textContent = 'Unknown KYC status'; // Handle unexpected values
+               // }
+            }
+    };
+
+
     // Public methods
     return {
         init: function () {
-            form = document.getElementById('kt_account_profile_details_form');
-            
+            form = document.getElementById('kt_account_kyc_details_form');
+
             if (!form) {
                 return;
             }
-           
-            submitButton = form.querySelector('#kt_account_profile_details_submit');
-            fetchprofilesetting();
+            
+            submitButton = form.querySelector('#kt_account_kyc_details_submit');
+            //fetchprofilesetting();
             initValidation();
             handleForm();
-            
+           // handleKycForm();
+
         }
     }
 }();
 
 // On document ready
-KTUtil.onDOMContentLoaded(function() {
-    KTAccountSettingsProfileDetails.init();
-    
+KTUtil.onDOMContentLoaded(function () {
+    KTKyc.init();
+
 });
 function formatDateToDDMMYYYY(date) {
     // Get the day, month, and year from the date object
