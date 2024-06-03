@@ -235,7 +235,11 @@ var KTKyc = function () {
                                     }).then(function (result) {
                                         if (result.isConfirmed) {
                                             //form.reset();
-                                            //fetchData();
+                                            document.querySelector('#kt_account_kyc_details_form').style.display = 'none';
+                                            document.querySelector('#kt_account_kyc_details_Update').style.display = 'block';
+                                            document.querySelector('#StatusKYC').style.display = 'block';
+
+                                            fetchData();
 
                                         }
                                     });
@@ -273,10 +277,7 @@ var KTKyc = function () {
     }
 
     function fetchData() {
-
-        document.querySelector('#kt_account_kyc_details_form').style.display = 'none';
-        document.querySelector('#kt_account_kyc_details_Update').style.display = 'block';
-
+    
         $.ajax({
             url: '/Account/GetStatus',
             type: 'GET',
@@ -316,22 +317,19 @@ var KTKyc = function () {
 
 
     var renderData = function () {
-        $(document).ready(function () {
             
-            document.querySelector('#StatusKYC').style.display = 'block';
             if (Status.length > 0) {
                 var profile = Status[0];
-                console.log(profile.statusKYC);
-                if (profile.statusKYC === 0) {
-                    document.querySelector('#kt_landing_hero_text').textContent = 'Your KYC is in process';
-                } else if (profile.statusKYC === 1) {
-                    document.querySelector('#kt_landing_hero_text').textContent = 'Approved';
-                } else {
-                    document.querySelector('#kt_landing_hero_text').textContent = 'Unknown KYC status'; // Handle unexpected values
-                }
+                document.querySelector('#kt_landing_hero_text').textContent = profile.StatusMessage;
+                console.log(profile.StatusMessage);
+                //if (profile.statusKYC === 0) {
+                   // document.querySelector('#kt_landing_hero_text').textContent = 'Your KYC is in process';
+                //} else if (profile.statusKYC === 1) {
+                //    document.querySelector('#kt_landing_hero_text').textContent = 'Approved';
+                //} else {
+                //    document.querySelector('#kt_landing_hero_text').textContent = 'Unknown KYC status'; // Handle unexpected values
+               // }
             }
-
-        });
     };
 
 

@@ -541,7 +541,9 @@ namespace Starterkit.Web.Logic
                         if (ds.Tables[0].Columns.Contains("Status") && !row["Status"].Equals(DBNull.Value))
                         {
                             profiloverviewModel.Status = Convert.ToInt32(row["Status"]);
+                            profiloverviewModel.StatusMessage = profiloverviewModel.Status == 0 ? "Your KYC is in Process !" : "Your KYC is now linked !";
                         }
+                    
                         if (ds.Tables[0].Columns.Contains("UserId") && !row["UserId"].Equals(DBNull.Value))
                         {
                             profiloverviewModel.UserId = Convert.ToInt32(row["UserId"]);

@@ -20,7 +20,10 @@ namespace Starterkit.Model
         /// <summary>
         /// Represent Status   
         ///</summary>
-
-
+        ///
+        public string StatusMessage { get; set; }
+        ///<summary>
+        /// Represent Status Message.
+        ///</summary>
     }
 }
