@@ -5,8 +5,8 @@ var KTCreateCaseGeneral = function () {
     // Elements
     var form;
     var submitButton;
-    var caseDetailData = [];
     var validator;
+    var caseDetailData = [];
     var jsonPostData = null;
 
     $('#yes-proceedings').hide();
@@ -63,130 +63,6 @@ var KTCreateCaseGeneral = function () {
 
                     secondary_case_type = form.querySelector('[name="secondary-case-type"]').value;
                     
-                    if (secondary_case_type == "CIVIL") {
-                        thrid_case_type = form.querySelector('[name="civil-case"]').value;
-                    }
-                    else if (secondary_case_type == "CRIMINAL") {
-                        thrid_case_type = form.querySelector('[name="criminal-case"]').value;
-                    }
-                    else if (secondary_case_type == "OTHERS") {
-                        thrid_case_type = form.querySelector('[name="other-case"]').value;
-                    }
-                    else if (secondary_case_type == "PERSONAL STATUS") {
-                        thrid_case_type = form.querySelector('[name="personal-status-case"]').value;
-                    }
-
-                    // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                    jsonPostData = {
-                        PrimaryCaseType: form.querySelector('[name="primary-case-type"]').value,
-                        SecondaryCaseType: form.querySelector('[name="secondary-case-type"]').value,
-                        ThirdCaseType: thrid_case_type,
-                        ProceedingYet: form.querySelector('[name="any-proceedings"]').value,
-                        DateCommenced: form.querySelector('[name="date_commenced"]').value,
-                        PreviousCaseNo: form.querySelector('[name="previous_case_number"]').value,
-                        CurrentCaseNo: form.querySelector('[name="current_case_number"]').value,
-                        LegalAdviceInferred: form.querySelector('[name="legal-advice-inferred"]').value,
-                        whichCourt: form.querySelector('[name="which-court"]').value,
-                        opname: form.querySelector('[name="opposition-fullname"]').value,
-                        opmail: form.querySelector('[name="opposition-email"]').value,
-                        opmob: form.querySelector('[name="opposition-phone"]').value,
-                        emrid: form.querySelector('[name="opposition-emiratesId"]').value,
-                        passno: form.querySelector('[name="opposition-passport"]').value,
-                        cdesc: form.querySelector('[name="case_description"]').value
-                    }
-
-
-                    $.ajax({
-                        type: "POST",
-                        url: "Case/CreateCase",
-                        contentType: "application/json; charset=utf-8",
-                        data: JSON.stringify(jsonPostData),
-                        dataType: "json",
-                        success: function (data) {
-                            if (data == "done") {
-                                Swal.fire({
-                                    text: "You have successfully registered!",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                }).then(function (result) {
-                                    if (result.isConfirmed) {
-                                        form.reset();
-
-                                        var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                                        if (redirectUrl) {
-                                            location.href = redirectUrl;
-
-                                        }
-                                    }
-                                });
-                            }
-                            else {
-                                Swal.fire({
-                                    text: "Sorry, looks like there are some errors detected, please try again.",
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn btn-primary"
-                                    }
-                                });
-                            }
-                        },
-                        error: ''
-                    });
-
-                }, 1500);
-            } else {
-                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
-            }
-            //});
-        });
-
-        // Handle password input
-
-    }
-
-    var handleUpdateForm = function (e) {
-        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
-
-        // Handle form submit
-        submitButton.addEventListener('click', function (e) {
-            e.preventDefault();
-            //location.href = form.getAttribute('data-kt-redirect-url');
-            jsonPostData = null;
-            //validator.revalidateField('password');
-            var status = "Valid";
-            //validator.validate().then(function (status) {
-            if (status == 'Valid') {
-                // Show loading indication
-                submitButton.setAttribute('data-kt-indicator', 'on');
-
-                // Disable button to avoid multiple click
-                submitButton.disabled = true;
-
-                // Simulate ajax request
-                setTimeout(function () {
-                    // Hide loading indication
-                    submitButton.removeAttribute('data-kt-indicator');
-
-                    // Enable button
-                    submitButton.disabled = false;
-
-                    secondary_case_type = form.querySelector('[name="secondary-case-type"]').value;
-
                     if (secondary_case_type == "CIVIL") {
                         thrid_case_type = form.querySelector('[name="civil-case"]').value;
                     }
@@ -282,6 +158,7 @@ var KTCreateCaseGeneral = function () {
         // Handle password input
 
     }
+
 
     // Handle form ajax
     var handleFormAjax = function (e) {
@@ -561,6 +438,8 @@ var KTCreateCaseGeneral = function () {
         }
     };
 
+    
+
 
 
 
@@ -575,7 +454,8 @@ var KTCreateCaseGeneral = function () {
             if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
                 handleFormAjax();
             } else {
-                //handleForm();
+                handleForm();
+                //fetchCaseDetail();
             }
             // Check if the URL contains 'createCase' and 'CaseId' parameter
             const urlParams = new URLSearchParams(window.location.search);
@@ -584,10 +464,6 @@ var KTCreateCaseGeneral = function () {
 
             if (url.includes('createCase') && caseId !== null) {
                 fetchCaseDetail();
-                handleUpdateForm();
-            }
-            else {
-                handleForm();
             }
 
         }

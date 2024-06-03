@@ -321,6 +321,52 @@ namespace Starterkit.Web.Logic
 							casedetailModel.Passno = Convert.ToString(row["Passno"]);
 						}
 						casedetail.Add(casedetailModel);
+                        if (ds.Tables[0].Columns.Contains("DateCommenced") && !row["DateCommenced"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.DateCommenced = Convert.ToDateTime(row["DateCommenced"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("PreviousCaseNo") && !row["PreviousCaseNo"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.PreviousCaseNo = Convert.ToString(row["PreviousCaseNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CurrentCaseNo") && !row["CurrentCaseNo"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.CurrentCaseNo = Convert.ToString(row["CurrentCaseNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("LegalAdviceInferred") && !row["LegalAdviceInferred"].Equals(DBNull.Value))
+                        {
+                            int legalAdviceInferredValue = Convert.ToInt32(row["LegalAdviceInferred"]);
+                            casedetailModel.LegalAdviceInferred = legalAdviceInferredValue == 1 ? "Yes" : "No";
+                        }
+                        if (ds.Tables[0].Columns.Contains("WhichCourt") && !row["WhichCourt"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.WhichCourt = Convert.ToString(row["WhichCourt"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Opname") && !row["Opname"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Opname = Convert.ToString(row["Opname"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Opmail") && !row["Opmail"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Opmail = Convert.ToString(row["Opmail"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Opmob") && !row["Opmob"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Opmob = Convert.ToString(row["Opmob"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Emrid") && !row["Emrid"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Emrid = Convert.ToString(row["Emrid"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Passno") && !row["Passno"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Passno = Convert.ToString(row["Passno"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("cdesc") && !row["cdesc"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Cdesc = Convert.ToString(row["cdesc"]);
+                        }
+                        casedetail.Add(casedetailModel);
 
 
 					}
@@ -513,6 +559,61 @@ namespace Starterkit.Web.Logic
 			CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
 			return customerDA.DAL_UserDocument(updateDescription);
 		}
+
+        public string CaseEdit(CaseUpdateModel Updatecase)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_UpdateCase(Updatecase);
+        }
+
+
+        public string InsertKyc(KycModel kycDocument)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_KycDocument(kycDocument);
+        }
+
+        public List<KycstatusModel> KYCStatus(int userId)
+        {
+            List<KycstatusModel> getstatus = new List<KycstatusModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, "", "KYCStatus");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        KycstatusModel profiloverviewModel = new KycstatusModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Status") && !row["Status"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Status = Convert.ToInt32(row["Status"]);
+                            profiloverviewModel.StatusMessage = profiloverviewModel.Status == 0 ? "Your KYC is in Process !" : "Your KYC is now linked !";
+                        }
+                    
+                        if (ds.Tables[0].Columns.Contains("UserId") && !row["UserId"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.UserId = Convert.ToInt32(row["UserId"]);
+                        }
+
+                        getstatus.Add(profiloverviewModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return getstatus;
+        }
 
 		public string InsertDependent(InsertDependentModel addDependent)
 		{

@@ -3,6 +3,7 @@
     // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
     KTTheme.AddJavascriptFile("js/custom/account/settings/profile-details.js");
     KTTheme.AddJavascriptFile("js/custom/account/settings/IDfileUpload.js");
+    KTTheme.AddJavascriptFile("js/custom/account/settings/KYC.js");
 }
 
 
@@ -16,30 +17,6 @@
                 <!--begin::Details-->
                 <partial name='~/Views/Layout/Demo1/Partials/Account/_AccountHeader.cshtml' />
                 <!--end::Details-->
-                <!--begin::Navs-->
-                <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
-                    <!--begin::Nav item-->
-                    <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5 " href="overview">Overview</a>
-                    </li>
-                    <!--end::Nav item-->
-                    <!--begin::Nav item-->
-                    <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="kyc">KYC</a>
-                    </li>
-                    <!--end::Nav item-->
-                    <!--begin::Nav item-->
-                    <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="settings">Edit Profile</a>
-                    </li>
-                    <!--end::Nav item-->
-                    <!--begin::Nav item-->
-                    <li class="nav-item mt-2">
-                        <a class="nav-link text-active-primary ms-0 me-10 py-5" href="changeEmail">Change Email</a>
-                    </li>
-                    <!--end::Nav item-->
-                </ul>
-                <!--begin::Navs-->
             </div>
         </div>
         <!--end::Navbar-->
@@ -58,7 +35,7 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form id="kt_account_profile_details_form" class="form">
+                <form id="kt_account_kyc_details_form" class="form">
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
                         <!--begin::Input group-->
@@ -72,7 +49,7 @@
                                 <div class="row">
                                     <!--begin::Col-->
                                     <div class="col-lg-6 fv-row">
-                                        <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Please enter Emirates ID" />
+                                        <input type="text" name="EmiratesId" id="EmiratesId" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Please enter Emirates ID" />
                                     </div>
                                     <!--end::Col-->
                                     <!--begin::Col-->
@@ -111,7 +88,7 @@
                                 <div class="row">
                                     <!--begin::Col-->
                                     <div class="col-lg-6 fv-row">
-                                        <input type="text" name="fname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Please enter Passport Number" />
+                                        <input type="text" name="PassportNo" id="PassportNo" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="Please enter Passport Number" />
                                     </div>
                                     <!--end::Col-->
                                 </div>
@@ -193,13 +170,22 @@
                     <!--begin::Actions-->
                     <div class="card-footer d-flex justify-content-end py-6 px-9">
                         <button type="reset" class="btn btn-light btn-active-light-primary me-2">Discard</button>
-                        <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                        <button type="submit" class="btn btn-primary" id="kt_account_kyc_details_submit">Save Changes</button>
+                        <button type="button" class="btn btn-primary" id="kt_account_kyc_details_Update" style="display:none;">Edit</button>
                     </div>
                     <!--end::Actions-->
                 </form>
                 <!--end::Form-->
+                <br />
+                <h1 class="lh-base fw-bold fs-2x fs-lg-3x text-center" id="StatusKYC" style="display:none;">
+                    <span style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
+                        <span id="kt_landing_hero_text"></span>
+                    </span>
+                </h1>
+
             </div>
             <!--end::Content-->
+
         </div>
         <!--end::Basic info-->
     </div>

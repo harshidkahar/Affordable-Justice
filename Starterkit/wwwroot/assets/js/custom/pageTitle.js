@@ -9,6 +9,7 @@ const kyc = document.getElementById("acc_nav_kyc");
 const billing = document.getElementById("acc_nav_billing");
 const statements = document.getElementById("acc_nav_statements");
 const referrals = document.getElementById("acc_nav_referrals");
+const changeEmail = document.getElementById("acc_nav_change_email"); 
 
 try {
     overview.classList.remove("active");
@@ -17,6 +18,7 @@ try {
     statements.classList.remove("active");
     referrals.classList.remove("active");
     kyc.classList.remove("active");
+    changeEmail.classList.remove("active");
 }
 catch { }
 
@@ -31,18 +33,18 @@ switch (page) {
         overview.classList.add("active");
         break;
     case "settings":
-        pageTitle = "Account Settings";
-        pageBreadcrum = "Account";
+        pageTitle = "Account - Edit Profile";
+        pageBreadcrum = "Account - Edit Profile";
         settings.classList.add("active");
         break;
     case "kyc":
-        pageTitle = "KYC";
-        pageBreadcrum = "Account";
-        settings.classList.add("active");
+        pageTitle = "Accouint - KYC";
+        pageBreadcrum = "Account - KYC";
+        kyc.classList.add("active");
         break;
     case "billing":
         pageTitle = "Account Billing";
-        pageBreadcrum = "Account";
+        pageBreadcrum = "Account - Billing";
         billing.classList.add("active");
         break;
     case "statements":
@@ -55,7 +57,12 @@ switch (page) {
         pageBreadcrum = "Account";
         referrals.classList.add("active");
         break;
-    case "createCase":
+    case "changeEmail":
+        pageTitle = "Account - Change Email";
+        pageBreadcrum = "Account - Change Email";
+        changeEmail.classList.add("active");
+        break;
+    case "createcase":
         pageTitle = "Create Case";
         pageBreadcrum = "Create Case";
         break;
@@ -64,6 +71,28 @@ switch (page) {
         pageBreadcrum = "View Case List";
         document.getElementById("action_status").style.visibility = "visible";
         break;
+    case "uploadCaseDocuments":
+        pageTitle = "Upload Case Documents";
+        pageBreadcrum = "Upload Case Documents";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "viewCaseDocuments":
+        pageTitle = "View Case Documents";
+        pageBreadcrum = "View Case Documents";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "caseDetails":
+        pageTitle = "Case Details";
+        pageBreadcrum = "Case Details";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "createcompany":
+        pageTitle = "Create Company";
+        pageBreadcrum = "Create Company";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+
+        
 }
 
 document.getElementById("pageTitle").innerHTML = pageTitle;

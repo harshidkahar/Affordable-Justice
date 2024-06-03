@@ -65,8 +65,15 @@ var KTCaseDetail = function () {
 
     return {
         init: function () {
-            fetchCaseDetail();
-        }
+            // Check if the URL contains 'createCase' and 'CaseId' parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseId = urlParams.get('CaseId');
+            const url = window.location.href;
+
+            if (url.includes('caseDetails') && caseId !== null) {
+                fetchCaseDetail();
+            }
+             }
     };
 }();
 
