@@ -144,5 +144,56 @@ namespace Starterkit.Controllers
         {
             return View("Views/Pages/Account/ChangeEmail.cshtml");
         }
+
+        public JsonResult KycDocumentUpload([FromBody] Kyc kycModel)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                KycModel kycDocument = new KycModel();
+
+                kycDocument.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                kycDocument.EmiratesId = kycModel.EmiratesId?.Trim();
+                kycDocument.PassportNo = kycModel.PassportNo?.Trim();
+                kycDocument.PassportFrontUrl = "C://Downloads/passfront.pdf";
+                kycDocument.PassportBackUrl = "C://Downloads/passback.pdf";
+                kycDocument.KycDocumentUrl = "C://Downloads/EmirId.pdf";
+                kycDocument.Opt = "I";
+
+
+
+
+                _Result = customerLogic.InsertKyc(kycDocument);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetStatus()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var getstatus = _customerLogic.KYCStatus(userId);
+
+                var result = new { success = true, getstatus };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve KYC STATUS." };
+                return Json(errorResult);
+            }
+        }
+
+
     }
 }

@@ -524,6 +524,55 @@ namespace Starterkit.Web.Logic
         }
 
 
+        public string InsertKyc(KycModel kycDocument)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_KycDocument(kycDocument);
+        }
+
+        public List<KycstatusModel> KYCStatus(int userId)
+        {
+            List<KycstatusModel> getstatus = new List<KycstatusModel>();
+            try
+            {
+                CommonDA commonDA = new CommonDA();
+                DataSet ds = commonDA.GetCommonFillData(userId, "", "KYCStatus");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        KycstatusModel profiloverviewModel = new KycstatusModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Status") && !row["Status"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.Status = Convert.ToInt32(row["Status"]);
+                            profiloverviewModel.StatusMessage = profiloverviewModel.Status == 0 ? "Your KYC is in Process !" : "Your KYC is now linked !";
+                        }
+                    
+                        if (ds.Tables[0].Columns.Contains("UserId") && !row["UserId"].Equals(DBNull.Value))
+                        {
+                            profiloverviewModel.UserId = Convert.ToInt32(row["UserId"]);
+                        }
+
+                        getstatus.Add(profiloverviewModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return getstatus;
+        }
+
+
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{
         //    var isAuthenticated = false;

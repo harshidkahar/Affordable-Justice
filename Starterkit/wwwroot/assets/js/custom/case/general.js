@@ -5,6 +5,7 @@ var KTCreateCaseGeneral = function () {
     // Elements
     var form;
     var submitButton;
+    var caseDetailData = [];
     var validator;
     var jsonPostData = null;
 
@@ -158,6 +159,129 @@ var KTCreateCaseGeneral = function () {
 
     }
 
+    var handleUpdateForm = function (e) {
+        // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
+
+        // Handle form submit
+        submitButton.addEventListener('click', function (e) {
+            e.preventDefault();
+            //location.href = form.getAttribute('data-kt-redirect-url');
+            jsonPostData = null;
+            //validator.revalidateField('password');
+            var status = "Valid";
+            //validator.validate().then(function (status) {
+            if (status == 'Valid') {
+                // Show loading indication
+                submitButton.setAttribute('data-kt-indicator', 'on');
+
+                // Disable button to avoid multiple click
+                submitButton.disabled = true;
+
+                // Simulate ajax request
+                setTimeout(function () {
+                    // Hide loading indication
+                    submitButton.removeAttribute('data-kt-indicator');
+
+                    // Enable button
+                    submitButton.disabled = false;
+
+                    secondary_case_type = form.querySelector('[name="secondary-case-type"]').value;
+
+                    if (secondary_case_type == "CIVIL") {
+                        thrid_case_type = form.querySelector('[name="civil-case"]').value;
+                    }
+                    else if (secondary_case_type == "CRIMINAL") {
+                        thrid_case_type = form.querySelector('[name="criminal-case"]').value;
+                    }
+                    else if (secondary_case_type == "OTHERS") {
+                        thrid_case_type = form.querySelector('[name="other-case"]').value;
+                    }
+                    else if (secondary_case_type == "PERSONAL STATUS") {
+                        thrid_case_type = form.querySelector('[name="personal-status-case"]').value;
+                    }
+
+                    // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                    jsonPostData = {
+                        PrimaryCaseType: form.querySelector('[name="primary-case-type"]').value,
+                        SecondaryCaseType: form.querySelector('[name="secondary-case-type"]').value,
+                        ThirdCaseType: thrid_case_type,
+                        ProceedingYet: form.querySelector('[name="any-proceedings"]').value,
+                        DateCommenced: form.querySelector('[name="date_commenced"]').value,
+                        PreviousCaseNo: form.querySelector('[name="previous_case_number"]').value,
+                        CurrentCaseNo: form.querySelector('[name="current_case_number"]').value,
+                        LegalAdviceInferred: form.querySelector('[name="legal-advice-inferred"]').value,
+                        whichCourt: form.querySelector('[name="which-court"]').value,
+                        opname: form.querySelector('[name="opposition-fullname"]').value,
+                        opmail: form.querySelector('[name="opposition-email"]').value,
+                        opmob: form.querySelector('[name="opposition-phone"]').value,
+                        emrid: form.querySelector('[name="opposition-emiratesId"]').value,
+                        passno: form.querySelector('[name="opposition-passport"]').value,
+                        cdesc: form.querySelector('[name="case_description"]').value
+                    }
+
+
+                    $.ajax({
+                        type: "PUT",
+                        url: "Case/EditCase",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(jsonPostData),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == "done") {
+                                Swal.fire({
+                                    text: "You have successfully Updated",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function (result) {
+                                    if (result.isConfirmed) {
+                                        //form.reset();
+
+                                        var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                        if (redirectUrl) {
+                                            location.href = redirectUrl;
+
+                                        }
+                                    }
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            }
+                        },
+                        error: ''
+                    });
+
+                }, 1500);
+            } else {
+                // Show error popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+            //});
+        });
+
+        // Handle password input
+
+    }
 
     // Handle form ajax
     var handleFormAjax = function (e) {
@@ -342,6 +466,103 @@ var KTCreateCaseGeneral = function () {
         })
     };
 
+    var fetchCaseDetail = function () {
+        $.ajax({
+            url: '/Case/EditCase',
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    caseDetailData = response.caseDetail;
+                    renderData();
+                    $('[data-control="select2"]').select2();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve case detail.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+    };
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    var renderData = function () {
+        if (caseDetailData.length > 0) {
+            var caseDetail = caseDetailData[0];
+
+            document.getElementById('ddlCT0').value = caseDetail.PrimaryCaseType || '';
+            document.getElementById('caseType1').value = caseDetail.SecondaryCaseType || '';
+            if (caseDetail.SecondaryCaseType === "CIVIL") {
+                document.querySelector('#ddlCivilCase').style.display = 'block';
+                document.querySelector('#ddlCriminalCase').style.display = 'none';
+                document.querySelector('#ddlOtherCase').style.display = 'none';
+                document.querySelector('#ddlPersonalStatus').style.display = 'none';
+                document.querySelector('[name="civil-case"]').value = caseDetail.ThirdCaseType || '';
+            } else if (caseDetail.SecondaryCaseType === "CRIMINAL") {
+                document.querySelector('#ddlCriminalCase').style.display = 'block';
+                document.querySelector('#ddlCivilCase').style.display = 'none';
+                document.querySelector('#ddlOtherCase').style.display = 'none';
+                document.querySelector('#ddlPersonalStatus').style.display = 'none';
+                document.querySelector('[name="criminal-case"]').value = caseDetail.ThirdCaseType || '';
+            } else if (caseDetail.SecondaryCaseType === "OTHERS") {
+                document.querySelector('#ddlOtherCase').style.display = 'block';
+                document.querySelector('#ddlCivilCase').style.display = 'none';
+                document.querySelector('#ddlCriminalCase').style.display = 'none';
+                document.querySelector('#ddlPersonalStatus').style.display = 'none';
+                document.querySelector('[name="other-case"]').value = caseDetail.ThirdCaseType || '';
+            } else if (caseDetail.SecondaryCaseType === "PERSONAL STATUS") {
+                document.querySelector('#ddlPersonalStatus').style.display = 'block';
+                document.querySelector('#ddlCivilCase').style.display = 'none';
+                document.querySelector('#ddlCriminalCase').style.display = 'none';
+                document.querySelector('#ddlOtherCase').style.display = 'none';
+                document.querySelector('[name="personal-status-case"]').value = caseDetail.ThirdCaseType || '';
+            }
+            const proceedingyet = caseDetail.ProceedingYet ? '1' : '2';
+            console.log(proceedingyet);
+            document.getElementById('any-proceedings').value = caseDetail.ProceedingYet ? '1' : '2';
+            if (proceedingyet === '1') {
+                document.querySelector('#yes-proceedings').style.display = 'block';
+
+            }
+            document.querySelector('[name="which-court"]').value = caseDetail.WhichCourt || '';
+            document.querySelector('[name="legal-advice-inferred"]').value = caseDetail.LegalAdviceInferred ? '1' : '2';
+            document.getElementById('kt_datepicker_2').value = caseDetail.DateCommenced ? formatDate(caseDetail.DateCommenced) : '';
+            document.querySelector('[name="previous_case_number"]').value = caseDetail.PreviousCaseNo || '';
+            document.querySelector('[name="current_case_number"]').value = caseDetail.CurrentCaseNo || '';
+            document.querySelector('[name="opposition-fullname"]').value = caseDetail.Opname || '';
+            document.querySelector('[name="opposition-email"]').value = caseDetail.Opmail || '';
+            document.querySelector('[name="opposition-phone"]').value = caseDetail.Opmob || '';
+            document.querySelector('[name="opposition-emiratesId"]').value = caseDetail.Emrid || '';
+            document.querySelector('[name="opposition-passport"]').value = caseDetail.Passno || '';
+            document.querySelector('[name="case_description"]').value = caseDetail.Cdesc || '';
+        }
+    };
+
+
+
 
     // Public functions
     return {
@@ -354,8 +575,21 @@ var KTCreateCaseGeneral = function () {
             if (isValidUrl(submitButton.closest('form').getAttribute('action'))) {
                 handleFormAjax();
             } else {
+                //handleForm();
+            }
+            // Check if the URL contains 'createCase' and 'CaseId' parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const caseId = urlParams.get('CaseId');
+            const url = window.location.href;
+
+            if (url.includes('createCase') && caseId !== null) {
+                fetchCaseDetail();
+                handleUpdateForm();
+            }
+            else {
                 handleForm();
             }
+
         }
     };
 
