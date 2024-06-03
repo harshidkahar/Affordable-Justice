@@ -340,31 +340,7 @@ var KTCreateAccount = function () {
                 document.querySelector('#depdetailslbl').style.display = 'none';
             }
 
-            dependvisaName = form.querySelector('[name="Dependentvisaname"]').value = '';
-            dependvisaEmail = form.querySelector('[name="Dependentvisaemail"]').value = '';
-            dependvisaDOB = form.querySelector('[name="DependentvisaDateOfBirth"]').value = '';
-            dependvisaPasspno = form.querySelector('[name="Dependentvisapasspno"]').value = '';
-            dependvisaAddress = form.querySelector('[name="dependentaddress"]').value = '';
-            // Reset Select2 elements
-            const countrySelect = form.querySelector('[name="dependentcountry"]');
-            const nationalitySelect = form.querySelector('[name="dependentnationality"]');
-
-            // Resetting the native select elements
-            countrySelect.selectedIndex = 0;
-            nationalitySelect.selectedIndex = 0;
-
-            // If Select2 is used, reset the Select2 elements
-            if ($(countrySelect).data('select2')) {
-                $(countrySelect).val(null).trigger('change');
-            }
-            if ($(nationalitySelect).data('select2')) {
-                $(nationalitySelect).val(null).trigger('change');
-            }
-
-            // Show the table if it's not already visible
-            document.querySelector('#dependentviewtable').style.display = 'block';
-            document.querySelector('#Dependentdetails').style.display = 'none';
-            document.querySelector('#addDependent').style.display = 'none';
+            
           var depDetails = null;
               depDetails = {
                   dependvisaName: form.querySelector('[name="Dependentvisaname"]').value,
@@ -376,7 +352,31 @@ var KTCreateAccount = function () {
                   dependvisanationality: form.querySelector('[name="dependentnationality"]').value,
               };
 
+          dependvisaName = form.querySelector('[name="Dependentvisaname"]').value = '';
+          dependvisaEmail = form.querySelector('[name="Dependentvisaemail"]').value = '';
+          dependvisaDOB = form.querySelector('[name="DependentvisaDateOfBirth"]').value = '';
+          dependvisaPasspno = form.querySelector('[name="Dependentvisapasspno"]').value = '';
+          dependvisaAddress = form.querySelector('[name="dependentaddress"]').value = '';
+          // Reset Select2 elements
+          const countrySelect = form.querySelector('[name="dependentcountry"]');
+          const nationalitySelect = form.querySelector('[name="dependentnationality"]');
 
+          // Resetting the native select elements
+          countrySelect.selectedIndex = 0;
+          nationalitySelect.selectedIndex = 0;
+
+          // If Select2 is used, reset the Select2 elements
+          if ($(countrySelect).data('select2')) {
+              $(countrySelect).val(null).trigger('change');
+          }
+          if ($(nationalitySelect).data('select2')) {
+              $(nationalitySelect).val(null).trigger('change');
+          }
+
+          // Show the table if it's not already visible
+          document.querySelector('#dependentviewtable').style.display = 'block';
+          document.querySelector('#Dependentdetails').style.display = 'none';
+          document.querySelector('#addDependent').style.display = 'none';
           $.ajax({
               type: "POST",
               url: "Case/AddDependent",

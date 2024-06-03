@@ -323,8 +323,25 @@ namespace Starterkit.Controllers
             }
         }
 
+		[AllowAnonymous]
+		[HttpPost]
+		public JsonResult GetCompanyId()
+		{
+			try
+			{				
+				string _Result = string.Empty;
+				
+				_Result = _contextAccessor.HttpContext.Session.GetString("CompId");
 
-        [AllowAnonymous]
+				return Json(_Result);
+			}
+			catch
+			{
+				return Json("error");
+			}
+		}
+
+		[AllowAnonymous]
         [HttpPost]
         public JsonResult AddDependent([FromBody] DependentModel insertDependent)
         {

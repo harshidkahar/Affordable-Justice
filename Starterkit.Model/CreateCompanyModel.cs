@@ -12,7 +12,7 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Primary Key
         /// </summary>
-        public int CompanyKey { get; set; }
+        public int Id { get; set; }
         public int UserId { get; set; }
         /// <summary>
         /// Represents User Id
