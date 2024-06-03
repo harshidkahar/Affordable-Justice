@@ -138,7 +138,7 @@ public class AuthController : Controller
 
             _contextAccessor.HttpContext.Session.SetString("CustomerGUID", userModel.CustomerGUID.ToString());
 
-            //_contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
+            _contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
 
             return "done";
 
@@ -193,7 +193,7 @@ public class AuthController : Controller
                     body = reader.ReadToEnd();
                 }
                 body = body.Replace("{OTP}", validateEmail);
-                //sendEmailLogic.SendEmail(otpModel.Email, subject, body);
+                sendEmailLogic.SendEmail(otpModel.Email, subject, body);
                 _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
 
                 returnValue = "done";//otpModel.Email;
@@ -230,7 +230,7 @@ public class AuthController : Controller
                     body = reader.ReadToEnd();
                 }
                 body = body.Replace("{OTP}", validateEmail);
-                //sendEmailLogic.SendEmail(otpModel.Email, subject, body);
+                sendEmailLogic.SendEmail(otpModel.Email, subject, body);
                 _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
 
                 returnValue = "done";//otpModel.Email;

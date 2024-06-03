@@ -34,7 +34,8 @@ namespace Starterkit.Controllers
                     _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
                 }
             }
-            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); }
+            catch { _contextAccessor.HttpContext.Session.SetString("CaseId", ""); 
+            }
             return View("Views/Pages/Cases/CreateCase.cshtml");
         }
 
@@ -51,6 +52,7 @@ namespace Starterkit.Controllers
         [HttpGet("/uploadCaseDocuments")]
         public IActionResult UploadCaseDocuments()
         {
+            _contextAccessor.HttpContext.Session.SetString("CaseId", "");
             try
             {
                 if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
@@ -76,6 +78,7 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Cases/caseDetails.cshtml");
         }
 
+     
         [HttpGet("/viewCaseDocuments")]
         public IActionResult ViewCaseDocuments()
         {
@@ -202,6 +205,25 @@ namespace Starterkit.Controllers
         }
 
 
+        [HttpGet]
+        public JsonResult EditCase()
+        {
+            try
+            {
+                CustomerLogic _customerLogic = new CustomerLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
+                var caseDetail = _customerLogic.GetCaseDetail(userId, caseId);
+
+                var result = new { success = true, caseDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case detail." };
+                return Json(errorResult);
+            }
+        }
 
         [HttpGet]
         public JsonResult GetCaseDetail()
@@ -223,8 +245,7 @@ namespace Starterkit.Controllers
             }
         }
 
-       
-        
+              
         [AllowAnonymous]
         [HttpPost]
         public JsonResult CreateCase([FromBody] InsertCaseModel registerCase)
@@ -279,7 +300,6 @@ namespace Starterkit.Controllers
         }
 
       
-
         [AllowAnonymous]
         [HttpPut]
         public JsonResult UpdateDescription([FromBody] DocumentDetailModel documentUpdate)
@@ -308,6 +328,59 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult EditCase([FromBody] UpdateCaseModel UpdateCase)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                CaseUpdateModel updateCreatecase = new CaseUpdateModel();
+
+                // Retrieving session data
+                int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+
+                // Updating the updateCreatecase object with session data and request data
+                // Updating the updateCreatecase object with session data and request data
+                updateCreatecase.CaseKey = caseId;
+                //updateCreatecase.UserId = userId;
+                updateCreatecase.PrimaryCaseType = UpdateCase.PrimaryCaseType?.Trim();
+                updateCreatecase.SecondaryCaseType = UpdateCase.SecondaryCaseType?.Trim();
+                updateCreatecase.ThirdCaseType = UpdateCase.ThirdCaseType?.Trim();
+                updateCreatecase.ProceedingYet = UpdateCase.ProceedingYet;
+                //updateCreatecase.DateCommenced = UpdateCase.DateCommenced;
+                updateCreatecase.PreviousCaseNo = UpdateCase.PreviousCaseNo?.Trim();
+                updateCreatecase.CurrentCaseNo = UpdateCase.CurrentCaseNo?.Trim();
+                updateCreatecase.LegalAdviceInferred = UpdateCase.LegalAdviceInferred;
+                updateCreatecase.whichCourt = UpdateCase.whichCourt?.Trim();
+                updateCreatecase.opname = UpdateCase.opname?.Trim();
+                updateCreatecase.opmail = UpdateCase.opmail?.Trim();
+                updateCreatecase.opmob = UpdateCase.opmob?.Trim();
+                updateCreatecase.emrid = UpdateCase.emrid?.Trim();
+                updateCreatecase.passno = UpdateCase.passno?.Trim();
+                updateCreatecase.cdesc = UpdateCase.cdesc?.Trim();
+
+                if (UpdateCase.DateCommenced != null)
+                {
+                    updateCreatecase.DateCommenced = UpdateCase.DateCommenced;
+                }
+
+                _Result = customerLogic.CaseEdit(updateCreatecase);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+
 
     }
 }
