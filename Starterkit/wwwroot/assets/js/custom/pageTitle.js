@@ -33,18 +33,18 @@ switch (page) {
         overview.classList.add("active");
         break;
     case "settings":
-        pageTitle = "Account Settings";
-        pageBreadcrum = "Account";
+        pageTitle = "Account - Edit Profile";
+        pageBreadcrum = "Account - Edit Profile";
         settings.classList.add("active");
         break;
     case "kyc":
-        pageTitle = "KYC";
-        pageBreadcrum = "Account";
+        pageTitle = "Accouint - KYC";
+        pageBreadcrum = "Account - KYC";
         kyc.classList.add("active");
         break;
     case "billing":
         pageTitle = "Account Billing";
-        pageBreadcrum = "Account";
+        pageBreadcrum = "Account - Billing";
         billing.classList.add("active");
         break;
     case "statements":
@@ -58,11 +58,11 @@ switch (page) {
         referrals.classList.add("active");
         break;
     case "changeEmail":
-        pageTitle = "Change Email";
-        pageBreadcrum = "Account";
+        pageTitle = "Account - Change Email";
+        pageBreadcrum = "Account - Change Email";
         changeEmail.classList.add("active");
         break;
-    case "createCase":
+    case "createcase":
         pageTitle = "Create Case";
         pageBreadcrum = "Create Case";
         break;
@@ -71,6 +71,28 @@ switch (page) {
         pageBreadcrum = "View Case List";
         document.getElementById("action_status").style.visibility = "visible";
         break;
+    case "uploadCaseDocuments":
+        pageTitle = "Upload Case Documents";
+        pageBreadcrum = "Upload Case Documents";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "viewCaseDocuments":
+        pageTitle = "View Case Documents";
+        pageBreadcrum = "View Case Documents";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "caseDetails":
+        pageTitle = "Case Details";
+        pageBreadcrum = "Case Details";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "createcompany":
+        pageTitle = "Create Company";
+        pageBreadcrum = "Create Company";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+
+        
 }
 
 document.getElementById("pageTitle").innerHTML = pageTitle;

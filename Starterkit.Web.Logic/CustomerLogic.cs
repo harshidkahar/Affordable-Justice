@@ -320,6 +320,10 @@ namespace Starterkit.Web.Logic
                         {
                             casedetailModel.Passno = Convert.ToString(row["Passno"]);
                         }
+                        if (ds.Tables[0].Columns.Contains("cdesc") && !row["cdesc"].Equals(DBNull.Value))
+                        {
+                            casedetailModel.Cdesc = Convert.ToString(row["cdesc"]);
+                        }
                         casedetail.Add(casedetailModel);
 
                        
@@ -511,6 +515,12 @@ namespace Starterkit.Web.Logic
         {
             CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
             return customerDA.DAL_UserDocument(updateDescription);
+        }
+
+        public string CaseEdit(CaseUpdateModel Updatecase)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_UpdateCase(Updatecase);
         }
 
 
