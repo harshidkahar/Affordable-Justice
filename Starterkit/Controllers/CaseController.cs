@@ -112,7 +112,21 @@ namespace Starterkit.Controllers
         [HttpGet("/createCompany")]
 		public IActionResult createCompany()
 		{
-			return View("Views/Pages/Cases/createCompany.cshtml");
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CompId", "");
+            }
+            catch { }
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CompId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CompId", HttpContext.Request.Query["CompId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CompId", ""); }
+
+            return View("Views/Pages/Cases/createCompany.cshtml");
 		}
 
         [HttpGet("/CompanyList")]
@@ -308,6 +322,40 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult AddDependent([FromBody] DependentModel insertDependent)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                InsertDependentModel addDependent = new InsertDependentModel();
+                addDependent.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                addDependent.CompKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                addDependent.dependvisaName= insertDependent.dependvisaName?.Trim();
+                addDependent.dependvisaEmail= insertDependent.dependvisaEmail?.Trim();
+                addDependent.dependvisaDOB= insertDependent.dependvisaDOB;
+                addDependent.dependvisaPasspno= insertDependent.dependvisaPasspno?.Trim();
+                addDependent.dependvisaAddress= insertDependent.dependvisaAddress?.Trim();
+                addDependent.dependvisacountry= insertDependent.dependvisacountry?.Trim();
+                addDependent.dependvisanationality= insertDependent.dependvisanationality?.Trim();
+
+                
+                addDependent.Opt = "I";
+                _Result = customerLogic.InsertDependent(addDependent);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
 
     }
 }

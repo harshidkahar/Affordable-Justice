@@ -162,8 +162,9 @@ var KTCreateAccount = function () {
         var dependvisa = form.querySelector('[name="visadependent"]:checked');
 
         var depdetail = document.querySelector('#dependentlbl');
-
-        form.querySelector('#addDependent').addEventListener('click', function (e) {
+        dependvisa = form.querySelector('[name="visadependent"]:checked'),
+      
+      form.querySelector('#addDependent').addEventListener('click', function (e) {
             e.preventDefault();
             console.log('add dependent clicked');
             document.querySelector('#NewDependent').style.display = 'block';
@@ -364,8 +365,62 @@ var KTCreateAccount = function () {
             document.querySelector('#dependentviewtable').style.display = 'block';
             document.querySelector('#Dependentdetails').style.display = 'none';
             document.querySelector('#addDependent').style.display = 'none';
+          var depDetails = null;
+              depDetails = {
+                  dependvisaName: form.querySelector('[name="Dependentvisaname"]').value,
+                  dependvisaEmail: form.querySelector('[name="Dependentvisaemail"]').value,
+                  dependvisaDOB: form.querySelector('[name="DependentvisaDateOfBirth"]').value,
+                  dependvisaPasspno: form.querySelector('[name="Dependentvisapasspno"]').value,
+                  dependvisaAddress: form.querySelector('[name="dependentaddress"]').value,
+                  dependvisacountry: form.querySelector('[name="dependentcountry"]').value,
+                  dependvisanationality: form.querySelector('[name="dependentnationality"]').value,
+              };
 
-            Swal.fire({
+
+          $.ajax({
+              type: "POST",
+              url: "Case/AddDependent",
+              contentType: "application/json; charset=utf-8",
+              data: JSON.stringify(depDetails),
+              dataType: "json",
+              success: function (data) {
+                  if (data == "done") {
+                      Swal.fire({
+                          text: "Partner Successfully Added!",
+                          icon: "success",
+                          buttonsStyling: false,
+                          confirmButtonText: "Ok, got it!",
+                          customClass: {
+                              confirmButton: "btn btn-primary"
+                          }
+                      }).then(function (result) {
+                          if (result.isConfirmed) {
+                              form.reset();
+
+                            //  var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                              //if (redirectUrl) {
+                                //  location.href = redirectUrl;
+
+                              //}
+                          }
+                      });
+                  }
+                  else {
+                      Swal.fire({
+                          text: "Sorry, looks like there are some errors detected, please try again.",
+                          icon: "error",
+                          buttonsStyling: false,
+                          confirmButtonText: "Ok, got it!",
+                          customClass: {
+                              confirmButton: "btn btn-primary"
+                          }
+                      });
+                  }
+              },
+              error: ''
+          });
+
+            /*Swal.fire({
                 text: "Dependent added successfully!",
                 icon: "success",
                 buttonsStyling: false,
@@ -373,7 +428,7 @@ var KTCreateAccount = function () {
                 customClass: {
                     confirmButton: "btn btn-primary"
                 }
-            });
+            }); */
 
             // Function to handle edit button click
             // Function to handle edit button click

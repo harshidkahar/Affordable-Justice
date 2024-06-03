@@ -225,5 +225,43 @@ namespace Starterkit.Data
             return returnValue;
         }
 
+
+        public string DAL_Dependent(InsertDependentModel addDependent)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_DependentDetail]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = addDependent.Id;
+                cmd.Parameters.Add("@CompId", SqlDbType.Int).Value = addDependent.CompKey;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = addDependent.UserId;
+                cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = addDependent.dependvisaName;
+                cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = addDependent.dependvisaEmail;
+                cmd.Parameters.Add("@DateOfBirth", SqlDbType.NVarChar).Value = addDependent.dependvisaDOB;
+                cmd.Parameters.Add("@Address", SqlDbType.Int).Value = addDependent.dependvisaAddress;
+                cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addDependent.dependvisacountry;
+                cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addDependent.dependvisanationality;
+                cmd.Parameters.Add("@PassportNo", SqlDbType.NVarChar).Value = addDependent.dependvisaPasspno;
+                cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addDependent.Opt;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+        }
+
+
+
     }
 }

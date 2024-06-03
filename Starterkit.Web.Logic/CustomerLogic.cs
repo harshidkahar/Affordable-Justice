@@ -513,6 +513,12 @@ namespace Starterkit.Web.Logic
             return customerDA.DAL_UserDocument(updateDescription);
         }
 
+        public string InsertDependent(InsertDependentModel addDependent)
+        {
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            return customerDA.DAL_Dependent(addDependent);
+        }
+
 
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{
