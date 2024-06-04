@@ -46,7 +46,6 @@ namespace Starterkit.Web.Logic.Base
         Email,
         Common,
         Case,
-        Company,
-       
+        Company       
     }
 }

@@ -92,8 +92,8 @@ namespace Starterkit.Controllers
                 
                 Company.Opt = "I";
                 _Result = companyLogic.CreateCompany(Company);
-
-                return Json(_Result);
+				_contextAccessor.HttpContext.Session.SetString("CompId", _Result);
+				return Json(_Result);
             }
             catch
             {
@@ -468,10 +468,5 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
-
-
-
-
-
     }
 }
