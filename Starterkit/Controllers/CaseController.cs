@@ -49,6 +49,7 @@ namespace Starterkit.Controllers
             catch {  }
             return View("Views/Pages/Cases/ViewCaseList.cshtml");
         }
+
         [HttpGet("/uploadCaseDocuments")]
         public IActionResult UploadCaseDocuments()
         {
@@ -112,41 +113,16 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Cases/ViewDocument.cshtml");
         }
 
-        [HttpGet("/createCompany")]
-		public IActionResult createCompany()
-		{
-            try
-            {
-                _contextAccessor.HttpContext.Session.SetString("CompId", "");
-            }
-            catch { }
-            try
-            {
-                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CompId"]))
-                {
-                    _contextAccessor.HttpContext.Session.SetString("CompId", HttpContext.Request.Query["CompId"].ToString());
-                }
-            }
-            catch { _contextAccessor.HttpContext.Session.SetString("CompId", ""); }
-
-            return View("Views/Pages/Cases/createCompany.cshtml");
-		}
-
-        [HttpGet("/CompanyList")]
-        public IActionResult CompanyList()
-        {
-            return View("Views/Pages/Cases/CompanyList.cshtml");
-        }
-
+       
         [HttpGet]
         public JsonResult GetCaseList()
         {
             try
             {
                 _contextAccessor.HttpContext.Session.SetString("CaseId", "");
-                CustomerLogic _customerLogic = new CustomerLogic();
+                CaseLogic _caseLogic = new CaseLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var caseList = _customerLogic.GetCaseList(userId);
+                var caseList = _caseLogic.GetCaseList(userId);
                 var result = new { success = true, caseList };
                 return Json(result);
             }
@@ -158,34 +134,16 @@ namespace Starterkit.Controllers
         }
 
 
-        [HttpGet]
-        public JsonResult GetCompanyList()
-        {
-            try
-            {
-                CustomerLogic _customerLogic = new CustomerLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var companyList = _customerLogic.GetCompanyList(userId);
-                var result = new { success = true, companyList };
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                var errorResult = new { success = false, message = "Failed to retrieve company list." };
-                return Json(errorResult);
-            }
-        }
-
-
+       
         [HttpGet]
         public JsonResult GetDocumentList()
         {
             try
             {
-                CustomerLogic _customerLogic = new CustomerLogic();
+                CaseLogic _caseLogic = new CaseLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
-                var documentList = _customerLogic.GetDocumentList(userId,caseId);
+                var documentList = _caseLogic.GetDocumentList(userId,caseId);
                 var result = new { success = true, documentList };
                 return Json(result);
             }
@@ -203,11 +161,11 @@ namespace Starterkit.Controllers
         {
             try
             {
-                CustomerLogic _customerLogic = new CustomerLogic();
+                CaseLogic _caseLogic = new CaseLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
                 int docId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DocId"));
-                var documentDetail = _customerLogic.GetDocumentDescription(docId, userId, caseId);
+                var documentDetail = _caseLogic.GetDocumentDescription(docId, userId, caseId);
                 var result = new { success = true, documentDetail };
                 return Json(result);
             }
@@ -224,10 +182,10 @@ namespace Starterkit.Controllers
         {
             try
             {
-                CustomerLogic _customerLogic = new CustomerLogic();
+                CaseLogic _caseLogic = new CaseLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
-                var caseDetail = _customerLogic.GetCaseDetail(userId, caseId);
+                var caseDetail = _caseLogic.GetCaseDetail(userId, caseId);
 
                 var result = new { success = true, caseDetail };
                 return Json(result);
@@ -244,10 +202,10 @@ namespace Starterkit.Controllers
         {
             try
             {
-                CustomerLogic _customerLogic = new CustomerLogic();
+                CaseLogic _caseLogic = new CaseLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 int caseId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CaseId")); // Replace with actual logic to fetch user ID
-                var caseDetail = _customerLogic.GetCaseDetail(userId, caseId);
+                var caseDetail = _caseLogic.GetCaseDetail(userId, caseId);
 
                 var result = new { success = true, caseDetail };
                 return Json(result);
@@ -268,7 +226,7 @@ namespace Starterkit.Controllers
             {
                 string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
-                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                CaseLogic caseLogic = (CaseLogic)LogicFactory.GetLogic(LogicType.Case);
                 CreateCaseModel _createCase = new CreateCaseModel();
 
                 _createCase.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
@@ -303,7 +261,7 @@ namespace Starterkit.Controllers
                 //_Customer.CustomerGUID = System.Guid.NewGuid();
 
                 _createCase.Opt = "I";
-                _Result = customerLogic.CreateCase(_createCase);
+                _Result = caseLogic.CreateCase(_createCase);
 
                 return Json(_Result);
             }
@@ -322,7 +280,7 @@ namespace Starterkit.Controllers
             {
                 string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
-                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                CaseLogic caseLogic = (CaseLogic)LogicFactory.GetLogic(LogicType.Case);
                 UserDocumentModel updateDescription = new UserDocumentModel();
                 updateDescription.Id= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DocId"));
                 updateDescription.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
@@ -333,7 +291,7 @@ namespace Starterkit.Controllers
                 updateDescription.Size = "";
                 updateDescription.FileName = "";
                 updateDescription.Opt = "U";
-                _Result = customerLogic.DocumentDetail(updateDescription);
+                _Result = caseLogic.DocumentDetail(updateDescription);
 
                 return Json(_Result);
             }
@@ -343,56 +301,7 @@ namespace Starterkit.Controllers
             }
         }
 
-		[AllowAnonymous]
-		[HttpGet]
-		public JsonResult GetCompanyId()
-		{
-			try
-			{				
-				string _Result = string.Empty;
-				
-				_Result = _contextAccessor.HttpContext.Session.GetString("CompId");
-
-				return Json(_Result);
-			}
-			catch
-			{
-				return Json("error");
-			}
-		}
-
-		[AllowAnonymous]
-        [HttpPost]
-        public JsonResult AddDependent([FromBody] DependentModel insertDependent)
-        {
-            try
-            {
-                string ErrorMessage = string.Empty;
-                string _Result = string.Empty;
-                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
-                InsertDependentModel addDependent = new InsertDependentModel();
-                addDependent.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
-                addDependent.CompKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
-                addDependent.dependvisaName= insertDependent.dependvisaName?.Trim();
-                addDependent.dependvisaEmail= insertDependent.dependvisaEmail?.Trim();
-                addDependent.dependvisaDOB= insertDependent.dependvisaDOB;
-                addDependent.dependvisaPasspno= insertDependent.dependvisaPasspno?.Trim();
-                addDependent.dependvisaAddress= insertDependent.dependvisaAddress?.Trim();
-                addDependent.dependvisacountry= insertDependent.dependvisacountry?.Trim();
-                addDependent.dependvisanationality= insertDependent.dependvisanationality?.Trim();
-
-                
-                addDependent.Opt = "I";
-                _Result = customerLogic.InsertDependent(addDependent);
-
-                return Json(_Result);
-            }
-            catch
-            {
-                return Json("error");
-            }
-        }
-
+		
 
         [AllowAnonymous]
         [HttpPut]
@@ -402,7 +311,7 @@ namespace Starterkit.Controllers
             {
                 string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
-                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
+                CaseLogic caseLogic = (CaseLogic)LogicFactory.GetLogic(LogicType.Case);
                 CaseUpdateModel updateCreatecase = new CaseUpdateModel();
 
                 // Retrieving session data
@@ -434,7 +343,7 @@ namespace Starterkit.Controllers
                     updateCreatecase.DateCommenced = UpdateCase.DateCommenced;
                 }
 
-                _Result = customerLogic.CaseEdit(updateCreatecase);
+                _Result = caseLogic.CaseEdit(updateCreatecase);
 
                 return Json(_Result);
             }

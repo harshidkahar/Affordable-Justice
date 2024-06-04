@@ -8,7 +8,7 @@ var KTCompanyList = function () {
     // Fetch case list data
     var fetchCompanyList = function () {
         $.ajax({
-            url: '/Case/GetCompanyList',
+            url: '/Company/GetCompanyList',
             type: 'GET',
             success: function (response) {
                 //const result = JSON.parse(response); // Parse the JSON string response

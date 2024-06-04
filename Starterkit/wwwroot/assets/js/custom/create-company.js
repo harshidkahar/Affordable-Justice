@@ -379,7 +379,7 @@ var KTCreateAccount = function () {
           document.querySelector('#addDependent').style.display = 'none';
           $.ajax({
               type: "POST",
-              url: "Case/AddDependent",
+              url: "Company/AddDependent",
               contentType: "application/json; charset=utf-8",
               data: JSON.stringify(depDetails),
               dataType: "json",
@@ -1916,6 +1916,8 @@ var KTCreateAccount = function () {
                             RvisaAddress: form.querySelector('[name="Rvisaaddress"]').value,
                             visacountry: form.querySelector('[name="visacountry"]').value,
                             visanationality: form.querySelector('[name="visanationality"]').value,
+                            Depvisa: form.querySelector('[name="visadependent"]:checked') ? form.querySelector('[name="visadependent"]:checked').value : '',
+
                         },
                         DependentDetails: {
                             dependentDetails,
