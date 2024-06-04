@@ -11,6 +11,19 @@ var KTCreateAccount = function () {
     var formSubmitButton;
     var formContinueButton;
     var formSaveButton;
+    var InsertCompanyData = null;
+    var updateFormParameter1 = null;
+    var updateFormParameter2 = null;
+    var updateFormParameter3 = null;
+    var updateFormParameter4 = null;
+    var updateFormParameter5 = null;
+    var updateFormParameter6 = null;
+    var updateFormParameter7 = null;
+    var updateFormParameter8 = null;
+    var updateFormParameter9 = null;
+    var updateFormParameter10 = null;
+    var updateFormParameter11 = null;
+
 
     // Variables
     var stepperObj;
@@ -38,7 +51,7 @@ var KTCreateAccount = function () {
 
 
     // Private Functions
-    var initStepper = function () {
+   var initStepper = function () {
         // Initialize Stepper
         stepperObj = new KTStepper(stepper);
 
@@ -1751,6 +1764,7 @@ var KTCreateAccount = function () {
                                     step4Msg.innerText = "Plese complete step 2 & 3";
                                 }
                             }
+                            CompanyInsert();
 
                         }
                         if (stepper.getCurrentStepIndex() == 5) {
@@ -1807,6 +1821,467 @@ var KTCreateAccount = function () {
             KTUtil.scrollTop();
         });
     }
+   var CompanyInsert = function () {
+        let cityValue = '';
+        const mainlandCity = form.querySelector('[name="mainlandcity"]');
+        const freezoneCity = form.querySelector('[name="fzcity"]');
+        const offshoreCity = form.querySelector('[name="offshoreCity"]');
+
+        if (mainlandCity && mainlandCity.value) {
+            cityValue = mainlandCity.value;
+        } else if (freezoneCity && freezoneCity.value) {
+            cityValue = freezoneCity.value;
+        } else if (offshoreCity && offshoreCity.value) {
+            cityValue = offshoreCity.value;
+        }
+
+
+        let location = '';
+        let sfZL1 = document.getElementById("fzcity").value;
+        console.log(sfZL1);
+
+        if (sfZL1 == "Abu Dhabi") {
+            const loc = document.querySelector('[name="ddlAbu"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Dubai") {
+            const loc = document.querySelector('[name="ddlDubai"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Sharjah") {
+            const loc = document.querySelector('[name="ddlSarjah"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Ajman") {
+            const loc = document.querySelector('[name="ddAjman"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Ras Al Khaimah (RAK)") {
+            const loc = document.querySelector('[name="ddlRAK"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Fujairah") {
+            const loc = document.querySelector('[name="ddlFujairah"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Umm Al Quwain (UAQ)") {
+            const loc = document.querySelector('[name="ddlUAQ"]');
+            location = loc.value;
+        }
+
+
+
+        InsertCompanyData = {
+            ApplicationType: form.querySelector('[name="create_company_type"]:checked') ? form.querySelector('[name="create_company_type"]:checked').value : '',
+            CompanyType: form.querySelector('[name="businessactivity"]').value,
+            City: cityValue,
+            Location: location,
+        };
+
+        console.log(InsertCompanyData);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'POST',
+            url: 'Company/InsertCompany', // Ensure this URL is correct
+            data: JSON.stringify(InsertCompanyData),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Company data inserted successfully.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.d.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+    }
+    var UpdateFormParameter1 = function () {
+
+        updateFormParameter1 = {
+            ApplicationType: form.querySelector('[name="create_company_type"]:checked') ? form.querySelector('[name="create_company_type"]:checked').value : '',
+            };
+
+        console.log(updateFormParameter1);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter1Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter1),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Application Type successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.d.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    } 
+    var UpdateFormParameter2 = function () {
+
+        updateFormParameter2 = {
+            CompanyType: form.querySelector('[name="businessactivity"]').value,
+             };
+
+        console.log(updateFormParameter2);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter2Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter2),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Company Type successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.d.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    } 
+    var UpdateFormParameter3 = function () {
+
+        let cityValue = '';
+        const mainlandCity = form.querySelector('[name="mainlandcity"]');
+        const freezoneCity = form.querySelector('[name="fzcity"]');
+        const offshoreCity = form.querySelector('[name="offshoreCity"]');
+
+        if (mainlandCity && mainlandCity.value) {
+            cityValue = mainlandCity.value;
+        } else if (freezoneCity && freezoneCity.value) {
+            cityValue = freezoneCity.value;
+        } else if (offshoreCity && offshoreCity.value) {
+            cityValue = offshoreCity.value;
+        }
+
+
+        let location = '';
+        let sfZL1 = document.getElementById("fzcity").value;
+        console.log(sfZL1);
+
+        if (sfZL1 == "Abu Dhabi") {
+            const loc = document.querySelector('[name="ddlAbu"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Dubai") {
+            const loc = document.querySelector('[name="ddlDubai"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Sharjah") {
+            const loc = document.querySelector('[name="ddlSarjah"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Ajman") {
+            const loc = document.querySelector('[name="ddAjman"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Ras Al Khaimah (RAK)") {
+            const loc = document.querySelector('[name="ddlRAK"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Fujairah") {
+            const loc = document.querySelector('[name="ddlFujairah"]');
+            location = loc.value;
+        }
+        if (sfZL1 == "Umm Al Quwain (UAQ)") {
+            const loc = document.querySelector('[name="ddlUAQ"]');
+            location = loc.value;
+        }
+
+
+
+        updateFormParameter3 = {
+            City: cityValue,
+            Location: location,
+        };
+
+        console.log(updateFormParameter3);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter3Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter3),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "City/Location successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.d.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    } 
+
+    var UpdateFormParameter4 = function () {
+
+        let businessCategory = '';
+        const mainlandBusinessCategory = form.querySelector('[name="mainlandbusscity"]');
+        const freezoneBusinessCategory = form.querySelector('[name="fzbuscate"]');
+
+        if (mainlandBusinessCategory && mainlandBusinessCategory.value) {
+            businessCategory = mainlandBusinessCategory.value;
+        } else if (freezoneBusinessCategory && freezoneBusinessCategory.value) {
+            businessCategory = freezoneBusinessCategory.value;
+        }
+
+
+        updateFormParameter4 = {
+            BusinessCategory: businessCategory,
+         };
+
+        console.log(updateFormParameter2);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter4Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter4),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Company Type successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.d.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+
+
+
+
 
 
     var handleForm = function () {
@@ -2047,7 +2522,6 @@ var KTCreateAccount = function () {
             validations[2].revalidateField('business_type');
         });
     }
-
     var initValidation = function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
         // Step 1

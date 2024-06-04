@@ -11,8 +11,7 @@
 
         public string Location { get; set; }
 
-        public string BusinessCategory { get; set; }
-
+        
 
 
     }

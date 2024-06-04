@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Starterkit.Model;
 using Starterkit.Models;
+using Starterkit.Models.Company;
 using Starterkit.Web.Logic;
 using Starterkit.Web.Logic.Base;
 using System.Xml.Linq;
@@ -70,9 +71,41 @@ namespace Starterkit.Controllers
             }
         }
 
-  
-              
-		[AllowAnonymous]
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult InsertCompany([FromBody] companyInsertModel insertcompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel Company = new CreateCompanyModel();
+
+
+                Company.UserId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                Company.ApplicationType=insertcompany.ApplicationType?.Trim();
+                Company.CompanyType=insertcompany.CompanyType?.Trim();
+                Company.BusinessCity=insertcompany.City?.Trim();
+                Company.BusinessLocation=insertcompany.Location?.Trim();
+                
+                
+                Company.Opt = "I";
+                _Result = companyLogic.CreateCompany(Company);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+
+
+        [AllowAnonymous]
 		[HttpGet]
 		public JsonResult GetCompanyId()
 		{

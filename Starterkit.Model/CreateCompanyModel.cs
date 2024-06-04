@@ -113,6 +113,12 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Passport Photo URL.
         /// </summary>
+        /// 
+
+        public string Opt { get; set; }
+        ///<summary>
+        ///Represent Opt
+        /// </summary>
     
     }
 }
