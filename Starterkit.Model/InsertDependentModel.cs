@@ -14,7 +14,7 @@ namespace Starterkit.Model
         /// Represents Primary Key
         /// </summary>
         public int CompKey { get; set; }
-        public int UserId { get; set; }
+        //public int UserId { get; set; }
         /// <summary>
         /// Represents User Id
         /// </summary>

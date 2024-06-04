@@ -12,6 +12,7 @@ var KTCreateAccount = function () {
     var formContinueButton;
     var formSaveButton;
     var InsertCompanyData = null;
+    var VisaDetails = null;
     var updateFormParameter1 = null;
     var updateFormParameter2 = null;
     var updateFormParameter3 = null;
@@ -47,8 +48,7 @@ var KTCreateAccount = function () {
     let laststep;
 
     var jsonPostData = null;
-
-
+    
 
     // Private Functions
     var initStepper = function () {
@@ -487,11 +487,6 @@ var KTCreateAccount = function () {
             });
 
         });
-
-    
-            
-
-       
 
 
 
@@ -1118,9 +1113,11 @@ var KTCreateAccount = function () {
 
                 var patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
                 var patType = patresiUAE ? patresiUAE.value : '';
+                var isPatResiUAE = (patType === 'yes') ? true : (patType === 'no') ? false : null;
 
                 var comptype = form.querySelector('[name="manager_comp"]:checked');
                 var cmptype = comptype ? comptype.value : '';
+                var isManagerComp = (cmptype === 'yes') ? true : (cmptype === 'no') ? false : null;
 
 
                 var patname = form.querySelector('#patnername').value;
@@ -1343,153 +1340,72 @@ var KTCreateAccount = function () {
 
                     }
 
-                 /*   else if (selectedOption1 === 'limited-partnership') {
-                        document.querySelector('#patnerDETAILSarea').style.display = 'block';
-                        ptcount();
-
-                        const patarea = document.querySelector('#patnerDETAILSarea');
-
-                        //count of patner is not working need to work.
-                        // patnercount++;
-
-
-
-
-                        // Patner is residence of UAE or not
-                        let div1 = document.createElement('div');
-                        div1.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                        div1.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">UAE Residency</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${patType}</label>`;
-                        patarea.appendChild(div1);
-
-
-                        // Patner is manager or not
-                        let div2 = document.createElement('div');
-                        div2.className = 'd-flex mb-4';
-                        div2.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">Company Manager</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${cmptype}</label>`;
-                        patarea.appendChild(div2);
-
-                        // Patner name
-                        let div3 = document.createElement('div');
-                        div3.className = 'd-flex mb-4';
-                        div3.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">Name</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${patname}</label>`;
-                        patarea.appendChild(div3);
-
-                        // Patner email
-                        let div4 = document.createElement('div');
-                        div4.className = 'd-flex mb-4';
-                        div4.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">Email Id</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${patemail}</label>`;
-                        patarea.appendChild(div4);
-
-                        // Patner date of birth
-                        let div5 = document.createElement('div');
-                        div5.className = 'd-flex mb-4';
-                        div5.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Date of Birth</label>
-        <label class="fs-4  fw-bold text-hover-primary">${patdob}</label>
-        
-    `;
-                        patarea.appendChild(div5);
-
-                        // Patner contact no
-                        let div6 = document.createElement('div');
-                        div6.className = 'd-flex mb-4';
-                        div6.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Contact No</label>
-        <label class="fs-4 fw-bold text-hover-primary">${ddlcountrycode}-${patphone}</label>
-       
-    `;
-                        patarea.appendChild(div6);
-
-                        if (patType === 'yes') {
-
-                            // Patner Emirates ID
-                            let div7 = document.createElement('div');
-                            div7.className = 'd-flex mb-4';
-                            div7.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Emirates ID</label>
-        \<label class="fs-4 fw-bold text-hover-primary">${patemiratesID}</label>
-       
-    `;
-                            patarea.appendChild(div7);
-
-                        }
-
-                        if (patType === 'no') {
-
-                            // Patner passport No
-                            let div8 = document.createElement('div');
-                            div8.className = 'd-flex mb-4';
-                            div8.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Passport No</label>
-        <label class="fs-4 fw-bold text-hover-primary">${patpassno}</label>
-        
-    `;
-                            patarea.appendChild(div8);
-                        }
-
-
-                        // Patner address
-                        let div9 = document.createElement('div');
-                        div9.className = 'd-flex mb-4';
-                        div9.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Address</label>
-        <label class="fs-4 fw-bold text-hover-primary">${pataddress}</label>        
-    `;
-                        patarea.appendChild(div9);
-
-                        // Patner country
-                        let div10 = document.createElement('div');
-                        div10.className = 'd-flex mb-4';
-                        div10.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Country</label>
-        <label class="fs-4 fw-bold text-hover-primary">${parcountry}</label>
-        
-    `;
-                        patarea.appendChild(div10);
-
-
-
-                        // Patner nationality
-                        let div11 = document.createElement('div');
-                        div11.className = 'd-flex mb-4';
-                        div11.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Nationality</label>
-        <label class="fs-4 fw-bold text-hover-primary">${patnationality}</label>        
-    `;
-                        patarea.appendChild(div11);
-
-                        // Patner percentage ownership
-                        let div12 = document.createElement('div');
-                        div12.className = 'd-flex mb-4';
-                        div12.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Ownership</label>
-        <label class="fs-4 fw-bold text-hover-primary">${percentage.toFixed(1)}%</label>
-        
-    `;
-                        patarea.appendChild(div12);
-
-                        let div13 = document.createElement('div');
-                        div13.className = 'mb-3 mt-3';
-                        div13.innerHTML = `<hr class="text-gray-600" />`;
-                        patarea.appendChild(div13);
-
-
-
-                    }   */
                     else {
                         document.querySelector('#patnerDETAILSarea').style.display = 'none';
                         document.querySelector('#Patnerdetails').style.display = 'none';
                         document.querySelector('#NewPartner').style.display = 'none';
 
                     }
+
+                    var patDetail = null;
+                    patDetail = {
+                        ResidenceUAE: isPatResiUAE,
+                        CompanyManager: isManagerComp,
+                        Name: form.querySelector('#patnername').value,
+                        Email: form.querySelector('[name="patneremail"]').value,
+                        CountryCode: form.querySelector('[name="country-code"]').value,
+                        Phone: form.querySelector('[name="patnerphoneno"]').value,
+                        Dob: form.querySelector('#patnerDateOfBirth').value,
+                        EmiratesId: form.querySelector('#patneremiratesID').value,
+                        PassportNo: form.querySelector('[name="patnerpassno"]').value,
+                        Address: form.querySelector('[name="patneraddress"]').value,
+                        Country: form.querySelector('[name="patnercountry"]').value,
+                        Nationality: form.querySelector('[name="Nationality"]').value,
+                        ManageBudget: form.querySelector('[name="manageBudget"]').value
+                    };
+
+                    $.ajax({
+                        type: "POST",
+                        url: "Company/AddPartner",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(patDetail),
+                        dataType: "json",
+                        success: function (data) {
+                            if (data == "done") {
+                                Swal.fire({
+                                    text: "Partner Successfully Added!",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function (result) {
+                                    if (result.isConfirmed) {
+                                        //form.reset();
+
+                                        //  var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                                        //if (redirectUrl) {
+                                        //  location.href = redirectUrl;
+
+                                        //}
+                                    }
+                                });
+                            }
+                            else {
+                                Swal.fire({
+                                    text: "Sorry, looks like there are some errors detected, please try again.",
+                                    icon: "error",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                });
+                            }
+                        },
+                        error: ''
+                    });
 
                     patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
                     patType = patresiUAE ? patresiUAE.value : '';
@@ -1549,15 +1465,7 @@ var KTCreateAccount = function () {
                 document.querySelector('#addpatner').style.display = 'none';
                 document.querySelector('#cancelpartner').style.display = 'none';
 
-                Swal.fire({
-                    text: "Partner added successfully!",
-                    icon: "success",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
+               
 
 
                 // Function to handle edit button click
@@ -1767,10 +1675,16 @@ var KTCreateAccount = function () {
                             CompanyInsert();
 
                         }
+                        //var visaresi = document.querySelector('[name="target_assign"]').value;
+
                         if (stepper.getCurrentStepIndex() == 5) {
+                          //  if (visaresi == 0) {
+                            //}
                             UpdateFormParameter4();
                         }
                         if (stepper.getCurrentStepIndex() == 6) {
+                            VisaDet();
+
                             UpdateFormParameter5();
                         }
                         if (stepper.getCurrentStepIndex() == 7) {
@@ -1896,30 +1810,9 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Company data inserted successfully.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                  
                 } else {
-                    // Show error message
-                    Swal.fire({
-                        text: response.d.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                  
                 }
             },
             error: function (error) {
@@ -1941,6 +1834,65 @@ var KTCreateAccount = function () {
             }
         });
     }
+
+    var VisaDet = function () {
+
+        
+
+        VisaDetails = {
+
+            Name: form.querySelector('[name="visaname"]').value,
+            DateOfBirth: form.querySelector('[name="visaDateOfBirth"]').value,
+            EmiratesId: form.querySelector('[name="visaemirId"]').value,
+            CurrentAddress: form.querySelector('[name="Cvisaaddress"]').value,
+            ResidenceAddress: form.querySelector('[name="Rvisaaddress"]').value,
+            Country: form.querySelector('[name="visacountry"]').value,
+            Nationality: form.querySelector('[name="visanationality"]').value,
+ };
+
+        console.log(VisaDetails);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'POST',
+            url: 'Company/ResidenceVisaDetails', // Ensure this URL is correct
+            data: JSON.stringify(VisaDetails),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+
+                } else {
+
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+    }
+
+
     var UpdateFormParameter1 = function () {
 
         updateFormParameter1 = {
@@ -1964,30 +1916,10 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Application Type successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+
                 }
             },
             error: function (error) {
@@ -2033,30 +1965,10 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Company Type successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 }
             },
             error: function (error) {
@@ -2152,49 +2064,12 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "City/Location successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
-                }
+                   }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+           
         });
 
     } 
@@ -2232,49 +2107,11 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Business Cateogry successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
-                } else {
+                   } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                    
                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
         });
 
     }
@@ -2301,56 +2138,26 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Residence Visa successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
-                } else {
+                   } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
-                }
-            },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
                     }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+            },
+          
         });
 
     }
     var UpdateFormParameter6 = function () {
+        var dependvisa = form.querySelector('[name="visadependent"]:checked');
+
+        // Get the value of the checked radio button, defaulting to an empty string if none are checked
+        var Depvisa = dependvisa ? dependvisa.value : '';
+
+        // Convert 'yes' to true and 'no' to false
+        var isDependVisa = (Depvisa === 'yes') ? true : (Depvisa === 'no') ? false : null;
+
 
         updateFormParameter6 = {
-            Depvisa: form.querySelector('[name="visadependent"]:checked') ? form.querySelector('[name="visadependent"]:checked').value : '',
+            Depvisa: isDependVisa,
   };
 
         console.log(updateFormParameter6);
@@ -2370,50 +2177,11 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Dependent Visa successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
-                } else {
+                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
-                }
+                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
-        });
+         });
 
     }
     var UpdateFormParameter7 = function () {
@@ -2440,49 +2208,13 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Office Type successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                  
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+          
         });
 
     }
@@ -2510,53 +2242,22 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Business Plan successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                    
                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+          
         });
 
     }
     var UpdateFormParameter9 = function () {
+
+        var busMind = form.querySelector('[name="busmind"]:checked');
+        var BMind = busMind ? busMind.value : '';
+        var isBusMind = (BMind === 'Yes') ? true : (BMind === 'No') ? false : null;
+
 
         const busname = form.querySelector('[name="namesOfBusiness"]').value;
         const busname1 = form.querySelector('[name="namesOfBusiness1"]').value;
@@ -2565,7 +2266,7 @@ var KTCreateAccount = function () {
 
 
         updateFormParameter9 = {
-            businessname: form.querySelector('[name="busmind"]:checked') ? form.querySelector('[name="busmind"]:checked').value : '',
+            businessname: isBusMind,
             concatenatedNames: cNames,
         };
 
@@ -2586,49 +2287,13 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Business Name successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                  
                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+         
         });
 
     }
@@ -2655,49 +2320,13 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Service successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                   
                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+          
         });
 
     }
@@ -2732,52 +2361,45 @@ var KTCreateAccount = function () {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                    Swal.fire({
-                        text: "Personal Information successfully Updated.",
-                        icon: "success",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                    
                 } else {
                     // Show error message
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                    
                 }
             },
-            error: function (error) {
-
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-
-                console.log('AJAX error:', error);
-            }
+        
         });
 
     }
+
+    document.querySelector('#modalConfirmYes').addEventListener('click', function () {
+
+        Swal.fire({
+            text: "Company have successfully registered!",
+            icon: "success",
+            buttonsStyling: false,
+            confirmButtonText: "Ok, got it!",
+            customClass: {
+                confirmButton: "btn btn-primary"
+            }
+        }).then(function (result) {
+            if (result.isConfirmed) {
+                //form.reset();
+
+                var redirectUrl = form.getAttribute('data-kt-redirect-url');
+                if (redirectUrl) {
+                    location.href = redirectUrl;
+
+                }
+            }
+        });
+
+
+
+
+
+
+    });
     var handleForm = function () {
      formSubmitButton.addEventListener('click', function (e) {
             // Validate form before change stepper step
@@ -2792,7 +2414,7 @@ var KTCreateAccount = function () {
 
                     // Disable button to avoid multiple click 
                     formSubmitButton.disabled = true;
-
+/*
 
                     let location='';
                     let sfZL1 = document.getElementById("fzcity").value;
@@ -2909,91 +2531,13 @@ var KTCreateAccount = function () {
                         //businessNameOption: concatenatedNames,
                     };
 
-                    console.log(jsonPostData);
+                    console.log(jsonPostData); */
                     // Show loading indication
                     formSubmitButton.setAttribute('data-kt-indicator', 'on');
 
-                    // Perform AJAX request
-                    $.ajax({
-                        method: 'POST',
-                        url: 'Customer/Create/CreateCompany.aspx/Insertcompany', // Ensure this URL is correct
-                        data: JSON.stringify(jsonPostData),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
-                        success: function (response) {
-                            // Hide loading indication
-                            formSubmitButton.removeAttribute('data-kt-indicator');
-
-                            // Enable button
-                            formSubmitButton.disabled = false;
-
-                            // Handle success
-                            if (response.d.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
-                                stepperObj.goNext();
-                                console.log('AJAX response:', response);
-                                // Show success message
-                                Swal.fire({
-                                    text: "Company data inserted successfully.",
-                                    icon: "success",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn btn-light"
-                                    }
-                                }).then(function () {
-                                    KTUtil.scrollTop();
-                                });
-                            } else {
-                                // Show error message
-                                Swal.fire({
-                                    text: response.d.message,
-                                    icon: "error",
-                                    buttonsStyling: false,
-                                    confirmButtonText: "Ok, got it!",
-                                    customClass: {
-                                        confirmButton: "btn btn-light"
-                                    }
-                                }).then(function () {
-                                    KTUtil.scrollTop();
-                                });
-                            }
-                        },
-                        error: function (error) {
-                            // Hide loading indication
-                            formSubmitButton.removeAttribute('data-kt-indicator');
-
-                            // Enable button
-                            formSubmitButton.disabled = false;
-
-                            // Show error message
-                            Swal.fire({
-                                text: "Sorry, looks like there are some errors detected, please try again.",
-                                icon: "error",
-                                buttonsStyling: false,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn btn-light"
-                                }
-                            }).then(function () {
-                                KTUtil.scrollTop();
-                            });
-
-                            console.log('AJAX error:', error);
-                        }
-                    });
 
                 } else {
-                    Swal.fire({
-                        text: "Sorry, looks like there are some errors detected, please try again.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-light"
-                        }
-                    }).then(function () {
-                        KTUtil.scrollTop();
-                    });
+                    
                 }
             });
      });
@@ -3404,6 +2948,8 @@ var KTCreateAccount = function () {
         //));
 
     }
+
+
 
     return {
         // Public Functions

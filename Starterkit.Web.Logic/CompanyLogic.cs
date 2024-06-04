@@ -77,6 +77,20 @@ namespace Starterkit.Web.Logic
         }
 
 
+        public string InsertPartner(PatnerDetailsModel addPartner)
+        {
+            CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
+            return companyDA.DAL_Partner(addPartner);
+        }
+
+        public string InsertVisaDetails(VisaDetailsModel addVisa)
+        {
+            CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
+            return companyDA.DAL_VisaDetail(addVisa);
+        }
+
+
+
 
         //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
         //{

@@ -18,6 +18,8 @@ namespace Starterkit.Model
         /// <summary> 
         /// Represents Company Id
         /// </summary>
+        
+        //public int UserId { get; set; }
 
         public bool UAEResidence { get; set; }
         /// <summary> 
@@ -39,7 +41,7 @@ namespace Starterkit.Model
         /// Represents Email id of partner
         /// </summary>
 
-        public DateTime DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         /// <summary> 
         /// Represents Partner Date of Birth
         /// </summary>
@@ -83,6 +85,8 @@ namespace Starterkit.Model
         /// <summary> 
         /// Represents patner ownership in company.
         /// </summary>
+        
+        public string Opt { get; set; }
 
 
     }

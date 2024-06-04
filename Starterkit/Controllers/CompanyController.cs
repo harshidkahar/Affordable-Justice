@@ -447,12 +447,11 @@ namespace Starterkit.Controllers
                 string _Result = string.Empty;
                 CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
                 InsertDependentModel addDependent = new InsertDependentModel();
-                addDependent.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                //addDependent.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
                 addDependent.CompKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
                 addDependent.dependvisaName= insertDependent.dependvisaName?.Trim();
                 addDependent.dependvisaEmail= insertDependent.dependvisaEmail?.Trim();
                 addDependent.dependvisaDOB= insertDependent.dependvisaDOB;
-                addDependent.dependvisaPasspno= insertDependent.dependvisaPasspno?.Trim();
                 addDependent.dependvisaAddress= insertDependent.dependvisaAddress?.Trim();
                 addDependent.dependvisacountry= insertDependent.dependvisacountry?.Trim();
                 addDependent.dependvisanationality= insertDependent.dependvisanationality?.Trim();
@@ -468,5 +467,80 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
+
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult AddPartner([FromBody] PartnerModel insertPartner)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                PatnerDetailsModel addPartner = new PatnerDetailsModel();
+
+                //this needed to change.
+                //addPartner.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                addPartner.CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                addPartner.UAEResidence = insertPartner.ResidenceUAE;
+                addPartner.IsCompanyManager = insertPartner.CompanyManager;
+                addPartner.Name = insertPartner.Name?.Trim();
+                addPartner.EmailId = insertPartner.Email?.Trim();
+                addPartner.DateOfBirth = insertPartner.Dob;
+                addPartner.CountryCode = insertPartner.CountryCode?.Trim();
+                addPartner.Phone = insertPartner.Phone?.Trim();
+                addPartner.EMRId = insertPartner.EmiratesId?.Trim();
+                addPartner.PassportNo = insertPartner.PassportNo?.Trim();
+                addPartner.Address = insertPartner.Address?.Trim();
+                addPartner.Country = insertPartner.Country?.Trim();
+                addPartner.Nationality = insertPartner.Nationality?.Trim();
+                addPartner.PatnerOwnership = insertPartner.ManageBudget;
+               
+
+                addPartner.Opt = "I";
+                _Result = companyLogic.InsertPartner(addPartner);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPost]
+        public JsonResult ResidenceVisaDetails([FromBody] VisaModel insertVisa)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                VisaDetailsModel addVisa = new VisaDetailsModel();
+
+                addVisa.CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                addVisa.Name = insertVisa.Name?.Trim();
+                addVisa.DateOfBirth = insertVisa.DateOfBirth;
+                addVisa.EmiratesId = insertVisa.EmiratesId?.Trim();
+                addVisa.CurrentAddress = insertVisa.CurrentAddress?.Trim();
+                addVisa.ResidenceAddress = insertVisa.ResidenceAddress?.Trim();
+                addVisa.Country = insertVisa.Country?.Trim();
+                addVisa.Nationality= insertVisa.Nationality?.Trim();
+                addVisa.Opt = "I";
+                
+                _Result = companyLogic.InsertVisaDetails(addVisa);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+
     }
 }

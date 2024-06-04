@@ -123,6 +123,7 @@ namespace Starterkit.Data
 
 
         }
+
         public string DAL_Dependent(InsertDependentModel addDependent)
         {
             try
@@ -135,14 +136,13 @@ namespace Starterkit.Data
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.Add("@Id", SqlDbType.Int).Value = addDependent.Id;
                 cmd.Parameters.Add("@CompId", SqlDbType.Int).Value = addDependent.CompKey;
-                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = addDependent.UserId;
+                //cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = addDependent.UserId;
                 cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = addDependent.dependvisaName;
                 cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = addDependent.dependvisaEmail;
                 cmd.Parameters.Add("@DateOfBirth", SqlDbType.NVarChar).Value = addDependent.dependvisaDOB;
-                cmd.Parameters.Add("@Address", SqlDbType.Int).Value = addDependent.dependvisaAddress;
+                cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = addDependent.dependvisaAddress;
                 cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addDependent.dependvisacountry;
                 cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addDependent.dependvisanationality;
-                cmd.Parameters.Add("@PassportNo", SqlDbType.NVarChar).Value = addDependent.dependvisaPasspno;
                 cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
                 cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addDependent.Opt;
                 SqlDataAdapter da = new SqlDataAdapter();
@@ -157,6 +157,83 @@ namespace Starterkit.Data
 
             }
         }
+
+        public string DAL_Partner(PatnerDetailsModel addPartner)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Partner]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = addPartner.PartnerKey;
+                cmd.Parameters.Add("@CompId", SqlDbType.Int).Value = addPartner.CompId;
+                cmd.Parameters.Add("@UAEResidence", SqlDbType.Bit).Value = addPartner.UAEResidence;
+                cmd.Parameters.Add("@IsCompanyManager", SqlDbType.Bit).Value = addPartner.IsCompanyManager;
+                //cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = addDependent.UserId;
+                cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = addPartner.Name;
+                cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = addPartner.EmailId;
+                cmd.Parameters.Add("@DateOfBirth", SqlDbType.NVarChar).Value = addPartner.DateOfBirth;
+                cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = addPartner.Address;
+                cmd.Parameters.Add("@CountryCode", SqlDbType.NVarChar).Value = addPartner.CountryCode;
+                cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = addPartner.Phone;
+                cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addPartner.Country;
+                cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addPartner.Nationality;
+                cmd.Parameters.Add("@EMRId", SqlDbType.NVarChar).Value = addPartner.EMRId;
+                cmd.Parameters.Add("@PassportNo", SqlDbType.NVarChar).Value = addPartner.PassportNo;
+                cmd.Parameters.Add("@PatnerOwnership", SqlDbType.Decimal).Value = addPartner.PatnerOwnership;
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addPartner.Opt;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+        }
+
+        public string DAL_VisaDetail(VisaDetailsModel addVisa)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Visa]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = addVisa.VisaKey;
+                cmd.Parameters.Add("@CompId", SqlDbType.Int).Value = addVisa.CompId;
+                //cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = addDependent.UserId;
+                cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = addVisa.Name;
+                cmd.Parameters.Add("@EmiratesId", SqlDbType.NVarChar).Value = addVisa.EmiratesId;
+                cmd.Parameters.Add("@DateOfBirth", SqlDbType.NVarChar).Value = addVisa.DateOfBirth;
+                cmd.Parameters.Add("@CurrentAddress", SqlDbType.NVarChar).Value = addVisa.CurrentAddress;
+                cmd.Parameters.Add("@ResidenceAddress", SqlDbType.NVarChar).Value = addVisa.ResidenceAddress;
+                cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addVisa.Country;
+                cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addVisa.Nationality;
+                cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addVisa.Opt;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+        }
+
+
 
     }
 }
