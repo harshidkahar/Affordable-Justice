@@ -2,7 +2,7 @@
 {
     public class companyInputParameterForm5Model
     {
-        public string visaresidence { get; set; }
+        public int visaresidence { get; set; }
 
 
     }

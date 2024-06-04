@@ -51,7 +51,7 @@ var KTCreateAccount = function () {
 
 
     // Private Functions
-   var initStepper = function () {
+    var initStepper = function () {
         // Initialize Stepper
         stepperObj = new KTStepper(stepper);
 
@@ -1768,27 +1768,28 @@ var KTCreateAccount = function () {
 
                         }
                         if (stepper.getCurrentStepIndex() == 5) {
-
-                            //  var filterbus_cate = form.querySelector('[name="mainlandbusscity"]');
-                            //  var selectedOption = filterbus_cate.value;
-
-                            //   console.log(selectedOption);
-
-                            //   if (selectedOption === 'partnership') {
-                            // document.querySelector('#Patnerdetails').style.display = 'block';
-                            //    }
-                            //    else if (selectedOption === 'limited-partnership') {
-                            //         document.querySelector('#Patnerdetails').style.display = 'block';
-                            //     }
-                            //     else {
-                            //         document.querySelector('#Patnerdetails').style.display = 'none';
-
-                            //                                }
-
-
-
+                            UpdateFormParameter4();
+                        }
+                        if (stepper.getCurrentStepIndex() == 6) {
+                            UpdateFormParameter5();
+                        }
+                        if (stepper.getCurrentStepIndex() == 7) {
+                            UpdateFormParameter6();
+                        }
+                        if (stepper.getCurrentStepIndex() == 8) {
+                            UpdateFormParameter7();
+                        }
+                        if (stepper.getCurrentStepIndex() == 9) {
+                            UpdateFormParameter8();
+                        }
+                        if (stepper.getCurrentStepIndex() == 10) {
+                            UpdateFormParameter9();
+                        }
+                        if (stepper.getCurrentStepIndex() == 11) {
+                            UpdateFormParameter10();
                         }
                         if (stepper.getCurrentStepIndex() == 12) {
+                            UpdateFormParameter11();
                             document.querySelector('#save').style.display = 'block';
                         }
                     }
@@ -1821,7 +1822,7 @@ var KTCreateAccount = function () {
             KTUtil.scrollTop();
         });
     }
-   var CompanyInsert = function () {
+    var CompanyInsert = function () {
         let cityValue = '';
         const mainlandCity = form.querySelector('[name="mainlandcity"]');
         const freezoneCity = form.querySelector('[name="fzcity"]');
@@ -1977,7 +1978,7 @@ var KTCreateAccount = function () {
                 } else {
                     // Show error message
                     Swal.fire({
-                        text: response.d.message,
+                        text: response.message,
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -2046,7 +2047,7 @@ var KTCreateAccount = function () {
                 } else {
                     // Show error message
                     Swal.fire({
-                        text: response.d.message,
+                        text: response.message,
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -2165,7 +2166,7 @@ var KTCreateAccount = function () {
                 } else {
                     // Show error message
                     Swal.fire({
-                        text: response.d.message,
+                        text: response.message,
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -2197,7 +2198,6 @@ var KTCreateAccount = function () {
         });
 
     } 
-
     var UpdateFormParameter4 = function () {
 
         let businessCategory = '';
@@ -2215,7 +2215,7 @@ var KTCreateAccount = function () {
             BusinessCategory: businessCategory,
          };
 
-        console.log(updateFormParameter2);
+        console.log(updateFormParameter4);
 
         // Perform AJAX request
         $.ajax({
@@ -2233,7 +2233,7 @@ var KTCreateAccount = function () {
                     console.log('AJAX response:', response);
                     // Show success message
                     Swal.fire({
-                        text: "Company Type successfully Updated.",
+                        text: "Business Cateogry successfully Updated.",
                         icon: "success",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -2246,7 +2246,7 @@ var KTCreateAccount = function () {
                 } else {
                     // Show error message
                     Swal.fire({
-                        text: response.d.message,
+                        text: response.message,
                         icon: "error",
                         buttonsStyling: false,
                         confirmButtonText: "Ok, got it!",
@@ -2278,12 +2278,506 @@ var KTCreateAccount = function () {
         });
 
     }
+    var UpdateFormParameter5 = function () {
+
+        updateFormParameter5 = {
+            visaresidence: form.querySelector('[name="target_assign"]').value,
+        };
+
+        console.log(updateFormParameter5);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter5Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter5),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Residence Visa successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+    var UpdateFormParameter6 = function () {
+
+        updateFormParameter6 = {
+            Depvisa: form.querySelector('[name="visadependent"]:checked') ? form.querySelector('[name="visadependent"]:checked').value : '',
+  };
+
+        console.log(updateFormParameter6);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter6Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter6),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Dependent Visa successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+    var UpdateFormParameter7 = function () {
+
+        updateFormParameter7 = {
+            officetype: form.querySelector('[name="officespace"]:checked') ? form.querySelector('[name="officespace"]:checked').value : '',
+            yourofficetype: form.querySelector('[name="youroffice"]').value,
+        };
+
+        console.log(updateFormParameter7);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter7Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter7),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Office Type successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+    var UpdateFormParameter8 = function () {
+
+   
+        updateFormParameter8 = {
+           businessPlan: form.querySelector('[name="bussplan"]:checked') ? form.querySelector('[name="bussplan"]:checked').value : '',
+        };
+
+        console.log(updateFormParameter8);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter8Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter8),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Business Plan successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+    var UpdateFormParameter9 = function () {
+
+        const busname = form.querySelector('[name="namesOfBusiness"]').value;
+        const busname1 = form.querySelector('[name="namesOfBusiness1"]').value;
+        const busname2 = form.querySelector('[name="namesOfBusiness2"]').value;
+        const cNames = busname + ', ' + busname1 + ', ' + busname2;
 
 
+        updateFormParameter9 = {
+            businessname: form.querySelector('[name="busmind"]:checked') ? form.querySelector('[name="busmind"]:checked').value : '',
+            concatenatedNames: cNames,
+        };
 
+        console.log(updateFormParameter9);
 
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter9Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter9),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
 
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Business Name successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
 
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+    var UpdateFormParameter10 = function () {
+       
+        updateFormParameter10 = {
+            service: form.querySelector('[name="services"]').value,
+        };
+
+        console.log(updateFormParameter10);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter10Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter10),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Service successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
+    var UpdateFormParameter11 = function () {
+
+        updateFormParameter11 = {
+            firstname: form.querySelector('[name="fname"]').value,
+            lastname: form.querySelector('[name="lname"]').value,
+            emailId: form.querySelector('[name="email"]').value,
+            phone: form.querySelector('[name="phoneno"]').value,
+            countrycode: form.querySelector('[name="countrycode1"]').value,
+            ResidenceAddress: form.querySelector('[name="raddress"]').value,
+            CurrentAddress: form.querySelector('[name="caddress"]').value,
+            country: form.querySelector('[name="country"]').value,
+            nationality: form.querySelector('[name="nationality"]').value,
+        };
+
+        console.log(updateFormParameter11);
+
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateParameter11Company', // Ensure this URL is correct
+            data: JSON.stringify(updateFormParameter11),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                    Swal.fire({
+                        text: "Personal Information successfully Updated.",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                } else {
+                    // Show error message
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-light"
+                        }
+                    }).then(function () {
+                        KTUtil.scrollTop();
+                    });
+                }
+            },
+            error: function (error) {
+
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+
+                console.log('AJAX error:', error);
+            }
+        });
+
+    }
     var handleForm = function () {
      formSubmitButton.addEventListener('click', function (e) {
             // Validate form before change stepper step

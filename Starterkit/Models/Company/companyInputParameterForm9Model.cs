@@ -2,7 +2,7 @@
 {
     public class companyInputParameterForm9Model
     {
-        public string businessname { get; set; }
+        public bool businessname { get; set; }
 
         public string concatenatedNames { get; set; }
 

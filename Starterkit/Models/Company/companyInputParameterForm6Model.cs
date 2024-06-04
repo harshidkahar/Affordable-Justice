@@ -2,7 +2,7 @@
 {
     public class companyInputParameterForm6Model
     {
-        public string Depvisa { get; set; }
+        public bool Depvisa { get; set; }
 
 
 

@@ -70,66 +70,73 @@ namespace Starterkit.Web.Logic
 			return companyDA.DAL_Company(createCompany);
 		}
 
+        public string EditCompany(CreateCompanyModel updateCompany)
+        {
+            CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
+            return companyDA.DAL_UpdateCompany(updateCompany);
+        }
 
-		//public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
-		//{
-		//    var isAuthenticated = false;
 
-		//    CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
 
-		//    var customer = customerDA.GetCustomerDetailsForAuthentication(p_LoginID);
+        //public bool CheckAuthentication(string p_LoginID, string p_Password, int p_MaxPasswordAttempts, string url)
+        //{
+        //    var isAuthenticated = false;
 
-		//    if (customer != null)
-		//    {
-		//        var maxPasswordAttempts = p_MaxPasswordAttempts <= 0 ? 5 : p_MaxPasswordAttempts;
+        //    CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
 
-		//        if (customer.PasswordAttempts >= p_MaxPasswordAttempts)
-		//        {
-		//            throw new AuthenticationException("You have exceeded the maximum number of attempts to authenticate with your credentials. contact: support@kinetiq.tv");
-		//        }
+        //    var customer = customerDA.GetCustomerDetailsForAuthentication(p_LoginID);
 
-		//        isAuthenticated = IQMedia.Security.Authentication.VerifyPassword(p_Password, customer.Password);
+        //    if (customer != null)
+        //    {
+        //        var maxPasswordAttempts = p_MaxPasswordAttempts <= 0 ? 5 : p_MaxPasswordAttempts;
 
-		//        if (!isAuthenticated || customer.PasswordAttempts > 0)
-		//        {
-		//            customerDA.UpdatePasswordAttempts(p_LoginID, isAuthenticated);
-		//        }
+        //        if (customer.PasswordAttempts >= p_MaxPasswordAttempts)
+        //        {
+        //            throw new AuthenticationException("You have exceeded the maximum number of attempts to authenticate with your credentials. contact: support@kinetiq.tv");
+        //        }
 
-		//        // Check the users's allowed subdomains
-		//        if (isAuthenticated)
-		//        {
-		//            List<string> allowedSubDomains = new List<string>();
+        //        isAuthenticated = IQMedia.Security.Authentication.VerifyPassword(p_Password, customer.Password);
 
-		//            if (!string.IsNullOrWhiteSpace(customer.WhiteLabelClient.SubDomain))
-		//                allowedSubDomains.Add(customer.WhiteLabelClient.SubDomain);
-		//            else
-		//            {
-		//                allowedSubDomains.Add("");
+        //        if (!isAuthenticated || customer.PasswordAttempts > 0)
+        //        {
+        //            customerDA.UpdatePasswordAttempts(p_LoginID, isAuthenticated);
+        //        }
 
-		//                string defaultSubDomains = ConfigurationManager.AppSettings["DefaultSubDomains"];
-		//                if (!string.IsNullOrWhiteSpace(defaultSubDomains))
-		//                    allowedSubDomains.AddRange(defaultSubDomains.Split(','));
-		//            }
+        //        // Check the users's allowed subdomains
+        //        if (isAuthenticated)
+        //        {
+        //            List<string> allowedSubDomains = new List<string>();
 
-		//            foreach (string subDomain in allowedSubDomains)
-		//            {
-		//                string tmpVal = subDomain;
+        //            if (!string.IsNullOrWhiteSpace(customer.WhiteLabelClient.SubDomain))
+        //                allowedSubDomains.Add(customer.WhiteLabelClient.SubDomain);
+        //            else
+        //            {
+        //                allowedSubDomains.Add("");
 
-		//                if (!string.IsNullOrWhiteSpace(tmpVal) && !tmpVal.EndsWith("."))
-		//                    tmpVal += ".";
+        //                string defaultSubDomains = ConfigurationManager.AppSettings["DefaultSubDomains"];
+        //                if (!string.IsNullOrWhiteSpace(defaultSubDomains))
+        //                    allowedSubDomains.AddRange(defaultSubDomains.Split(','));
+        //            }
 
-		//                string regexPattern = $"http[s]?:\\/\\/(www.)?{tmpVal}iqmediacorp\\.com";
-		//                if (Regex.IsMatch(url, regexPattern))
-		//                {
-		//                    hasDomainAccess = true;
-		//                    break;
-		//                }
-		//            }
-		//        }
-		//    }
+        //            foreach (string subDomain in allowedSubDomains)
+        //            {
+        //                string tmpVal = subDomain;
 
-		//    return isAuthenticated && hasDomainAccess;
-		//}
+        //                if (!string.IsNullOrWhiteSpace(tmpVal) && !tmpVal.EndsWith("."))
+        //                    tmpVal += ".";
 
-	}
+        //                string regexPattern = $"http[s]?:\\/\\/(www.)?{tmpVal}iqmediacorp\\.com";
+        //                if (Regex.IsMatch(url, regexPattern))
+        //                {
+        //                    hasDomainAccess = true;
+        //                    break;
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return isAuthenticated && hasDomainAccess;
+        //}
+
+    }
 }

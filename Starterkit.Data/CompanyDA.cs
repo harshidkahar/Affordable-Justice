@@ -71,7 +71,59 @@ namespace Starterkit.Data
 
 			}
 		}
-		public string DAL_Dependent(InsertDependentModel addDependent)
+
+
+		public string DAL_UpdateCompany(CreateCompanyModel updateCompany) {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Company]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = updateCompany.Id;
+                cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = updateCompany.UserId;
+                cmd.Parameters.Add("@ApplicationType", SqlDbType.NVarChar).Value = updateCompany.ApplicationType;
+                cmd.Parameters.Add("@CompanyType", SqlDbType.NVarChar).Value = updateCompany.CompanyType;
+                cmd.Parameters.Add("@BusinessCity", SqlDbType.NVarChar).Value = updateCompany.BusinessCity;
+                cmd.Parameters.Add("@BusinessLocation", SqlDbType.NVarChar).Value = updateCompany.BusinessLocation;
+                cmd.Parameters.Add("@BusinessCategory", SqlDbType.NVarChar).Value = updateCompany.BusinessCategory;
+                cmd.Parameters.Add("@NoOfResidentVisa", SqlDbType.Int).Value = updateCompany.NoOfResidentVisa;
+                cmd.Parameters.Add("@DependentVisaReq", SqlDbType.Bit).Value = updateCompany.DependentVisaReq;
+                cmd.Parameters.Add("@OfficeType", SqlDbType.NVarChar).Value = updateCompany.OfficeType;
+                cmd.Parameters.Add("@YourOfficeType", SqlDbType.NVarChar).Value = updateCompany.YourOfficeType;
+                cmd.Parameters.Add("@StartBusiness", SqlDbType.NVarChar).Value = updateCompany.StartBusiness;
+                cmd.Parameters.Add("@HasBusinessName", SqlDbType.Bit).Value = updateCompany.HasBusinessName;
+                cmd.Parameters.Add("@BusinessNameOption", SqlDbType.NVarChar).Value = updateCompany.HasBusinessName;
+                cmd.Parameters.Add("@NeedAssistanceOn", SqlDbType.NVarChar).Value = updateCompany.NeedAssistanceOn;
+                cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = updateCompany.FirstName;
+                cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = updateCompany.LastName;
+                cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = updateCompany.EmailId;
+                cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = updateCompany.Phone;
+                cmd.Parameters.Add("@CAddress", SqlDbType.NVarChar).Value = updateCompany.CAddress;
+                cmd.Parameters.Add("@RAddress", SqlDbType.NVarChar).Value = updateCompany.RAddress;
+                cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = updateCompany.Country;
+                cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = updateCompany.Nationality;
+                cmd.Parameters.Add("@CountryCode", SqlDbType.NVarChar).Value = updateCompany.CountryCode;
+                cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C:/Downloads/passport.pdf";
+                cmd.Parameters.Add("@PassportPhotoUrl", SqlDbType.NVarChar).Value = "C:/Downloads/passportPhoto.pdf";
+                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = updateCompany.Opt;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+
+
+        }
+        public string DAL_Dependent(InsertDependentModel addDependent)
         {
             try
             {

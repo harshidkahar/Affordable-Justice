@@ -51,8 +51,7 @@ namespace Starterkit.Controllers
         {
             return View("Views/Pages/Company/CompanyList.cshtml");
         }
-
-        
+     
         [HttpGet]
         public JsonResult GetCompanyList()
         {
@@ -103,8 +102,6 @@ namespace Starterkit.Controllers
         }
 
 
-
-
         [AllowAnonymous]
 		[HttpGet]
 		public JsonResult GetCompanyId()
@@ -123,7 +120,324 @@ namespace Starterkit.Controllers
 			}
 		}
 
-		[AllowAnonymous]
+
+        //Update Starts From Here
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter1Company([FromBody] companyInputParameterForm1Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+             
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.ApplicationType = editCompany.ApplicationType?.Trim();
+                updateCompany.Opt = "A";
+                
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter2Company([FromBody] companyInputParameterForm2Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.CompanyType = editCompany.CompanyType?.Trim();
+                updateCompany.Opt = "B";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter3Company([FromBody] companyInputParameterForm3Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.BusinessCity = editCompany.City?.Trim();
+                updateCompany.BusinessLocation = editCompany.Location?.Trim();
+                updateCompany.Opt = "C";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter4Company([FromBody] companyInputParameterForm4Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.BusinessCategory = editCompany.BusinessCategory?.Trim();
+                updateCompany.Opt = "D";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter5Company([FromBody] companyInputParameterForm5Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.NoOfResidentVisa = editCompany.visaresidence;
+                updateCompany.Opt = "E";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter6Company([FromBody] companyInputParameterForm6Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.DependentVisaReq = editCompany.Depvisa;
+                updateCompany.Opt = "F";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter7Company([FromBody] companyInputParameterForm7Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.OfficeType = editCompany.officetype;
+                updateCompany.YourOfficeType = editCompany.yourofficetype;
+                updateCompany.Opt = "G";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter8Company([FromBody] companyInputParameterForm8Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.StartBusiness = editCompany.businessPlan?.Trim();
+                updateCompany.Opt = "H";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter9Company([FromBody] companyInputParameterForm9Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.HasBusinessName = editCompany.businessname;
+                updateCompany.BusinessNameOption = editCompany.concatenatedNames?.Trim();
+                updateCompany.Opt = "J";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter10Company([FromBody] companyInputParameterForm10Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.NeedAssistanceOn = editCompany.service?.Trim();
+                updateCompany.Opt = "K";
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateParameter11Company([FromBody] companyInputParameterForm11Model editCompany)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
+                CreateCompanyModel updateCompany = new CreateCompanyModel();
+
+
+                updateCompany.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                updateCompany.FirstName = editCompany.firstname?.Trim();
+                updateCompany.LastName = editCompany.lastname?.Trim();
+                updateCompany.EmailId = editCompany.emailId?.Trim();
+                updateCompany.CountryCode = editCompany.countryCode?.Trim();
+                updateCompany.Phone = editCompany.phone?.Trim();
+                updateCompany.CAddress = editCompany.CurrentAddress?.Trim();
+                updateCompany.RAddress = editCompany.ResidenceAddress?.Trim();
+                updateCompany.Country = editCompany.country?.Trim();
+                updateCompany.Nationality = editCompany.nationality?.Trim();
+                updateCompany.Opt = "L";
+
+
+
+                _Result = companyLogic.EditCompany(updateCompany);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+        [AllowAnonymous]
         [HttpPost]
         public JsonResult AddDependent([FromBody] DependentModel insertDependent)
         {
