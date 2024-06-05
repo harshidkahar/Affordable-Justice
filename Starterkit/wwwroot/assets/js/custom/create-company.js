@@ -11,6 +11,12 @@ var KTCreateAccount = function () {
     var formSubmitButton;
     var formContinueButton;
     var formSaveButton;
+    let CompId;
+    var dependentListData = [];
+    var partnerListData = [];
+
+
+    //Company insert and update variable declared.
     var InsertCompanyData = null;
     var VisaDetails = null;
     var updateFormParameter1 = null;
@@ -160,10 +166,13 @@ var KTCreateAccount = function () {
             document.querySelector('#autogenrated_busname').style.display = 'block';
             document.querySelector('#bussiness_name').style.display = 'none';
         });
-        
+
+
         //DependentDETAILS
+
         const dependarea = document.querySelector('#DepDETAIL')
         let dpcount = 0;
+
         function Dcount() {
             let ddcount = ++dpcount;
             // patnercount++;
@@ -172,33 +181,26 @@ var KTCreateAccount = function () {
             div.innerHTML = `<label class="fw-bold fs-2">Dependent ${ddcount}</label>`;
             dependarea.appendChild(div);
         }
-        var dependvisa = form.querySelector('[name="visadependent"]:checked');
 
+        var dependvisa = form.querySelector('[name="visadependent"]:checked');
         var depdetail = document.querySelector('#dependentlbl');
         dependvisa = form.querySelector('[name="visadependent"]:checked'),
       
-      form.querySelector('#addDependent').addEventListener('click', function (e) {
+    form.querySelector('#addDependent').addEventListener('click', function (e) {
             e.preventDefault();
             console.log('add dependent clicked');
             document.querySelector('#NewDependent').style.display = 'block';
             document.querySelector('#cancelDependent').style.display = 'none';
-             //Dependent Detail Label Section.
+            depdetail.innerText = "Dependent Information";  //Dependent Detail Label Section.
         
-        depdetail.innerText = "Dependent Information";
-        
-
             const area = form.querySelector('#DepDETAIL');
-
-            // Generate a unique ID for each row
             function generateId() {
-                return 'row-' + Math.random().toString(36).substr(2, 9);
+                return 'row-' + Math.random().toString(36).substr(2, 9);    //Generate a unique ID for each row
             }
-            const dependentBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody');
-            //const dparea = document.querySelector('#DepDETAIL');
 
-            var dependvisa = form.querySelector('[name="visadependent"]:checked');
+            //const dependentBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody'); //Table Body Declartion. 
+            var dependvisa = form.querySelector('[name="visadependent"]:checked'); //Dependent Details var declaration.
             var Depvisa = dependvisa ? dependvisa.value : '';
-
             var dependvisaName = form.querySelector('[name="Dependentvisaname"]').value;
             var dependvisaEmail = form.querySelector('[name="Dependentvisaemail"]').value;
             var dependvisaDOB = form.querySelector('[name="DependentvisaDateOfBirth"]').value;
@@ -207,11 +209,9 @@ var KTCreateAccount = function () {
             var dependvisacountry = form.querySelector('[name="dependentcountry"]').value;
             var dependvisanationality = form.querySelector('[name="dependentnationality"]').value;
 
-            if (dependvisaName && dependvisaPasspno) {
+    /*        if (dependvisaName && dependvisaPasspno) {
                 const newRow1 = document.createElement('tr');
                 const uniqueId = generateId();
-
-                // Store all details in a data attribute
                 newRow1.dataset.dependentDetails = JSON.stringify({
                     name: dependvisaName,
                     email: dependvisaEmail,
@@ -220,140 +220,133 @@ var KTCreateAccount = function () {
                     address: dependvisaAddress,
                     country: dependvisacountry,
                     nationality: dependvisanationality
-                });
-
+                });  // Store all details in a data attribute
 
                 newRow1.innerHTML = `
-      <td data-id="${uniqueId}">${dependvisaName}</td>
-      <td>${dependvisaPasspno}</td>
-      <td>
-          <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${uniqueId}">
-              <i class="ki-duotone ki-pencil">
-                  <span class="path1"></span>
-                  <span class="path2"></span>
-              </i>
-          </button>
-          <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete">
-              <i class="ki-duotone ki-trash fs-5">
-                  <span class="path1"></span>
-                  <span class="path2"></span>
-                  <span class="path3"></span>
-                  <span class="path4"></span>
-                  <span class="path5"></span>
-              </i>
-          </button>
-      </td>
-    `;
+                                  <td data-id="${uniqueId}">${dependvisaName}</td>
+                                  <td>${dependvisaPasspno}</td>
+                                  <td>
+                                      <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${uniqueId}">
+                                          <i class="ki-duotone ki-pencil">
+                                              <span class="path1"></span>
+                                              <span class="path2"></span>
+                                          </i>
+                                      </button>
+                                      <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete">
+                                          <i class="ki-duotone ki-trash fs-5">
+                                              <span class="path1"></span>
+                                              <span class="path2"></span>
+                                              <span class="path3"></span>
+                                              <span class="path4"></span>
+                                              <span class="path5"></span>
+                                          </i>
+                                      </button>
+                                  </td>
+                                `;
                dependentBody.appendChild(newRow1);
-            }
-            document.querySelector('#DepDETAIL').style.display = 'block';
-
-            if (Depvisa === 'yes') {
-
-                //document.querySelector('#depdetailslbl').style.display = 'block';
-
-                Dcount();
-
+    } */
+          document.querySelector('#DepDETAIL').style.display = 'block';
+            if (Depvisa === 'yes')
+            {
+                Dcount(); //document.querySelector('#depdetailslbl').style.display = 'block';
                 const dparea = form.querySelector('#DepDETAIL');
 
                 // Dependent Name
-                let div1 = document.createElement('div');
-                div1.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div1.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Name</label>
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisaName}</label>`;
-                dparea.appendChild(div1);
+                        let div1 = document.createElement('div');
+                        div1.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div1.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Name</label>
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisaName}</label>`;
+                        dparea.appendChild(div1);
 
 
                 // Dependent Email
-                let div2 = document.createElement('div');
-                div2.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div2.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Email Id</label>
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisaEmail}</label>`;
-                dparea.appendChild(div2);
+                        let div2 = document.createElement('div');
+                        div2.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div2.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Email Id</label>
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisaEmail}</label>`;
+                        dparea.appendChild(div2);
 
 
                 // Dependent Date of Birth
-                let div3 = document.createElement('div');
-                div3.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div3.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisaDOB}</label>`;
-                dparea.appendChild(div3);
+                        let div3 = document.createElement('div');
+                        div3.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div3.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisaDOB}</label>`;
+                        dparea.appendChild(div3);
 
 
                 //Dependent Passport No
-                let div4 = document.createElement('div');
-                div4.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div4.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Passport No</label> 
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisaPasspno}</label>`;
-                dparea.appendChild(div4);
+                        let div4 = document.createElement('div');
+                        div4.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div4.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Passport No</label> 
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisaPasspno}</label>`;
+                        dparea.appendChild(div4);
 
 
                 //Dependent Address
-                let div5 = document.createElement('div');
-                div5.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div5.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Address</label>
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisaAddress}</label>`;
-                dparea.appendChild(div5);
+                        let div5 = document.createElement('div');
+                        div5.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div5.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Address</label>
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisaAddress}</label>`;
+                        dparea.appendChild(div5);
 
 
                 //Dependent Country
-                let div6 = document.createElement('div');
-                div6.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div6.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Country</label>
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisacountry}</label>`;
-                dparea.appendChild(div6);
+                        let div6 = document.createElement('div');
+                        div6.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div6.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Country</label>
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisacountry}</label>`;
+                        dparea.appendChild(div6);
 
 
                 //Dependent Nationality
-                let div7 = document.createElement('div');
-                div7.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div7.innerHTML = `
-             <label class="col-5 fs-5 text-gray-600">Nationality</label>
-             <label class="fs-4 fw-bold text-hover-primary">${dependvisanationality}</label`;
-                dparea.appendChild(div7);
+                        let div7 = document.createElement('div');
+                        div7.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div7.innerHTML = `
+                     <label class="col-5 fs-5 text-gray-600">Nationality</label>
+                     <label class="fs-4 fw-bold text-hover-primary">${dependvisanationality}</label`;
+                        dparea.appendChild(div7);
 
 
                 //Dependent Passport
-                let div8 = document.createElement('div');
-                div8.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div8.innerHTML = `
-         <label class="col-5 fs-5 text-gray-600">Passport</label>
-             <!--begin::Overlay-->
-                 <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
-             <!--begin::Image-->
-                 <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
-                     style="background-image:url('assets/media/stock/900x600/23.jpg')">
-                 </div>
-             <!--end::Image-->
-             <!--begin::Action-->
-                 <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
-                     <i class="bi bi-eye-fill text-white fs-3x"></i>
-                 </div>
-             <!--end::Action-->
-                 </a>
-             <!--end::Overlay-->
-             `;
-                dparea.appendChild(div8);
+                        let div8 = document.createElement('div');
+                        div8.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
+                        div8.innerHTML = `
+                 <label class="col-5 fs-5 text-gray-600">Passport</label>
+                     <!--begin::Overlay-->
+                         <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                     <!--begin::Image-->
+                         <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                             style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                         </div>
+                     <!--end::Image-->
+                     <!--begin::Action-->
+                         <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                             <i class="bi bi-eye-fill text-white fs-3x"></i>
+                         </div>
+                     <!--end::Action-->
+                         </a>
+                     <!--end::Overlay-->
+                     `;
+                        dparea.appendChild(div8);
 
-                let div9 = document.createElement('div');
-                div9.className = 'mb-3 mt-3';
-                div9.innerHTML = `<hr class="text-gray-600" />`;
-                dparea.appendChild(div9);
+                        let div9 = document.createElement('div');
+                        div9.className = 'mb-3 mt-3';
+                        div9.innerHTML = `<hr class="text-gray-600" />`;
+                        dparea.appendChild(div9);
             }
-
             if (Depvisa === 'no') {
                 document.querySelector('#DepDETAIL').style.display = 'none';
                 document.querySelector('#DepDETAILS').style.display = 'none';
                 document.querySelector('#depdetailslbl').style.display = 'none';
             }
 
-            
           var depDetails = null;
               depDetails = {
                   dependvisaName: form.querySelector('[name="Dependentvisaname"]').value,
@@ -370,26 +363,20 @@ var KTCreateAccount = function () {
           dependvisaDOB = form.querySelector('[name="DependentvisaDateOfBirth"]').value = '';
           dependvisaPasspno = form.querySelector('[name="Dependentvisapasspno"]').value = '';
           dependvisaAddress = form.querySelector('[name="dependentaddress"]').value = '';
-          // Reset Select2 elements
-          const countrySelect = form.querySelector('[name="dependentcountry"]');
+          const countrySelect = form.querySelector('[name="dependentcountry"]');  // Reset Select2 elements
           const nationalitySelect = form.querySelector('[name="dependentnationality"]');
-
-          // Resetting the native select elements
-          countrySelect.selectedIndex = 0;
+          countrySelect.selectedIndex = 0;  // Resetting the native select elements
           nationalitySelect.selectedIndex = 0;
-
-          // If Select2 is used, reset the Select2 elements
-          if ($(countrySelect).data('select2')) {
+          if ($(countrySelect).data('select2')) { // If Select2 is used, reset the Select2 elements
               $(countrySelect).val(null).trigger('change');
           }
           if ($(nationalitySelect).data('select2')) {
               $(nationalitySelect).val(null).trigger('change');
           }
-
-          // Show the table if it's not already visible
-          document.querySelector('#dependentviewtable').style.display = 'block';
+          document.querySelector('#dependentviewtable').style.display = 'block';// Show the table if it's not already visible
           document.querySelector('#Dependentdetails').style.display = 'none';
           document.querySelector('#addDependent').style.display = 'none';
+
           $.ajax({
               type: "POST",
               url: "Company/AddDependent",
@@ -399,7 +386,7 @@ var KTCreateAccount = function () {
               success: function (data) {
                   if (data == "done") {
                       Swal.fire({
-                          text: "Partner Successfully Added!",
+                          text: "Dependent Successfully Added!",
                           icon: "success",
                           buttonsStyling: false,
                           confirmButtonText: "Ok, got it!",
@@ -408,13 +395,7 @@ var KTCreateAccount = function () {
                           }
                       }).then(function (result) {
                           if (result.isConfirmed) {
-                              form.reset();
-
-                            //  var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                              //if (redirectUrl) {
-                                //  location.href = redirectUrl;
-
-                              //}
+                              fetchDependent();
                           }
                       });
                   }
@@ -432,27 +413,11 @@ var KTCreateAccount = function () {
               },
               error: ''
           });
-
-            /*Swal.fire({
-                text: "Dependent added successfully!",
-                icon: "success",
-                buttonsStyling: false,
-                confirmButtonText: "Ok, got it!",
-                customClass: {
-                    confirmButton: "btn btn-primary"
-                }
-            }); */
-
-            // Function to handle edit button click
-            // Function to handle edit button click
-            document.querySelector('#kt_datatable_vertical_scroll1 tbody').addEventListener('click', function (event) {
+        /*   document.querySelector('#kt_datatable_vertical_scroll1 tbody').addEventListener('click', function (event) {
                 if (event.target.closest('.edit')) {
                     const row = event.target.closest('tr');
                     const id = row.querySelector('[data-id]').getAttribute('data-id');
-
-                    // Retrieve stored data from the row's data attribute
-                    const data = JSON.parse(row.dataset.dependentDetails);
-
+                    const data = JSON.parse(row.dataset.dependentDetails);  // Retrieve stored data from the row's data attribute
                     document.querySelector('#Dependentdetails').style.display = 'block';
                     document.querySelector('#addDependent').style.display = 'block';
                     form.querySelector('[name="Dependentvisaname"]').value = data.name;
@@ -460,8 +425,8 @@ var KTCreateAccount = function () {
                     form.querySelector('[name="DependentvisaDateOfBirth"]').value = data.dob;
                     form.querySelector('[name="Dependentvisapasspno"]').value = data.passport;
                     form.querySelector('[name="dependentaddress"]').value = data.address;
-                     form.querySelector('[name="dependentcountry"]').value = data.country;
-            form.querySelector('[name="dependentnationality"]').value = data.nationality;
+                    form.querySelector('[name="dependentcountry"]').value = data.country;
+                    form.querySelector('[name="dependentnationality"]').value = data.nationality;
 
             // If Select2 is used, update the Select2 elements
             if ($(form.querySelector('[name="dependentcountry"]')).data('select2')) {
@@ -471,9 +436,8 @@ var KTCreateAccount = function () {
                 $(form.querySelector('[name="dependentnationality"]')).val(data.nationality).trigger('change');
             }
                 }
-            });
-
-            document.querySelectorAll('.dependentdelete').forEach(button => {
+            }); */
+           document.querySelectorAll('.dependentdelete').forEach(button => {
                 button.addEventListener('click', function (e) {
                     e.preventDefault();
                     console.log('delete');
@@ -484,11 +448,81 @@ var KTCreateAccount = function () {
                         console.log('Row deleted');
                     }
                 });
-            });
+           });
+    });
 
+    var fetchDependent = function () {
+        $.ajax({
+            url: '/Company/DependentList',
+            type: 'GET',
+            success: function (response) {
+                //const result = JSON.parse(response); // Parse the JSON string response
+                console.log(response)
+                //console.log(result);
+                if (response.success) {
+                    dependentListData = response.dependentList;
+                    dependentrenderTable();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve Dependent list.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
         });
 
+        }
 
+    function dependentrenderTable() {
+
+            const tableBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody');
+            tableBody.innerHTML = ''; // Clear existing rows
+
+            dependentListData.forEach((dependentItem, index) => {
+                const row = tableBody.insertRow();
+
+                row.insertCell(0).textContent = dependentItem.dependvisaName;
+                row.insertCell(1).textContent = dependentItem.dependvisaPasspno;
+                row.insertCell(2).innerHTML = ` <td>
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${dependentItem.CompanyKey}">
+                                <i class="ki-duotone ki-pencil">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete">
+                                <i class="ki-duotone ki-trash fs-5">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </button>
+                        </td>
+                                `;
+
+                //KTMenu.createInstances();
+            });
+
+        }
+        
 
         // Validation before going to next page
         stepperObj.on('kt.stepper.next', function (stepper) {
@@ -564,17 +598,17 @@ var KTCreateAccount = function () {
             var Depvisa = dependvisa ? dependvisa.value : '';
 
 
-/* Declared Variables of Dependent Visa Details Old One Not in use.
-
-            //Form of visa dependent if yes
-            var dependvisaName = form.querySelector('[name="Dependentvisaname"]').value;
-            var dependvisaEmail = form.querySelector('[name="Dependentvisaemail"]').value;
-            var dependvisaDOB = form.querySelector('[name="DependentvisaDateOfBirth"]').value;
-            var dependvisaPasspno = form.querySelector('[name="Dependentvisapasspno"]').value;
-            var dependvisaAddress = form.querySelector('[name="dependentaddress"]').value;
-            var dependvisacountry = form.querySelector('[name="dependentcountry"]').value;
-            var dependvisanationality = form.querySelector('[name="dependentnationality"]').value;
-*/
+            /* Declared Variables of Dependent Visa Details Old One Not in use.
+            
+                        //Form of visa dependent if yes
+                        var dependvisaName = form.querySelector('[name="Dependentvisaname"]').value;
+                        var dependvisaEmail = form.querySelector('[name="Dependentvisaemail"]').value;
+                        var dependvisaDOB = form.querySelector('[name="DependentvisaDateOfBirth"]').value;
+                        var dependvisaPasspno = form.querySelector('[name="Dependentvisapasspno"]').value;
+                        var dependvisaAddress = form.querySelector('[name="dependentaddress"]').value;
+                        var dependvisacountry = form.querySelector('[name="dependentcountry"]').value;
+                        var dependvisanationality = form.querySelector('[name="dependentnationality"]').value;
+            */
 
             //Step-7
             var OfficeSpace = form.querySelector('[name="officespace"]:checked');
@@ -619,7 +653,7 @@ var KTCreateAccount = function () {
             var Country = form.querySelector('[name="country"]').value;
             var Nationality = form.querySelector('[name="nationality"]').value;
 
-/* OVERVIEW STEP 12 HTML LABELS DECLARED AND STORED */
+            /* OVERVIEW STEP 12 HTML LABELS DECLARED AND STORED */
 
             //Step-1 Application Type
             var overviewstep1 = form.querySelector('#App_type');
@@ -671,52 +705,52 @@ var KTCreateAccount = function () {
                 const loc = document.querySelector('[name="ddlUAQ"]');
                 location = loc.value;
             }
-                   var overviewstep3loca = form.querySelector('#freezloca');
+            var overviewstep3loca = form.querySelector('#freezloca');
             var overviewstep3localbl = form.querySelector('#freezlocalbl');
 
-/*Patner Details Old One Not in use.
+            /*Patner Details Old One Not in use.
+                        
+                        //Step-4 Patner Details
+                        //Patner is residence of UAE or not
+                        var overviewpatresiUAE = form.querySelector('#patresiUAE');
+                        var overviewpatresiUAElbl = form.querySelector('#lblpatresiUAE');
             
-            //Step-4 Patner Details
-            //Patner is residence of UAE or not
-            var overviewpatresiUAE = form.querySelector('#patresiUAE');
-            var overviewpatresiUAElbl = form.querySelector('#lblpatresiUAE');
-
-            //Patner is manager or not
-            var overviewpatcomptype = form.querySelector('#patmanager');
-            var overviewpatcomptypelbl = form.querySelector('#lblpatmanager');
-
-            //patner name
-            var overviewpatname = form.querySelector('#patname');
-            var overviewpatnamelbl = form.querySelector('#lblpatname');
-
-            //patner email
-            var overviewpatemail = form.querySelector('#patemail');
-            var overviewemaillbl = form.querySelector('#lblpatemail');
-
-            //patner dob
-            var overviewpatdob = form.querySelector('#patdob');
-            var overviewpatdoblbl = form.querySelector('#lblpatdob');
-
-            //patner contact no
-            var overviewcontactno = form.querySelector('#patcontactno');
-            var overviewcontactnolbl = form.querySelector('#lblpatcontactno');
-
-            //patner emirates ID
-            var overviewpatemirID = form.querySelector('#patemrID');
-            var overviewpatemirIDlbl = form.querySelector('#lblpatemrID');
-
-            //patner address
-            var overviewpataddress = form.querySelector('#pataddress');
-            var overviewspataddresslbl = form.querySelector('#lblpataddress');
-
-            //patner nation
-            var overviewnation = form.querySelector('#patnation');
-            var overviewnationlbl = form.querySelector('#lblpatnation');
-
-            //patner percent ownership.
-            var overviewpercentown = form.querySelector('#patownership');
-            var overviewpercentownlbl = form.querySelector('#lblpatownership');
-*/
+                        //Patner is manager or not
+                        var overviewpatcomptype = form.querySelector('#patmanager');
+                        var overviewpatcomptypelbl = form.querySelector('#lblpatmanager');
+            
+                        //patner name
+                        var overviewpatname = form.querySelector('#patname');
+                        var overviewpatnamelbl = form.querySelector('#lblpatname');
+            
+                        //patner email
+                        var overviewpatemail = form.querySelector('#patemail');
+                        var overviewemaillbl = form.querySelector('#lblpatemail');
+            
+                        //patner dob
+                        var overviewpatdob = form.querySelector('#patdob');
+                        var overviewpatdoblbl = form.querySelector('#lblpatdob');
+            
+                        //patner contact no
+                        var overviewcontactno = form.querySelector('#patcontactno');
+                        var overviewcontactnolbl = form.querySelector('#lblpatcontactno');
+            
+                        //patner emirates ID
+                        var overviewpatemirID = form.querySelector('#patemrID');
+                        var overviewpatemirIDlbl = form.querySelector('#lblpatemrID');
+            
+                        //patner address
+                        var overviewpataddress = form.querySelector('#pataddress');
+                        var overviewspataddresslbl = form.querySelector('#lblpataddress');
+            
+                        //patner nation
+                        var overviewnation = form.querySelector('#patnation');
+                        var overviewnationlbl = form.querySelector('#lblpatnation');
+            
+                        //patner percent ownership.
+                        var overviewpercentown = form.querySelector('#patownership');
+                        var overviewpercentownlbl = form.querySelector('#lblpatownership');
+            */
 
             //Step-5 Visa Residence
             var overviewstep5 = form.querySelector('#resi_visa');
@@ -727,33 +761,33 @@ var KTCreateAccount = function () {
             var overviewstep6 = form.querySelector('#dep_visa');
             var overviewstep6lbl = form.querySelector('#lbldep_visa');
 
-/* This is Of Dependent Visa Details Old One Not in use.
-
-            //Step-6 Visa Dependent Details NAME
-            var overviewstep6depName = form.querySelector('#dep_visaname');
-            var overviewstep6lbldepname = form.querySelector('#lbldep_visanme');
-
-            var overviewstep6depEmail = form.querySelector('#dep_visaemail');
-            var overviewstep6lbldepemail = form.querySelector('#lbldep_visaemail');
-
-            var overviewstep6depDOB = form.querySelector('#dep_visadob');
-            var overviewstep6lbldepDOB = form.querySelector('#lbldep_visadob');
-
-            var overviewstep6depPassprt = form.querySelector('#dep_visapassno');
-            var overviewstep6lblPassprt = form.querySelector('#lbldep_visapassno');
-
-            var overviewstep6depaddress = form.querySelector('#dep_visaAddress');
-            var overviewstep6lbladdress = form.querySelector('#lbldep_visaAddress');
-
-            var overviewstep6depcountry = form.querySelector('#dep_visacountry');
-            var overviewstep6lblcountry = form.querySelector('#lbldep_visacountry');
-
-            var overviewstep6depnationality = form.querySelector('#dep_visanationality');
-            var overviewstep6lblnationality = form.querySelector('#lbldep_visanationality');
-
-            var overviewstep6depUploadpplbl = form.querySelector('#dep_visa_passdrop');
-            var overviewstep6depUploadpp = form.querySelector('#lbldep_visa_passdrop'); 
-*/
+            /* This is Of Dependent Visa Details Old One Not in use.
+            
+                        //Step-6 Visa Dependent Details NAME
+                        var overviewstep6depName = form.querySelector('#dep_visaname');
+                        var overviewstep6lbldepname = form.querySelector('#lbldep_visanme');
+            
+                        var overviewstep6depEmail = form.querySelector('#dep_visaemail');
+                        var overviewstep6lbldepemail = form.querySelector('#lbldep_visaemail');
+            
+                        var overviewstep6depDOB = form.querySelector('#dep_visadob');
+                        var overviewstep6lbldepDOB = form.querySelector('#lbldep_visadob');
+            
+                        var overviewstep6depPassprt = form.querySelector('#dep_visapassno');
+                        var overviewstep6lblPassprt = form.querySelector('#lbldep_visapassno');
+            
+                        var overviewstep6depaddress = form.querySelector('#dep_visaAddress');
+                        var overviewstep6lbladdress = form.querySelector('#lbldep_visaAddress');
+            
+                        var overviewstep6depcountry = form.querySelector('#dep_visacountry');
+                        var overviewstep6lblcountry = form.querySelector('#lbldep_visacountry');
+            
+                        var overviewstep6depnationality = form.querySelector('#dep_visanationality');
+                        var overviewstep6lblnationality = form.querySelector('#lbldep_visanationality');
+            
+                        var overviewstep6depUploadpplbl = form.querySelector('#dep_visa_passdrop');
+                        var overviewstep6depUploadpp = form.querySelector('#lbldep_visa_passdrop'); 
+            */
 
             //Step-7 Office Type
             var overviewstep7 = form.querySelector('#office_type');
@@ -846,7 +880,7 @@ var KTCreateAccount = function () {
                 overviewstep4.innerHTML = `Business Category`;
                 overviewstep4lbl.innerHTML = `${mainlbusscate}`;
             }
-            
+
             if (companyTypeInput === 'FreeZone') {
                 document.querySelector('#freelocation').style.display = 'block';
                 document.querySelector('#frlocation').style.display = 'block';
@@ -855,62 +889,62 @@ var KTCreateAccount = function () {
                 overviewstep3loca.innerHTML = `Business Location:`;
                 overviewstep3localbl.innerHTML = `${location}`;
             }
-            
-           
+
+
             overviewstep5.innerHTML = `Residency Visa Required:`;
             overviewstep5lbl.innerHTML = `${visaresidence}`;
 
             overviewstep6.innerHTML = `Dependents Visa Required:`;
             overviewstep6lbl.innerHTML = `${Depvisa}`;
 
+
+
+            /*
+                        if (Depvisa == 'yes') {
+                            document.querySelector('#DEPdetarea').style.display = 'block';
+                            depcount();
+                            overviewstep6depName.innerHTML = `Dependent Name:`;
+                            overviewstep6lbldepname.innerHTML = `${dependvisaName}`;
             
-
-/*
-            if (Depvisa == 'yes') {
-                document.querySelector('#DEPdetarea').style.display = 'block';
-                depcount();
-                overviewstep6depName.innerHTML = `Dependent Name:`;
-                overviewstep6lbldepname.innerHTML = `${dependvisaName}`;
-
-                overviewstep6depEmail.innerHTML = `Dependent Email:`;
-                overviewstep6lbldepemail.innerHTML = `${dependvisaEmail}`;
-
-                overviewstep6depDOB.innerHTML = `Dependent Name:`;
-                overviewstep6lbldepDOB.innerHTML = `${dependvisaDOB}`;
-
-                overviewstep6depPassprt.innerHTML = `Dependent Passport No:`;
-                overviewstep6lblPassprt.innerHTML = `${dependvisaPasspno}`;
-
-                overviewstep6depaddress.innerHTML = `Dependent Address`;
-                overviewstep6lbladdress.innerHTML = `${dependvisaAddress}`;
-
-                overviewstep6depcountry.innerHTML = `Dependent Country`;
-                overviewstep6lblcountry.innerHTML = `${dependvisacountry}`;
-
-                overviewstep6depnationality.innerHTML = `Dependent Nationality`;
-                overviewstep6lblnationality.innerHTML = `${dependvisanationality}`;
-
-                overviewstep6depUploadpplbl.innerHTML = `Dependent Passport`;
-                overviewstep6depUploadpp.innerHTML = ` <!--begin::Overlay-->
-                                                        <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
-                                                            <!--begin::Image-->
-                                                            <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
-                                                                style="background-image:url('assets/media/stock/900x600/23.jpg')">
-                                                            </div>
-                                                            <!--end::Image-->
-
-                                                            <!--begin::Action-->
-                                                            <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
-                                                                <i class="bi bi-eye-fill text-white fs-3x"></i>
-                                                            </div>
-                                                            <!--end::Action-->
-                                                        </a>
-                                                        <!--end::Overlay-->`;
-            }
-            if (Depvisa === 'no') {
-                document.querySelector('#DEPdetarea').style.display = 'none';
-            }
-    */
+                            overviewstep6depEmail.innerHTML = `Dependent Email:`;
+                            overviewstep6lbldepemail.innerHTML = `${dependvisaEmail}`;
+            
+                            overviewstep6depDOB.innerHTML = `Dependent Name:`;
+                            overviewstep6lbldepDOB.innerHTML = `${dependvisaDOB}`;
+            
+                            overviewstep6depPassprt.innerHTML = `Dependent Passport No:`;
+                            overviewstep6lblPassprt.innerHTML = `${dependvisaPasspno}`;
+            
+                            overviewstep6depaddress.innerHTML = `Dependent Address`;
+                            overviewstep6lbladdress.innerHTML = `${dependvisaAddress}`;
+            
+                            overviewstep6depcountry.innerHTML = `Dependent Country`;
+                            overviewstep6lblcountry.innerHTML = `${dependvisacountry}`;
+            
+                            overviewstep6depnationality.innerHTML = `Dependent Nationality`;
+                            overviewstep6lblnationality.innerHTML = `${dependvisanationality}`;
+            
+                            overviewstep6depUploadpplbl.innerHTML = `Dependent Passport`;
+                            overviewstep6depUploadpp.innerHTML = ` <!--begin::Overlay-->
+                                                                    <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                                                                        <!--begin::Image-->
+                                                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                                                                            style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                                                                        </div>
+                                                                        <!--end::Image-->
+            
+                                                                        <!--begin::Action-->
+                                                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                                                                            <i class="bi bi-eye-fill text-white fs-3x"></i>
+                                                                        </div>
+                                                                        <!--end::Action-->
+                                                                    </a>
+                                                                    <!--end::Overlay-->`;
+                        }
+                        if (Depvisa === 'no') {
+                            document.querySelector('#DEPdetarea').style.display = 'none';
+                        }
+                */
 
             overviewstep7.innerHTML = `Office Space:`;
             overviewstep7lbl.innerHTML = `${OSpace}`;
@@ -1091,10 +1125,10 @@ var KTCreateAccount = function () {
             //Patnership adding into table.
             form.querySelector('#addpatner').addEventListener('click', function (e) {
                 e.preventDefault();
-               
+
                 function generateId() {
                     return Math.random().toString(36).substr(2, 9);
-                 }
+                }
 
                 patdetail.innerText = `Partner Information`;
                 // Get the table tbody element
@@ -1158,7 +1192,7 @@ var KTCreateAccount = function () {
 
 
                 if (name && percent) {
-                    const newRow = document.createElement('tr');
+        /*            const newRow = document.createElement('tr');
                     const uniqueId = generateId();
 
                     // Store all details in a data attribute
@@ -1179,35 +1213,35 @@ var KTCreateAccount = function () {
                     });
 
                     newRow.innerHTML = `
-            <td data-id="${uniqueId}">${name}</td>
-            <td>${percent}</td>
-            <td>
-                <button type="button" class="btn btn-sm btn-light-primary me-3 editpartner" id="editpartner" data-id="${uniqueId}">
-                    <i class="ki-duotone ki-pencil">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                    </i>
-                </button>
-                <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete">
-                    <i class="ki-duotone ki-trash fs-5">
-                        <span class="path1"></span>
-                        <span class="path2"></span>
-                        <span class="path3"></span>
-                        <span class="path4"></span>
-                        <span class="path5"></span>
-                    </i>
-                </button>
-            </td>
-        `;
-                    tableBody.appendChild(newRow);
+                <td data-id="${uniqueId}">${name}</td>
+                <td>${percent}</td>
+                <td>
+                    <button type="button" class="btn btn-sm btn-light-primary me-3 editpartner" id="editpartner" data-id="${uniqueId}">
+                        <i class="ki-duotone ki-pencil">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                    </button>
+                    <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete">
+                        <i class="ki-duotone ki-trash fs-5">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                            <span class="path3"></span>
+                            <span class="path4"></span>
+                            <span class="path5"></span>
+                        </i>
+                    </button>
+                </td>
+            `;
+                    tableBody.appendChild(newRow); */
 
                     // Patner Detail count is there.
-                    if (selectedOption2 || selectedOption1 === 'civil-company' || selectedOption1 === 'limited-liability-company' || selectedOption1 === 'limited-partnership' || selectedOption1 === 'public-joint-stock-company' || selectedOption1 === 'private-joint-stock-company' || selectedOption1 === 'gcc-company-branch' || selectedOption1 === 'local-company-branch' || selectedOption1 === 'holding-companies' || selectedOption1 === 'partnership') 
-                        //if (selectedOption1 === 'partnership')
-                        {
+                    if (selectedOption2 || selectedOption1 === 'civil-company' || selectedOption1 === 'limited-liability-company' || selectedOption1 === 'limited-partnership' || selectedOption1 === 'public-joint-stock-company' || selectedOption1 === 'private-joint-stock-company' || selectedOption1 === 'gcc-company-branch' || selectedOption1 === 'local-company-branch' || selectedOption1 === 'holding-companies' || selectedOption1 === 'partnership')
+                    //if (selectedOption1 === 'partnership')
+                    {
 
                         document.querySelector('#patnerDETAILSarea').style.display = 'block';
-                      
+
                         const patarea = document.querySelector('#patnerDETAILSarea');
                         ptcount();
 
@@ -1278,7 +1312,7 @@ var KTCreateAccount = function () {
 
                         }
 
-                         if (patType === 'no') {
+                        if (patType === 'no') {
 
                             // Patner passport No
                             let div8 = document.createElement('div');
@@ -1290,7 +1324,7 @@ var KTCreateAccount = function () {
     `;
                             patarea.appendChild(div8);
                         }
-                        
+
 
                         // Patner address
                         let div9 = document.createElement('div');
@@ -1311,7 +1345,7 @@ var KTCreateAccount = function () {
     `;
                         patarea.appendChild(div10);
 
-                        
+
 
                         // Patner nationality
                         let div11 = document.createElement('div');
@@ -1382,6 +1416,7 @@ var KTCreateAccount = function () {
                                     }
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
+                                        fetchPartner();
                                         //form.reset();
 
                                         //  var redirectUrl = form.getAttribute('data-kt-redirect-url');
@@ -1404,7 +1439,7 @@ var KTCreateAccount = function () {
                                 });
                             }
                         },
-                        error: ''
+
                     });
 
                     patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
@@ -1420,14 +1455,14 @@ var KTCreateAccount = function () {
                     // Clear form fields
                     form.querySelector('#patnername').value = '';
                     form.querySelector('input[name="patneremail"]').value = '';
-                   const pddlcountrycode = form.querySelector('[name="country-code"]');
+                    const pddlcountrycode = form.querySelector('[name="country-code"]');
                     form.querySelector('input[name="patnerphoneno"]').value = '';
                     form.querySelector('#patnerDateOfBirth').value = '';
-                    form.querySelector('#patneremiratesID').value='';
+                    form.querySelector('#patneremiratesID').value = '';
                     form.querySelector('input[name="patnerpassno"]').value = '';
                     form.querySelector('textarea[name="patneraddress"]').value = '';
-                   const pcountry=form.querySelector('select[name="patnercountry"]');
-                   const pnationality =form.querySelector('select[name="Nationality"]');
+                    const pcountry = form.querySelector('select[name="patnercountry"]');
+                    const pnationality = form.querySelector('select[name="Nationality"]');
                     form.querySelector('[name="manageBudget"]').value = '50.0';
 
                     // Resetting the native select elements
@@ -1454,7 +1489,7 @@ var KTCreateAccount = function () {
                     document.querySelector('#cancelpartner').style.display = 'none';
                     document.querySelector('#NewPartner').style.display = 'block';
                     // percent = form.querySelector('[name="manageBudget"]').value = '';
-                    
+
 
                 }
 
@@ -1465,278 +1500,409 @@ var KTCreateAccount = function () {
                 document.querySelector('#addpatner').style.display = 'none';
                 document.querySelector('#cancelpartner').style.display = 'none';
 
-               
+
 
 
                 // Function to handle edit button click
                 document.querySelector('#kt_datatable_vertical_scroll tbody').addEventListener('click', function (event) {
-                    if (event.target.closest('.editpartner')) {
-                        const row = event.target.closest('tr');
-                        const id = row.querySelector('[data-id]').getAttribute('data-id');
-
-                        // Retrieve stored data from the row's data attribute
-                        const data = JSON.parse(row.dataset.partnerDetails);
-
-                        document.querySelector('#Patnerdetails').style.display = 'block';
-                        document.querySelector('#addpatner').style.display = 'block';
-                        form.querySelector('[name="patnername"]').value = data.name;
-                        form.querySelector('[name="patneremail"]').value = data.email;
-                        form.querySelector('[name="patnerphoneno"]').value = data.phone;
-                        form.querySelector('[name="patnerDateOfBirth"]').value = data.dob;
-                        form.querySelector('[name="patnerpassno"]').value = data.passport;
-                        form.querySelector('[name="patneraddress"]').value = data.address;
-                        form.querySelector('[name="patnercountry"]').value = data.country;
-                        form.querySelector('[name="Nationality"]').value = data.nationality;
-                        form.querySelector('[name="manageBudget"]').value = data.percentage;
-                        form.querySelector('[name="country-code"]').value = data.countrycode;
-                        form.querySelector('[name="patneremiratesID"]').value = data.emiratesID;
-
-                        // Set radio buttons for patner_resiUAE
-                        const patnerResiUaeRadios = form.querySelectorAll('[name="patner_resiUAE"]');
-                        patnerResiUaeRadios.forEach(radio => {
-                            radio.checked = (radio.value === data.type);
-                        });
-
-                        // Set radio buttons for Comp_type
-                        const compTypeRadios = form.querySelectorAll('[name="manager_comp"]');
-                        compTypeRadios.forEach(radio => {
-                            radio.checked = (radio.value === data.companyManager);
-                        });
-
-                        // If Select2 is used, update the Select2 elements
-                        if ($(form.querySelector('[name="patnercountry"]')).data('select2')) {
-                            $(form.querySelector('[name="patnercountry"]')).val(data.country).trigger('change');
+                       if (event.target.closest('.editpartner')) {
+                            //const row = event.target.closest('tr');
+                            //const id = row.querySelector('[data-id]').getAttribute('data-id');
+    
+                            /*Retrieve stored data from the row's data attribute
+                            const data = JSON.parse(row.dataset.partnerDetails);
+    
+                            document.querySelector('#Patnerdetails').style.display = 'block';
+                            document.querySelector('#addpatner').style.display = 'block';
+                            form.querySelector('[name="patnername"]').value = data.name;
+                            form.querySelector('[name="patneremail"]').value = data.email;
+                            form.querySelector('[name="patnerphoneno"]').value = data.phone;
+                            form.querySelector('[name="patnerDateOfBirth"]').value = data.dob;
+                            form.querySelector('[name="patnerpassno"]').value = data.passport;
+                            form.querySelector('[name="patneraddress"]').value = data.address;
+                            form.querySelector('[name="patnercountry"]').value = data.country;
+                            form.querySelector('[name="Nationality"]').value = data.nationality;
+                            form.querySelector('[name="manageBudget"]').value = data.percentage;
+                            form.querySelector('[name="country-code"]').value = data.countrycode;
+                            form.querySelector('[name="patneremiratesID"]').value = data.emiratesID;
+    
+                            // Set radio buttons for patner_resiUAE
+                            const patnerResiUaeRadios = form.querySelectorAll('[name="patner_resiUAE"]');
+                            patnerResiUaeRadios.forEach(radio => {
+                                radio.checked = (radio.value === data.type);
+                            });
+    
+                            // Set radio buttons for Comp_type
+                            const compTypeRadios = form.querySelectorAll('[name="manager_comp"]');
+                            compTypeRadios.forEach(radio => {
+                                radio.checked = (radio.value === data.companyManager);
+                            });
+    
+                            // If Select2 is used, update the Select2 elements
+                            if ($(form.querySelector('[name="patnercountry"]')).data('select2')) {
+                                $(form.querySelector('[name="patnercountry"]')).val(data.country).trigger('change');
+                            }
+                            if ($(form.querySelector('[name="Nationality"]')).data('select2')) {
+                                $(form.querySelector('[name="Nationality"]')).val(data.nationality).trigger('change');
+                            }
+                            if ($(form.querySelector('[name="country-code"]')).data('select2')) {
+                                $(form.querySelector('[name="country-code"]')).val(data.countrycode).trigger('change');
+                            } */
                         }
-                        if ($(form.querySelector('[name="Nationality"]')).data('select2')) {
-                            $(form.querySelector('[name="Nationality"]')).val(data.nationality).trigger('change');
-                        }
-                        if ($(form.querySelector('[name="country-code"]')).data('select2')) {
-                            $(form.querySelector('[name="country-code"]')).val(data.countrycode).trigger('change');
-                        }
-                    }
-                
-                });
+                    
+                    }); 
 
-                document.querySelectorAll('.partnerdelete').forEach(button => {
-                    button.addEventListener('click', function (e) {
-                        e.preventDefault();
-                        console.log('delete');
-                        if (e.target && e.target.closest('.partnerdelete')) {
+                    document.querySelectorAll('.partnerdelete').forEach(button => {
+                        button.addEventListener('click', function (e) {
                             e.preventDefault();
-                            const row = e.target.closest('tr');
-                            row.remove();
-                            console.log('Row deleted');
-                        }
+                            console.log('delete');
+                            if (e.target && e.target.closest('.partnerdelete')) {
+                                e.preventDefault();
+                                const row = e.target.closest('tr');
+                                row.remove();
+                                console.log('Row deleted');
+                            }
+                        });
                     });
                 });
-            });
 
 
-            form.querySelector('#cancelpartner').addEventListener('click', function () {
+                form.querySelector('#cancelpartner').addEventListener('click', function () {
 
-                patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
-                patType = patresiUAE ? patresiUAE.value : '';
-                if (patresiUAE !== null) {
-                    patresiUAE.checked = false;
-                }
-                comptype = form.querySelector('[name="manager_comp"]:checked');
-                cmptype = comptype ? comptype.value : '';
-                if (comptype !== null) {
-                    comptype.checked = false;
-                }
-                // Clear form fields
-                form.querySelector('#patnername').value = '';
-                form.querySelector('input[name="patneremail"]').value = '';
-                const pddlcountrycode = form.querySelector('[name="country-code"]');
-                form.querySelector('input[name="patnerphoneno"]').value = '';
-                form.querySelector('#patnerDateOfBirth').value = '';
-                form.querySelector('#patneremiratesID').value = '';
-                form.querySelector('input[name="patnerpassno"]').value = '';
-                form.querySelector('textarea[name="patneraddress"]').value = '';
-                const pcountry = form.querySelector('select[name="patnercountry"]');
-                const pnationality = form.querySelector('select[name="Nationality"]');
-                form.querySelector('[name="manageBudget"]').value = '50.0';
-
-                // Resetting the native select elements
-                pcountry.selectedIndex = 0;
-                pnationality.selectedIndex = 0;
-                pddlcountrycode.selectedIndex = 0;
-                // If Select2 is used, reset the Select2 elements
-                if ($(pcountry).data('select2')) {
-                    $(pcountry).val(null).trigger('change');
-                }
-                if ($(pnationality).data('select2')) {
-                    $(pnationality).val(null).trigger('change');
-                }
-                if ($(pddlcountrycode).data('select2')) {
-                    $(pddlcountrycode).val(null).trigger('change');
-                }
-
-
-            });
-
-      
-            // Validate form before change stepper step
-            var validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
-            if (validator) {
-                validator.validate().then(function (status) {
-                    console.log('validated!');
-
-                    if (status == 'Valid') {
-                        stepper.goNext();
-                        KTUtil.scrollTop();
-
-                        var companyTypeInput = form.querySelector('[name="businessactivity"]').value;
-                        if (stepper.getCurrentStepIndex() == 3) {
-
-                            document.querySelector('#freezoneDetails').style.display = 'none';
-                            document.querySelector('#freezoneForm').style.display = 'none';
-
-                            document.querySelector('#mainlandDetails').style.display = 'none';
-                            document.querySelector('#mainlandForm').style.display = 'none';
-
-                            document.querySelector('#offshoreForm').style.display = 'none';
-                            document.querySelector('#offshoreDetails').style.display = 'none';
-                            document.querySelector('#NewPartner').style.display = 'none';
-
-                            if (companyTypeInput) {
-                                if (companyTypeInput === 'Mainland') {
-                                    document.querySelector('#mainlandDetails').style.display = 'block';
-                                    document.querySelector('#mainlandForm').style.display = 'block';
-                                    document.querySelector('#offshoreForm').style.display = 'none';
-                                    document.querySelector('#offshoreDetails').style.display = 'none';
-
-                                }
-
-                                if (companyTypeInput === 'FreeZone') {
-                                    document.querySelector('#freezoneDetails').style.display = 'block';
-                                    document.querySelector('#freezoneForm').style.display = 'block';
-                                    document.querySelector('#offshoreForm').style.display = 'none';
-                                    document.querySelector('#offshoreDetails').style.display = 'none';
-
-                                }
-                                if (companyTypeInput === 'OffShore Company') {
-                                    document.querySelector('#offshoreForm').style.display = 'block';
-                                    document.querySelector('#offshoreDetails').style.display = 'block';
-                                }
-                                document.querySelector('#selectstep2').style.display = 'none';
-                            }
-                            else {
-                                document.querySelector('#selectstep2').style.display = 'block';
-                            }
-                        }
-                        if (stepper.getCurrentStepIndex() == 4) {
-
-                            document.querySelector('#mainlandbussDetails').style.display = 'none';
-                            document.querySelector('#mainlandbussForm').style.display = 'none';
-                            document.querySelector('#freezonebussDetails').style.display = 'none';
-                            document.querySelector('#freezonebussForm').style.display = 'none';
-                           
-                            if (companyTypeInput) {
-                                if (companyTypeInput === 'Mainland') {
-                                    businessCity = document.getElementById("mainlandCity").value;
-                                    businessLocation = "";
-                                    document.querySelector('#mainlandbussDetails').style.display = 'block';
-                                    document.querySelector('#mainlandbussForm').style.display = 'block';
-                                    document.querySelector('#lblMsgSkip').style.display = 'none';
-                                }
-                                if (companyTypeInput === 'FreeZone') {
-                                    businessCity = document.getElementById("fzcity").value;
-                                    //businessLocation = form.querySelector('[name="fzlocation"]').value;
-                                    document.querySelector('#freezonebussDetails').style.display = 'block';
-                                    document.querySelector('#freezonebussForm').style.display = 'block';
-                                    document.querySelector('#lblMsgSkip').style.display = 'none';
-                                }
-                                if (companyTypeInput === 'OffShore Company') {
-                                    businessCity = document.querySelector('#offshoreCity').value;
-                                    document.querySelector('#lblMsgStep4').style.display = 'none';
-                                    document.querySelector('#lblMsgSkip').style.display = 'block';
-                                }
-
-                                if (businessCity) {
-                                    document.querySelector('#lblMsgStep4').style.display = 'none';
-                                }
-                                else {
-                                    document.querySelector('#lblMsgStep4').style.display = 'block';
-                                    var step4Msg = document.getElementById('lblMsgStep4');
-                                    step4Msg.innerText = "Plese complete step 3";
-                                }
-                            }
-                            else {
-                                if (businessCity) {
-                                    document.querySelector('#lblMsgStep4').style.display = 'none';
-                                }
-                                else {
-                                    document.querySelector('#lblMsgStep4').style.display = 'block';
-                                    var step4Msg = document.getElementById('lblMsgStep4');
-                                    step4Msg.innerText = "Plese complete step 2 & 3";
-                                }
-                            }
-                            CompanyInsert();
-
-                        }
-                        //var visaresi = document.querySelector('[name="target_assign"]').value;
-
-                        if (stepper.getCurrentStepIndex() == 5) {
-                          //  if (visaresi == 0) {
-                            //}
-                            UpdateFormParameter4();
-                        }
-                        if (stepper.getCurrentStepIndex() == 6) {
-                            VisaDet();
-
-                            UpdateFormParameter5();
-                        }
-                        if (stepper.getCurrentStepIndex() == 7) {
-                            UpdateFormParameter6();
-                        }
-                        if (stepper.getCurrentStepIndex() == 8) {
-                            UpdateFormParameter7();
-                        }
-                        if (stepper.getCurrentStepIndex() == 9) {
-                            UpdateFormParameter8();
-                        }
-                        if (stepper.getCurrentStepIndex() == 10) {
-                            UpdateFormParameter9();
-                        }
-                        if (stepper.getCurrentStepIndex() == 11) {
-                            UpdateFormParameter10();
-                        }
-                        if (stepper.getCurrentStepIndex() == 12) {
-                            UpdateFormParameter11();
-                            document.querySelector('#save').style.display = 'block';
-                        }
+                    patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
+                    patType = patresiUAE ? patresiUAE.value : '';
+                    if (patresiUAE !== null) {
+                        patresiUAE.checked = false;
                     }
-                    else {
+                    comptype = form.querySelector('[name="manager_comp"]:checked');
+                    cmptype = comptype ? comptype.value : '';
+                    if (comptype !== null) {
+                        comptype.checked = false;
+                    }
+                    // Clear form fields
+                    form.querySelector('#patnername').value = '';
+                    form.querySelector('input[name="patneremail"]').value = '';
+                    const pddlcountrycode = form.querySelector('[name="country-code"]');
+                    form.querySelector('input[name="patnerphoneno"]').value = '';
+                    form.querySelector('#patnerDateOfBirth').value = '';
+                    form.querySelector('#patneremiratesID').value = '';
+                    form.querySelector('input[name="patnerpassno"]').value = '';
+                    form.querySelector('textarea[name="patneraddress"]').value = '';
+                    const pcountry = form.querySelector('select[name="patnercountry"]');
+                    const pnationality = form.querySelector('select[name="Nationality"]');
+                    form.querySelector('[name="manageBudget"]').value = '50.0';
+
+                    // Resetting the native select elements
+                    pcountry.selectedIndex = 0;
+                    pnationality.selectedIndex = 0;
+                    pddlcountrycode.selectedIndex = 0;
+                    // If Select2 is used, reset the Select2 elements
+                    if ($(pcountry).data('select2')) {
+                        $(pcountry).val(null).trigger('change');
+                    }
+                    if ($(pnationality).data('select2')) {
+                        $(pnationality).val(null).trigger('change');
+                    }
+                    if ($(pddlcountrycode).data('select2')) {
+                        $(pddlcountrycode).val(null).trigger('change');
+                    }
+
+                });
+
+
+                // Validate form before change stepper step
+                var validator = validations[stepper.getCurrentStepIndex() - 1]; // get validator for currnt step
+                if (validator) {
+                    validator.validate().then(function (status) {
+                        console.log('validated!');
+
+                        if (status == 'Valid') {
+                            stepper.goNext();
+                            KTUtil.scrollTop();
+
+                            if (stepper.getCurrentStepIndex() == 2) {
+                                if (CompId) {
+                                    UpdateFormParameter1();
+                                }
+
+                            }
+
+                            var companyTypeInput = form.querySelector('[name="businessactivity"]').value;
+                            if (stepper.getCurrentStepIndex() == 3) {
+
+                                document.querySelector('#freezoneDetails').style.display = 'none';
+                                document.querySelector('#freezoneForm').style.display = 'none';
+
+                                document.querySelector('#mainlandDetails').style.display = 'none';
+                                document.querySelector('#mainlandForm').style.display = 'none';
+
+                                document.querySelector('#offshoreForm').style.display = 'none';
+                                document.querySelector('#offshoreDetails').style.display = 'none';
+                                document.querySelector('#NewPartner').style.display = 'none';
+
+                                if (companyTypeInput) {
+                                    if (companyTypeInput === 'Mainland') {
+                                        document.querySelector('#mainlandDetails').style.display = 'block';
+                                        document.querySelector('#mainlandForm').style.display = 'block';
+                                        document.querySelector('#offshoreForm').style.display = 'none';
+                                        document.querySelector('#offshoreDetails').style.display = 'none';
+
+                                    }
+
+                                    if (companyTypeInput === 'FreeZone') {
+                                        document.querySelector('#freezoneDetails').style.display = 'block';
+                                        document.querySelector('#freezoneForm').style.display = 'block';
+                                        document.querySelector('#offshoreForm').style.display = 'none';
+                                        document.querySelector('#offshoreDetails').style.display = 'none';
+
+                                    }
+                                    if (companyTypeInput === 'OffShore Company') {
+                                        document.querySelector('#offshoreForm').style.display = 'block';
+                                        document.querySelector('#offshoreDetails').style.display = 'block';
+                                    }
+                                    document.querySelector('#selectstep2').style.display = 'none';
+                                }
+                                else {
+                                    document.querySelector('#selectstep2').style.display = 'block';
+                                }
+                                if (CompId) {
+                                    UpdateFormParameter2();
+                                }
+
+
+                            }
+                            if (stepper.getCurrentStepIndex() == 4) {
+
+                                document.querySelector('#mainlandbussDetails').style.display = 'none';
+                                document.querySelector('#mainlandbussForm').style.display = 'none';
+                                document.querySelector('#freezonebussDetails').style.display = 'none';
+                                document.querySelector('#freezonebussForm').style.display = 'none';
+
+                                if (companyTypeInput) {
+                                    if (companyTypeInput === 'Mainland') {
+                                        businessCity = document.getElementById("mainlandCity").value;
+                                        businessLocation = "";
+                                        document.querySelector('#mainlandbussDetails').style.display = 'block';
+                                        document.querySelector('#mainlandbussForm').style.display = 'block';
+                                        document.querySelector('#lblMsgSkip').style.display = 'none';
+                                    }
+                                    if (companyTypeInput === 'FreeZone') {
+                                        businessCity = document.getElementById("fzcity").value;
+                                        //businessLocation = form.querySelector('[name="fzlocation"]').value;
+                                        document.querySelector('#freezonebussDetails').style.display = 'block';
+                                        document.querySelector('#freezonebussForm').style.display = 'block';
+                                        document.querySelector('#lblMsgSkip').style.display = 'none';
+                                    }
+                                    if (companyTypeInput === 'OffShore Company') {
+                                        businessCity = document.querySelector('#offshoreCity').value;
+                                        document.querySelector('#lblMsgStep4').style.display = 'none';
+                                        document.querySelector('#lblMsgSkip').style.display = 'block';
+                                    }
+
+                                    if (businessCity) {
+                                        document.querySelector('#lblMsgStep4').style.display = 'none';
+                                    }
+                                    else {
+                                        document.querySelector('#lblMsgStep4').style.display = 'block';
+                                        var step4Msg = document.getElementById('lblMsgStep4');
+                                        step4Msg.innerText = "Plese complete step 3";
+                                    }
+                                }
+                                else {
+                                    if (businessCity) {
+                                        document.querySelector('#lblMsgStep4').style.display = 'none';
+                                    }
+                                    else {
+                                        document.querySelector('#lblMsgStep4').style.display = 'block';
+                                        var step4Msg = document.getElementById('lblMsgStep4');
+                                        step4Msg.innerText = "Plese complete step 2 & 3";
+                                    }
+                                }
+                                if (CompId) {
+                                    UpdateFormParameter3();
+                                } else {
+                                    CompanyInsert();
+                                }
+                            }
+
+                            if (stepper.getCurrentStepIndex() == 5) {
+                                UpdateFormParameter4();
+                            }
+                            let visaresi = document.querySelector('[name="target_assign"]').value;
+                            let Visa = visaresi.value;
+                            if (stepper.getCurrentStepIndex() == 6) {
+                                if (Visa === '0') {
+                                    VisaDet();
+                                }
+                                UpdateFormParameter5();
+                            }
+                            if (stepper.getCurrentStepIndex() == 7) {
+                                UpdateFormParameter6();
+                            }
+                            if (stepper.getCurrentStepIndex() == 8) {
+                                UpdateFormParameter7();
+                            }
+                            if (stepper.getCurrentStepIndex() == 9) {
+                                UpdateFormParameter8();
+                            }
+                            if (stepper.getCurrentStepIndex() == 10) {
+                                UpdateFormParameter9();
+                            }
+                            if (stepper.getCurrentStepIndex() == 11) {
+                                UpdateFormParameter10();
+                            }
+                            if (stepper.getCurrentStepIndex() == 12) {
+                                UpdateFormParameter11();
+                                document.querySelector('#save').style.display = 'block';
+                            }
+                        }
+                        else {
+                            Swal.fire({
+                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-light"
+                                }
+                            }).then(function () {
+                                KTUtil.scrollTop();
+                            });
+                        }
+                    });
+                } else {
+                    stepper.goNext();
+                    KTUtil.scrollTop();
+                }
+            });
+
+
+            var fetchPartner = function () {
+                $.ajax({
+                    url: '/Company/PartnerList',
+                    type: 'GET',
+                    success: function (response) {
+                        //const result = JSON.parse(response); // Parse the JSON string response
+                        console.log(response)
+                        //console.log(result);
+                        if (response.success) {
+                            partnerListData = response.partnerList;
+                            partnerrenderTable();
+                        } else {
+                            Swal.fire({
+                                text: response.message,
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            });
+                        }
+                    },
+                    error: function () {
                         Swal.fire({
-                            text: "Sorry, looks like there are some errors detected, please try again.",
+                            text: "Failed to retrieve partner list.",
                             icon: "error",
                             buttonsStyling: false,
                             confirmButtonText: "Ok, got it!",
                             customClass: {
-                                confirmButton: "btn btn-light"
+                                confirmButton: "btn btn-primary"
                             }
-                        }).then(function () {
-                            KTUtil.scrollTop();
                         });
                     }
                 });
-            } else {
-                stepper.goNext();
+
+            }
+
+            function partnerrenderTable() {
+
+                const tableBody = document.querySelector('#kt_datatable_vertical_scroll tbody');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                partnerListData.forEach((partnerItem, index) => {
+                    const row = tableBody.insertRow();
+
+                    row.insertCell(0).textContent = partnerItem.Name;
+                    row.insertCell(1).textContent = partnerItem.PatnerOwnership;
+                    row.insertCell(2).innerHTML = ` <td>
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${partnerItem.CompanyKey}">
+                                <i class="ki-duotone ki-pencil">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                </i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete">
+                                <i class="ki-duotone ki-trash fs-5">
+                                    <span class="path1"></span>
+                                    <span class="path2"></span>
+                                    <span class="path3"></span>
+                                    <span class="path4"></span>
+                                    <span class="path5"></span>
+                                </i>
+                            </button>
+                        </td>
+                                `;
+
+                    //KTMenu.createInstances();
+                });
+
+            }
+
+
+            // Prev event
+            stepperObj.on('kt.stepper.previous', function (stepper) {
+                console.log('stepper.previous');
+                document.querySelector('#save').style.display = 'none';
+                stepper.goPrevious();
+                document.querySelector('#save').style.display = 'none';
                 KTUtil.scrollTop();
+            });
+        }
+
+  /*  var GetCompanyId = function () {
+
+        $.ajax({
+            url: '/Company/GetCompanyId',
+            type: 'GET',
+            success: function (response) {
+                //const result = JSON.parse(response); // Parse the JSON string response
+                console.log(response)
+                //console.log(result);
+                if (response.success) {
+                   // companyListData = response.companyList;
+                    r//enderTable();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve Id.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
         });
 
-        // Prev event
-        stepperObj.on('kt.stepper.previous', function (stepper) {
-            console.log('stepper.previous');
-            document.querySelector('#save').style.display = 'none';
-            stepper.goPrevious();
-            document.querySelector('#save').style.display = 'none';
-            KTUtil.scrollTop();
-        });
-    }
+
+
+    }  */
+
     var CompanyInsert = function () {
+
         let cityValue = '';
         const mainlandCity = form.querySelector('[name="mainlandcity"]');
         const freezoneCity = form.querySelector('[name="fzcity"]');
@@ -1749,7 +1915,6 @@ var KTCreateAccount = function () {
         } else if (offshoreCity && offshoreCity.value) {
             cityValue = offshoreCity.value;
         }
-
 
         let location = '';
         let sfZL1 = document.getElementById("fzcity").value;
@@ -1784,17 +1949,13 @@ var KTCreateAccount = function () {
             location = loc.value;
         }
 
-
-
         InsertCompanyData = {
             ApplicationType: form.querySelector('[name="create_company_type"]:checked') ? form.querySelector('[name="create_company_type"]:checked').value : '',
             CompanyType: form.querySelector('[name="businessactivity"]').value,
             City: cityValue,
             Location: location,
         };
-
         console.log(InsertCompanyData);
-
         // Perform AJAX request
         $.ajax({
             method: 'POST',
@@ -1804,19 +1965,17 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
+                CompId = response;
+                console.log(CompId);
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                  
                 } else {
-                  
                 }
             },
             error: function (error) {
-
                 // Show error message
                 Swal.fire({
                     text: "Sorry, looks like there are some errors detected, please try again.",
@@ -1829,15 +1988,11 @@ var KTCreateAccount = function () {
                 }).then(function () {
                     KTUtil.scrollTop();
                 });
-
                 console.log('AJAX error:', error);
             }
         });
     }
-
-    var VisaDet = function () {
-
-        
+    var VisaDet = function () {        
 
         VisaDetails = {
 
@@ -1849,9 +2004,7 @@ var KTCreateAccount = function () {
             Country: form.querySelector('[name="visacountry"]').value,
             Nationality: form.querySelector('[name="visanationality"]').value,
  };
-
         console.log(VisaDetails);
-
         // Perform AJAX request
         $.ajax({
             method: 'POST',
@@ -1861,19 +2014,15 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-
                 } else {
-
                 }
             },
             error: function (error) {
-
                 // Show error message
                 Swal.fire({
                     text: "Sorry, looks like there are some errors detected, please try again.",
@@ -1886,21 +2035,16 @@ var KTCreateAccount = function () {
                 }).then(function () {
                     KTUtil.scrollTop();
                 });
-
                 console.log('AJAX error:', error);
             }
         });
     }
-
-
     var UpdateFormParameter1 = function () {
 
         updateFormParameter1 = {
             ApplicationType: form.querySelector('[name="create_company_type"]:checked') ? form.querySelector('[name="create_company_type"]:checked').value : '',
             };
-
         console.log(updateFormParameter1);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -1910,20 +2054,16 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                   
                 } else {
                     // Show error message
-
                 }
             },
             error: function (error) {
-
                 // Show error message
                 Swal.fire({
                     text: "Sorry, looks like there are some errors detected, please try again.",
@@ -1932,24 +2072,20 @@ var KTCreateAccount = function () {
                     confirmButtonText: "Ok, got it!",
                     customClass: {
                         confirmButton: "btn btn-light"
-                    }
+                   }
                 }).then(function () {
                     KTUtil.scrollTop();
                 });
-
                 console.log('AJAX error:', error);
             }
         });
-
     } 
     var UpdateFormParameter2 = function () {
 
         updateFormParameter2 = {
             CompanyType: form.querySelector('[name="businessactivity"]').value,
-             };
-
+        };
         console.log(updateFormParameter2);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -1959,20 +2095,16 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                   
                 } else {
                     // Show error message
-                   
                 }
             },
             error: function (error) {
-
                 // Show error message
                 Swal.fire({
                     text: "Sorry, looks like there are some errors detected, please try again.",
@@ -1985,11 +2117,9 @@ var KTCreateAccount = function () {
                 }).then(function () {
                     KTUtil.scrollTop();
                 });
-
                 console.log('AJAX error:', error);
             }
         });
-
     } 
     var UpdateFormParameter3 = function () {
 
@@ -2006,7 +2136,6 @@ var KTCreateAccount = function () {
             cityValue = offshoreCity.value;
         }
 
-
         let location = '';
         let sfZL1 = document.getElementById("fzcity").value;
         console.log(sfZL1);
@@ -2040,15 +2169,11 @@ var KTCreateAccount = function () {
             location = loc.value;
         }
 
-
-
         updateFormParameter3 = {
             City: cityValue,
             Location: location,
         };
-
         console.log(updateFormParameter3);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2058,40 +2183,32 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
-                    // Show success message
-                   
+                    // Show success message        
                 } else {
                     // Show error message
-                   }
+                }
             },
-           
         });
-
     } 
     var UpdateFormParameter4 = function () {
 
         let businessCategory = '';
         const mainlandBusinessCategory = form.querySelector('[name="mainlandbusscity"]');
         const freezoneBusinessCategory = form.querySelector('[name="fzbuscate"]');
-
         if (mainlandBusinessCategory && mainlandBusinessCategory.value) {
             businessCategory = mainlandBusinessCategory.value;
         } else if (freezoneBusinessCategory && freezoneBusinessCategory.value) {
             businessCategory = freezoneBusinessCategory.value;
         }
 
-
         updateFormParameter4 = {
             BusinessCategory: businessCategory,
          };
-
         console.log(updateFormParameter4);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2101,28 +2218,23 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
                    } else {
-                    // Show error message
-                    
+                    // Show error message         
                 }
             },
         });
-
     }
     var UpdateFormParameter5 = function () {
 
         updateFormParameter5 = {
             visaresidence: form.querySelector('[name="target_assign"]').value,
         };
-
         console.log(updateFormParameter5);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2132,7 +2244,6 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
@@ -2140,28 +2251,22 @@ var KTCreateAccount = function () {
                     // Show success message
                    } else {
                     // Show error message
-                    }
+                   }
             },
-          
         });
-
     }
     var UpdateFormParameter6 = function () {
-        var dependvisa = form.querySelector('[name="visadependent"]:checked');
 
+        var dependvisa = form.querySelector('[name="visadependent"]:checked');
         // Get the value of the checked radio button, defaulting to an empty string if none are checked
         var Depvisa = dependvisa ? dependvisa.value : '';
-
         // Convert 'yes' to true and 'no' to false
         var isDependVisa = (Depvisa === 'yes') ? true : (Depvisa === 'no') ? false : null;
 
-
         updateFormParameter6 = {
             Depvisa: isDependVisa,
-  };
-
+    };
         console.log(updateFormParameter6);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2171,7 +2276,6 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
@@ -2182,7 +2286,6 @@ var KTCreateAccount = function () {
                  }
             },
          });
-
     }
     var UpdateFormParameter7 = function () {
 
@@ -2190,9 +2293,7 @@ var KTCreateAccount = function () {
             officetype: form.querySelector('[name="officespace"]:checked') ? form.querySelector('[name="officespace"]:checked').value : '',
             yourofficetype: form.querySelector('[name="youroffice"]').value,
         };
-
         console.log(updateFormParameter7);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2202,31 +2303,23 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                  
                 } else {
-                    // Show error message
-                   
+                    // Show error message     
                 }
             },
-          
         });
-
     }
     var UpdateFormParameter8 = function () {
 
-   
         updateFormParameter8 = {
            businessPlan: form.querySelector('[name="bussplan"]:checked') ? form.querySelector('[name="bussplan"]:checked').value : '',
         };
-
         console.log(updateFormParameter8);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2236,42 +2329,32 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                   
                 } else {
-                    // Show error message
-                    
+                    // Show error message      
                 }
             },
-          
         });
-
     }
     var UpdateFormParameter9 = function () {
 
         var busMind = form.querySelector('[name="busmind"]:checked');
         var BMind = busMind ? busMind.value : '';
         var isBusMind = (BMind === 'Yes') ? true : (BMind === 'No') ? false : null;
-
-
         const busname = form.querySelector('[name="namesOfBusiness"]').value;
         const busname1 = form.querySelector('[name="namesOfBusiness1"]').value;
         const busname2 = form.querySelector('[name="namesOfBusiness2"]').value;
         const cNames = busname + ', ' + busname1 + ', ' + busname2;
 
-
         updateFormParameter9 = {
             businessname: isBusMind,
             concatenatedNames: cNames,
         };
-
         console.log(updateFormParameter9);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2281,19 +2364,15 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                   
                 } else {
-                    // Show error message
-                  
+                    // Show error message    
                 }
             },
-         
         });
 
     }
@@ -2302,9 +2381,7 @@ var KTCreateAccount = function () {
         updateFormParameter10 = {
             service: form.querySelector('[name="services"]').value,
         };
-
         console.log(updateFormParameter10);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2314,21 +2391,16 @@ var KTCreateAccount = function () {
             dataType: 'json',
             success: function (response) {
                 // Hide loading indication
-
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
-                   
                 } else {
-                    // Show error message
-                   
+                    // Show error message     
                 }
             },
-          
         });
-
     }
     var UpdateFormParameter11 = function () {
 
@@ -2343,9 +2415,7 @@ var KTCreateAccount = function () {
             country: form.querySelector('[name="country"]').value,
             nationality: form.querySelector('[name="nationality"]').value,
         };
-
         console.log(updateFormParameter11);
-
         // Perform AJAX request
         $.ajax({
             method: 'PUT',
@@ -2354,51 +2424,40 @@ var KTCreateAccount = function () {
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
-                // Hide loading indication
-
-                // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
-                    // Show success message
-                    
                 } else {
                     // Show error message
                     
                 }
             },
-        
         });
-
     }
 
-    document.querySelector('#modalConfirmYes').addEventListener('click', function () {
+    //Redirecting to Company-List Code.
+    document.querySelector('#insertcompany').addEventListener('click', function () {
 
         Swal.fire({
-            text: "Company have successfully registered!",
-            icon: "success",
+            html: `Are you sure you wish to submit this form, once submitted it cannot be changed`,
+            icon: "info",
             buttonsStyling: false,
-            confirmButtonText: "Ok, got it!",
+            showCancelButton: true,
+            confirmButtonText: "Ok",
+            cancelButtonText: 'Cancel',
             customClass: {
-                confirmButton: "btn btn-primary"
+                confirmButton: "btn btn-primary",
+                cancelButton: 'btn btn-danger'
             }
         }).then(function (result) {
-            if (result.isConfirmed) {
-                //form.reset();
-
-                var redirectUrl = form.getAttribute('data-kt-redirect-url');
-                if (redirectUrl) {
-                    location.href = redirectUrl;
-
-                }
+            //form.reset();
+            if (result.isConfirmed) { 
+            var redirectUrl = form.getAttribute('data-kt-redirect-url');
+            if (redirectUrl) {
+                location.href = redirectUrl;
             }
+        }
         });
-
-
-
-
-
-
     });
     var handleForm = function () {
      formSubmitButton.addEventListener('click', function (e) {
@@ -2534,6 +2593,8 @@ var KTCreateAccount = function () {
                     console.log(jsonPostData); */
                     // Show loading indication
                     formSubmitButton.setAttribute('data-kt-indicator', 'on');
+
+                    console.log('form Submitted Sucessfully');
 
 
                 } else {
@@ -2949,8 +3010,6 @@ var KTCreateAccount = function () {
 
     }
 
-
-
     return {
         // Public Functions
         init: function () {
@@ -2999,7 +3058,6 @@ var myDropzone = new Dropzone("#kt_dropzonejs_example_1", {
         }
     }
 });
-
 
 var myDropzone = new Dropzone("#kt_dropzonejs_example_2", {
     url: "https://keenthemes.com/scripts/void.php", // Set the url for your upload script location

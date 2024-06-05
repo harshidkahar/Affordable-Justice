@@ -67,7 +67,6 @@ namespace Starterkit.Web.Logic
 			return caseList;
 		}
 
-
 		public List<UserDocumentModel> GetDocumentList(int userId, int CaseId)
 		{
 			List<UserDocumentModel> documentList = new List<UserDocumentModel>();
@@ -163,7 +162,6 @@ namespace Starterkit.Web.Logic
 			}
 			return documentDetail;
 		}
-
 
 		public List<CaseDetailModel> GetCaseDetail(int userId, int CaseId)
 		{

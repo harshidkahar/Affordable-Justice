@@ -72,7 +72,6 @@ namespace Starterkit.Data
 			}
 		}
 
-
 		public string DAL_UpdateCompany(CreateCompanyModel updateCompany) {
             try
             {
@@ -95,7 +94,7 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@YourOfficeType", SqlDbType.NVarChar).Value = updateCompany.YourOfficeType;
                 cmd.Parameters.Add("@StartBusiness", SqlDbType.NVarChar).Value = updateCompany.StartBusiness;
                 cmd.Parameters.Add("@HasBusinessName", SqlDbType.Bit).Value = updateCompany.HasBusinessName;
-                cmd.Parameters.Add("@BusinessNameOption", SqlDbType.NVarChar).Value = updateCompany.HasBusinessName;
+                cmd.Parameters.Add("@BusinessNameOption", SqlDbType.NVarChar).Value = updateCompany.BusinessNameOption;
                 cmd.Parameters.Add("@NeedAssistanceOn", SqlDbType.NVarChar).Value = updateCompany.NeedAssistanceOn;
                 cmd.Parameters.Add("@FirstName", SqlDbType.NVarChar).Value = updateCompany.FirstName;
                 cmd.Parameters.Add("@LastName", SqlDbType.NVarChar).Value = updateCompany.LastName;
@@ -140,6 +139,7 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = addDependent.dependvisaName;
                 cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = addDependent.dependvisaEmail;
                 cmd.Parameters.Add("@DateOfBirth", SqlDbType.NVarChar).Value = addDependent.dependvisaDOB;
+                cmd.Parameters.Add("@PassportNo", SqlDbType.NVarChar).Value = addDependent.dependvisaPasspno;
                 cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = addDependent.dependvisaAddress;
                 cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addDependent.dependvisacountry;
                 cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addDependent.dependvisanationality;

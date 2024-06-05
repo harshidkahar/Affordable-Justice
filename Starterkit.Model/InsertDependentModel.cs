@@ -9,48 +9,105 @@ namespace Starterkit.Model
     [Serializable]
     public class InsertDependentModel
     {
-        public int Id { get; set; }
         /// <summary>
         /// Represents Primary Key
         /// </summary>
-        public int CompKey { get; set; }
-        //public int UserId { get; set; }
+        private int _id = 0;
+        public int Id
+        {
+            get { return _id; }
+            set { _id = value; }
+        }
+
         /// <summary>
-        /// Represents User Id
+        /// Represents Company Key
         /// </summary>
-        public string DepVisa { get; set; }
+        private int _compKey = 0;
+        public int CompKey
+        {
+            get { return _compKey; }
+            set { _compKey = value; }
+        }
+
         /// <summary>
-        /// Represents Visa
+        /// Represents Visa Name
         /// </summary>
-        public string dependvisaName { get; set; }
+        private string _dependVisaName = "";
+        public string dependvisaName
+        {
+            get { return _dependVisaName; }
+            set { _dependVisaName = value; }
+        }
+
         /// <summary>
-        /// Represents Name
+        /// Represents Visa Email
         /// </summary>
-        public string dependvisaEmail { get; set; }
+        private string _dependVisaEmail = "";
+        public string dependvisaEmail
+        {
+            get { return _dependVisaEmail; }
+            set { _dependVisaEmail = value; }
+        }
+
         /// <summary>
-        /// Represents Email
+        /// Represents Visa Date of Birth
         /// </summary>
-        public string dependvisaDOB { get; set; }
+        private string _dependVisaDOB = "";
+        public string dependvisaDOB
+        {
+            get { return _dependVisaDOB; }
+            set { _dependVisaDOB = value; }
+        }
+
         /// <summary>
-        /// Represents DOB
+        /// Represents Visa Passport Number
         /// </summary>
-        public string dependvisaPasspno { get; set; }
+        private string _dependVisaPasspno = "";
+        public string dependvisaPasspno
+        {
+            get { return _dependVisaPasspno; }
+            set { _dependVisaPasspno = value; }
+        }
         /// <summary>
-        /// Represents Passport No
+        /// Represents Visa Address
         /// </summary>
-        public string dependvisaAddress { get; set; }
+        private string _dependVisaAddress = "";
+        public string dependvisaAddress
+        {
+            get { return _dependVisaAddress; }
+            set { _dependVisaAddress = value; }
+        }
+
+
         /// <summary>
-        /// Represents Address
+        /// Represents Visa Country
         /// </summary>
-        public string dependvisacountry { get; set; }
+        private string _dependVisaCountry = "";
+        public string dependvisacountry
+        {
+            get { return _dependVisaCountry; }
+            set { _dependVisaCountry = value; }
+        }
+
+
         /// <summary>
-        /// Represents Country
+        /// Represents Visa Nationality
         /// </summary>
-        public string dependvisanationality { get; set; }
+        private string _dependVisaNationality = "";
+        public string dependvisanationality
+        {
+            get { return _dependVisaNationality; }
+            set { _dependVisaNationality = value; }
+        }
+
         /// <summary>
-        /// Represents Nationality
+        /// Represents an Optional field
         /// </summary>
-       
-        public string Opt {  get; set; }
+        private string _opt = "";
+        public string Opt
+        {
+            get { return _opt; }
+            set { _opt = value; }
+        }
     }
 }
