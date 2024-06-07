@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Starterkit.Model
 {
@@ -12,40 +8,91 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Primary Key
         /// </summary>
-        public int DependentKey { get; set; }
-        public int CompId { get; set; }
+        private int _dependentKey = 0;
+        public int DependentKey
+        {
+            get { return _dependentKey; }
+            set { _dependentKey = value; }
+        }
+
         /// <summary>
         /// Represents Company Id
         /// </summary>
-        public string Name { get; set; }
+        private int _compId = 0;
+        public int CompId
+        {
+            get { return _compId; }
+            set { _compId = value; }
+        }
+
         /// <summary>
         /// Represents Name
         /// </summary>
-        public string EmailId { get; set; }
+        private string _name = "";
+        public string Name
+        {
+            get { return _name; }
+            set { _name = value; }
+        }
+
         /// <summary>
         /// Represents Email id
         /// </summary>
-        public DateTime DateOfBirth { get; set; }
+        private string _emailId = "";
+        public string EmailId
+        {
+            get { return _emailId; }
+            set { _emailId = value; }
+        }
+
         /// <summary>
         /// Represents Date of Birth
         /// </summary>
-        public string Address { get; set; }
+        private DateTime _dateOfBirth;
+        public DateTime DateOfBirth
+        {
+            get { return _dateOfBirth; }
+            set { _dateOfBirth = value; }
+        }
+
         /// <summary>
         /// Represents Address
         /// </summary>
-        public string Country { get; set; }
+        private string _address = "";
+        public string Address
+        {
+            get { return _address; }
+            set { _address = value; }
+        }
+
         /// <summary>
         /// Represents Country
-        /// </summary>  
-        public string Nationality { get; set; }
+        /// </summary>
+        private string _country = "";
+        public string Country
+        {
+            get { return _country; }
+            set { _country = value; }
+        }
+
         /// <summary>
         /// Represents Nationality
         /// </summary>
-        public string PassportUrl { get; set; }
+        private string _nationality = "";
+        public string Nationality
+        {
+            get { return _nationality; }
+            set { _nationality = value; }
+        }
+
         /// <summary>
         /// Represents Passport URL.
         /// </summary>
-
-
+        private string _passportUrl = "";
+        public string PassportUrl
+        {
+            get { return _passportUrl; }
+            set { _passportUrl = value; }
+        }
     }
 }

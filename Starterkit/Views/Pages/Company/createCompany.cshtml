@@ -4,6 +4,8 @@
     <!--begin::Custom Javascript(used for this page only)-->
 	
     KTTheme.AddJavascriptFile("js/custom/create-company.js?v=1.0");
+    KTTheme.AddJavascriptFile("js/custom/company/CompanyDetail.js");
+
   
 }
 
@@ -80,7 +82,7 @@
                     </div>
                     <!--end::Nav-->
                     <!--begin::Form-->
-                    <form class="mx-auto mw-600px w-100 pt-15 pb-10" novalidate="novalidate" id="kt_create_account_form">
+                    <form class="mx-auto mw-600px w-100 pt-15 pb-10" novalidate="novalidate" id="kt_create_account_form" data-kt-redirect-url="/CompanyList">
                         <!--begin::Step 1-->
                         <div class="current" data-kt-stepper-element="content">
                             <!--begin::Wrapper-->
@@ -1264,7 +1266,7 @@
                                     <div class="d-flex justify-content-center align-items-center">
                                         <label class="fs-4 fw-semibold col-3">Patner ownership</label>
                                         <label class="fs-4 col-1">:</label>
-                                        <input id="percentageDialer" name="manageBudget" class="form-control form-control-solid" type="number" min="0" max="100" step="0.1" value="50.0">
+                                        <input id="percentageDialer" name="manageBudget" class="form-control form-control-solid" type="number" min="0" max="100" step="0.1" value="50.00">
                                           <!-- Display the selected percentage -->
                                            </div>
                                       
@@ -3837,7 +3839,7 @@
                                  </button>
  
                               
-                               <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" data-bs-toggle="modal" id="insertcompany" data-bs-target="#kt_comingSoonFeature">
+                               <button type="button" class="btn btn-lg btn-primary me-3" data-kt-stepper-action="submit" id="insertcompany">
                                     <span class="indicator-label">Submit
 															
                                         <i class="ki-duotone ki-arrow-right fs-3 ms-2 me-0">
@@ -3889,7 +3891,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" href="CompanyList">Yes</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal" id="modalConfirmYes" >Yes</button>
 
             </div>
         </div>
