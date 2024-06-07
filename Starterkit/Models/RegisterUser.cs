@@ -8,6 +8,7 @@
         public string Email { set; get; }
         public string ContactNo { set; get; }
         public string SponsorId { set; get; }
+        public string CountryCode { set; get; }
         
     }
 }
