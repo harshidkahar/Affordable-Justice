@@ -8,7 +8,7 @@ var KTCompanyList = function () {
     // Fetch case list data
     var fetchCompanyList = function () {
         $.ajax({
-            url: '/Case/GetCompanyList',
+            url: '/Company/GetCompanyList',
             type: 'GET',
             success: function (response) {
                 //const result = JSON.parse(response); // Parse the JSON string response
@@ -43,6 +43,17 @@ var KTCompanyList = function () {
         });
     }
 
+
+    function formatDate(dateString) {
+        const date = new Date(dateString);
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-based, so we add 1
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+
+
+
     // Render table with case list data
     var renderTable = function () {
         const tableBody = table.querySelector('tbody');
@@ -56,7 +67,7 @@ var KTCompanyList = function () {
             //row.insertCell(1).textContent = companyItem.PrimaryCaseType;
             //row.insertCell(2).textContent = companyItem.ThirdCaseType;
             if (companyItem.Date !== null && companyItem.Date !== undefined) {
-                row.insertCell(2).textContent = companyItem.Date;
+                row.insertCell(2).textContent = formatDate(companyItem.Date);
             } else {
                 row.insertCell(2).textContent = ""; 
             }
@@ -68,19 +79,9 @@ var KTCompanyList = function () {
                 + '<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">'
                 + '<!--begin::Menu item-->'
                 + '<div class="menu-item px-3">'
-                + '<a href="/viewCaseDocuments?CaseId' + companyItem.CompanyKey +'" class="menu-link px3">View Documents</a>'
+                + '<a href="/createCompany?CompId' + companyItem.CompanyKey +'" class="menu-link px3">Edit</a>'
                 + '</div>'
                 + '<!--end::Menu item-->'
-                + '<!--begin::Menu item-->'
-                + '<div class="menu-item px-3">'
-                + '<a href="/uploadCaseDocuments?CaseId=' + companyItem.CompanyKey+'" class="menu-link px3">Upload Documents</a>'
-                    + '</div>'
-                    + '!--end::Menu item-->'
-                    + '<!--begin::Menu item-->'
-                    + '<div class="menu-item px-3">'
-                + '<a href="caseDetails?CaseId' + companyItem.CompanyKey +'"  class="menu-link px3">Company Details</a>'
-                    + '</div>'
-                    + '<!--end::Menu item-->'
                 + '</div>';
 
             KTMenu.createInstances();

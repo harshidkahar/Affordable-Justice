@@ -1,22 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Starterkit.Model
+﻿namespace Starterkit.Models
 {
     [Serializable]
-    public class VisaDetailsModel
+    public class VisaModel
     {
-        /// <summary> 
-        /// Represents Primary Key
-        /// </summary>
-        public int VisaKey { get; set; }
-        public int CompId { get; set; }
-        /// <summary> 
-        /// Represents Company Id.
-        /// </summary>
         public string Name { get; set; }
         /// <summary> 
         /// Represents Name.
@@ -46,11 +32,7 @@ namespace Starterkit.Model
         /// <summary> 
         /// Represents Nationality
         /// </summary>
-        public string PassportUrl { get; set; }
-        /// <summary> 
-        /// Represents Passport URL.
-        /// </summary>
 
-        public string Opt { get; set; }
     }
 }
+

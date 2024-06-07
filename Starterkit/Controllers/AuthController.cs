@@ -193,7 +193,7 @@ public class AuthController : Controller
                     body = reader.ReadToEnd();
                 }
                 body = body.Replace("{OTP}", validateEmail);
-                sendEmailLogic.SendEmail(otpModel.Email, subject, body);
+                //sendEmailLogic.SendEmail(otpModel.Email, subject, body);
                 _contextAccessor.HttpContext.Session.SetString("OtpEmail", otpModel.Email);
 
                 returnValue = "done";//otpModel.Email;
