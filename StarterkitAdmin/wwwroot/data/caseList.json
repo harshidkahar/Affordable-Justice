@@ -1,0 +1,115 @@
+{
+  "CaseType1": [
+    {
+      "value": "CIVIL",
+      "name": "CIVIL"
+    },
+    {
+      "value": "CRIMINAL",
+      "name": "CRIMINAL"
+    }
+    // Add more countries...
+  ],
+  "CaseType2": {
+    "CIVIL": [
+      {
+        "value": "INDIVIDUAL CONTRACT DISPUTE",
+        "name": "INDIVIDUAL CONTRACT DISPUTE"
+      },
+      {
+        "value": "PERSONAL INJURY CLAIMS",
+        "name": "PERSONAL INJURY CLAIMS"
+      },
+      {
+        "value": "REAL ESTATE DISPUTES",
+        "name": "REAL ESTATE DISPUTES"
+      },
+      {
+        "value": "EMPLOYMENT DISPUTE",
+        "name": "EMPLOYMENT DISPUTE"
+      },
+      {
+        "value": "ACCIDENTAL CLAIM DISPUTE",
+        "name": "ACCIDENTAL CLAIM DISPUTE"
+      },
+      {
+        "value": "BANKING & FINANCIAL DISPUTE",
+        "name": "BANKING & FINANCIAL DISPUTE"
+      },
+      {
+        "value": "INSURANCE DISPUTE",
+        "name": "INSURANCE DISPUTE"
+      },
+      {
+        "value": "LABOUR DISPUTE",
+        "name": "LABOUR DISPUTE"
+      },
+      {
+        "value": "CONSUMER DISPUTE",
+        "name": "CONSUMER DISPUTE"
+      },
+      {
+        "value": "CYBER CRIME",
+        "name": "CYBER CRIME"
+      },
+      {
+        "value": "TAXES",
+        "name": "TAXES"
+      }
+    ],
+    "CRIMINAL": [
+      {
+        "value": "DEFAMATION",
+        "name": "DEFAMATION"
+      },
+      {
+        "value": "CHEQUE BOUNCING",
+        "name": "CHEQUE BOUNCING"
+      },
+      {
+        "value": "DRUGS",
+        "name": "DRUGS"
+      },
+      {
+        "value": "THEFT",
+        "name": "THEFT"
+      },
+      {
+        "value": "ROBBERY",
+        "name": "ROBBERY"
+      },
+      {
+        "value": "HUMAN TRAFFICKING",
+        "name": "HUMAN TRAFFICKING"
+      },
+      {
+        "value": "EXTRADITION",
+        "name": "EXTRADITION"
+      },
+      {
+        "value": "BODILY CRIME",
+        "name": "BODILY CRIME"
+      },
+      {
+        "value": "CRIME AGAINST STATE",
+        "name": "CRIME AGAINST STATE"
+      },
+      {
+        "value": "SEXUAL CRIME",
+        "name": "SEXUAL CRIME"
+      },
+      {
+        "value": "FINANCIAL FRAUD",
+        "name": "FINANCIAL FRAUD"
+      },
+      {
+        "value": "INTERPOL",
+        "name": "INTERPOL"
+      },
+      {
+        "value": "SMUGGLING",
+        "name": "SMUGGLING"
+      }
+    ]
+  }
+}
