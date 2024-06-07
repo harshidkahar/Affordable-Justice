@@ -81,8 +81,8 @@ public class AuthController : Controller
             _Customer.FirstName = !string.IsNullOrEmpty(register.FirstName) ? register.FirstName.Trim() : register.FirstName;
             _Customer.LastName = !string.IsNullOrEmpty(register.LastName) ? register.LastName.Trim() : register.LastName;
             _Customer.Email = !string.IsNullOrEmpty(register.Email) ? register.Email.Trim() : register.Email;
-
-            _Customer.ContactNo = !string.IsNullOrEmpty(register.ContactNo) ? register.ContactNo.Trim() : register.ContactNo;
+			_Customer.CountryCode = !string.IsNullOrEmpty(register.CountryCode) ? register.CountryCode.Trim() : register.CountryCode;
+			_Customer.ContactNo = !string.IsNullOrEmpty(register.ContactNo) ? register.ContactNo.Trim() : register.ContactNo;
             //_Customer.IsActive = _Customer.IsActive.HasValue ? _Customer.IsActive.Value : false;
             _Customer.CustomerGUID = System.Guid.NewGuid();
 
@@ -96,7 +96,13 @@ public class AuthController : Controller
         }
     }
 
-    [HttpGet("/reset-password")]
+	[HttpGet("validateSignup/")]
+	public ActionResult ValidateSignUp()
+	{
+		return View("Views/Auth/TwoFactor_Signup.cshtml");
+	}
+
+	[HttpGet("/reset-password")]
     public IActionResult ResetPassword()
     {
         return View(_theme.GetPageView("Auth", "ResetPassword.cshtml"));
@@ -174,7 +180,7 @@ public class AuthController : Controller
 
 
     [HttpPost]
-    public string SendOTP([FromBody] SendOtpModel otpModel)
+    public JsonResult SendOTP([FromBody] SendOtpModel otpModel)
     {
         string returnValue = string.Empty;
         try
@@ -207,7 +213,7 @@ public class AuthController : Controller
         {
             returnValue = "invalid-Email";
         }
-        return returnValue;
+        return Json(returnValue);
     }
 
     [HttpPost]
