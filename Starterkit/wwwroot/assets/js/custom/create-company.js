@@ -12,6 +12,8 @@ var KTCreateAccount = function () {
     var formContinueButton;
     var formSaveButton;
     let CompId;
+    let PartId;
+    let DepId;
     var dependentListData = [];
     var partnerListData = [];
 
@@ -184,7 +186,7 @@ var KTCreateAccount = function () {
 
         var dependvisa = form.querySelector('[name="visadependent"]:checked');
         var depdetail = document.querySelector('#dependentlbl');
-        dependvisa = form.querySelector('[name="visadependent"]:checked'),
+        dependvisa = form.querySelector('[name="visadependent"]:checked');
       
     form.querySelector('#addDependent').addEventListener('click', function (e) {
             e.preventDefault();
@@ -395,6 +397,8 @@ var KTCreateAccount = function () {
                           }
                       }).then(function (result) {
                           if (result.isConfirmed) {
+                              DepId = data;
+                              console.log(DepId);
                               fetchDependent();
                           }
                       });
@@ -437,6 +441,11 @@ var KTCreateAccount = function () {
             }
                 }
             }); */
+        document.querySelector('#editdependent').addEventListener('click', function () {
+            document.querySelector('#Dependentdetails').style.display = 'block';
+            document.querySelector('#addDependent').style.display = 'block';
+        });
+
            document.querySelectorAll('.dependentdelete').forEach(button => {
                 button.addEventListener('click', function (e) {
                     e.preventDefault();
@@ -500,7 +509,7 @@ var KTCreateAccount = function () {
                 row.insertCell(0).textContent = dependentItem.dependvisaName;
                 row.insertCell(1).textContent = dependentItem.dependvisaPasspno;
                 row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${dependentItem.CompanyKey}">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" data-id="${dependentItem.Id}">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -522,8 +531,10 @@ var KTCreateAccount = function () {
             });
 
         }
-        
 
+        
+    
+      
         // Validation before going to next page
         stepperObj.on('kt.stepper.next', function (stepper) {
             console.log('stepper.next');
@@ -1416,6 +1427,8 @@ var KTCreateAccount = function () {
                                     }
                                 }).then(function (result) {
                                     if (result.isConfirmed) {
+                                        PartId = data;
+                                        console.log(PartId);
                                         fetchPartner();
                                         //form.reset();
 
@@ -1564,9 +1577,11 @@ var KTCreateAccount = function () {
                             }
                         });
                     });
+                // Add event listener for the edit button
                 });
 
-
+                
+           
                 form.querySelector('#cancelpartner').addEventListener('click', function () {
 
                     patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
@@ -1728,12 +1743,13 @@ var KTCreateAccount = function () {
                             if (stepper.getCurrentStepIndex() == 5) {
                                 UpdateFormParameter4();
                             }
-                            let visaresi = document.querySelector('[name="target_assign"]').value;
-                            let Visa = visaresi.value;
                             if (stepper.getCurrentStepIndex() == 6) {
-                                if (Visa === '0') {
+                                let visaresi = document.querySelector('[name="target_assign"]').value;
+                                let Visa = visaresi.value;
+                                console.log('visa', Visa);
                                     VisaDet();
-                                }
+                                    //visaDetail();
+                                
                                 UpdateFormParameter5();
                             }
                             if (stepper.getCurrentStepIndex() == 7) {
@@ -1826,7 +1842,7 @@ var KTCreateAccount = function () {
                     row.insertCell(0).textContent = partnerItem.Name;
                     row.insertCell(1).textContent = partnerItem.PatnerOwnership;
                     row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${partnerItem.CompanyKey}">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${partnerItem.Key}">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -1845,9 +1861,133 @@ var KTCreateAccount = function () {
                                 `;
 
                     //KTMenu.createInstances();
+                    const editButton = row.querySelector('.edit');
+                    editButton.addEventListener('click', () => {
+                        // Add your edit functionality here
+                        console.log('Edit button clicked for index:', index);
+                        document.querySelector('#Patnerdetails').style.display = 'block';
+                        document.querySelector('#addpatner').style.display = 'block';
+
+                    });
                 });
+                
+
 
             }
+
+
+        var visaDetail = function () {
+
+            $.ajax({
+                url: '/Company/GetvisaDetail',
+                type: 'GET',
+                success: function (response) {
+                    console.log(response);
+                    if (response.success) {
+                        visaDetailData = response.visaDetail;
+                        visadetailRenderDetail();
+                    } else {
+                        Swal.fire({
+                            text: response.message,
+                            icon: "error",
+                            buttonsStyling: false,
+                            confirmButtonText: "Ok, got it!",
+                            customClass: {
+                                confirmButton: "btn btn-primary"
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    Swal.fire({
+                        text: "Failed to retrieve visa detail.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            });
+
+        }
+        function visadetailRenderDetail() {
+
+            if (visaDetailData.length > 0) {
+                var visaItem = visaDetailData[0];
+
+
+                var visaresidence = document.querySelector('[name="target_assign"]');
+                var selected = visaresidence.value;
+
+                const visaarea = document.querySelector('#residenceDETAILSarea');
+                if (selected === '0') {
+                    document.querySelector('#residenceDETAILSarea').style.display = 'block';
+                    residencedetailslbl.innerText = `Residence Visa Information`;
+
+                    // Build the entire HTML string
+                    const htmlContent = `
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Name</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Name}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
+                <label class="fs-4 fw-bold text-hover-primary">${date}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Emirates Id</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.EmiratesId}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Current Address</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.CurrentAddress}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Resident Address</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.ResidenceAddress}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Country</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Country}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Nationality</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Nationality}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Passport</label>
+                <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                         style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                    </div>
+                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                        <i class="bi bi-eye-fill text-white fs-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="mb-3 mt-3">
+                <hr class="text-gray-600" />
+            </div>
+        `;
+
+                    // Set the HTML content
+                    visaarea.innerHTML = htmlContent;
+
+                }
+                else {
+                    document.querySelector('#residenceDETAILSarea').style.display = 'none';
+                }
+
+
+            }
+
+
+
+        }
+
+
 
 
             // Prev event

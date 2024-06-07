@@ -125,10 +125,12 @@ namespace Starterkit.Data
 
         public string DAL_Dependent(InsertDependentModel addDependent)
         {
+            string returnValue = "invalid";
             try
             {
                 string _Result = string.Empty;
                 Guid guid = Guid.NewGuid();
+                ds.Tables.Clear();
 
                 con = DataAccess.OpenConnection();
                 SqlCommand cmd = new SqlCommand("[dbo].[DAL_DependentDetail]", con);
@@ -146,7 +148,6 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
                 cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addDependent.Opt;
                 SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return _Result = "done";

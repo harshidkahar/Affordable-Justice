@@ -139,10 +139,25 @@ namespace Starterkit.Model
 				_dependentVisaReq = value;
 			}
 		}
-		/// <summary>
-		/// Represents OfficeType.
-		/// </summary>
-		private string _officeType = "";
+
+		private string _dependentVisareqtext ="";
+
+		public string dependentVisaReqText
+		{
+			get { 
+			
+				return _dependentVisareqtext;
+			}
+			set
+			{
+				_dependentVisareqtext = value;
+			}
+		}
+
+        /// <summary>
+        /// Represents OfficeType.
+        /// </summary>
+        private string _officeType = "";
 		public string OfficeType {
 			get
 			{
@@ -195,10 +210,27 @@ namespace Starterkit.Model
 				_hasBusinessName = value;
 			}
 		}
-		/// <summary>
-		/// Represents Business Name Option
-		/// </summary>
-		private string _businessNameOption = "";
+
+        private string _businessnametext = "";
+
+        public string BusinessNameText
+        {
+            get
+            {
+
+                return _businessnametext;
+            }
+            set
+            {
+                _businessnametext = value;
+            }
+        }
+
+
+        /// <summary>
+        /// Represents Business Name Option
+        /// </summary>
+        private string _businessNameOption = "";
 		public string BusinessNameOption {
 			get
 			{
