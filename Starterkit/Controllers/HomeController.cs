@@ -26,8 +26,14 @@ namespace Starterkit.Controllers
             return View("Views/LandingPage.cshtml");
         }
 
-		// GET: HomeController/Details/5
-		public ActionResult Details(string FirstName)
+        [HttpGet("welcome/")]
+        public ActionResult Welcome()
+        {
+            //return View(_theme.GetPageView("Auth", "SignIn.cshtml"));
+            return View("Views/Welcome.cshtml");
+        }
+        // GET: HomeController/Details/5
+        public ActionResult Details(string FirstName)
         {
             return View();
         }

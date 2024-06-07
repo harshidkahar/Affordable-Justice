@@ -1,5 +1,5 @@
 ﻿var path = window.location.pathname;
-var page = path.split("/").pop();
+var page = (path.split("/")[path.split("/").length - 1]);//path.split("/").pop(); 
 var pageTitle = "";
 var pageBreadcrum = "";
 
@@ -23,7 +23,7 @@ try {
 catch { }
 
 switch (page) {
-    case "dashboards":
+    case "dashboard":
         pageTitle = "Dashboard";
         pageBreadcrum = "Dashboard";
         break;
@@ -89,6 +89,11 @@ switch (page) {
     case "createcompany":
         pageTitle = "Create Company";
         pageBreadcrum = "Create Company";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "companyList":
+        pageTitle = "Company List";
+        pageBreadcrum = "Company List";
         document.getElementById("action_status").style.visibility = "visible";
         break;
 
