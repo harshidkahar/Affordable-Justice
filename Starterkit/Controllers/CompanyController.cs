@@ -45,7 +45,7 @@ namespace Starterkit.Controllers
             return View("Views/Pages/Company/createCompany.cshtml");
 		}
 
-        [HttpGet("/CompanyList")]
+        [HttpGet("/companyList")]
         public IActionResult CompanyList()
         {
             return View("Views/Pages/Company/CompanyList.cshtml");
