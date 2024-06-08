@@ -238,7 +238,7 @@ namespace Starterkit.Web.Logic
                         }
                         if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisaDOB = Convert.ToString(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                            dependentModel.dependvisaDOB = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
                         }
                         if (ds.Tables[0].Columns.Contains("PassportNo") && !row["PassportNo"].Equals(DBNull.Value))
                         {

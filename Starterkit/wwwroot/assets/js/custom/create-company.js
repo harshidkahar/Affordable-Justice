@@ -1120,6 +1120,22 @@ var KTCreateAccount = function () {
                         console.log('validated!');
 
                         if (status == 'Valid') {
+                            if (typeof CompId !== 'undefined') {
+                                $.ajax({
+                                    type: 'GET',
+                                    url: 'Company/GetCompanyId', // Ensure this URL is correct
+                                    contentType: 'application/json; charset=utf-8',
+                                    dataType: 'json',
+                                    success: function (response) {
+                                        if (response == "error") {
+
+                                        }
+                                        else {
+                                            CompId = response;
+                                        }
+                                    }
+                                });
+                            }
                             stepper.goNext();
                             KTUtil.scrollTop();
 
