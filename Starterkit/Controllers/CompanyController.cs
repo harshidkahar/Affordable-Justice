@@ -451,7 +451,6 @@ namespace Starterkit.Controllers
             }
         }
 
-
         [HttpGet]
         public JsonResult DependentList()
         {
@@ -470,26 +469,10 @@ namespace Starterkit.Controllers
             }
         }
 
-
         [AllowAnonymous]
         [HttpPost]
         public JsonResult AddDependent([FromBody] DependentModel insertDependent)
-        {
-            int depId = 0;
-            try
-            {
-                _contextAccessor.HttpContext.Session.SetString("DepId", "");
-            }
-            catch { }
-            try
-            {
-                if (!String.IsNullOrEmpty(HttpContext.Request.Query["DepId"]))
-                {
-                    depId = Convert.ToInt32(_contextAccessor.HttpContext.Request.Query["DepId"]);
-                }
-            }
-            catch { _contextAccessor.HttpContext.Session.SetString("DepId", ""); }
-
+        {           
             try
             {
                 string ErrorMessage = string.Empty;
@@ -519,14 +502,14 @@ namespace Starterkit.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetDependentDetail()
+        public JsonResult GetDependentDetail(DependentRequestModel model)
         {
             try
             {
                 CompanyLogic _companyLogic = new CompanyLogic();
-                int depId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DepId")); // Replace with actual logic to fetch user ID
+                //int depId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DepId")); // Replace with actual logic to fetch user ID
                 //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
-                var dependentDetail = _companyLogic.DependentDetail(depId);
+                var dependentDetail = _companyLogic.DependentDetail(model.DependentKey);
 
                 var result = new { success = true, dependentDetail };
                 return Json(result);
@@ -540,7 +523,7 @@ namespace Starterkit.Controllers
 
         [AllowAnonymous]
         [HttpPut]
-        public JsonResult UpdateDependent([FromBody] DependentModel updateDependent)
+        public JsonResult UpdateDependent([FromBody] DependentModel model)
         {
             try
             {
@@ -548,14 +531,15 @@ namespace Starterkit.Controllers
                 string _Result = string.Empty;
                 CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
                 InsertDependentModel Dependent = new InsertDependentModel();
-                //addDependent.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                Dependent.Id= model.Id;
                 Dependent.CompKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
-                Dependent.dependvisaName = updateDependent.dependvisaName?.Trim();
-                Dependent.dependvisaEmail = updateDependent.dependvisaEmail?.Trim();
-                Dependent.dependvisaDOB = updateDependent.dependvisaDOB;
-                Dependent.dependvisaAddress = updateDependent.dependvisaAddress?.Trim();
-                Dependent.dependvisacountry = updateDependent.dependvisacountry?.Trim();
-                Dependent.dependvisanationality = updateDependent.dependvisanationality?.Trim();
+                Dependent.dependvisaName = model.dependvisaName?.Trim();
+                Dependent.dependvisaEmail = model.dependvisaEmail?.Trim();
+                Dependent.dependvisaPasspno = model.dependvisaPasspno?.Trim();
+                Dependent.dependvisaDOB = model.dependvisaDOB;
+                Dependent.dependvisaAddress = model.dependvisaAddress?.Trim();
+                Dependent.dependvisacountry = model.dependvisacountry?.Trim();
+                Dependent.dependvisanationality = model.dependvisanationality?.Trim();
 
 
                 Dependent.Opt = "U";
@@ -568,6 +552,30 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
+
+        [HttpDelete]
+        public JsonResult DeleteDependent([FromBody] DependentModel model)
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                InsertDependentModel Dependent = new InsertDependentModel();
+                Dependent.Id = model.Id;
+                Dependent.Opt = "D";
+                //int depId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DepId")); // Replace with actual logic to fetch user ID
+                //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                var dependentDetail = _companyLogic.DeleteDependent(Dependent);
+
+                var result = new { success = true, dependentDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve dependent detail." };
+                return Json(errorResult);
+            }
+        }
+
 
         [HttpGet]
         public JsonResult PartnerList()
@@ -591,20 +599,6 @@ namespace Starterkit.Controllers
         [HttpPost]
         public JsonResult AddPartner([FromBody] PartnerModel insertPartner)
         {
-            int partId = 0;
-            try
-            {
-                _contextAccessor.HttpContext.Session.SetString("PartId", "");
-            }
-            catch { }
-            try
-            {
-                if (!String.IsNullOrEmpty(HttpContext.Request.Query["PartId"]))
-                {
-                    partId = Convert.ToInt32(_contextAccessor.HttpContext.Request.Query["PartId"]);
-                }
-            }
-            catch { _contextAccessor.HttpContext.Session.SetString("PartId", ""); }
             try
             {
                 string ErrorMessage = string.Empty;
@@ -642,14 +636,13 @@ namespace Starterkit.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetPartnerDetail()
+        public JsonResult GetPartnerDetail(PartnerRequestModel model)
         {
             try
             {
                 CompanyLogic _companyLogic = new CompanyLogic();
-                int partId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("PartId")); ;
                 //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
-                var partnerDetail = _companyLogic.PartnerDetail(partId);
+                var partnerDetail = _companyLogic.PartnerDetail(model.PartnerKey);
 
                 var result = new { success = true, partnerDetail };
                 return Json(result);
@@ -673,7 +666,7 @@ namespace Starterkit.Controllers
                 PatnerDetailsModel Partner = new PatnerDetailsModel();
 
                 //this needed to change.
-                //addPartner.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                Partner.PartnerKey = updatePartner.Id; 
                 Partner.CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
                 Partner.UAEResidence = updatePartner.ResidenceUAE;
                 Partner.IsCompanyManager = updatePartner.CompanyManager;
@@ -700,6 +693,29 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
+
+        [HttpDelete]
+        public JsonResult PartnerDelete(PartnerModel model)
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                PatnerDetailsModel Partner = new PatnerDetailsModel();
+                Partner.PartnerKey = model.Id;
+                Partner.Opt= "D";
+                //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                var partnerDetail = _companyLogic.DeletePartner(Partner);
+
+                var result = new { success = true, partnerDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve partner detail." };
+                return Json(errorResult);
+            }
+        }
+
 
         [AllowAnonymous]
         [HttpPost]

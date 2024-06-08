@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starterkit.Web.Logic", "..\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starterkit.Model", "..\Starterkit.Model\Starterkit.Model.csproj", "{37590B01-8439-4C1E-9DD0-DC398183A2A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Starterkit.Data", "..\Starterkit.Data\Starterkit.Data.csproj", "{D93A295F-3D3C-4820-9E2A-80E1D5AD324F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starterkit.Data", "..\Starterkit.Data\Starterkit.Data.csproj", "{D93A295F-3D3C-4820-9E2A-80E1D5AD324F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

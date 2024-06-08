@@ -125,7 +125,7 @@ namespace Starterkit.Data
 
         public string DAL_Dependent(InsertDependentModel addDependent)
         {
-            string returnValue = "invalid";
+           
             try
             {
                 string _Result = string.Empty;

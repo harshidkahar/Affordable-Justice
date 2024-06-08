@@ -7,6 +7,8 @@ var KTCompanyDetail = function () {
     var dependentListData = [];
     var dependentDetailData = [];
     var visaDetailData = [];
+
+    //Company Detail Section.
     var fetchCompanyDetail = function () {
         $.ajax({
             url: '/Company/GetCompanyDetail',
@@ -42,7 +44,6 @@ var KTCompanyDetail = function () {
             }
         });
     };
-
     var renderData = function () {
         if (companyDetailData.length > 0) {
             var companyItem = companyDetailData[0];
@@ -66,7 +67,7 @@ var KTCompanyDetail = function () {
             if (companyItem.dependentVisaReqText === 'yes') {
                 document.querySelector('#dependentviewtable').style.display = 'block';
                 fetchDependent();
-                dependentDetail();
+                
             }
 
 
@@ -163,7 +164,8 @@ var KTCompanyDetail = function () {
                 { 
                     document.querySelector('#patnerviewtable').style.display = 'block';
                     fetchPartner();
-                    partnerDetail();
+                    document.querySelector('#patnerDETAILSarea').style.display = 'block';
+                    
                 }
 
             }
@@ -188,8 +190,8 @@ var KTCompanyDetail = function () {
                 if (companyItem.BusinessCategory) {
                     document.querySelector('#patnerviewtable').style.display = 'block';
                     fetchPartner();
-                    partnerDetail();
-                }
+                   
+                   }
 
 
                 
@@ -257,7 +259,7 @@ var KTCompanyDetail = function () {
                 visaresiSelect.value = companyItem.NoOfResidentVisa;
                 $(visaresiSelect).trigger('change');
 
-    visaDetail();
+                visaDetail();
 
         //OVERVIEW STARTS FROM HERE.
                 var overviewstep1 = document.querySelector('#App_type');
@@ -539,6 +541,7 @@ var KTCompanyDetail = function () {
         }
     };
 
+    //Residence Visa Section.
     var visaDetail = function () {
 
         $.ajax({
@@ -549,6 +552,7 @@ var KTCompanyDetail = function () {
                 if (response.success) {
                     visaDetailData = response.visaDetail;
                     visadetailRenderDetail();
+                    visaOverview();
                 } else {
                     Swal.fire({
                         text: response.message,
@@ -575,7 +579,6 @@ var KTCompanyDetail = function () {
         });
 
     }
-
     function visadetailRenderDetail() {
 
         if (visaDetailData.length > 0) {
@@ -602,16 +605,24 @@ var KTCompanyDetail = function () {
             nationalitySelect.value = visaItem.Nationality;
             $(nationalitySelect).trigger('change');
 
+
+        }
+
+    }
+    var visaOverview = function () {
+        if (visaDetailData.length > 0) {
+            var visaItem = visaDetailData[0];
+
             var visaresidence = document.querySelector('[name="target_assign"]');
             var selected = visaresidence.value;
 
             const visaarea = document.querySelector('#residenceDETAILSarea');
             //if (selected === '0') {
-                document.querySelector('#residenceDETAILSarea').style.display = 'block';
-                residencedetailslbl.innerText = `Residence Visa Information`;
+            document.querySelector('#residenceDETAILSarea').style.display = 'block';
+            residencedetailslbl.innerText = `Residence Visa Information`;
 
-                // Build the entire HTML string
-                const htmlContent = `
+            // Build the entire HTML string
+            const htmlContent = `
             <div class="d-flex mb-4">
                 <label class="col-5 fs-5 text-gray-600">Name</label>
                 <label class="fs-4 fw-bold text-hover-primary">${visaItem.Name}</label>
@@ -656,20 +667,20 @@ var KTCompanyDetail = function () {
             </div>
         `;
 
-                // Set the HTML content
-                visaarea.innerHTML = htmlContent;
+            // Set the HTML content
+            visaarea.innerHTML = htmlContent;
 
-         //   }
-        //    else {
-                //document.querySelector('#residenceDETAILSarea').style.display = 'none';
-        //    }
+            //   }
+            //    else {
+            //document.querySelector('#residenceDETAILSarea').style.display = 'none';
+            //    }
 
 
         }
 
-
-
     }
+
+    //Partner List Section.
     var fetchPartner = function () {
         $.ajax({
             url: '/Company/PartnerList',
@@ -681,7 +692,7 @@ var KTCompanyDetail = function () {
                 if (response.success) {
                     partnerListData = response.partnerList;
                     partnerrenderTable();
-                    //partneroverview();
+                   
                 } else {
                     Swal.fire({
                         text: response.message,
@@ -708,7 +719,25 @@ var KTCompanyDetail = function () {
         });
 
     }
- 
+
+    let patnercount = 0;
+    const patarea = document.querySelector('#patnerDETAILSarea');
+    function ptcount() {
+        let pcount = ++patnercount;
+        let div = document.createElement('div');
+        div.className = 'd-flex mb-3';
+        div.innerHTML = `<label class="fw-bold fs-2">Partner ${pcount}</label>`;
+        patarea.appendChild(div);
+    }
+
+    var filterbusiness_cate = document.querySelector('[name="mainlandbusscity"]');
+    var selectedOption1 = filterbusiness_cate.value;
+
+    var filterbusiness_cate1 = document.querySelector('[name="fzbuscate"]');
+    var selectedOption2 = filterbusiness_cate1.value;
+
+    var patdetail = document.querySelector('#patdetailslbl');
+
     function partnerrenderTable() {
 
         const tableBody = document.querySelector('#kt_datatable_vertical_scroll tbody');
@@ -720,7 +749,7 @@ var KTCompanyDetail = function () {
             row.insertCell(0).textContent = partnerItem.Name;
             row.insertCell(1).textContent = partnerItem.PatnerOwnership;
             row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" data-id="${partnerItem.Key}">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" onclick="partnerDetail(${partnerItem.PartnerKey})">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -745,14 +774,146 @@ var KTCompanyDetail = function () {
                 console.log('Edit button clicked for index:', index);
                 document.querySelector('#Patnerdetails').style.display = 'block';
                 document.querySelector('#addpatner').style.display = 'block';
+                partnerDetail(partnerItem.PartnerKey);
 
             });
+
+            const deleteButton = row.querySelector('.partnerdelete');
+            deleteButton.addEventListener('click', () => {
+                // Add your edit functionality here
+                console.log('parnter delete button clicked for index:', index);
+                //document.querySelector('#Patnerdetails').style.display = 'block';
+                //document.querySelector('#addpatner').style.display = 'block';
+                partnerDelete(partnerItem.PartnerKey);
+
+            });
+
+            function generateId() {
+                return Math.random().toString(36).substr(2, 9);
+            }
+
+            patdetail.innerText = `Partner Information`;
+            document.querySelector('#patnerDETAILSarea').style.display = 'block';
+            ptcount();
+
+                const patarea = document.querySelector('#patnerDETAILSarea');
+                document.querySelector('#patnerDETAILSarea').style.display = 'block';
+
+                // Patner is residence of UAE or not
+                let div1 = document.createElement('div');
+                div1.className = 'd-flex mb-4';
+                div1.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">UAE Residency</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.UAEResidenceText}</label>`;
+                patarea.appendChild(div1);
+
+                // Patner is manager or not
+                let div2 = document.createElement('div');
+                div2.className = 'd-flex mb-4';
+                div2.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Company Manager</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.IsCompanyManagerText}</label>`;
+                patarea.appendChild(div2);
+
+                // Patner name
+                let div3 = document.createElement('div');
+                div3.className = 'd-flex mb-4';
+                div3.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Name</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Name}</label>`;
+                patarea.appendChild(div3);
+
+                // Patner email
+                let div4 = document.createElement('div');
+                div4.className = 'd-flex mb-4';
+                div4.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Email Id</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.EmailId}</label>`;
+                patarea.appendChild(div4);
+
+                // Patner date of birth
+                let div5 = document.createElement('div');
+                div5.className = 'd-flex mb-4';
+                div5.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Date of Birth</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.DateOfBirth}</label>`;
+                patarea.appendChild(div5);
+
+                // Patner contact no
+                let div6 = document.createElement('div');
+                div6.className = 'd-flex mb-4';
+                div6.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Contact No</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.CountryCode}-${partnerItem.Phone}</label>`;
+                patarea.appendChild(div6);
+
+                if (partnerItem.UAEResidenceText === 'yes') {
+                    // Patner Emirates ID
+                    let div7 = document.createElement('div');
+                    div7.className = 'd-flex mb-4';
+                    div7.innerHTML = `
+                <label class="col-5 fs-5 text-gray-600">Emirates ID</label>
+                <label class="fs-4 fw-bold text-hover-primary">${partnerItem.EMRId}</label>`;
+                    patarea.appendChild(div7);
+                }
+
+                if (partnerItem.UAEResidenceText === 'no') {
+                    // Patner passport No
+                    let div8 = document.createElement('div');
+                    div8.className = 'd-flex mb-4';
+                    div8.innerHTML = `
+                <label class="col-5 fs-5 text-gray-600">Passport No</label>
+                <label class="fs-4 fw-bold text-hover-primary">${partnerItem.PassportNo}</label>`;
+                    patarea.appendChild(div8);
+                }
+
+                // Patner address
+                let div9 = document.createElement('div');
+                div9.className = 'd-flex mb-4';
+                div9.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Address</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Address}</label>`;
+                patarea.appendChild(div9);
+
+                // Patner country
+                let div10 = document.createElement('div');
+                div10.className = 'd-flex mb-4';
+                div10.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Country</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Country}</label>`;
+                patarea.appendChild(div10);
+
+                // Patner nationality
+                let div11 = document.createElement('div');
+                div11.className = 'd-flex mb-4';
+                div11.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Nationality</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Nationality}</label>`;
+                patarea.appendChild(div11);
+
+                // Patner percentage ownership
+                let div12 = document.createElement('div');
+                div12.className = 'd-flex mb-4';
+                div12.innerHTML = `
+            <label class="col-5 fs-5 text-gray-600">Ownership</label>
+            <label class="fs-4 fw-bold text-hover-primary">${partnerItem.PatnerOwnership}%</label>`;
+                patarea.appendChild(div12);
+
+                let div13 = document.createElement('div');
+                div13.className = 'mb-3 mt-3';
+                div13.innerHTML = `<hr class="text-gray-600" />`;
+                patarea.appendChild(div13);
+
+            
+
+
         });
 
-
+        
 
     }
 
+    //Dependent List Section.
     var fetchDependent = function () {
         $.ajax({
             url: '/Company/DependentList',
@@ -791,6 +952,21 @@ var KTCompanyDetail = function () {
 
     }
 
+    //Dependent overview function
+    const dependarea = document.querySelector('#DepDETAIL')
+    let dpcount = 0;
+    function Dcount() {
+        let ddcount = ++dpcount;
+        // patnercount++;
+        let div = document.createElement('div');
+        div.className = 'd-flex mb-3';
+        div.innerHTML = `<label class="fw-bold fs-2">Dependent ${ddcount}</label>`;
+        dependarea.appendChild(div);
+    }
+    var dependvisa;
+    var depdetail = document.querySelector('#dependentlbl');
+    dependvisa = document.querySelector('[name="visadependent"]:checked');
+
     function dependentrenderTable() {
 
         const tableBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody');
@@ -802,7 +978,7 @@ var KTCompanyDetail = function () {
             row.insertCell(0).textContent = dependentItem.dependvisaName;
             row.insertCell(1).textContent = dependentItem.dependvisaPasspno;
             row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" data-id="${dependentItem.Id}">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" onclick="partnerDetail(${dependentItem.Id})">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -819,96 +995,32 @@ var KTCompanyDetail = function () {
                             </button>
                         </td>
                                 `;
+            const deleteButton = row.querySelector('.dependentdelete');
+            deleteButton.addEventListener('click', () => {
+                // Add your edit functionality here
+                console.log('delete button clicked for index:', index);
+                //document.querySelector('#Dependentdetails').style.display = 'block';
+                //document.querySelector('#addDependent').style.display = 'block';
+                //document.querySelector('#cancelDependent').style.display = 'block';
+                dependentDelete(dependentItem.Id);
 
-            //KTMenu.createInstances();
-        });
+            });
 
-    }
+            const editButton = row.querySelector('.edit');
+            editButton.addEventListener('click', () => {
+                // Add your edit functionality here
+                console.log('Edit button clicked for index:', index);
+                document.querySelector('#Dependentdetails').style.display = 'block';
+                document.querySelector('#addDependent').style.display = 'block';
+                document.querySelector('#cancelDependent').style.display = 'block';
+                dependentDetail(dependentItem.Id);
 
-    var dependentDetail = function () {
+            });
 
-        $.ajax({
-            url: '/Company/GetDependentDetail',
-            type: 'GET',
-            success: function (response) {
-                console.log(response);
-                if (response.success) {
-                    dependentDetailData = response.dependentDetail;
-                    dependentdetailRenderData();
-                } else {
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
-            },
-            error: function () {
-                Swal.fire({
-                    text: "Failed to retrieve dependent detail.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
-            }
-        });
+            var dependvisa;
+            var depdetail = document.querySelector('#dependentlbl');
+            dependvisa = document.querySelector('[name="visadependent"]:checked');
 
-
-    }
-
-    const dependarea = document.querySelector('#DepDETAIL')
-    let dpcount = 0;
-    function Dcount() {
-        let ddcount = ++dpcount;
-        // patnercount++;
-        let div = document.createElement('div');
-        div.className = 'd-flex mb-3';
-        div.innerHTML = `<label class="fw-bold fs-2">Dependent ${ddcount}</label>`;
-        dependarea.appendChild(div);
-    }
-    var dependvisa;
-    var depdetail = document.querySelector('#dependentlbl');
-     dependvisa = document.querySelector('[name="visadependent"]:checked');
-    var dependentdetailRenderData = function () {
-
-        if (dependentDetailData.length > 0) {
-            var dependentItem = dependentDetailData[0];
-
-            document.querySelector('[name="Dependentvisaname"]').value = dependentItem.dependvisaName;
-            document.querySelector('[name="Dependentvisaemail"]').value = dependentItem.dependvisaEmail;
-            try {
-
-                let date = new Date(dependentItem.dependvisaDOB);
-                document.getElementById('DateOfBirth').value = formatDateToDDMMYYYY(date).toString();
-            }
-            catch { document.getElementById('DateOfBirth').value = ''; }
-
-            document.querySelector('[name="Dependentvisapasspno"]').value = dependentItem.dependvisaPasspno;
-            //document.querySelector('[name="dependvisaDOB"]').value = dependentItem.dependvisaDOB;
-            document.querySelector('[name="dependvisaCountry"]').value = dependentItem.dependvisacountry;
-            document.querySelector('[name="dependvisaNationality"]').value = dependentItem.dependvisanationality;
-            document.querySelector('[name="dependentaddress"]').value = dependentItem.dependvisaAddress;
-            
-            const countrycodeSelect = document.querySelector('[name="dependvisaCountryCode"]');
-            countrycodeSelect.value = dependentItem.dependvisaCountryCode;
-            $(countrycodeSelect).trigger('change');
-
-            const countrySelect = document.querySelector('[name="dependentcountry"]');
-            countrySelect.value = dependentItem.dependvisaCountry;
-            $(countrySelect).trigger('change');
-
-            const nationalitySelect = document.querySelector('[name="dependentnationality"]');
-            nationalitySelect.value = dependentItem.dependvisaNationality;
-            $(nationalitySelect).trigger('change');
-
-           
             depdetail.innerText = "Dependent Information";  //Dependent Detail Label Section.
 
             const area = document.querySelector('#DepDETAIL');
@@ -919,9 +1031,10 @@ var KTCompanyDetail = function () {
             var Depvisa = dependvisa ? dependvisa.value : '';
 
             document.querySelector('#DepDETAIL').style.display = 'block';
-            if (Depvisa === 'yes') {
-                Dcount(); //document.querySelector('#depdetailslbl').style.display = 'block';
-                const dparea = form.querySelector('#DepDETAIL');
+
+            document.querySelector('#DepDETAIL').style.display = 'block';
+            Dcount(); //document.querySelector('#depdetailslbl').style.display = 'block';
+            const dparea = document.querySelector('#DepDETAIL');
 
                 // Dependent Name
                 let div1 = document.createElement('div');
@@ -946,7 +1059,7 @@ var KTCompanyDetail = function () {
                 div3.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
                 div3.innerHTML = `
                      <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
-                     <label class="fs-4 fw-bold text-hover-primary">${date}</label>`;
+                     <label class="fs-4 fw-bold text-hover-primary">${dependentItem.dependvisaDOB}</label>`;
                 dparea.appendChild(div3);
 
 
@@ -1012,29 +1125,236 @@ var KTCompanyDetail = function () {
                 div9.className = 'mb-3 mt-3';
                 div9.innerHTML = `<hr class="text-gray-600" />`;
                 dparea.appendChild(div9);
-            }
-            if (Depvisa === 'no') {
-                document.querySelector('#DepDETAIL').style.display = 'none';
-                document.querySelector('#DepDETAILS').style.display = 'none';
-                document.querySelector('#depdetailslbl').style.display = 'none';
-            }
+           //     document.querySelector('#DepDETAIL').style.display = 'none';
+             //   document.querySelector('#DepDETAILS').style.display = 'none';
+               // document.querySelector('#depdetailslbl').style.display = 'none';
+            
 
 
+            //KTMenu.createInstances();
+        });
+
+    }
+
+    //Dependent Detail Section.
+    var dependentDetail = function (dependentKey) {
+
+        var model = { DependentKey: dependentKey };
+        $.ajax({
+            url: '/Company/GetDependentDetail',
+            type: 'GET',
+            contentType: 'application/json', // Specify JSON content type
+            data: model,
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    dependentDetailData = response.dependentDetail;
+                    dependentdetailRenderData();
+                    //populateDependentForm(window.currentDependent);
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve dependent detail.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+
+
+    }
+    var dependentdetailRenderData = function () {
+
+        if (dependentDetailData.length > 0) {
+            var dependentItem = dependentDetailData[0];
+
+            document.querySelector('[name="Dependentvisaname"]').value = dependentItem.dependvisaName;
+            document.querySelector('[name="Dependentvisaemail"]').value = dependentItem.dependvisaEmail;
+            try {
+
+                let date = new Date(dependentItem.dependvisaDOB);
+                document.getElementById('DateOfBirth').value = formatDateToDDMMYYYY(date).toString();
+            }
+            catch { document.getElementById('DateOfBirth').value = ''; }
+
+            document.querySelector('[name="Dependentvisapasspno"]').value = dependentItem.dependvisaPasspno;
+            //document.querySelector('[name="dependvisaDOB"]').value = dependentItem.dependvisaDOB;
+            document.querySelector('[name="dependentaddress"]').value = dependentItem.dependvisaAddress;
+            
+            const countrySelect = document.querySelector('[name="dependentcountry"]');
+            countrySelect.value = dependentItem.dependvisacountry;
+            $(countrySelect).trigger('change');
+
+            const nationalitySelect = document.querySelector('[name="dependentnationality"]');
+            nationalitySelect.value = dependentItem.dependvisanationality;
+            $(nationalitySelect).trigger('change');
+
+           
+            
 
 
         }
 
     }
-    var partnerDetail = function () { 
 
+    document.querySelector('#addDependent').addEventListener('click', function () {
+        console.log('edit dependent clicked');
+        if (dependentDetailData.length > 0) {
+            var dependentItem = dependentDetailData[0];
+            console.log('dependent edit clicked');
+            if (dependentItem.Id) {
+                updateDependent(dependentItem.Id);
+            }
+            document.querySelector('#NewDependent').style.display = 'block';
+            document.querySelector('#cancelDependent').style.display = 'none';
+
+        }
+    });    
+    var updateDependent = function (dependentKey) {
+        // Assuming you have the dependent data stored in window.currentDependent
+        //var dependentData = window.currentDependent;
+
+        // Prepare the data object to be sent to the server
+        var model = {
+            Id: dependentKey, // Assuming Id is stored in dependentData
+            dependvisaName: document.querySelector('[name="Dependentvisaname"]').value,
+            dependvisaEmail: document.querySelector('[name="Dependentvisaemail"]').value,
+            dependvisaDOB: document.getElementById('DateOfBirth').value,
+            dependvisaPasspno: document.querySelector('[name="Dependentvisapasspno"]').value,
+            dependvisaAddress: document.querySelector('[name="dependentaddress"]').value,
+            dependvisacountry: document.querySelector('[name="dependentcountry"]').value,
+            dependvisanationality: document.querySelector('[name="dependentnationality"]').value,
+              };
+
+        // Send the data to the server for updating the dependent
+        $.ajax({
+            url: '/Company/UpdateDependent',
+            type: 'PUT',
+            contentType: 'application/json', // Specify JSON content type
+            data: JSON.stringify(model),
+            success: function (data) {
+                if (data == "done") {
+                    Swal.fire({
+                        text: "Dependent Successfully Updated!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+
+                        }
+                    });
+                }
+                else {
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+             error: function () {
+                // Handle error
+                Swal.fire({
+                    text: "Failed to update dependent.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+    }
+    var dependentDelete = function (dependentKey) {
+
+        var model = { Id: dependentKey };
+        $.ajax({
+            url: '/Company/DeleteDependent',
+            type: 'DELETE',
+            contentType: 'application/json', // Specify JSON content type
+            data: JSON.stringify(model),
+            success: function (data) {
+                if (data == "done") {
+                    Swal.fire({
+                        text: "Dependent Successfully Deleted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+
+                        }
+                    });
+                }
+                else {
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+        error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve dependent detail.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+
+
+    }
+
+    //Partner Detail Section.
+    var partnerDetail = function (partnerKey) { 
+        var model = { PartnerKey: partnerKey };
         $.ajax({
             url: '/Company/GetPartnerDetail',
             type: 'GET',
+            contentType: 'application/json', // Specify JSON content type
+            data: model,
             success: function (response) {
                 console.log(response);
                 if (response.success) {
                     partnerDetailData = response.partnerDetail;
                     partnerdetailRenderData();
+                   
                 } else {
                     Swal.fire({
                         text: response.message,
@@ -1060,17 +1380,6 @@ var KTCompanyDetail = function () {
             }
         });
 
-    }
-
-    const patarea = document.querySelector('#patnerDETAILSarea');
-    let patnercount = 0;
-    function ptcount() {
-        let pcount = ++patnercount;
-        // patnercount++;
-        let div = document.createElement('div');
-        div.className = 'd-flex mb-3';
-        div.innerHTML = `<label class="fw-bold fs-2">Partner ${pcount}</label>`;
-        patarea.appendChild(div);
     }
     var partnerdetailRenderData = function () {
 
@@ -1119,166 +1428,155 @@ var KTCompanyDetail = function () {
             }
             catch { document.getElementById('patnerDateOfBirth').value = ''; }
 
-            function generateId() {
-                return Math.random().toString(36).substr(2, 9);
-            }
-
-            var filterbusiness_cate = document.querySelector('[name="mainlandbusscity"]');
-            var selectedOption1 = filterbusiness_cate.value;
-
-            var filterbusiness_cate1 = document.querySelector('[name="fzbuscate"]');
-            var selectedOption2 = filterbusiness_cate1.value;
-
-            patdetail.innerText = `Partner Information`;
-            if (selectedOption2 || selectedOption1 === 'civil-company' || selectedOption1 === 'limited-liability-company' || selectedOption1 === 'limited-partnership' || selectedOption1 === 'public-joint-stock-company' || selectedOption1 === 'private-joint-stock-company' || selectedOption1 === 'gcc-company-branch' || selectedOption1 === 'local-company-branch' || selectedOption1 === 'holding-companies' || selectedOption1 === 'partnership')
-            //if (selectedOption1 === 'partnership')
-            {
-
-                document.querySelector('#patnerDETAILSarea').style.display = 'block';
-
-                const patarea = document.querySelector('#patnerDETAILSarea');
-                ptcount();
-
-                // Patner is residence of UAE or not
-                let div1 = document.createElement('div');
-                div1.className = 'd-flex mb-4'; // Apply d-flex and margin-bottom classes
-                div1.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">UAE Residency</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.UAEResidenceText}</label>`;
-                patarea.appendChild(div1);
-
-
-                // Patner is manager or not
-                let div2 = document.createElement('div');
-                div2.className = 'd-flex mb-4';
-                div2.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">Company Manager</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.IsCompanyManagerText}</label>`;
-                patarea.appendChild(div2);
-
-                // Patner name
-                let div3 = document.createElement('div');
-                div3.className = 'd-flex mb-4';
-                div3.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">Name</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Name}</label>`;
-                patarea.appendChild(div3);
-
-                // Patner email
-                let div4 = document.createElement('div');
-                div4.className = 'd-flex mb-4';
-                div4.innerHTML = `
-                        <label class="col-5 fs-5 text-gray-600">Email Id</label>
-                        <label class="fs-4 fw-bold text-hover-primary">${parnterItem.EmailId}</label>`;
-                patarea.appendChild(div4);
-
-                // Patner date of birth
-                let div5 = document.createElement('div');
-                div5.className = 'd-flex mb-4';
-                div5.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Date of Birth</label>
-        <label class="fs-4  fw-bold text-hover-primary">${partnerItem.DateOfBirth}</label>
-        
-    `;
-                patarea.appendChild(div5);
-
-                // Patner contact no
-                let div6 = document.createElement('div');
-                div6.className = 'd-flex mb-4';
-                div6.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Contact No</label>
-        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.CountryCode}-${partnerItem.Phone}</label>
-       
-    `;
-                patarea.appendChild(div6);
-
-                if (partnerItem.UAEResidenceText === 'yes') {
-
-                    // Patner Emirates ID
-                    let div7 = document.createElement('div');
-                    div7.className = 'd-flex mb-4';
-                    div7.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Emirates ID</label>
-        \<label class="fs-4 fw-bold text-hover-primary">${partnerItem.EMRId}</label>
-       
-    `;
-                    patarea.appendChild(div7);
-
-                }
-
-                if (partnerItem.UAEResidenceText === 'no') {
-
-                    // Patner passport No
-                    let div8 = document.createElement('div');
-                    div8.className = 'd-flex mb-4';
-                    div8.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Passport No</label>
-        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.PassportNo}</label>
-        
-    `;
-                    patarea.appendChild(div8);
-                }
-
-
-                // Patner address
-                let div9 = document.createElement('div');
-                div9.className = 'd-flex mb-4';
-                div9.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Address</label>
-        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Address}</label>        
-    `;
-                patarea.appendChild(div9);
-
-                // Patner country
-                let div10 = document.createElement('div');
-                div10.className = 'd-flex mb-4';
-                div10.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Country</label>
-        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Country}</label>
-        
-    `;
-                patarea.appendChild(div10);
-
-
-
-                // Patner nationality
-                let div11 = document.createElement('div');
-                div11.className = 'd-flex mb-4';
-                div11.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Nationality</label>
-        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.Nationality}</label>        
-    `;
-                patarea.appendChild(div11);
-
-                // Patner percentage ownership
-                let div12 = document.createElement('div');
-                div12.className = 'd-flex mb-4';
-                div12.innerHTML = `
-        <label class="col-5 fs-5 text-gray-600">Ownership</label>
-        <label class="fs-4 fw-bold text-hover-primary">${partnerItem.PatnerOwnership}%</label>
-        
-    `;
-                patarea.appendChild(div12);
-
-                let div13 = document.createElement('div');
-                div13.className = 'mb-3 mt-3';
-                div13.innerHTML = `<hr class="text-gray-600" />`;
-                patarea.appendChild(div13);
-
-
-            }
-
-            else {
-                document.querySelector('#patnerDETAILSarea').style.display = 'none';
-                document.querySelector('#Patnerdetails').style.display = 'none';
-                document.querySelector('#NewPartner').style.display = 'none';
-
-            }
-
+           
         }
     }
 
-    function formatDateToDDMMYYYY(date) {
+    document.querySelector('#addpatner').addEventListener('click', function () {
+        console.log('edit partner clicked');
+        if (partnerDetailData.length > 0) {
+            var partnerItem = partnerDetailData[0];
+
+            if (partnerItem.PartnerKey) {
+                console.log('edit partner working');
+                updatePartner(partnerItem.PartnerKey);
+            }
+        }
+    });
+
+    var updatePartner = function (partnerKey) {
+        var patresiUAE = document.querySelector('[name="patner_resiUAE"]:checked');
+        var patType = patresiUAE ? patresiUAE.value : '';
+        var isPatResiUAE = (patType === 'yes') ? true : (patType === 'no') ? false : null;
+        var comptype = document.querySelector('[name="manager_comp"]:checked');
+        var cmptype = comptype ? comptype.value : '';
+        var isManagerComp = (cmptype === 'yes') ? true : (cmptype === 'no') ? false : null;
+
+        // Assuming you have the dependent data stored in window.currentDependent
+        //var dependentData = window.currentDependent;
+
+        // Prepare the data object to be sent to the server
+        var model = {
+            Id: partnerKey, // Assuming Id is stored in dependentData
+            ResidenceUAE: isPatResiUAE,
+            CompanyManager: isManagerComp,
+            Name: document.querySelector('#patnername').value,
+            Email: document.querySelector('[name="patneremail"]').value,
+            CountryCode: document.querySelector('[name="country-code"]').value,
+            Phone: document.querySelector('[name="patnerphoneno"]').value,
+            Dob: document.querySelector('#patnerDateOfBirth').value,
+            EmiratesId: document.querySelector('#patneremiratesID').value,
+            PassportNo: document.querySelector('[name="patnerpassno"]').value,
+            Address: document.querySelector('[name="patneraddress"]').value,
+            Country: document.querySelector('[name="patnercountry"]').value,
+            Nationality: document.querySelector('[name="Nationality"]').value,
+            ManageBudget: document.querySelector('[name="manageBudget"]').value
+        };
+
+        // Send the data to the server for updating the dependent
+        $.ajax({
+            url: '/Company/UpdatePartner',
+            type: 'PUT',
+            contentType: 'application/json', // Specify JSON content type
+            data: JSON.stringify(model),
+            success: function (data) {
+                if (data == "done") {
+                    Swal.fire({
+                        text: "Partner Successfully Updated!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+                          
+                        }
+                    });
+                }
+                else {
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                // Handle error
+                Swal.fire({
+                    text: "Failed to update partner.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+    }
+    var partnerDelete = function (partnerKey) {
+
+        var model = { Id: partnerKey };
+
+        $.ajax({
+            url: '/Company/PartnerDelete',
+            type: 'DELETE',
+            contentType: 'application/json', // Specify JSON content type
+            data: JSON.stringify(model),
+            success: function (data) {
+                if (data == "done") {
+                    Swal.fire({
+                        text: "Partner Successfully Deleted!",
+                        icon: "success",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    }).then(function (result) {
+                        if (result.isConfirmed) {
+
+                        }
+                    });
+                }
+                else {
+                    Swal.fire({
+                        text: "Sorry, looks like there are some errors detected, please try again.",
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+           error: function () {
+                Swal.fire({
+                    text: "Failed to delete partner.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+
+
+    }
+
+   
+  function formatDateToDDMMYYYY(date) {
         // Get the day, month, and year from the date object
         let day = date.getDate();
         let month = date.getMonth() + 1; // Months are zero-based

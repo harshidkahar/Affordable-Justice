@@ -70,6 +70,13 @@ namespace Starterkit.Web.Logic
             return companyDA.DAL_Dependent(addDependent);
         }
 
+        public string DeleteDependent(InsertDependentModel addDependent)
+        {
+            CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
+            return companyDA.DAL_Dependent(addDependent);
+        }
+
+
         public string CreateCompany(CreateCompanyModel createCompany)
 		{
 			CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
@@ -94,6 +101,12 @@ namespace Starterkit.Web.Logic
             return companyDA.DAL_Partner(addPartner);
         }
 
+        public string DeletePartner(PatnerDetailsModel addPartner)
+        {
+            CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
+            return companyDA.DAL_Partner(addPartner);
+        }
+
         public string InsertVisaDetails(VisaDetailsModel addVisa)
         {
             CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
@@ -106,37 +119,93 @@ namespace Starterkit.Web.Logic
             return companyDA.DAL_VisaDetail(addVisa);
         }
 
-        public List<PatnerDetailsModel> GetPartnerList(int compId)
-        {
-            List<PatnerDetailsModel> partnerList = new List<PatnerDetailsModel>();
+         public List<PatnerDetailsModel> GetPartnerList(int compId)
+         {
+          List<PatnerDetailsModel> partnerList = new List<PatnerDetailsModel>();
             try
             {
-                CommonDA commonDA = new CommonDA();
-                DataSet ds = commonDA.GetCommonFillData(compId, "", "UserPartnerList");
+            CommonDA commonDA = new CommonDA();
+        DataSet ds = commonDA.GetCommonFillData(compId, "", "UserPartnerList");
 
-                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
-                {
-                    foreach (DataRow row in ds.Tables[0].Rows)
-                    {
-                        PatnerDetailsModel partnerModel = new PatnerDetailsModel();
-                        if (ds.Tables[0].Columns.Contains("Name") && !row["Name"].Equals(DBNull.Value))
-                        {
-                            partnerModel.Name = Convert.ToString(row["Name"]);
-                        }
-                        if (ds.Tables[0].Columns.Contains("PatnerOwnership") && !row["PatnerOwnership"].Equals(DBNull.Value))
-                        {
-                            partnerModel.PatnerOwnership = Convert.ToDecimal(row["PatnerOwnership"]);
-                        }
-                        partnerList.Add(partnerModel);
-                    }
-                }
-            }
-            catch (Exception ex)
+        if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+        {
+            foreach (DataRow row in ds.Tables[0].Rows)
             {
-                // Handle exception
+                PatnerDetailsModel partnerModel = new PatnerDetailsModel();
+
+                if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                {
+                    partnerModel.PartnerKey = Convert.ToInt32(row["Id"]);
+                }
+                if (ds.Tables[0].Columns.Contains("CompId") && !row["CompId"].Equals(DBNull.Value))
+                {
+                    partnerModel.CompId = Convert.ToInt32(row["CompId"]);
+                }
+                if (ds.Tables[0].Columns.Contains("UAEResidence") && !row["UAEResidence"].Equals(DBNull.Value))
+                {
+                    partnerModel.UAEResidence = Convert.ToBoolean(row["UAEResidence"]);
+                    partnerModel.UAEResidenceText = partnerModel.UAEResidence ? "yes" : "no";
+                }
+                if (ds.Tables[0].Columns.Contains("IsCompanyManager") && !row["IsCompanyManager"].Equals(DBNull.Value))
+                {
+                    partnerModel.IsCompanyManager = Convert.ToBoolean(row["IsCompanyManager"]);
+                    partnerModel.IsCompanyManagerText = partnerModel.IsCompanyManager ? "yes" : "no";
+                }
+                if (ds.Tables[0].Columns.Contains("Name") && !row["Name"].Equals(DBNull.Value))
+                {
+                    partnerModel.Name = Convert.ToString(row["Name"]);
+                }
+                if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                {
+                    partnerModel.EmailId = Convert.ToString(row["EmailId"]);
+                }
+                if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                {
+                    partnerModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                }
+                if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                {
+                    partnerModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                }
+                if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                {
+                    partnerModel.Phone = Convert.ToString(row["Phone"]);
+                }
+                if (ds.Tables[0].Columns.Contains("EMRId") && !row["EMRId"].Equals(DBNull.Value))
+                {
+                    partnerModel.EMRId = Convert.ToString(row["EMRId"]);
+                }
+                if (ds.Tables[0].Columns.Contains("PassportNo") && !row["PassportNo"].Equals(DBNull.Value))
+                {
+                    partnerModel.PassportNo = Convert.ToString(row["PassportNo"]);
+                }
+                if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                {
+                    partnerModel.Address = Convert.ToString(row["Address"]);
+                }
+                if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                {
+                    partnerModel.Country = Convert.ToString(row["Country"]);
+                }
+                if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                {
+                    partnerModel.Nationality = Convert.ToString(row["Nationality"]);
+                }
+                if (ds.Tables[0].Columns.Contains("PatnerOwnership") && !row["PatnerOwnership"].Equals(DBNull.Value))
+                {
+                    partnerModel.PatnerOwnership = Convert.ToDecimal(row["PatnerOwnership"]);
+                }
+
+                partnerList.Add(partnerModel);
             }
-            return partnerList;
         }
+    }
+    catch (Exception ex)
+    {
+        // Handle exception
+    }
+    return partnerList;
+}
 
         public List<InsertDependentModel> GetDependentList(int compId)
         {
@@ -151,13 +220,41 @@ namespace Starterkit.Web.Logic
                     foreach (DataRow row in ds.Tables[0].Rows)
                     {
                         InsertDependentModel dependentModel = new InsertDependentModel();
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            dependentModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CompId") && !row["CompId"].Equals(DBNull.Value))
+                        {
+                            dependentModel.CompKey = Convert.ToInt32(row["CompId"]);
+                        }
                         if (ds.Tables[0].Columns.Contains("Name") && !row["Name"].Equals(DBNull.Value))
                         {
                             dependentModel.dependvisaName = Convert.ToString(row["Name"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("PassportNo") && !row["PassportNO"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            dependentModel.dependvisaEmail = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            dependentModel.dependvisaDOB = Convert.ToString(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("PassportNo") && !row["PassportNo"].Equals(DBNull.Value))
                         {
                             dependentModel.dependvisaPasspno = Convert.ToString(row["PassportNo"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            dependentModel.dependvisaAddress = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            dependentModel.dependvisacountry = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            dependentModel.dependvisanationality = Convert.ToString(row["Nationality"]);
                         }
                         dependentList.Add(dependentModel);
                     }
@@ -379,7 +476,7 @@ namespace Starterkit.Web.Logic
             try
             {
                 CommonDA commonDA = new CommonDA();
-                DataSet ds = commonDA.GetCommonFillData(partId, "", "GetVisaDetail");
+                DataSet ds = commonDA.GetCommonFillData(partId, "", "GetPartnerDetail");
 
                 if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
@@ -389,7 +486,7 @@ namespace Starterkit.Web.Logic
 
                         if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
                         {
-                            partnerModel.PartnerKey = Convert.ToInt32(row["PartnerKey"]);
+                            partnerModel.PartnerKey = Convert.ToInt32(row["Id"]);
                         }
                         if (ds.Tables[0].Columns.Contains("CompId") && !row["CompId"].Equals(DBNull.Value))
                         {
@@ -481,37 +578,37 @@ namespace Starterkit.Web.Logic
                         {
                             dependentModel.Id = Convert.ToInt32(row["Id"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("CompKey") && !row["CompKey"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("CompId") && !row["CompId"].Equals(DBNull.Value))
                         {
-                            dependentModel.CompKey = Convert.ToInt32(row["CompKey"]);
+                            dependentModel.CompKey = Convert.ToInt32(row["CompId"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaName") && !row["DependVisaName"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("Name") && !row["Name"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisaName = Convert.ToString(row["DependVisaName"]);
+                            dependentModel.dependvisaName = Convert.ToString(row["Name"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaEmail") && !row["DependVisaEmail"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisaEmail = Convert.ToString(row["DependVisaEmail"]);
+                            dependentModel.dependvisaEmail = Convert.ToString(row["EmailId"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaDOB") && !row["DependVisaDOB"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisaDOB = Convert.ToString(row["DependVisaDOB"]);
+                            dependentModel.dependvisaDOB = Convert.ToString(row["DateOfBirth"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaPasspno") && !row["DependVisaPasspno"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("PassportNo") && !row["PassportNo"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisaPasspno = Convert.ToString(row["DependVisaPasspno"]);
+                            dependentModel.dependvisaPasspno = Convert.ToString(row["PassportNo"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaAddress") && !row["DependVisaAddress"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisaAddress = Convert.ToString(row["DependVisaAddress"]);
+                            dependentModel.dependvisaAddress = Convert.ToString(row["Address"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaCountry") && !row["DependVisaCountry"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisacountry = Convert.ToString(row["DependVisaCountry"]);
+                            dependentModel.dependvisacountry = Convert.ToString(row["Country"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("DependVisaNationality") && !row["DependVisaNationality"].Equals(DBNull.Value))
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
                         {
-                            dependentModel.dependvisanationality = Convert.ToString(row["DependVisaNationality"]);
+                            dependentModel.dependvisanationality = Convert.ToString(row["Nationality"]);
                         }
                         
 
