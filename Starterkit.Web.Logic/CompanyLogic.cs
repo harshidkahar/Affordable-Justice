@@ -428,7 +428,7 @@ namespace Starterkit.Web.Logic
                         }
                         if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
                         {
-                            visaModel.DateOfBirth = Convert.ToString(row["DateOfBirth"]);
+                            visaModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
                         }
                         if (ds.Tables[0].Columns.Contains("EmiratesId") && !row["EmiratesId"].Equals(DBNull.Value))
                         {
@@ -454,11 +454,7 @@ namespace Starterkit.Web.Logic
                         {
                             visaModel.PassportUrl = Convert.ToString(row["PassportUrl"]);
                         }
-                        if (ds.Tables[0].Columns.Contains("Opt") && !row["Opt"].Equals(DBNull.Value))
-                        {
-                            visaModel.Opt = Convert.ToString(row["Opt"]);
-                        }
-
+                      
                         visaDetailList.Add(visaModel);
                     }
                 }

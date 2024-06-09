@@ -552,7 +552,7 @@ var KTCompanyDetail = function () {
                 if (response.success) {
                     visaDetailData = response.visaDetail;
                     visadetailRenderDetail();
-                    visaOverview();
+                    
                 } else {
                     Swal.fire({
                         text: response.message,
@@ -604,14 +604,6 @@ var KTCompanyDetail = function () {
             const nationalitySelect = document.querySelector('[name="visanationality"]');
             nationalitySelect.value = visaItem.Nationality;
             $(nationalitySelect).trigger('change');
-
-
-        }
-
-    }
-    var visaOverview = function () {
-        if (visaDetailData.length > 0) {
-            var visaItem = visaDetailData[0];
 
             var visaresidence = document.querySelector('[name="target_assign"]');
             var selected = visaresidence.value;
@@ -676,10 +668,62 @@ var KTCompanyDetail = function () {
             //    }
 
 
+            if (visaItem.VisaKey) {
+                updateVisaDetails();
+            }
         }
 
     }
 
+    var updateVisaDetails = function () {
+
+        VisaDetails = {
+
+            Name: document.querySelector('[name="visaname"]').value,
+            DateOfBirth: document.querySelector('[name="visaDateOfBirth"]').value,
+            EmiratesId: document.querySelector('[name="visaemirId"]').value,
+            CurrentAddress: document.querySelector('[name="Cvisaaddress"]').value,
+            ResidenceAddress: document.querySelector('[name="Rvisaaddress"]').value,
+            Country: document.querySelector('[name="visacountry"]').value,
+            Nationality: document.querySelector('[name="visanationality"]').value,
+        };
+        console.log(VisaDetails);
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateResidenceVisaDetails', // Ensure this URL is correct
+            data: JSON.stringify(VisaDetails),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                } else {
+                }
+            },
+            error: function (error) {
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+                console.log('AJAX error:', error);
+            }
+        });
+    }
+
+   
     //Partner List Section.
     var fetchPartner = function () {
         $.ajax({
@@ -1524,7 +1568,7 @@ var KTCompanyDetail = function () {
     }
     var partnerDelete = function (partnerKey) {
 
-        var model = { Id: partnerKey };
+        var model = { PartnerKey: partnerKey };
 
         $.ajax({
             url: '/Company/PartnerDelete',

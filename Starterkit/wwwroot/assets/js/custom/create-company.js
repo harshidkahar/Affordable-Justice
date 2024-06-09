@@ -263,7 +263,7 @@ var KTCreateAccount = function () {
         }
 
         //Dependent overview function
-        const dependarea = document.querySelector('#DepDETAIL')
+        const dparea = document.querySelector('#DepDETAIL')
         let dpcount = 0;
         function Dcount() {
             let ddcount = ++dpcount;
@@ -271,7 +271,7 @@ var KTCreateAccount = function () {
             let div = document.createElement('div');
             div.className = 'd-flex mb-3';
             div.innerHTML = `<label class="fw-bold fs-2">Dependent ${ddcount}</label>`;
-            dependarea.appendChild(div);
+            dparea.appendChild(div);
         }
         var dependvisa;
         var depdetail = document.querySelector('#dependentlbl');
@@ -281,6 +281,9 @@ var KTCreateAccount = function () {
 
             const tableBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody');
             tableBody.innerHTML = ''; // Clear existing rows
+
+            dparea.innerHTML = "";
+            dpcount = 0;
 
             dependentListData.forEach((dependentItem, index) => {
                 const row = tableBody.insertRow();
@@ -323,6 +326,7 @@ var KTCreateAccount = function () {
                     document.querySelector('#Dependentdetails').style.display = 'block';
                     document.querySelector('#addDependent').style.display = 'block';
                     document.querySelector('#cancelDependent').style.display = 'block';
+                    document.querySelector('#NewDependent').style.display = 'none';)
                     dependentDetail(dependentItem.Id);
 
                 });
@@ -598,6 +602,7 @@ var KTCreateAccount = function () {
                 console.log('dependent edit clicked');
                 if (dependentItem.Id) {
                     updateDependent(dependentItem.Id);
+                    dependentDetailData = [];
                     console.log('dependent edit clicked');
                 }
 
@@ -1251,8 +1256,9 @@ var KTCreateAccount = function () {
                             if (stepper.getCurrentStepIndex() == 6) {
                                 //let Visa = visaresi.value;
                                 console.log('visa', visaresi);
-                                if (visaresi === '0') {
-                                    VisaDet();
+                                if (visaresi === '0' && CompId) {
+                                    Visa();
+                                    //VisaDet();
                                     visaDetail();
                                 }
                                 UpdateFormParameter5();
@@ -1297,7 +1303,20 @@ var KTCreateAccount = function () {
                 }
             });
 
+        var Visa = function () {
+            if (visaDetailData.length > 0) {
+                var visaItem = visaDetailData[0];
 
+                if (visaItem.VisaKey) {
+                    updateVisaDetails();
+                    visaDetailData = [];
+                }
+            }
+            else {
+                VisaDet();
+            }
+
+        }
         //Add partner section.
         var addPartner = function () {
 
@@ -1376,12 +1395,12 @@ var KTCreateAccount = function () {
 
             });
 
-            patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
+           var patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
             patType = patresiUAE ? patresiUAE.value : '';
             if (patresiUAE !== null) {
                 patresiUAE.checked = false;
             }
-            comptype = form.querySelector('[name="manager_comp"]:checked');
+           var comptype = form.querySelector('[name="manager_comp"]:checked');
             cmptype = comptype ? comptype.value : '';
             if (comptype !== null) {
                 comptype.checked = false;
@@ -1490,6 +1509,9 @@ var KTCreateAccount = function () {
 
             const tableBody = document.querySelector('#kt_datatable_vertical_scroll tbody');
             tableBody.innerHTML = ''; // Clear existing rows
+            // Clear #patnerDETAILSarea before appending new details
+            patarea.innerHTML = '';
+            patnercount = 0; // Reset partner count
 
             partnerListData.forEach((partnerItem, index) => {
                 const row = tableBody.insertRow();
@@ -1548,7 +1570,6 @@ var KTCreateAccount = function () {
 
                 const patarea = document.querySelector('#patnerDETAILSarea');
                 document.querySelector('#patnerDETAILSarea').style.display = 'block';
-
                 // Patner is residence of UAE or not
                 let div1 = document.createElement('div');
                 div1.className = 'd-flex mb-4';
@@ -1717,7 +1738,12 @@ var KTCreateAccount = function () {
                         break;
                     }
                 }
-
+                if (partnerItem.UAEResidenceText === 'yes') {
+                    document.querySelector('[name="patneremiratesID"]').style.display = 'block';
+                }
+                if (partnerItem.UAEResidenceText === 'no') {
+                    document.querySelector('[name="patnerpassno"]').style.display = 'block';
+                }
                 document.querySelector('[name="patnername"]').value = partnerItem.Name;
                 document.querySelector('[name="patneremail"]').value = partnerItem.EmailId;
                 document.querySelector('[name="patnerphoneno"]').value = partnerItem.Phone;
@@ -1756,7 +1782,8 @@ var KTCreateAccount = function () {
                 if (partnerItem.PartnerKey) {
                     console.log('edit partner working');
                     updatePartner(partnerItem.PartnerKey);
-                }
+                    partnerDetailData = [];
+                     }
             }
             else {
                 addPartner();
@@ -1764,15 +1791,15 @@ var KTCreateAccount = function () {
             }
         });
 
-        document.querySelector('#cancelpartner').addEventListener('click', function () {
+        form.querySelector('#cancelpartner').addEventListener('click', function () {
 
-            patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
-            patType = patresiUAE ? patresiUAE.value : '';
+            var patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
+            var patType = patresiUAE ? patresiUAE.value : '';
             if (patresiUAE !== null) {
                 patresiUAE.checked = false;
             }
-            comptype = form.querySelector('[name="manager_comp"]:checked');
-            cmptype = comptype ? comptype.value : '';
+          var comptype = form.querySelector('[name="manager_comp"]:checked');
+          var cmptype = comptype ? comptype.value : '';
             if (comptype !== null) {
                 comptype.checked = false;
             }
@@ -1809,10 +1836,48 @@ var KTCreateAccount = function () {
             document.querySelector('#addpatner').style.display = 'none';
             document.querySelector('#cancelpartner').style.display = 'none';
             document.querySelector('#NewPartner').style.display = 'block';
-
-
         });
 
+        var partnerValueNull = function () {
+            var patresiUAE = form.querySelector('[name="patner_resiUAE"]:checked');
+            var patType = patresiUAE ? patresiUAE.value : '';
+            if (patresiUAE !== null) {
+                patresiUAE.checked = false;
+            }
+            var comptype = form.querySelector('[name="manager_comp"]:checked');
+            var cmptype = comptype ? comptype.value : '';
+            if (comptype !== null) {
+                comptype.checked = false;
+            }
+            // Clear form fields
+            form.querySelector('#patnername').value = '';
+            form.querySelector('input[name="patneremail"]').value = '';
+            const pddlcountrycode = form.querySelector('[name="country-code"]');
+            form.querySelector('input[name="patnerphoneno"]').value = '';
+            form.querySelector('#patnerDateOfBirth').value = '';
+            form.querySelector('#patneremiratesID').value = '';
+            form.querySelector('input[name="patnerpassno"]').value = '';
+            form.querySelector('textarea[name="patneraddress"]').value = '';
+            const pcountry = form.querySelector('select[name="patnercountry"]');
+            const pnationality = form.querySelector('select[name="Nationality"]');
+            form.querySelector('[name="manageBudget"]').value = '50.0';
+
+            // Resetting the native select elements
+            pcountry.selectedIndex = 0;
+            pnationality.selectedIndex = 0;
+            pddlcountrycode.selectedIndex = 0;
+            // If Select2 is used, reset the Select2 elements
+            if ($(pcountry).data('select2')) {
+                $(pcountry).val(null).trigger('change');
+            }
+            if ($(pnationality).data('select2')) {
+                $(pnationality).val(null).trigger('change');
+            }
+            if ($(pddlcountrycode).data('select2')) {
+                $(pddlcountrycode).val(null).trigger('change');
+            }
+
+        }
         var updatePartner = function (partnerKey) {
             var patresiUAE = document.querySelector('[name="patner_resiUAE"]:checked');
             var patType = patresiUAE ? patresiUAE.value : '';
@@ -1841,7 +1906,8 @@ var KTCreateAccount = function () {
                 Nationality: document.querySelector('[name="Nationality"]').value,
                 ManageBudget: document.querySelector('[name="manageBudget"]').value
             };
-
+            const patarea = document.querySelector('#patnerDETAILSarea');
+                                
             // Send the data to the server for updating the dependent
             $.ajax({
                 url: '/Company/UpdatePartner',
@@ -1860,7 +1926,15 @@ var KTCreateAccount = function () {
                             }
                         }).then(function (result) {
                             if (result.isConfirmed) {
+                                //patnercount = 0;
+                                //patarea.innerHTML = "";
                                 fetchPartner();
+                                document.querySelector('#patnerviewtable').style.display = 'block';
+                                document.querySelector('#Patnerdetails').style.display = 'none';
+                                document.querySelector('#addpatner').style.display = 'none';
+                                document.querySelector('#cancelpartner').style.display = 'none';
+                                document.querySelector('#NewPartner').style.display = 'block';
+                                partnerValueNull();
                             }
                         });
                     }
@@ -1941,7 +2015,6 @@ var KTCreateAccount = function () {
 
 
         }
-
       
       function formatDateToDDMMYYYY(date) {
             // Get the day, month, and year from the date object
@@ -2003,7 +2076,6 @@ var KTCreateAccount = function () {
                 var selected = visaresidence.value;
 
                 const visaarea = document.querySelector('#residenceDETAILSarea');
-                if (selected === '0') {
                     document.querySelector('#residenceDETAILSarea').style.display = 'block';
                     residencedetailslbl.innerText = `Residence Visa Information`;
 
@@ -2015,7 +2087,7 @@ var KTCreateAccount = function () {
             </div>
             <div class="d-flex mb-4">
                 <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
-                <label class="fs-4 fw-bold text-hover-primary">${date}</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.DateOfBirth}</label>
             </div>
             <div class="d-flex mb-4">
                 <label class="col-5 fs-5 text-gray-600">Emirates Id</label>
@@ -2056,12 +2128,9 @@ var KTCreateAccount = function () {
                     // Set the HTML content
                     visaarea.innerHTML = htmlContent;
 
-                }
-                else {
-                    document.querySelector('#residenceDETAILSarea').style.display = 'none';
-                }
-
-
+                   // document.querySelector('#residenceDETAILSarea').style.display = 'none';
+                
+               
             }
 
 
@@ -2195,6 +2264,7 @@ var KTCreateAccount = function () {
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
+                    visaDetail();
                     // Show success message
                 } else {
                 }
@@ -2216,6 +2286,56 @@ var KTCreateAccount = function () {
             }
         });
     }
+
+    var updateVisaDetails = function () {
+
+        VisaDetails = {
+
+            Name: form.querySelector('[name="visaname"]').value,
+            DateOfBirth: form.querySelector('[name="visaDateOfBirth"]').value,
+            EmiratesId: form.querySelector('[name="visaemirId"]').value,
+            CurrentAddress: form.querySelector('[name="Cvisaaddress"]').value,
+            ResidenceAddress: form.querySelector('[name="Rvisaaddress"]').value,
+            Country: form.querySelector('[name="visacountry"]').value,
+            Nationality: form.querySelector('[name="visanationality"]').value,
+        };
+        console.log(VisaDetails);
+        // Perform AJAX request
+        $.ajax({
+            method: 'PUT',
+            url: 'Company/UpdateResidenceVisaDetails', // Ensure this URL is correct
+            data: JSON.stringify(VisaDetails),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                // Hide loading indication
+                // Handle success
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                    // Show success message
+                } else {
+                }
+            },
+            error: function (error) {
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+                console.log('AJAX error:', error);
+            }
+        });
+    }
+
+
     var UpdateFormParameter1 = function () {
 
         updateFormParameter1 = {

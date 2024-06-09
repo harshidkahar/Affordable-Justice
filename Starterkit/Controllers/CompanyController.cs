@@ -107,7 +107,7 @@ namespace Starterkit.Controllers
 		{
 			try
 			{				
-				string _Result = string.Empty;
+				string _Result = "0";
 				
 				_Result = _contextAccessor.HttpContext.Session.GetString("CompId");
 
@@ -554,7 +554,7 @@ namespace Starterkit.Controllers
         }
 
         [HttpDelete]
-        public JsonResult DeleteDependent([FromBody] DependentModel model)
+        public JsonResult DeleteDependent(DependentModel model)
         {
             try
             {
@@ -695,17 +695,18 @@ namespace Starterkit.Controllers
         }
 
         [HttpDelete]
-        public JsonResult PartnerDelete(PartnerModel model)
+        public JsonResult PartnerDelete(PartnerRequestModel model)
         {
             try
             {
                 CompanyLogic _companyLogic = new CompanyLogic();
                 PatnerDetailsModel Partner = new PatnerDetailsModel();
-                Partner.PartnerKey = model.Id;
+                Partner.PartnerKey = model.PartnerKey;
                 Partner.Opt= "D";
                 //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
                 var partnerDetail = _companyLogic.DeletePartner(Partner);
 
+                
                 var result = new { success = true, partnerDetail };
                 return Json(result);
             }
