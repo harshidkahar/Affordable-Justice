@@ -554,7 +554,7 @@ namespace Starterkit.Controllers
         }
 
         [HttpDelete]
-        public JsonResult DeleteDependent(DependentModel model)
+        public JsonResult DeleteDependent([FromBody] DependentModel model)
         {
             try
             {
@@ -695,13 +695,13 @@ namespace Starterkit.Controllers
         }
 
         [HttpDelete]
-        public JsonResult PartnerDelete(PartnerRequestModel model)
+        public JsonResult PartnerDelete([FromBody] PartnerModel model)
         {
             try
             {
                 CompanyLogic _companyLogic = new CompanyLogic();
                 PatnerDetailsModel Partner = new PatnerDetailsModel();
-                Partner.PartnerKey = model.PartnerKey;
+                Partner.PartnerKey = model.Id;
                 Partner.Opt= "D";
                 //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
                 var partnerDetail = _companyLogic.DeletePartner(Partner);
@@ -720,6 +720,7 @@ namespace Starterkit.Controllers
 
         [AllowAnonymous]
         [HttpPost]
+        [HttpPut]
         public JsonResult ResidenceVisaDetails([FromBody] VisaModel insertVisa)
         {
             try
@@ -748,6 +749,11 @@ namespace Starterkit.Controllers
                 return Json("error");
             }
         }
+
+
+
+
+
 
         [AllowAnonymous]
         [HttpPut]

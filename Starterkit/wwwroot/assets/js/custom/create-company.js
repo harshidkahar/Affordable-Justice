@@ -291,13 +291,13 @@ var KTCreateAccount = function () {
                 row.insertCell(0).textContent = dependentItem.dependvisaName;
                 row.insertCell(1).textContent = dependentItem.dependvisaPasspno;
                 row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" onclick="partnerDetail(${dependentItem.Id})">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" onclick="dependentDetail(${dependentItem.Id});">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete">
+                            <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete" onclick="dependentDelete(${dependentItem.Id});">
                                 <i class="ki-duotone ki-trash fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -326,7 +326,7 @@ var KTCreateAccount = function () {
                     document.querySelector('#Dependentdetails').style.display = 'block';
                     document.querySelector('#addDependent').style.display = 'block';
                     document.querySelector('#cancelDependent').style.display = 'block';
-                    document.querySelector('#NewDependent').style.display = 'none';)
+                    document.querySelector('#NewDependent').style.display = 'none';
                     dependentDetail(dependentItem.Id);
 
                 });
@@ -633,6 +633,7 @@ var KTCreateAccount = function () {
                             }
                         }).then(function (result) {
                             if (result.isConfirmed) {
+                                fetchDependent();
 
                             }
                         });
@@ -649,17 +650,6 @@ var KTCreateAccount = function () {
                         });
                     }
                 },
-        error: function () {
-                    Swal.fire({
-                        text: "Failed to retrieve dependent detail.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
             });
 
 
@@ -1256,11 +1246,8 @@ var KTCreateAccount = function () {
                             if (stepper.getCurrentStepIndex() == 6) {
                                 //let Visa = visaresi.value;
                                 console.log('visa', visaresi);
-                                if (visaresi === '0' && CompId) {
-                                    Visa();
-                                    //VisaDet();
-                                    visaDetail();
-                                }
+                                handleVisaDetails(visaresi);
+
                                 UpdateFormParameter5();
                             }
                             if (stepper.getCurrentStepIndex() == 7) {
@@ -1303,20 +1290,6 @@ var KTCreateAccount = function () {
                 }
             });
 
-        var Visa = function () {
-            if (visaDetailData.length > 0) {
-                var visaItem = visaDetailData[0];
-
-                if (visaItem.VisaKey) {
-                    updateVisaDetails();
-                    visaDetailData = [];
-                }
-            }
-            else {
-                VisaDet();
-            }
-
-        }
         //Add partner section.
         var addPartner = function () {
 
@@ -1519,13 +1492,13 @@ var KTCreateAccount = function () {
                 row.insertCell(0).textContent = partnerItem.Name;
                 row.insertCell(1).textContent = partnerItem.PatnerOwnership;
                 row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" onclick="partnerDetail(${partnerItem.PartnerKey})">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" onclick="partnerDetail(${partnerItem.PartnerKey});">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete">
+                            <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete" onclick="partnerDelete(${partnerItem.PartnerKey});">
                                 <i class="ki-duotone ki-trash fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -1739,10 +1712,10 @@ var KTCreateAccount = function () {
                     }
                 }
                 if (partnerItem.UAEResidenceText === 'yes') {
-                    document.querySelector('[name="patneremiratesID"]').style.display = 'block';
+                    document.querySelector('[name="patnerEMRno"]').style.display = 'block';
                 }
                 if (partnerItem.UAEResidenceText === 'no') {
-                    document.querySelector('[name="patnerpassno"]').style.display = 'block';
+                    document.querySelector('[name="patnerPPno"]').style.display = 'block';
                 }
                 document.querySelector('[name="patnername"]').value = partnerItem.Name;
                 document.querySelector('[name="patneremail"]').value = partnerItem.EmailId;
@@ -2000,20 +1973,35 @@ var KTCreateAccount = function () {
                         });
                     }
                 },
-           error: function () {
-                    Swal.fire({
-                        text: "Failed to delete partner.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
             });
 
 
+        }
+
+        let insertExecuted = false;
+        let visaresi = document.querySelector('[name="target_assign"]').value;
+        function handleVisaDetails(visaresi) {
+            if (CompId) {
+                if (visaresi === '0') {
+                    // Check if insert was executed previously
+                    if (!insertExecuted) {
+                        // Perform insert operation
+                        VisaDet();
+                        insertExecuted = true;
+                        // Retrieve the updated details after insert
+                        visaDetail();
+                    } else {
+                        // Perform update operation
+                        updateVisaDetails();
+                        // Retrieve the updated details after update
+                        visaDetail();
+                    }
+                }
+
+            }
+            else {
+                updateVisaDetails();
+            }
         }
       
       function formatDateToDDMMYYYY(date) {
@@ -2030,113 +2018,7 @@ var KTCreateAccount = function () {
             return `${year}-${month}-${day}`;
         }
 
-         var visaDetail = function () {
-
-            $.ajax({
-                url: '/Company/GetvisaDetail',
-                type: 'GET',
-                success: function (response) {
-                    console.log(response);
-                    if (response.success) {
-                        visaDetailData = response.visaDetail;
-                        visadetailRenderDetail();
-                    } else {
-                        Swal.fire({
-                            text: response.message,
-                            icon: "error",
-                            buttonsStyling: false,
-                            confirmButtonText: "Ok, got it!",
-                            customClass: {
-                                confirmButton: "btn btn-primary"
-                            }
-                        });
-                    }
-                },
-                error: function () {
-                    Swal.fire({
-                        text: "Failed to retrieve visa detail.",
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
-            });
-
-        }
-        function visadetailRenderDetail() {
-
-            if (visaDetailData.length > 0) {
-                var visaItem = visaDetailData[0];
-
-
-                var visaresidence = document.querySelector('[name="target_assign"]');
-                var selected = visaresidence.value;
-
-                const visaarea = document.querySelector('#residenceDETAILSarea');
-                    document.querySelector('#residenceDETAILSarea').style.display = 'block';
-                    residencedetailslbl.innerText = `Residence Visa Information`;
-
-                    // Build the entire HTML string
-                    const htmlContent = `
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Name</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Name}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.DateOfBirth}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Emirates Id</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.EmiratesId}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Current Address</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.CurrentAddress}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Resident Address</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.ResidenceAddress}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Country</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Country}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Nationality</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Nationality}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Passport</label>
-                <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
-                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
-                         style="background-image:url('assets/media/stock/900x600/23.jpg')">
-                    </div>
-                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
-                        <i class="bi bi-eye-fill text-white fs-3x"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="mb-3 mt-3">
-                <hr class="text-gray-600" />
-            </div>
-        `;
-
-                    // Set the HTML content
-                    visaarea.innerHTML = htmlContent;
-
-                   // document.querySelector('#residenceDETAILSarea').style.display = 'none';
-                
-               
-            }
-
-
-
-        }
-
+    
             // Prev event
             stepperObj.on('kt.stepper.previous', function (stepper) {
                 console.log('stepper.previous');
@@ -2238,7 +2120,126 @@ var KTCreateAccount = function () {
             }
         });
     }
-    var VisaDet = function () {        
+
+    // Global function to handle visa detail action based on VisaKey
+    function handleVisaDetailAction(visaItem) {
+        if (visaItem.VisaKey) {
+            updateVisaDetails();
+            visaDetailData = [];
+        } else {
+            VisaDet();
+        }
+    }
+
+    var visaDetail = function () {
+
+        $.ajax({
+            url: '/Company/GetvisaDetail',
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    visaDetailData = response.visaDetail;
+                    visadetailRenderDetail();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve visa detail.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+
+    }
+    function visadetailRenderDetail() {
+
+        if (visaDetailData.length > 0) {
+            var visaItem = visaDetailData[0];
+
+          
+            var visaresidence = document.querySelector('[name="target_assign"]');
+            var selected = visaresidence.value;
+
+
+            const visaarea = document.querySelector('#residenceDETAILSarea');
+            document.querySelector('#residenceDETAILSarea').style.display = 'block';
+            residencedetailslbl.innerText = `Residence Visa Information`;
+            visaarea.innerHTML = '';
+
+            // Build the entire HTML string
+            const htmlContent = `
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Name</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Name}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.DateOfBirth}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Emirates Id</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.EmiratesId}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Current Address</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.CurrentAddress}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Resident Address</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.ResidenceAddress}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Country</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Country}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Nationality</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Nationality}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Passport</label>
+                <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                         style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                    </div>
+                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                        <i class="bi bi-eye-fill text-white fs-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="mb-3 mt-3">
+                <hr class="text-gray-600" />
+            </div>
+        `;
+
+            // Set the HTML content
+            visaarea.innerHTML = htmlContent;
+
+            // document.querySelector('#residenceDETAILSarea').style.display = 'none';
+            
+
+        }
+
+
+
+    }
+    var VisaDet = function () {
 
         VisaDetails = {
 
@@ -2249,7 +2250,7 @@ var KTCreateAccount = function () {
             ResidenceAddress: form.querySelector('[name="Rvisaaddress"]').value,
             Country: form.querySelector('[name="visacountry"]').value,
             Nationality: form.querySelector('[name="visanationality"]').value,
- };
+        };
         console.log(VisaDetails);
         // Perform AJAX request
         $.ajax({
@@ -2264,7 +2265,7 @@ var KTCreateAccount = function () {
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
-                    visaDetail();
+                    //visaDetail();
                     // Show success message
                 } else {
                 }
@@ -2286,7 +2287,6 @@ var KTCreateAccount = function () {
             }
         });
     }
-
     var updateVisaDetails = function () {
 
         VisaDetails = {
@@ -2311,6 +2311,7 @@ var KTCreateAccount = function () {
                 // Hide loading indication
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    visaDetail();
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message
@@ -2334,8 +2335,6 @@ var KTCreateAccount = function () {
             }
         });
     }
-
-
     var UpdateFormParameter1 = function () {
 
         updateFormParameter1 = {

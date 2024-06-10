@@ -793,13 +793,13 @@ var KTCompanyDetail = function () {
             row.insertCell(0).textContent = partnerItem.Name;
             row.insertCell(1).textContent = partnerItem.PatnerOwnership;
             row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" onclick="partnerDetail(${partnerItem.PartnerKey})">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="edit" onclick="partnerDetail(${partnerItem.PartnerKey});">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete">
+                            <button type="button" class="btn btn-sm btn-light-danger partnerdelete" id="partnerdelete" onclick="partnerDelete(${partnerItem.PartnerKey});">
                                 <i class="ki-duotone ki-trash fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -1022,13 +1022,13 @@ var KTCompanyDetail = function () {
             row.insertCell(0).textContent = dependentItem.dependvisaName;
             row.insertCell(1).textContent = dependentItem.dependvisaPasspno;
             row.insertCell(2).innerHTML = ` <td>
-                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" onclick="partnerDetail(${dependentItem.Id})">
+                            <button type="button" class="btn btn-sm btn-light-primary me-3 edit" id="editdependent" onclick="partnerDetail(${dependentItem.Id});">
                                 <i class="ki-duotone ki-pencil">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
                                 </i>
                             </button>
-                            <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete">
+                            <button type="button" class="btn btn-sm btn-light-danger dependentdelete" id="dependentdelete" onclick="dependentDelete(${dependentItem.Id});">
                                 <i class="ki-duotone ki-trash fs-5">
                                     <span class="path1"></span>
                                     <span class="path2"></span>
@@ -1353,7 +1353,7 @@ var KTCompanyDetail = function () {
                         }
                     }).then(function (result) {
                         if (result.isConfirmed) {
-
+                            fetchDependent();
                         }
                     });
                 }
@@ -1368,17 +1368,6 @@ var KTCompanyDetail = function () {
                         }
                     });
                 }
-            },
-        error: function () {
-                Swal.fire({
-                    text: "Failed to retrieve dependent detail.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
             }
         });
 
@@ -1568,7 +1557,7 @@ var KTCompanyDetail = function () {
     }
     var partnerDelete = function (partnerKey) {
 
-        var model = { PartnerKey: partnerKey };
+        var model = { Id: partnerKey };
 
         $.ajax({
             url: '/Company/PartnerDelete',
@@ -1587,7 +1576,7 @@ var KTCompanyDetail = function () {
                         }
                     }).then(function (result) {
                         if (result.isConfirmed) {
-
+                            fetchPartner();
                         }
                     });
                 }
@@ -1602,17 +1591,6 @@ var KTCompanyDetail = function () {
                         }
                     });
                 }
-            },
-           error: function () {
-                Swal.fire({
-                    text: "Failed to delete partner.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
             }
         });
 
