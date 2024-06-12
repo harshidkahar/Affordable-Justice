@@ -1627,7 +1627,7 @@ var KTCompanyDetail = function () {
             const compId = urlParams.get('CompId');
             const url = window.location.href;
 
-            if (url.includes('createCompany') && compId !== null) {
+           if (url.includes('updateCompany') && compId !== null) {
                 fetchCompanyDetail();
             }
         }
