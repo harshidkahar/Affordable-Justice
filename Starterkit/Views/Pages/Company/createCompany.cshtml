@@ -2480,7 +2480,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid mb-5">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="VirtualOffice" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="VirtualOffice" onchange="yourofficetype();" />
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -2494,7 +2494,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid mb-5">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="SharedOffice" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="SharedOffice" onchange="yourofficetype();"/>
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -2508,7 +2508,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="PrivateOffice" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="PrivateOffice" onchange="yourofficetype();" />
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -2522,7 +2522,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="Warehouse" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="Warehouse" onchange="yourofficetype();" />
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -2538,7 +2538,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="Storage" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="Storage" onchange="yourofficetype();" />
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -2553,7 +2553,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="ShopFront" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="ShopFront" onchange="yourofficetype();"/>
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -2568,7 +2568,7 @@
                                             <!--begin::Radio-->
                                             <div class="form-check form-check-custom form-check-solid">
                                                 <!--begin::Input-->
-                                                <input class="form-check-input me-3" name="officespace" type="radio" value="NotNeeded" />
+                                                <input class="form-check-input me-3" name="officespace" type="radio" value="NotNeeded" onchange="yourofficetype();" />
                                                 <!--end::Input-->
 
                                                 <!--begin::Label-->
@@ -4010,6 +4010,12 @@
             document.querySelector('#off_type').style.display = 'none';
 
         }
+        if (OSpace === 'VirtualOffice' || OSpace === "SharedOffice" || OSpace === "PrivateOffice" || OSpace === "Warehouse" || OSpace === "Storage" || OSpace === "ShopFront" || OSpace === "NotNeeded")
+        { 
+            document.querySelector('#off_type').style.display = 'none';
+               
+        }
+
 
     }
 

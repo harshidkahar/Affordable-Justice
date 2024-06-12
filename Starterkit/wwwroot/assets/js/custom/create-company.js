@@ -119,6 +119,11 @@ var KTCreateAccount = function () {
         form.querySelector('#no').addEventListener('change', function () {
             //console.log('no is clicked');
             document.querySelector('#NewDependent').style.display = 'none';
+            document.querySelector('#Dependentdetails').style.display = 'none';
+            document.querySelector('#addDependent').style.display = 'none';
+            document.querySelector('#cancelDependent').style.display = 'none';
+            fetchDependent();
+
         });
 
         //step-6 To add a new dependent.
@@ -793,6 +798,15 @@ var KTCreateAccount = function () {
             var OfficeSpace = form.querySelector('[name="officespace"]:checked');
             var OSpace = OfficeSpace ? OfficeSpace.value : '';
             console.log(OSpace);
+            if (OSpace === "Others") {
+                form.querySelector('#off_type').style.display = 'block';
+            }
+            else {
+                form.querySelector('#off_type').style.display = 'none';
+            }
+            if (OSpace === 'VirtualOffice' || OSpace === "SharedOffice" || OSpace === "PrivateOffice" || OSpace === "Warehouse" || OSpace === "Storage" || OSpace === "ShopFront" || OSpace === "NotNeeded") {
+                document.querySelector('#off_type').style.display = 'none';
+            }
 
             var offtype = form.querySelector('[name="youroffice"]').value;
 
@@ -1256,6 +1270,7 @@ var KTCreateAccount = function () {
                                 UpdateFormParameter5();
                             }
                             if (stepper.getCurrentStepIndex() == 7) {
+                                fetchDependent();
                                 UpdateFormParameter6();
                             }
                             if (stepper.getCurrentStepIndex() == 8) {
@@ -1719,9 +1734,12 @@ var KTCreateAccount = function () {
                 }
                 if (partnerItem.UAEResidenceText === 'yes') {
                     document.querySelector('[name="patnerEMRno"]').style.display = 'block';
+                    document.querySelector('[name="patnerPPno"]').style.display = 'none';
                 }
                 if (partnerItem.UAEResidenceText === 'no') {
                     document.querySelector('[name="patnerPPno"]').style.display = 'block';
+                    document.querySelector('[name="patnerEMRno"]').style.display = 'none';
+
                 }
                 document.querySelector('[name="patnername"]').value = partnerItem.Name;
                 document.querySelector('[name="patneremail"]').value = partnerItem.EmailId;
@@ -1995,6 +2013,7 @@ var KTCreateAccount = function () {
                         VisaDet();
                         insertExecuted = true;
                         // Retrieve the updated details after insert
+                        
                         visaDetail();
                     } else {
                         // Perform update operation

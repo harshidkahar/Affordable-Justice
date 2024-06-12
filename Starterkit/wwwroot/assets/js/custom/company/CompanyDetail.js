@@ -64,10 +64,16 @@ var KTCompanyDetail = function () {
                     break;
                 }
             }
+
             if (companyItem.dependentVisaReqText === 'yes') {
                 document.querySelector('#dependentviewtable').style.display = 'block';
+                document.querySelector('#NewDependent').style.display = 'block';
                 fetchDependent();
                 
+            }
+            if (companyItem.dependentVisaReqText === 'no') {
+                document.querySelector('#dependentviewtable').style.display = 'block';
+                //fetchDependent();
             }
 
 
@@ -78,6 +84,7 @@ var KTCompanyDetail = function () {
                     break;
                 }
             }
+            
 
             var startbusinessRadios = document.getElementsByName('bussplan');
             for (var i = 0; i < startbusinessRadios.length; i++) {
@@ -98,6 +105,12 @@ var KTCompanyDetail = function () {
                 document.querySelector('#off_type').style.display = 'block';
                 document.querySelector('[name="youroffice"]').value = companyItem.YourOfficeType;
             }
+            if (companyItem.OfficeType === 'VirtualOffice' || companyItem.OfficeType === "SharedOffice" || companyItem.OfficeType === "PrivateOffice" || companyItem.OfficeType === "Warehouse" || companyItem.OfficeType === "Storage" || companyItem.OfficeType === "ShopFront" || companyItem.OfficeType === "NotNeeded") {
+                document.querySelector('#off_type').style.display = 'none';
+               
+            }
+
+          
             var businessNameParts = companyItem.BusinessNameOption.split(',');
             var c1 = businessNameParts[0];
             var c2 = businessNameParts[1];
@@ -668,9 +681,7 @@ var KTCompanyDetail = function () {
             //    }
 
 
-            if (visaItem.VisaKey) {
-                updateVisaDetails();
-            }
+           
         }
 
     }
@@ -822,6 +833,8 @@ var KTCompanyDetail = function () {
                 console.log('Edit button clicked for index:', index);
                 document.querySelector('#Patnerdetails').style.display = 'block';
                 document.querySelector('#addpatner').style.display = 'block';
+                document.querySelector('#cancelpartner').style.display = 'block';
+                document.querySelector('#NewPartner').style.display = 'none';
                 partnerDetail(partnerItem.PartnerKey);
 
             });
@@ -1442,6 +1455,16 @@ var KTCompanyDetail = function () {
                 }
             }
 
+            if (partnerItem.UAEResidenceText === 'yes') {
+                document.querySelector('[name="patnerEMRno"]').style.display = 'block';
+                document.querySelector('[name="patnerPPno"]').style.display = 'none';
+            }
+
+            if (partnerItem.UAEResidenceText === 'no') {
+                document.querySelector('[name="patnerPPno"]').style.display = 'block';
+                document.querySelector('[name="patnerEMRno"]').style.display = 'none';
+            }
+
             document.querySelector('[name="patnername"]').value = partnerItem.Name;
             document.querySelector('[name="patneremail"]').value = partnerItem.EmailId;
             document.querySelector('[name="patnerphoneno"]').value = partnerItem.Phone;
@@ -1466,9 +1489,7 @@ var KTCompanyDetail = function () {
                 let date = new Date(partnerItem.DateOfBirth);
                 document.getElementById('patnerDateOfBirth').value = formatDateToDDMMYYYY(date).toString();
             }
-            catch { document.getElementById('patnerDateOfBirth').value = ''; }
-
-           
+            catch { document.getElementById('patnerDateOfBirth').value = ''; }           
         }
     }
 
