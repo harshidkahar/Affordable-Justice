@@ -787,6 +787,10 @@ var KTCompanyDetail = function () {
         const tableBody = document.querySelector('#kt_datatable_vertical_scroll tbody');
         tableBody.innerHTML = ''; // Clear existing rows
 
+        patdetail.innerText = "";
+        patarea.innerHTML = "";
+        patnercount=0;
+
         partnerListData.forEach((partnerItem, index) => {
             const row = tableBody.insertRow();
 
@@ -997,7 +1001,7 @@ var KTCompanyDetail = function () {
     }
 
     //Dependent overview function
-    const dependarea = document.querySelector('#DepDETAIL')
+    const dparea = document.querySelector('#DepDETAIL')
     let dpcount = 0;
     function Dcount() {
         let ddcount = ++dpcount;
@@ -1005,16 +1009,20 @@ var KTCompanyDetail = function () {
         let div = document.createElement('div');
         div.className = 'd-flex mb-3';
         div.innerHTML = `<label class="fw-bold fs-2">Dependent ${ddcount}</label>`;
-        dependarea.appendChild(div);
+        dparea.appendChild(div);
     }
     var dependvisa;
     var depdetail = document.querySelector('#dependentlbl');
     dependvisa = document.querySelector('[name="visadependent"]:checked');
+    var depdetail = document.querySelector('#dependentlbl');
 
     function dependentrenderTable() {
 
         const tableBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody');
         tableBody.innerHTML = ''; // Clear existing rows
+        depdetail.innerText="";
+        dparea.innerHTML = "";
+        dpcount = 0;
 
         dependentListData.forEach((dependentItem, index) => {
             const row = tableBody.insertRow();
@@ -1062,7 +1070,6 @@ var KTCompanyDetail = function () {
             });
 
             var dependvisa;
-            var depdetail = document.querySelector('#dependentlbl');
             dependvisa = document.querySelector('[name="visadependent"]:checked');
 
             depdetail.innerText = "Dependent Information";  //Dependent Detail Label Section.

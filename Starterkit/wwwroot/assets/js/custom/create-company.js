@@ -276,12 +276,14 @@ var KTCreateAccount = function () {
         var dependvisa;
         var depdetail = document.querySelector('#dependentlbl');
         dependvisa = document.querySelector('[name="visadependent"]:checked');
+        var depdetail = document.querySelector('#dependentlbl');
 
         function dependentrenderTable() {
 
             const tableBody = document.querySelector('#kt_datatable_vertical_scroll1 tbody');
             tableBody.innerHTML = ''; // Clear existing rows
 
+            depdetail.innerText = "";
             dparea.innerHTML = "";
             dpcount = 0;
 
@@ -332,7 +334,6 @@ var KTCreateAccount = function () {
                 });
 
                 var dependvisa;
-                var depdetail = document.querySelector('#dependentlbl');
                 dependvisa = document.querySelector('[name="visadependent"]:checked');
 
                 depdetail.innerText = "Dependent Information";  //Dependent Detail Label Section.
@@ -622,7 +623,7 @@ var KTCreateAccount = function () {
                 contentType: 'application/json', // Specify JSON content type
                 data: JSON.stringify(model),
                 success: function (data) {
-                    if (data == "done") {
+                    if (data.success == true) {
                         Swal.fire({
                             text: "Dependent Successfully Deleted!",
                             icon: "success",
@@ -1483,6 +1484,7 @@ var KTCreateAccount = function () {
             const tableBody = document.querySelector('#kt_datatable_vertical_scroll tbody');
             tableBody.innerHTML = ''; // Clear existing rows
             // Clear #patnerDETAILSarea before appending new details
+            patdetail.innerText = "";
             patarea.innerHTML = '';
             patnercount = 0; // Reset partner count
 
@@ -1946,7 +1948,7 @@ var KTCreateAccount = function () {
                 contentType: 'application/json', // Specify JSON content type
                 data: JSON.stringify(model),
                 success: function (data) {
-                    if (data == "done") {
+                    if (data.success == true) {
                         Swal.fire({
                             text: "Partner Successfully Deleted!",
                             icon: "success",
@@ -1957,7 +1959,7 @@ var KTCreateAccount = function () {
                             }
                         }).then(function (result) {
                             if (result.isConfirmed) {
-
+                                fetchPartner();
                             }
                         });
                     }
