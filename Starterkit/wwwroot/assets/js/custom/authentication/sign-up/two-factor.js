@@ -53,7 +53,7 @@ var KTSigninTwoFactor = function () {
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(jsonPostData),
                         success: function (data) {
-                            if (data.d == "done") {
+                            if (data == "done") {
                                 Swal.fire({
                                     text: "You have been successfully verified",
                                     icon: "success",

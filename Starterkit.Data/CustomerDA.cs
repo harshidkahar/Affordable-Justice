@@ -30,7 +30,8 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@SponsorEmail", SqlDbType.NVarChar).Value = p_Customer.SponsorId;
                 cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = p_Customer.Email;
                 cmd.Parameters.Add("@ContactNo", SqlDbType.NVarChar).Value = p_Customer.ContactNo;
-                SqlDataAdapter dap = new SqlDataAdapter();
+				cmd.Parameters.Add("@CountryCode", SqlDbType.NVarChar).Value = p_Customer.CountryCode;
+				SqlDataAdapter dap = new SqlDataAdapter();
                 dap.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
                 con.Close();

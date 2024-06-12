@@ -15,7 +15,7 @@ public class DashboardsController : Controller
     }
 
     
-    [HttpGet("/dashboards")]
+    [HttpGet("/dashboard")]
     public IActionResult Index()
     {
         return View(_theme.GetPageView("Dashboards", "Index.cshtml"));

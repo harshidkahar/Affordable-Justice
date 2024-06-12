@@ -120,7 +120,7 @@ var KTSignupGeneral = function () {
                             data: JSON.stringify(jsonPostData),
                             dataType: "json",
                             success: function (data) {
-                                if (data.d == "done") {
+                                if (data == "done") {
                                     Swal.fire({
                                         text: "You have successfully registered!",
                                         icon: "success",
@@ -134,12 +134,12 @@ var KTSignupGeneral = function () {
                                                 form.reset();
                                                 $.ajax({
                                                     type: "POST",
-                                                    url: "SignIn.aspx/SendOTP",
+                                                    url: "/Auth/SendOtp/",
                                                     contentType: "application/json; charset=utf-8",
                                                     data: JSON.stringify(jsonPostData),
                                                     dataType: "json",
                                                     success: function (data) {
-                                                        if (data.d == "done") {
+                                                        if (data == "done") {
                                                             Swal.fire({
                                                                 text: "An OTP is send to your email!",
                                                                 icon: "success",

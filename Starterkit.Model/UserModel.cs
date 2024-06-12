@@ -120,7 +120,7 @@ namespace Starterkit.Model
             set { _IsActive = value; }
         }
 
-        private string _SponsorId;
+        private string _SponsorId = "";
         public string SponsorId
         {
             get { return _SponsorId; }
@@ -147,8 +147,14 @@ namespace Starterkit.Model
             get { return _Email; }
             set { _Email = value; }
         }
+        private string _CountryCode;
+        public string CountryCode
+        {
+            get { return _CountryCode; }
+            set { _CountryCode = value; }
+        }
 
-        private string _ContactNo;
+		private string _ContactNo;
         public string ContactNo
         {
             get { return _ContactNo; }
