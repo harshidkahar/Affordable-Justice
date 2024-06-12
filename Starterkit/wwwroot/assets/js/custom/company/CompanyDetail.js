@@ -138,7 +138,7 @@ var KTCompanyDetail = function () {
             companyTypeSelect.value = companyItem.CompanyType;
             $(companyTypeSelect).trigger('change');
 
-            let sfZL = document.getElementById("fzcity").value;
+            let sfZL = companyItem.BusinessCity;
             console.log(sfZL);
 
             if (companyTypeSelect.value === 'Mainland') {
@@ -677,7 +677,7 @@ var KTCompanyDetail = function () {
 
     var updateVisaDetails = function () {
 
-        VisaDetails = {
+       var VisaDetails = {
 
             Name: document.querySelector('[name="visaname"]').value,
             DateOfBirth: document.querySelector('[name="visaDateOfBirth"]').value,
@@ -1342,7 +1342,7 @@ var KTCompanyDetail = function () {
             contentType: 'application/json', // Specify JSON content type
             data: JSON.stringify(model),
             success: function (data) {
-                if (data == "done") {
+                if (data.success == true) {
                     Swal.fire({
                         text: "Dependent Successfully Deleted!",
                         icon: "success",
@@ -1565,7 +1565,7 @@ var KTCompanyDetail = function () {
             contentType: 'application/json', // Specify JSON content type
             data: JSON.stringify(model),
             success: function (data) {
-                if (data == "done") {
+                if (data.success == true) {
                     Swal.fire({
                         text: "Partner Successfully Deleted!",
                         icon: "success",

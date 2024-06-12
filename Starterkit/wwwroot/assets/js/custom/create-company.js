@@ -1115,7 +1115,7 @@ var KTCreateAccount = function () {
                         console.log('validated!');
 
                         if (status == 'Valid') {
-                            if (typeof CompId !== 'undefined') {
+                            if (typeof CompId == 'undefined') {
                                 $.ajax({
                                     type: 'GET',
                                     url: 'Company/GetCompanyId', // Ensure this URL is correct
