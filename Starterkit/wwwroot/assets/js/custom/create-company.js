@@ -634,6 +634,10 @@ var KTCreateAccount = function () {
                             }
                         }).then(function (result) {
                             if (result.isConfirmed) {
+                                document.querySelector('#Dependentdetails').style.display = 'none';
+                                document.querySelector('#addDependent').style.display = 'none';
+                                document.querySelector('#NewDependent').style.display = 'block';
+                                document.querySelector('#cancelDependent').style.display = 'none';
                                 fetchDependent();
 
                             }
