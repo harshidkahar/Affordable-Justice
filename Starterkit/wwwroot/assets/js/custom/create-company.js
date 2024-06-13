@@ -1265,10 +1265,10 @@ var KTCreateAccount = function () {
                             if (stepper.getCurrentStepIndex() == 6) {
                                 //let Visa = visaresi.value;
                                 console.log('visa', visaresi);
-                                handleVisaDetails(visaresi);
-
+                                VisaDet();
                                 UpdateFormParameter5();
                             }
+                           
                             if (stepper.getCurrentStepIndex() == 7) {
                                 UpdateFormParameter6();
                                 fetchDependent();
@@ -2001,35 +2001,7 @@ var KTCreateAccount = function () {
 
 
         }
-
-        let insertExecuted = false;
-        let visaresi = document.querySelector('[name="target_assign"]').value;
-        function handleVisaDetails(visaresi) {
-            if (CompId) {
-                if (visaresi === '0') {
-                    // Check if insert was executed previously
-                    if (!insertExecuted) {
-                        // Perform insert operation
-                        VisaDet();
-                        insertExecuted = true;
-                        // Retrieve the updated details after insert
-                        
-                        visaDetail();
-                    } else {
-                        // Perform update operation
-                        updateVisaDetails();
-                        // Retrieve the updated details after update
-                        visaDetail();
-                    }
-                }
-
-            }
-            else {
-                updateVisaDetails();
-                visaDetail();
-            }
-        }
-      
+         
       function formatDateToDDMMYYYY(date) {
             // Get the day, month, and year from the date object
             let day = date.getDate();
@@ -2147,15 +2119,54 @@ var KTCreateAccount = function () {
         });
     }
 
-    // Global function to handle visa detail action based on VisaKey
-    function handleVisaDetailAction(visaItem) {
-        if (visaItem.VisaKey) {
-            updateVisaDetails();
-            visaDetailData = [];
-        } else {
-            VisaDet();
-        }
+ 
+    var VisaDet = function () {
+
+        VisaDetails = {
+
+            Name: form.querySelector('[name="visaname"]').value,
+            DateOfBirth: form.querySelector('[name="visaDateOfBirth"]').value,
+            EmiratesId: form.querySelector('[name="visaemirId"]').value,
+            CurrentAddress: form.querySelector('[name="Cvisaaddress"]').value,
+            ResidenceAddress: form.querySelector('[name="Rvisaaddress"]').value,
+            Country: form.querySelector('[name="visacountry"]').value,
+            Nationality: form.querySelector('[name="visanationality"]').value,
+        };
+        console.log(VisaDetails);
+        // Perform AJAX request
+        $.ajax({
+            method: 'POST',
+            url: 'Company/ResidenceVisaDetails', // Ensure this URL is correct
+            data: JSON.stringify(VisaDetails),
+            contentType: 'application/json; charset=utf-8',
+            dataType: 'json',
+            success: function (response) {
+                visaDetail();
+                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                    stepperObj.goNext();
+                    console.log('AJAX response:', response);
+                  
+                } else {
+                }
+            },
+            error: function (error) {
+                // Show error message
+                Swal.fire({
+                    text: "Sorry, looks like there are some errors detected, please try again.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-light"
+                    }
+                }).then(function () {
+                    KTUtil.scrollTop();
+                });
+                console.log('AJAX error:', error);
+            }
+        });
     }
+
 
     var visaDetail = function () {
 
@@ -2198,7 +2209,7 @@ var KTCreateAccount = function () {
         if (visaDetailData.length > 0) {
             var visaItem = visaDetailData[0];
 
-          
+
             var visaresidence = document.querySelector('[name="target_assign"]');
             var selected = visaresidence.value;
 
@@ -2258,61 +2269,14 @@ var KTCreateAccount = function () {
             visaarea.innerHTML = htmlContent;
 
             // document.querySelector('#residenceDETAILSarea').style.display = 'none';
-            
+
 
         }
 
 
 
     }
-    var VisaDet = function () {
 
-        VisaDetails = {
-
-            Name: form.querySelector('[name="visaname"]').value,
-            DateOfBirth: form.querySelector('[name="visaDateOfBirth"]').value,
-            EmiratesId: form.querySelector('[name="visaemirId"]').value,
-            CurrentAddress: form.querySelector('[name="Cvisaaddress"]').value,
-            ResidenceAddress: form.querySelector('[name="Rvisaaddress"]').value,
-            Country: form.querySelector('[name="visacountry"]').value,
-            Nationality: form.querySelector('[name="visanationality"]').value,
-        };
-        console.log(VisaDetails);
-        // Perform AJAX request
-        $.ajax({
-            method: 'POST',
-            url: 'Company/ResidenceVisaDetails', // Ensure this URL is correct
-            data: JSON.stringify(VisaDetails),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-            success: function (response) {
-                // Hide loading indication
-                // Handle success
-                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
-                    stepperObj.goNext();
-                    console.log('AJAX response:', response);
-                    //visaDetail();
-                    // Show success message
-                } else {
-                }
-            },
-            error: function (error) {
-                // Show error message
-                Swal.fire({
-                    text: "Sorry, looks like there are some errors detected, please try again.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-light"
-                    }
-                }).then(function () {
-                    KTUtil.scrollTop();
-                });
-                console.log('AJAX error:', error);
-            }
-        });
-    }
     var updateVisaDetails = function () {
 
         VisaDetails = {

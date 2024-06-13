@@ -113,12 +113,7 @@ namespace Starterkit.Web.Logic
             return companyDA.DAL_VisaDetail(addVisa);
         }
 
-        public string UpdateVisaDetails(VisaDetailsModel addVisa)
-        {
-            CompanyDA companyDA = (CompanyDA)DataAccessFactory.GetDataAccess(DataAccessType.Company);
-            return companyDA.DAL_VisaDetail(addVisa);
-        }
-
+      
          public List<PatnerDetailsModel> GetPartnerList(int compId)
          {
           List<PatnerDetailsModel> partnerList = new List<PatnerDetailsModel>();
