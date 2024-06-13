@@ -62,9 +62,17 @@ switch (page) {
         pageBreadcrum = "Account - Change Email";
         changeEmail.classList.add("active");
         break;
-    case "createcase":
+    case "createCase":
         pageTitle = "Create Case";
         pageBreadcrum = "Create Case";
+        document.querySelector('#lnkCreateCase').href = "createCase";
+        document.querySelector('#lnkCreateCase').innerHTML = "Case Details";
+        break;        
+    case "updateCase":
+        pageTitle = "Update Case";
+        pageBreadcrum = "Update Case";
+        document.querySelector('#lnkCreateCase').href = "updateCase";
+        document.querySelector('#lnkCreateCase').innerHTML = "Case Details";
         break;
     case "viewCaseList":
         pageTitle = "View Case List";
@@ -86,9 +94,14 @@ switch (page) {
         pageBreadcrum = "Case Details";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-    case "createcompany":
+    case "createCompany":
         pageTitle = "Create Company";
         pageBreadcrum = "Create Company";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "updateCompany":
+        pageTitle = "Update Company";
+        pageBreadcrum = "Update Company";
         document.getElementById("action_status").style.visibility = "visible";
         break;
     case "companyList":
