@@ -122,7 +122,7 @@ var KTCreateAccount = function () {
             document.querySelector('#Dependentdetails').style.display = 'none';
             document.querySelector('#addDependent').style.display = 'none';
             document.querySelector('#cancelDependent').style.display = 'none';
-            fetchDependent();
+            //fetchDependent();
 
         });
 
@@ -1270,8 +1270,8 @@ var KTCreateAccount = function () {
                                 UpdateFormParameter5();
                             }
                             if (stepper.getCurrentStepIndex() == 7) {
-                                fetchDependent();
                                 UpdateFormParameter6();
+                                fetchDependent();
                             }
                             if (stepper.getCurrentStepIndex() == 8) {
                                 UpdateFormParameter7();
@@ -2026,6 +2026,7 @@ var KTCreateAccount = function () {
             }
             else {
                 updateVisaDetails();
+                visaDetail();
             }
         }
       
@@ -2598,7 +2599,7 @@ var KTCreateAccount = function () {
             success: function (response) {
                 // Hide loading indication
                 // Handle success
-                if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                if (response.success) {
                     stepperObj.goNext();
                     console.log('AJAX response:', response);
                     // Show success message

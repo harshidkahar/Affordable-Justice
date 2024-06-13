@@ -1323,6 +1323,7 @@ var KTCompanyDetail = function () {
                         }
                     }).then(function (result) {
                         if (result.isConfirmed) {
+                            
 
                         }
                     });
