@@ -168,10 +168,10 @@ namespace Starterkit.Controllers
             try
             {
                 CompanyLogic _companyLogic = new CompanyLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); 
+                int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); 
                 var companyDetail = _companyLogic.CompanyDetail(userId, CompId);
-
+                var companyOverview = _companyLogic.GetCompanyDetails(CompId);
                 var result = new { success = true, companyDetail };
                 return Json(result);
             }
