@@ -114,6 +114,31 @@ namespace Starterkit.Web.Logic
             return companyDA.DAL_VisaDetail(addVisa);
         }
 
+          public string ChangeStatus(int id, int status)
+          {
+            try
+            {
+           
+                   // Initialize data access object
+                   CommonDA commonDA = new CommonDA();
+
+                   // Call data access method to change status
+                   DataSet ds = commonDA.GetCommonFillData(id, status.ToString(), "ChangeCompanyStatus");
+
+                   // Process the result from the dataset as needed
+                   // Assuming here the status change was successful
+                   return "Status changed successfully";
+             }
+             catch (Exception ex)
+             {
+               // Log the exception (Assuming a logging mechanism exists)
+               Console.WriteLine($"An error occurred: {ex.Message}");
+
+                   // Return a meaningful error message
+                   return $"An error occurred while changing status: {ex.Message}";
+               }
+            }
+    
 
         public List<PatnerDetailsModel> GetPartnerList(int compId)
         {

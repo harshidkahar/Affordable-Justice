@@ -60,9 +60,11 @@
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
+                                        <div id="location" style="display:none;">
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Location : </label>
                                             <label id="lblLocation"></label>
+                                        </div>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -114,9 +116,11 @@
                                     <!--begin::Row-->
                                     <div class="row">
                                         <!--begin::Col-->
+                                        <div id="yourOfficeType" style="display:none;">
                                         <div class="col-lg-6 col-md-12 fv-row ">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Your Office Type : </label>
                                             <label id="lblYourOfficeType"></label>
+                                        </div>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
@@ -140,18 +144,42 @@
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
+                                        <div id="YourBusinessName" style="display:none;">
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Your Business Name : </label>
                                             <label id="lblyourBusinessName"></label>
+                                        </div>
                                         </div>
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row ">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Need Assistance On : </label>
+                                            <label id="lblNeedAssistanceOn"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
 
-                              
-
+                                <br />
+                                
+                                <h3 id="lblPartnerDetail" style="display:none;"></h3>
+                                <div id="partnerDetail" style="display:none;"></div>
+                                <br />
+                                <h3 id="lblVisaDetail" style="display:none;"></h3>
+                                <div id="visaDetail" style="display:none;"></div>
+                                <br>
+                                <h3 id="lblDependentDetail" style="display:none;"></h3>
+                                <div id="dependentDetail" style="display:none;"></div>
                                 <br>
                                 <h3>Personal Details</h3>
                                 <!--begin::Input group-->
@@ -194,27 +222,6 @@
                                     <div class="row">
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Country : </label>
-                                            <label id="lblCountry"></label>
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6 col-md-12 fv-row">
-                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality : </label>
-                                            <label id="lblNationality"></label>
-                                        </div>
-                                        <!--end::Col-->
-
-                                    </div>
-                                    <!--end::Row-->
-                                </div>
-                                <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row mb-2 mb-xl-6">
-                                    <!--begin::Row-->
-                                    <div class="row">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Current Address : </label>
                                             <label id="lblCurrentAddress"></label>
                                         </div>
@@ -230,6 +237,28 @@
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Country : </label>
+                                            <label id="lblCountry"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality : </label>
+                                            <label id="lblNationality"></label>
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                               
                                 <!--begin::Input group-->
                                 <div class="row mb-2 mb-xl-6">
                                     <!--begin::Row-->

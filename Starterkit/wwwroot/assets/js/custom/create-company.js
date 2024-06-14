@@ -2772,38 +2772,42 @@ var KTCreateAccount = function () {
                     // Disable button to avoid multiple click 
                     formSubmitButton.disabled = true;
 
-                    statusChanged = {
-                        Status: 1
-                       };
-                    console.log(statusChanged);
                     // Perform AJAX request
                     $.ajax({
                         method: 'PUT',
-                        url: 'Company/ChangingStatus', // Ensure this URL is correct
-                        data: JSON.stringify(statusChanged),
-                        contentType: 'application/json; charset=utf-8',
-                        dataType: 'json',
+                        url: 'Company/ChangeStatus', // Ensure this URL is correct
                         success: function (response) {
-                            // Hide loading indication
-                            // Handle success
-                            CompId = response;
-                            console.log(CompId);
+                            //const result = JSON.parse(response); // Parse the JSON string response
+                            console.log(response)
+                            Swal.fire({
+                                text: "Company Creation Successfully Submitted!",
+                                icon: "success",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-primary"
+                                }
+                            })
+                            //console.log(result);
                             if (response.success) {
+                                if (CompId) {
+                                    window.location.href = "/companyOverview?CompId=" + CompId;
+                                } else {
+                                    console.error('CompId is undefined');
+                                }
+                            } else {
                                 Swal.fire({
-                                    text: "Company Creation Successfully Submitted!",
-                                    icon: "success",
+                                    text: response.message,
+                                    icon: "error",
                                     buttonsStyling: false,
                                     confirmButtonText: "Ok, got it!",
                                     customClass: {
                                         confirmButton: "btn btn-primary"
                                     }
-                                })                            // .d is used to access the data in the JSON response from ASP.NET WebMethod
-                                console.log('AJAX response:', response);
-                                // Show success message
-                            } else {
+                                });
                             }
                         },
-                        error: function (error) {
+               error: function (error) {
                             // Show error message
                             Swal.fire({
                                 text: "Sorry, looks like there are some errors detected, please try again.",
@@ -2945,7 +2949,7 @@ var KTCreateAccount = function () {
 
 
                 } else {
-                    
+                    console.log('error in creation');
                 }
             });
      });

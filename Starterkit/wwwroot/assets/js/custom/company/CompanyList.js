@@ -82,21 +82,27 @@ var KTCompanyList = function () {
                 + '<a href="/updateCompany?CompId=' + companyItem.CompanyKey +'" class="menu-link px3">Edit</a>'
                 + '</div>'
                 + '<!--end::Menu item-->'
+                + '<!--begin::Menu item-->'
+                + '<div class="menu-item px-3">'
+                + '<a href="/companyOverview?CompId=' + companyItem.CompanyKey + '" class="menu-link px3">Overview</a>'
+                + '</div>'
+                + '<!--end::Menu item-->'
+
                 + '</div>';
 
             KTMenu.createInstances();
         });
     }
-
+    
     // Function to get status label based on status code
     var getStatusLabel = function (statusCode) {
         switch (statusCode) {
             case 0:
                 return 'In Process';
             case 1:
-                return 'Assigned';
-            case 2:
                 return 'Submitted';
+            case 2:
+                return 'Assigned';
             case 3:
                 return 'Closed';
             default:

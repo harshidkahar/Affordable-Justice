@@ -163,6 +163,45 @@ namespace Starterkit.Controllers
 		}
 
         [HttpGet]
+        public JsonResult GetCompanyOverview()
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                var companyOverview = _companyLogic.GetCompanyDetails(CompId);
+                var result = new { success = true, companyOverview };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve company overview." };
+                return Json(errorResult);
+            }
+        }
+
+        [HttpPut]
+        public JsonResult ChangeStatus()
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                int Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                int Status = 1;
+                var companyOverview = _companyLogic.ChangeStatus(Id,Status);
+                var result = new { success = true, companyOverview };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve company overview." };
+                return Json(errorResult);
+            }
+        } 
+
+
+        [HttpGet]
         public JsonResult GetCompanyDetail()
         {
             try
