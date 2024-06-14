@@ -46,7 +46,28 @@ namespace Starterkit.Controllers
 
              return View("Views/Pages/Company/createCompany.cshtml");
 		}
-       
+        [HttpGet("/companyOverview")]
+        public IActionResult CompanyOverview()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CompId", "");
+            }
+            catch { }
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CompId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CompId", HttpContext.Request.Query["CompId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CompId", ""); }
+
+
+
+            return View("Views/Pages/Company/companyOverview.cshtml");
+        }
+
         [HttpGet("/updateCompany")]
         public IActionResult updateCompany()
         {
@@ -473,6 +494,7 @@ namespace Starterkit.Controllers
             }
         }
 
+       
         [HttpGet]
         public JsonResult DependentList()
         {

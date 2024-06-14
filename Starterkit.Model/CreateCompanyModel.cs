@@ -425,6 +425,22 @@ namespace Starterkit.Model
 				_opt = value;
 			}
 		}
-    
+
+        ///<summary>
+        ///Represent Status
+        ///</summary>
+        private int _status = 0;
+        public int Status
+		{
+            get
+			{
+                return _status;
+            }
+            set
+			{
+                _status = value;
+            }
+        }	
+
     }
 }

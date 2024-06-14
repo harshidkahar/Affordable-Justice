@@ -20,6 +20,7 @@ var KTCreateAccount = function () {
 
 
     //Company insert and update variable declared.
+    var statusChanged = null;
     var InsertCompanyData = null;
     var VisaDetails = null;
     var updateFormParameter1 = null;
@@ -1265,7 +1266,10 @@ var KTCreateAccount = function () {
                             if (stepper.getCurrentStepIndex() == 6) {
                                 //let Visa = visaresi.value;
                                 console.log('visa', visaresi);
-                                VisaDet();
+                                if (visaresi === '0') {
+                                    VisaDet();
+                                    
+                                }
                                 UpdateFormParameter5();
                             }
                            
@@ -2168,115 +2172,7 @@ var KTCreateAccount = function () {
     }
 
 
-    var visaDetail = function () {
-
-        $.ajax({
-            url: '/Company/GetvisaDetail',
-            type: 'GET',
-            success: function (response) {
-                console.log(response);
-                if (response.success) {
-                    visaDetailData = response.visaDetail;
-                    visadetailRenderDetail();
-                } else {
-                    Swal.fire({
-                        text: response.message,
-                        icon: "error",
-                        buttonsStyling: false,
-                        confirmButtonText: "Ok, got it!",
-                        customClass: {
-                            confirmButton: "btn btn-primary"
-                        }
-                    });
-                }
-            },
-            error: function () {
-                Swal.fire({
-                    text: "Failed to retrieve visa detail.",
-                    icon: "error",
-                    buttonsStyling: false,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn btn-primary"
-                    }
-                });
-            }
-        });
-
-    }
-    function visadetailRenderDetail() {
-
-        if (visaDetailData.length > 0) {
-            var visaItem = visaDetailData[0];
-
-
-            var visaresidence = document.querySelector('[name="target_assign"]');
-            var selected = visaresidence.value;
-
-
-            const visaarea = document.querySelector('#residenceDETAILSarea');
-            document.querySelector('#residenceDETAILSarea').style.display = 'block';
-            residencedetailslbl.innerText = `Residence Visa Information`;
-            visaarea.innerHTML = '';
-
-            // Build the entire HTML string
-            const htmlContent = `
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Name</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Name}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.DateOfBirth}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Emirates Id</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.EmiratesId}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Current Address</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.CurrentAddress}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Resident Address</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.ResidenceAddress}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Country</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Country}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Nationality</label>
-                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Nationality}</label>
-            </div>
-            <div class="d-flex mb-4">
-                <label class="col-5 fs-5 text-gray-600">Passport</label>
-                <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
-                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
-                         style="background-image:url('assets/media/stock/900x600/23.jpg')">
-                    </div>
-                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
-                        <i class="bi bi-eye-fill text-white fs-3x"></i>
-                    </div>
-                </a>
-            </div>
-            <div class="mb-3 mt-3">
-                <hr class="text-gray-600" />
-            </div>
-        `;
-
-            // Set the HTML content
-            visaarea.innerHTML = htmlContent;
-
-            // document.querySelector('#residenceDETAILSarea').style.display = 'none';
-
-
-        }
-
-
-
-    }
-
+    
     var updateVisaDetails = function () {
 
         VisaDetails = {
@@ -2529,6 +2425,7 @@ var KTCreateAccount = function () {
             contentType: 'application/json; charset=utf-8',
             dataType: 'json',
             success: function (response) {
+                visaDetail();
                 // Hide loading indication
                 // Handle success
                 if (response.success) { // .d is used to access the data in the JSON response from ASP.NET WebMethod
@@ -2541,6 +2438,121 @@ var KTCreateAccount = function () {
             },
         });
     }
+
+    var visaDetail = function () {
+
+        $.ajax({
+            url: '/Company/GetvisaDetail',
+            type: 'GET',
+            success: function (response) {
+                console.log(response);
+                if (response.success) {
+                    visaDetailData = response.visaDetail;
+                    visadetailRenderDetail();
+                } else {
+                    Swal.fire({
+                        text: response.message,
+                        icon: "error",
+                        buttonsStyling: false,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn btn-primary"
+                        }
+                    });
+                }
+            },
+            error: function () {
+                Swal.fire({
+                    text: "Failed to retrieve visa detail.",
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
+            }
+        });
+
+    }
+    const visaarea = document.querySelector('#residenceDETAILSarea');
+
+    function visadetailRenderDetail() {
+
+        visaarea.innerHTML = "";
+
+        residencedetailslbl.innerText = "";
+
+        if (visaDetailData.length > 0) {
+            var visaItem = visaDetailData[0];
+
+
+            var visaresidence = document.querySelector('[name="target_assign"]');
+            var selected = visaresidence.value;
+
+
+            const visaarea = document.querySelector('#residenceDETAILSarea');
+            document.querySelector('#residenceDETAILSarea').style.display = 'block';
+            residencedetailslbl.innerText = `Residence Visa Information`;
+            
+            // Build the entire HTML string
+            const htmlContent = `
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Name</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Name}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Date Of Birth</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.DateOfBirth}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Emirates Id</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.EmiratesId}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Current Address</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.CurrentAddress}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Resident Address</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.ResidenceAddress}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Country</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Country}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Nationality</label>
+                <label class="fs-4 fw-bold text-hover-primary">${visaItem.Nationality}</label>
+            </div>
+            <div class="d-flex mb-4">
+                <label class="col-5 fs-5 text-gray-600">Passport</label>
+                <a class="d-block overlay" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                    <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                         style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                    </div>
+                    <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                        <i class="bi bi-eye-fill text-white fs-3x"></i>
+                    </div>
+                </a>
+            </div>
+            <div class="mb-3 mt-3">
+                <hr class="text-gray-600" />
+            </div>
+        `;
+
+            // Set the HTML content
+            visaarea.innerHTML = htmlContent;
+
+            // document.querySelector('#residenceDETAILSarea').style.display = 'none';
+
+
+        }
+
+
+
+    }
+
     var UpdateFormParameter6 = function () {
 
         var dependvisa = form.querySelector('[name="visadependent"]:checked');
@@ -2722,7 +2734,7 @@ var KTCreateAccount = function () {
     }
 
     //Redirecting to Company-List Code.
-    document.querySelector('#insertcompany').addEventListener('click', function () {
+    document.querySelector('#save').addEventListener('click', function () {
 
         Swal.fire({
             html: `Are you sure you wish to submit this form, once submitted it cannot be changed`,
@@ -2759,7 +2771,56 @@ var KTCreateAccount = function () {
 
                     // Disable button to avoid multiple click 
                     formSubmitButton.disabled = true;
+
+                    statusChanged = {
+                        Status: 1
+                       };
+                    console.log(statusChanged);
+                    // Perform AJAX request
+                    $.ajax({
+                        method: 'PUT',
+                        url: 'Company/ChangingStatus', // Ensure this URL is correct
+                        data: JSON.stringify(statusChanged),
+                        contentType: 'application/json; charset=utf-8',
+                        dataType: 'json',
+                        success: function (response) {
+                            // Hide loading indication
+                            // Handle success
+                            CompId = response;
+                            console.log(CompId);
+                            if (response.success) {
+                                Swal.fire({
+                                    text: "Company Creation Successfully Submitted!",
+                                    icon: "success",
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                })                            // .d is used to access the data in the JSON response from ASP.NET WebMethod
+                                console.log('AJAX response:', response);
+                                // Show success message
+                            } else {
+                            }
+                        },
+                        error: function (error) {
+                            // Show error message
+                            Swal.fire({
+                                text: "Sorry, looks like there are some errors detected, please try again.",
+                                icon: "error",
+                                buttonsStyling: false,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn btn-light"
+                                }
+                            }).then(function () {
+                                KTUtil.scrollTop();
+                            });
+                            console.log('AJAX error:', error);
+                        }
+                    });
 /*
+
 
                     let location='';
                     let sfZL1 = document.getElementById("fzcity").value;
