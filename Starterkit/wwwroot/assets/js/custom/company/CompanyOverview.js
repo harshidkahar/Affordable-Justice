@@ -3,8 +3,6 @@
 var KTCompanyDetail = function () {
     var companyOverviewData = [];
     var partnerDetailData = [];
-    var partnerListData = [];
-    var dependentListData = [];
     var dependentDetailData = [];
     var visaDetailData = [];
 
@@ -68,13 +66,18 @@ var KTCompanyDetail = function () {
 
     var renderData = function () {
         patarea.innerHTML = "";
-        patnercount = 0;
-
+        patnercount = companyOverviewData.patnerDetails.length;
+        if (patnercount > 0) {
+            partnerDetailData = companyOverviewData.patnerDetails;
+        }
+        if (companyOverviewData.DependentVisaReq == true) {
+            dpcount = companyOverviewData
+        }
         dpcount = 0;
         dparea.innerHTML = "";
 
-        if (companyOverviewData.length > 0) {
-            var companyoverview = companyOverviewData[0];
+        if (companyOverviewData != null) {
+            var companyoverview = companyOverviewData;
 
             document.querySelector('#lblApplicationType').textContent = companyoverview.ApplicationType || 'N/A';
             document.querySelector('#lblCompanyType').textContent = companyoverview.CompanyType || 'N/A';
@@ -96,13 +99,13 @@ var KTCompanyDetail = function () {
 
                 ptcount();
                 const patarea = document.querySelector('#partnerDetail');
-
+                
                 // Partner is residence of UAE or not
                 let div1 = document.createElement('div');
                 div1.className = 'col-lg-6 col-md-12 fv-row';
                 div1.innerHTML = `
         <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">UAE Residency</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.UAEResidenceText}</label>`;
+        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.patnerDetails[0].UAEResidenceText}</label>`;
                 patarea.appendChild(div1);
 
                 // Partner is manager or not
@@ -299,7 +302,7 @@ var KTCompanyDetail = function () {
 
             document.querySelector('#lblVisaDependent').textContent = companyoverview.dependentVisaReqText || 'N/A';
 
-            if (dependentVisaReqText === 'no') {
+            if (companyoverview.dependentVisaReqText === 'no') {
 
                 document.querySelector('#lblDependentDetail').style.display = 'block';
                 document.querySelector('#dependentDetail').style.display = 'block';
