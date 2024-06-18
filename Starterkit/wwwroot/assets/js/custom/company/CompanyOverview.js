@@ -42,10 +42,10 @@ var KTCompanyDetail = function () {
             }
         });
     };
-    let patnercount = 0;
+    let patcount = 0;
     const patarea = document.querySelector('#partnerDetail');
     function ptcount() {
-        let pcount = ++patnercount;
+        let pcount = ++patcount;
         let div = document.createElement('div');
         div.className = 'd-flex mb-3';
         div.innerHTML = `<label class="fw-bold fs-2">Partner ${pcount}</label>`;
@@ -53,16 +53,18 @@ var KTCompanyDetail = function () {
     }
 
     const dparea = document.querySelector('#dependentDetail')
-    let dpcount = 0;
+    let depcount = 0;
     function Dcount() {
-        let ddcount = ++dpcount;
+        let ddcount = ++depcount;
         // patnercount++;
         let div = document.createElement('div');
         div.className = 'd-flex mb-3';
         div.innerHTML = `<label class="fw-bold fs-2">Dependent ${ddcount}</label>`;
         dparea.appendChild(div);
     }
+    let patnercount = 0;
 
+    let dpcount =0;
 
     var renderData = function () {
         patarea.innerHTML = "";
@@ -70,12 +72,17 @@ var KTCompanyDetail = function () {
         if (patnercount > 0) {
             partnerDetailData = companyOverviewData.patnerDetails;
         }
-        if (companyOverviewData.DependentVisaReq == true) {
-            dpcount = companyOverviewData
-        }
-        dpcount = 0;
+        dpcount = companyOverviewData.dependentDetails.length;
         dparea.innerHTML = "";
 
+        if (companyOverviewData.DependentVisaReq == true) {
+            dependentDetailData = companyOverviewData.dependentDetails;
+        }
+        if (companyOverviewData.NoOfResidentVisa == true) {
+            visaDetailData = companyOverviewData.visaDetails;
+        }
+
+        
         if (companyOverviewData != null) {
             var companyoverview = companyOverviewData;
 
@@ -95,127 +102,144 @@ var KTCompanyDetail = function () {
                 document.querySelector('#lblPartnerDetail').style.display = 'block';
                 document.querySelector('#partnerDetail').style.display = 'block';
 
-                document.querySelector('#lblPartnerDetail').innerText = `Partner Detail`;
-
-                ptcount();
                 const patarea = document.querySelector('#partnerDetail');
+
+               
+                document.querySelector('#lblPartnerDetail').innerText = `Partner Detail`;
                 
-                // Partner is residence of UAE or not
-                let div1 = document.createElement('div');
-                div1.className = 'col-lg-6 col-md-12 fv-row';
-                div1.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">UAE Residency</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.patnerDetails[0].UAEResidenceText}</label>`;
-                patarea.appendChild(div1);
+                // Check if patnerDetails is an array and has elements
+                if (Array.isArray(companyoverview.patnerDetails) && companyoverview.patnerDetails.length > 0) {
+                    companyoverview.patnerDetails.forEach((partner, index) => {
+                        console.log(`Partner ${index + 1}:`, partner); // Logging partner details for debugging
+                        ptcount();
 
-                // Partner is manager or not
-                let div2 = document.createElement('div');
-                div2.className = 'col-lg-6 col-md-12 fv-row';
-                div2.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Company Manager</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.IsCompanyManagerText}</label>`;
-                patarea.appendChild(div2);
+                        // Grouping the fields in input groups and rows with two columns each
+                        const inputGroup1 = document.createElement('div');
+                        inputGroup1.className = 'row mb-0 mb-xl-6';
+                        inputGroup1.innerHTML = `
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">UAE Residency : </label>
+                        <label>${partner.UAEResidenceText}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Company Manager : </label>
+                        <label>${partner.IsCompanyManagerText}</label>
+                    </div>
+                </div>`;
+                        patarea.appendChild(inputGroup1);
 
-                // Partner name
-                let div3 = document.createElement('div');
-                div3.className = 'col-lg-6 col-md-12 fv-row';
-                div3.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Name</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.Name}</label>`;
-                patarea.appendChild(div3);
+                        const inputGroup2 = document.createElement('div');
+                        inputGroup2.className = 'row mb-0 mb-xl-6';
+                        inputGroup2.innerHTML = `
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Name : </label>
+                        <label>${partner.Name}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Email Id : </label>
+                        <label>${partner.EmailId}</label>
+                    </div>
+                </div>`;
+                        patarea.appendChild(inputGroup2);
 
-                // Partner email
-                let div4 = document.createElement('div');
-                div4.className = 'col-lg-6 col-md-12 fv-row';
-                div4.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Email Id</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.EmailId}</label>`;
-                patarea.appendChild(div4);
+                        const inputGroup3 = document.createElement('div');
+                        inputGroup3.className = 'row mb-0 mb-xl-6';
+                        inputGroup3.innerHTML = `
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Date of Birth : </label>
+                        <label>${partner.DateOfBirth}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Contact No : </label>
+                        <label>${partner.CountryCode}-${partner.Phone}</label>
+                    </div>
+                </div>`;
+                        patarea.appendChild(inputGroup3);
 
-                // Partner date of birth
-                let div5 = document.createElement('div');
-                div5.className = 'col-lg-6 col-md-12 fv-row';
-                div5.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Date of Birth</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.DateOfBirth}</label>`;
-                patarea.appendChild(div5);
+                        if (partner.UAEResidenceText === 'yes') {
+                            const inputGroup4 = document.createElement('div');
+                            inputGroup4.className = 'row mb-0 mb-xl-6';
+                            inputGroup4.innerHTML = `
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 fv-row">
+                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Emirates ID : </label>
+                            <label>${partner.EMRId}</label>
+                        </div>
+                         <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Address : </label>
+                        <label>${partner.Address}</label>
+                    </div>
+                    </div>
+                   `;
+                            patarea.appendChild(inputGroup4);
+                        }
 
-                // Partner contact no
-                let div6 = document.createElement('div');
-                div6.className = 'col-lg-6 col-md-12 fv-row';
-                div6.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Contact No</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.CountryCode}-${companyoverview.Phone}</label>`;
-                patarea.appendChild(div6);
+                        if (partner.UAEResidenceText === 'no') {
+                            const inputGroup4 = document.createElement('div');
+                            inputGroup4.className = 'row mb-0 mb-xl-6';
+                            inputGroup4.innerHTML = `
+                    <div class="row">
+                        <div class="col-lg-6 col-md-12 fv-row">
+                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport No : </label>
+                            <label>${partner.PassportNo}</label>
+                        </div>
+                         <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Address : </label>
+                        <label>${partner.Address}</label>
+                    </div>
+                        </div>`;
+                            patarea.appendChild(inputGroup4);
+                        }
 
-                if (companyoverview.UAEResidenceText === 'yes') {
-                    // Partner Emirates ID
-                    let div7 = document.createElement('div');
-                    div7.className = 'col-lg-6 col-md-12 fv-row';
-                    div7.innerHTML = `
-            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Emirates ID</label>
-            <label class="fs-4 fw-bold text-hover-primary">${companyoverview.EMRId}</label>`;
-                    patarea.appendChild(div7);
+                        const inputGroup5 = document.createElement('div');
+                        inputGroup5.className = 'row mb-0 mb-xl-6';
+                        inputGroup5.innerHTML = `
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Country : </label>
+                        <label>${partner.Country}</label>
+                    </div>
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality : </label>
+                        <label>${partner.Nationality}</label>
+                    </div>
+                    
+                </div>`;
+                        patarea.appendChild(inputGroup5);
+
+                        const inputGroup6 = document.createElement('div');
+                        inputGroup6.className = 'row mb-0 mb-xl-6';
+                        inputGroup6.innerHTML = `
+                <div class="row">
+                    <div class="col-lg-6 col-md-12 fv-row">
+                        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Ownership : </label>
+                        <label>${partner.PatnerOwnership}%</label>
+                    </div>
+                </div>`;
+                        patarea.appendChild(inputGroup6);
+
+                        const divider = document.createElement('div');
+                        divider.className = 'mb-3 mt-3';
+                        divider.innerHTML = `<hr class="text-gray-600" />`;
+                        patarea.appendChild(divider);
+                    });
                 }
-
-                if (companyoverview.UAEResidenceText === 'no') {
-                    // Partner passport No
-                    let div8 = document.createElement('div');
-                    div8.className = 'col-lg-6 col-md-12 fv-row';
-                    div8.innerHTML = `
-            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport No</label>
-            <label class="fs-4 fw-bold text-hover-primary">${companyoverview.PassportNo}</label>`;
-                    patarea.appendChild(div8);
+                else {
+                    console.log('No partner details available or partner details are not in expected format.');
                 }
-
-                // Partner address
-                let div9 = document.createElement('div');
-                div9.className = 'col-lg-6 col-md-12 fv-row';
-                div9.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Address</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.Address}</label>`;
-                patarea.appendChild(div9);
-
-                // Partner country
-                let div10 = document.createElement('div');
-                div10.className = 'col-lg-6 col-md-12 fv-row';
-                div10.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Country</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.Country}</label>`;
-                patarea.appendChild(div10);
-
-                // Partner nationality
-                let div11 = document.createElement('div');
-                div11.className = 'col-lg-6 col-md-12 fv-row';
-                div11.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.Nationality}</label>`;
-                patarea.appendChild(div11);
-
-                // Partner percentage ownership
-                let div12 = document.createElement('div');
-                div12.className = 'col-lg-6 col-md-12 fv-row';
-                div12.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Ownership</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.PatnerOwnership}%</label>`;
-                patarea.appendChild(div12);
-
-                let div13 = document.createElement('div');
-                div13.className = 'mb-3 mt-3';
-                div13.innerHTML = `<hr class="text-gray-600" />`;
-                patarea.appendChild(div13);
+            
             }
 
-            
+            document.querySelector('#lblResidentVisaReq').textContent = companyoverview.NoOfResidentVisa;
 
-
-            document.querySelector('#lblResidentVisaReq').textContent = companyoverview.NoOfResidentVisa || 'N/A';
-
-            if (companyoverview.NoOfResidentVisa === '0') {
+            if (companyoverview.NoOfResidentVisa === 0) {
                 document.querySelector('#lblVisaDetail').style.display = 'block';
                 document.querySelector('#visaDetail').style.display = 'block';
 
-                document.querySelector('#lblVisaDetail').innerText = `Visa Detail`;
+            document.querySelector('#lblVisaDetail').innerText = `Visa Detail`;
                 document.querySelector('#visaDetail').innerHTML = `
                                   <!--begin::Input group-->
                                 <div class="row mb-0 mb-xl-6">
@@ -224,13 +248,13 @@ var KTCompanyDetail = function () {
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Name : </label>
-                                            <label>${companyoverview.Name}</label>
+                                            <label>${companyoverview.visaDetails[0].Name}</label>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Date Of Birth : </label>
-                                            <label>${companyoverview.DateOfBirth}</label>
+                                            <label>${companyoverview.visaDetails[0].DateOfBirth}</label>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -244,13 +268,13 @@ var KTCompanyDetail = function () {
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Emirates Id : </label>
-                                            <label>${companyoverview.EmiratesId}</label>
+                                            <label>${companyoverview.visaDetails[0].EmiratesId}</label>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Current Address : </label>
-                                            <label>${companyoverview.CurrentAddress}</label>
+                                            <label>${companyoverview.visaDetails[0].CurrentAddress}</label>
                                         </div>
                                         <!--end::Col-->
                                     </div>
@@ -264,7 +288,7 @@ var KTCompanyDetail = function () {
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Resident Address : </label>
-                                            <label>${companyoverview.ResidenceAddress}</label>
+                                            <label>${companyoverview.visaDetails[0].ResidenceAddress}</label>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
@@ -284,99 +308,149 @@ var KTCompanyDetail = function () {
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality : </label>
-                                            <label>${companyoverview.Nationality}</label>
+                                            <label>${companyoverview.visaDetails[0].Nationality}</label>
                                         </div>
                                         <!--end::Col-->
                                         <!--begin::Col-->
                                         <div class="col-lg-6 col-md-12 fv-row">
                                             <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport : </label>
-                                            <label></label>
+                        <!--begin::Overlay-->
+                         <a class="d-block overlay justify-content-end align-items-end" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                     <!--begin::Image-->
+                         <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                             style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                         </div>
+                     <!--end::Image-->
+                     <!--begin::Action-->
+                         <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                             <i class="bi bi-eye-fill text-white fs-3x"></i>
+                         </div>
+                     <!--end::Action-->
+                         </a>
+                     <!--end::Overlay-->
+                
                                         </div>
                                         <!--end::Col-->
                                     </div>
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Input group-->
+                                <hr class"mb-3 mt-3 text-gray-600" />
                 `;
             }
-
             document.querySelector('#lblVisaDependent').textContent = companyoverview.dependentVisaReqText || 'N/A';
 
-            if (companyoverview.dependentVisaReqText === 'no') {
+            if (companyoverview.dependentVisaReqText === 'yes') {
 
                 document.querySelector('#lblDependentDetail').style.display = 'block';
                 document.querySelector('#dependentDetail').style.display = 'block';
 
                 document.querySelector('#lblDependentDetail').innerText = `Dependent Detail`;
 
-                Dcount(); //document.querySelector('#depdetailslbl').style.display = 'block';
                 const dparea = document.querySelector('#dependentDetail');
 
-                // Dependent Name
-                let div1 = document.createElement('div');
-                div1.className = 'col-lg-6 col-md-12 fv-row';
-                div1.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Name</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.dependvisaName}</label>`;
-                dparea.appendChild(div1);
+                // Check if dependentDetails is an array and has elements
+                if (Array.isArray(companyoverview.dependentDetails) && companyoverview.dependentDetails.length > 0) {
+                    companyoverview.dependentDetails.forEach((dependent, index) => {
+                        console.log(`Dependent ${index + 1}:`, dependent); // Logging dependent details for debugging
+                        Dcount(); //document.querySelector('#depdetailslbl').style.display = 'block';
 
-                // Dependent Email
-                let div2 = document.createElement('div');
-                div2.className = 'col-lg-6 col-md-12 fv-row';
-                div2.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Email Id</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.dependvisaEmail}</label>`;
-                dparea.appendChild(div2);
+                        // Grouping the fields in input groups and rows with two columns each
+                        const inputGroup1 = document.createElement('div');
+                        inputGroup1.className = 'row mb-0 mb-xl-6';
+                        inputGroup1.innerHTML = `
+            <div class="row">
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Name : </label>
+                    <label>${dependent.dependvisaName}</label>
+                </div>
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Email Id : </label>
+                    <label>${dependent.dependvisaEmail}</label>
+                </div>
+            </div>`;
+                        dparea.appendChild(inputGroup1);
 
-                // Dependent Date of Birth
-                let div3 = document.createElement('div');
-                div3.className = 'col-lg-6 col-md-12 fv-row';
-                div3.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Date Of Birth</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.dependvisaDOB}</label>`;
-                dparea.appendChild(div3);
+                        const inputGroup2 = document.createElement('div');
+                        inputGroup2.className = 'row mb-0 mb-xl-6';
+                        inputGroup2.innerHTML = `
+            <div class="row">
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Date Of Birth : </label>
+                    <label>${dependent.dependvisaDOB}</label>
+                </div>
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport No : </label>
+                    <label>${dependent.dependvisaPasspno}</label>
+                </div>
+            </div>`;
+                        dparea.appendChild(inputGroup2);
 
-                // Dependent Passport No
-                let div4 = document.createElement('div');
-                div4.className = 'col-lg-6 col-md-12 fv-row';
-                div4.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport No</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.dependvisaPassport}</label>`;
-                dparea.appendChild(div4);
+                        const inputGroup3 = document.createElement('div');
+                        inputGroup3.className = 'row mb-0 mb-xl-6';
+                        inputGroup3.innerHTML = `
+            <div class="row">
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Address : </label>
+                    <label>${dependent.dependvisaAddress}</label>
+                </div>
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Country : </label>
+                    <label>${dependent.dependvisacountry}</label>
+                </div>
+            </div>`;
+                        dparea.appendChild(inputGroup3);
 
-                // Dependent Emirates ID
-                let div5 = document.createElement('div');
-                div5.className = 'col-lg-6 col-md-12 fv-row';
-                div5.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Emirates ID</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.dependvisaEMRId}</label>`;
-                dparea.appendChild(div5);
+                        const inputGroup4 = document.createElement('div');
+                        inputGroup4.className = 'row mb-0 mb-xl-6';
+                        inputGroup4.innerHTML = `
+            <div class="row">
+                <div class="col-lg-6 col-md-12 fv-row">
+                    <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality : </label>
+                    <label>${dependent.dependvisanationality}</label>
+                </div>
+                <div class="col-lg-6 col-md-12 fv-row">
+                <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport : </label>
+                     <!--begin::Overlay-->
+                         <a class="d-block overlay justify-content-end align-items-end" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                     <!--begin::Image-->
+                         <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                             style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                         </div>
+                     <!--end::Image-->
+                     <!--begin::Action-->
+                         <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                             <i class="bi bi-eye-fill text-white fs-3x"></i>
+                         </div>
+                     <!--end::Action-->
+                         </a>
+                     <!--end::Overlay-->
+                     </div>
+                </div>
+          `;
+                        dparea.appendChild(inputGroup4);
 
-               
-                //
-                // Dependent Nationality
-                let div6 = document.createElement('div');
-                div6.className = 'col-lg-6 col-md-12 fv-row';
-                div6.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality</label>
-        <label class="fs-4 fw-bold text-hover-primary">${companyoverview.dependvisaNationality}</label>`;
-                dparea.appendChild(div6);
-
-                let div7 = document.createElement('div');
-                div7.className = 'col-lg-6 col-md-12 fv-row';
-                div7.innerHTML = `
-        <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Visa Expiry Date</label>
-        <label class="fs-4 fw-bold text-hover-primary"></label>`;
-                dparea.appendChild(div7);
-
-
+                        const divider = document.createElement('div');
+                        divider.className = 'mb-3 mt-3';
+                        divider.innerHTML = `<hr class="text-gray-600" />`;
+                        dparea.appendChild(divider);
+                    });
+                } else {
+                    console.log('No dependent details available or dependent details are not in expected format.');
+                }
             }
 
             document.querySelector('#lblofficeType').textContent = companyoverview.OfficeType || 'N/A';
-            document.querySelector('#lblYourOfficeType').textContent = companyoverview.YourOfficeType || 'N/A';
+            if (companyoverview.OfficeType === 'Others') {
+                document.querySelector('#yourOfficeType').style.display = 'block';
+                document.querySelector('#lblYourOfficeType').textContent = companyoverview.YourOfficeType || 'N/A';
+            }
             document.querySelector('#lblbusinessPlan').textContent = companyoverview.StartBusiness || 'N/A';
             document.querySelector('#lblbusinessName').textContent = companyoverview.BusinessNameText || 'N/A';
-            document.querySelector('#lblyourBusinessName').textContent = companyoverview.BusinessNameOption || 'N/A';
+            if (companyoverview.BusinessNameText === 'Yes') {
+                document.querySelector('#YourBusinessName').style.display = 'block';
+                document.querySelector('#lblyourBusinessName').textContent = companyoverview.BusinessNameOption || 'N/A';
+            }
             document.querySelector('#lblNeedAssistanceOn').textContent = companyoverview.NeedAssistanceOn || 'N/A';
             document.querySelector('#lblFullName').textContent = `${companyoverview.FirstName || ''} ${companyoverview.LastName || ''}`;
             document.querySelector('#lblEmail').textContent = companyoverview.EmailId || 'N/A';
@@ -385,6 +459,36 @@ var KTCompanyDetail = function () {
             document.querySelector('#lblCurrentAddress').textContent = companyoverview.CAddress || 'N/A';
             document.querySelector('#lblCountry').textContent = companyoverview.Country || 'N/A';
             document.querySelector('#lblNationality').textContent = companyoverview.Nationality || 'N/A';
+            document.querySelector('#lblpassportUrl').innerHTML = `            <!--begin::Overlay-->
+                         <a class="d-block overlay justify-content-end align-items-end" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                     <!--begin::Image-->
+                         <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                             style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                         </div>
+                     <!--end::Image-->
+                     <!--begin::Action-->
+                         <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                             <i class="bi bi-eye-fill text-white fs-3x"></i>
+                         </div>
+                     <!--end::Action-->
+                         </a>
+                     <!--end::Overlay-->
+                                     `;
+            document.querySelector('#lblpassport').innerHTML =`           <!--begin::Overlay-->
+                         <a class="d-block overlay justify-content-end align-items-end" data-fslightbox="lightbox-basic" href="assets/media/stock/900x600/23.jpg">
+                     <!--begin::Image-->
+                         <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100px w-lg-200px"
+                             style="background-image:url('assets/media/stock/900x600/23.jpg')">
+                         </div>
+                     <!--end::Image-->
+                     <!--begin::Action-->
+                         <div class="overlay-layer card-rounded bg-dark bg-opacity-25 shadow w-lg-200px">
+                             <i class="bi bi-eye-fill text-white fs-3x"></i>
+                         </div>
+                     <!--end::Action-->
+                         </a>
+                     <!--end::Overlay-->
+                    `;
 
            
         /*        overviewstep11Uploadpplbl.innerHTML = `Passport`;

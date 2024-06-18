@@ -911,7 +911,7 @@ namespace Starterkit.Web.Logic
                             }
                             if (ds.Tables[2].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
                             {
-                                partnerModel.DateOfBirth = Convert.ToString(row["DateOfBirth"]);
+                                partnerModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
                             }
                             if (ds.Tables[2].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
                             {
@@ -977,7 +977,7 @@ namespace Starterkit.Web.Logic
                                 }
                                 if (ds.Tables[3].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
                                 {
-                                    dependentModel.dependvisaDOB = Convert.ToString(row["DateOfBirth"]);
+                                    dependentModel.dependvisaDOB = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd"); ;
                                 }
                                 if (ds.Tables[3].Columns.Contains("PassportNo") && !row["PassportNo"].Equals(DBNull.Value))
                                 {
