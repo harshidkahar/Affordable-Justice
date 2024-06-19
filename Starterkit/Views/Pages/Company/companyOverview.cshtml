@@ -1,0 +1,295 @@
+﻿
+@{
+    ViewData["Title"] = "caseDetails";
+    KTTheme.AddJavascriptFile("js/custom/company/CompanyOverview.js");
+
+}
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+    <!--begin::Content wrapper-->
+    <div class="d-flex flex-column flex-column-fluid">
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content flex-column-fluid">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container container-xxl">
+               
+                <div class="card mb-5 mb-xl-10">
+                    <!--begin::Card header-->
+                    <div class="card-header cursor-pointer">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">Company Overview</h3>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <!--begin::Card header-->
+                    <!--begin::Card body-->
+                    <div class="card-body p-9">
+                        <div class="row mb-6">
+
+                            <!--begin::Card body-->
+                            <div class="card-body p-9">
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6 ">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12  fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6 ">Application Type : </label>
+                                            <label id="lblApplicationType"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Company Type : </label>
+                                            <label id="lblCompanyType"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">City : </label>
+                                            <label id="lblCity"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row" id="location" style="display:none;">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Location : </label>
+                                            <label id="lblLocation"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Business category : </label>
+                                            <label id="lblBusinessCategory"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Resident Visa Required : </label>
+                                            <label id="lblResidentVisaReq"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row ">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Visa for Dependents : </label>
+                                            <label id="lblVisaDependent"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Office Type : </label>
+                                            <label id="lblofficeType"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row" id="yourOfficeType" style="display:none;">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Your Office Type : </label>
+                                            <label id="lblYourOfficeType"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Business Plan : </label>
+                                            <label id="lblbusinessPlan"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row ">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Has Business Name : </label>
+                                            <label id="lblbusinessName"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row" id="YourBusinessName" style="display:none;">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Your Business Name : </label>
+                                            <label id="lblyourBusinessName"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row ">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Need Assistance On : </label>
+                                            <label id="lblNeedAssistanceOn"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <hr class="mb-3 mt-3 text-gray-600" />
+
+                                <br />
+                                
+                                <h3 id="lblPartnerDetail" style="display:none;"></h3>
+                                <div id="partnerDetail" style="display:none;"></div>
+                                <br />
+                                <h3 id="lblVisaDetail" style="display:none;"></h3>
+                                <div id="visaDetail" style="display:none;"></div>
+                                <br>
+                                <h3 id="lblDependentDetail" style="display:none;"></h3>
+                                <div id="dependentDetail" style="display:none;"></div>
+                                <br>
+                                <h3>Personal Details</h3>
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Full Name : </label>
+                                            <label id="lblFullName"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Email : </label>
+                                            <label id="lblEmail"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Contact Number : </label>
+                                            <label id="lblPhone"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Current Address : </label>
+                                            <label id="lblCurrentAddress"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Residence Address : </label>
+                                            <label id="lblResidentAddress"></label>
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Country : </label>
+                                            <label id="lblCountry"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Nationality : </label>
+                                            <label id="lblNationality"></label>
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                               
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport photo : </label>
+                                            <label id="lblpassportUrl"></label>
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label fw-bold fs-6">Passport : </label>
+                                            <label id="lblpassport"></label>
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                </div>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Card body-->
+                        </div>
+
+                    </div>
+                    <!--end::Card body-->
+                </div>
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Content wrapper-->
+</div>
