@@ -3,6 +3,8 @@
     [Serializable]
     public class DependentModel
     {
+        public int Id { get; set; }
+
         public string dependvisaName { get; set; }
         /// <summary>
         /// Represents Name
@@ -32,7 +34,6 @@
         /// Represents Nationality
         /// </summary>
 
-        public string Opt { get; set; }
-    }
+            }
 }
 

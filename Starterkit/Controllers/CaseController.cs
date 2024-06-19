@@ -133,8 +133,23 @@ namespace Starterkit.Controllers
             }
         }
 
+        [HttpGet("/updateCase")]
+        public IActionResult UpdateCase()
+        {
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CaseId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CaseId", HttpContext.Request.Query["CaseId"].ToString());
+                }
+            }
+            catch
+            {
+                _contextAccessor.HttpContext.Session.SetString("CaseId", "");
+            }
+            return View("Views/Pages/Cases/CreateCase.cshtml");
+        }
 
-       
         [HttpGet]
         public JsonResult GetDocumentList()
         {

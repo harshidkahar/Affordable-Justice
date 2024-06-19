@@ -35,6 +35,14 @@ namespace Starterkit.Model
             set { _UAEResidence = value; }
         }
 
+        private string _uaeresidenceText = "";
+        public string UAEResidenceText { 
+        
+        get { return _uaeresidenceText; }
+            set { _uaeresidenceText = value; }
+
+        }
+
         /// <summary>
         /// Represents whether the partner is a company manager or not
         /// </summary>
@@ -43,6 +51,13 @@ namespace Starterkit.Model
         {
             get { return _isCompanyManager; }
             set { _isCompanyManager = value; }
+        }
+
+        private string _iscompanymanagerText = "";
+        public string IsCompanyManagerText
+        {
+            get { return _iscompanymanagerText; }
+            set { _iscompanymanagerText = value; }
         }
 
         /// <summary>
