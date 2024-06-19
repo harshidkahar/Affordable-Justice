@@ -72,7 +72,10 @@ var KTCompanyDetail = function () {
         if (patnercount > 0) {
             partnerDetailData = companyOverviewData.patnerDetails;
         }
-        dpcount = companyOverviewData.dependentDetails.length;
+        try {
+            dpcount = companyOverviewData.dependentDetails.length;
+        }
+        catch { }
         dparea.innerHTML = "";
 
         if (companyOverviewData.DependentVisaReq == true) {
