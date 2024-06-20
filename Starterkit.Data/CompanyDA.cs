@@ -125,10 +125,12 @@ namespace Starterkit.Data
 
         public string DAL_Dependent(InsertDependentModel addDependent)
         {
+           
             try
             {
                 string _Result = string.Empty;
                 Guid guid = Guid.NewGuid();
+                ds.Tables.Clear();
 
                 con = DataAccess.OpenConnection();
                 SqlCommand cmd = new SqlCommand("[dbo].[DAL_DependentDetail]", con);
@@ -146,7 +148,6 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
                 cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addDependent.Opt;
                 SqlDataAdapter da = new SqlDataAdapter();
-                da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
                 con.Close();
                 return _Result = "done";
@@ -198,6 +199,7 @@ namespace Starterkit.Data
             }
         }
 
+        /*
         public string DAL_VisaDetail(VisaDetailsModel addVisa)
         {
             try
@@ -219,7 +221,43 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addVisa.Country;
                 cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addVisa.Nationality;
                 cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
-                cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addVisa.Opt;
+                //cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addVisa.Opt;
+                SqlDataAdapter da = new SqlDataAdapter();
+                da.SelectCommand = cmd;
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return _Result = "done";
+            }
+            catch (Exception ex)
+            {
+                return "false";
+
+            }
+        }  
+        */
+
+        public string DAL_VisaDetail(VisaDetailsModel addVisa)
+        {
+            try
+            {
+                string _Result = string.Empty;
+                Guid guid = Guid.NewGuid();
+
+                con = DataAccess.OpenConnection();
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Visa]", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.Add("@Id", SqlDbType.Int).Value = addVisa.VisaKey;
+                cmd.Parameters.Add("@CompId", SqlDbType.Int).Value = addVisa.CompId;
+                //cmd.Parameters.Add("@UserId", SqlDbType.Int).Value = addDependent.UserId;
+                cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = addVisa.Name;
+                cmd.Parameters.Add("@EmiratesId", SqlDbType.NVarChar).Value = addVisa.EmiratesId;
+                cmd.Parameters.Add("@DateOfBirth", SqlDbType.NVarChar).Value = addVisa.DateOfBirth;
+                cmd.Parameters.Add("@CurrentAddress", SqlDbType.NVarChar).Value = addVisa.CurrentAddress;
+                cmd.Parameters.Add("@ResidenceAddress", SqlDbType.NVarChar).Value = addVisa.ResidenceAddress;
+                cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = addVisa.Country;
+                cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = addVisa.Nationality;
+                cmd.Parameters.Add("@PassportUrl", SqlDbType.NVarChar).Value = "C://Downloads/ABC.pdf";
+                //cmd.Parameters.Add("@Opt", SqlDbType.Char).Value = addVisa.Opt;
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
@@ -232,7 +270,6 @@ namespace Starterkit.Data
 
             }
         }
-
 
 
     }

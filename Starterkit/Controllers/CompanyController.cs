@@ -42,8 +42,53 @@ namespace Starterkit.Controllers
             }
             catch { _contextAccessor.HttpContext.Session.SetString("CompId", ""); }
 
-            return View("Views/Pages/Company/createCompany.cshtml");
+           
+
+             return View("Views/Pages/Company/createCompany.cshtml");
 		}
+        [HttpGet("/companyOverview")]
+        public IActionResult CompanyOverview()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CompId", "");
+            }
+            catch { }
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CompId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CompId", HttpContext.Request.Query["CompId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CompId", ""); }
+
+
+
+            return View("Views/Pages/Company/companyOverview.cshtml");
+        }
+
+        [HttpGet("/updateCompany")]
+        public IActionResult updateCompany()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("CompId", "");
+            }
+            catch { }
+            try
+            {
+                if (!String.IsNullOrEmpty(HttpContext.Request.Query["CompId"]))
+                {
+                    _contextAccessor.HttpContext.Session.SetString("CompId", HttpContext.Request.Query["CompId"].ToString());
+                }
+            }
+            catch { _contextAccessor.HttpContext.Session.SetString("CompId", ""); }
+
+
+
+            return View("Views/Pages/Company/createCompany.cshtml");
+        }
 
         [HttpGet("/companyList")]
         public IActionResult CompanyList()
@@ -105,7 +150,7 @@ namespace Starterkit.Controllers
 		{
 			try
 			{				
-				string _Result = string.Empty;
+				string _Result = "0";
 				
 				_Result = _contextAccessor.HttpContext.Session.GetString("CompId");
 
@@ -116,6 +161,65 @@ namespace Starterkit.Controllers
 				return Json("error");
 			}
 		}
+
+        [HttpGet]
+        public JsonResult GetCompanyOverview()
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                var companyOverview = _companyLogic.GetCompanyDetails(CompId);
+                var result = new { success = true, companyOverview };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve company overview." };
+                return Json(errorResult);
+            }
+        }
+
+        [HttpPut]
+        public JsonResult ChangeStatus()
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                int Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
+                int Status = 1;
+                var companyOverview = _companyLogic.ChangeStatus(Id,Status);
+                var result = new { success = true, companyOverview };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve company overview." };
+                return Json(errorResult);
+            }
+        } 
+
+
+        [HttpGet]
+        public JsonResult GetCompanyDetail()
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); 
+                int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); 
+                var companyDetail = _companyLogic.CompanyDetail(userId, CompId);
+                var companyOverview = _companyLogic.GetCompanyDetails(CompId);
+                var result = new { success = true, companyDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve company detail." };
+                return Json(errorResult);
+            }
+        }
 
         //Update Starts From Here
 
@@ -429,7 +533,7 @@ namespace Starterkit.Controllers
             }
         }
 
-
+       
         [HttpGet]
         public JsonResult DependentList()
         {
@@ -448,11 +552,10 @@ namespace Starterkit.Controllers
             }
         }
 
-
         [AllowAnonymous]
         [HttpPost]
         public JsonResult AddDependent([FromBody] DependentModel insertDependent)
-        {
+        {           
             try
             {
                 string ErrorMessage = string.Empty;
@@ -472,7 +575,7 @@ namespace Starterkit.Controllers
                 
                 addDependent.Opt = "I";
                 _Result = companyLogic.InsertDependent(addDependent);
-
+                
                 return Json(_Result);
             }
             catch
@@ -481,9 +584,29 @@ namespace Starterkit.Controllers
             }
         }
 
+        [HttpGet]
+        public JsonResult GetDependentDetail(DependentRequestModel model)
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                //int depId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DepId")); // Replace with actual logic to fetch user ID
+                //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                var dependentDetail = _companyLogic.DependentDetail(model.DependentKey);
+
+                var result = new { success = true, dependentDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve dependent detail." };
+                return Json(errorResult);
+            }
+        }
+
         [AllowAnonymous]
         [HttpPut]
-        public JsonResult UpdateDependent([FromBody] DependentModel updateDependent)
+        public JsonResult UpdateDependent([FromBody] DependentModel model)
         {
             try
             {
@@ -491,14 +614,15 @@ namespace Starterkit.Controllers
                 string _Result = string.Empty;
                 CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
                 InsertDependentModel Dependent = new InsertDependentModel();
-                //addDependent.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                Dependent.Id= model.Id;
                 Dependent.CompKey = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
-                Dependent.dependvisaName = updateDependent.dependvisaName?.Trim();
-                Dependent.dependvisaEmail = updateDependent.dependvisaEmail?.Trim();
-                Dependent.dependvisaDOB = updateDependent.dependvisaDOB;
-                Dependent.dependvisaAddress = updateDependent.dependvisaAddress?.Trim();
-                Dependent.dependvisacountry = updateDependent.dependvisacountry?.Trim();
-                Dependent.dependvisanationality = updateDependent.dependvisanationality?.Trim();
+                Dependent.dependvisaName = model.dependvisaName?.Trim();
+                Dependent.dependvisaEmail = model.dependvisaEmail?.Trim();
+                Dependent.dependvisaPasspno = model.dependvisaPasspno?.Trim();
+                Dependent.dependvisaDOB = model.dependvisaDOB;
+                Dependent.dependvisaAddress = model.dependvisaAddress?.Trim();
+                Dependent.dependvisacountry = model.dependvisacountry?.Trim();
+                Dependent.dependvisanationality = model.dependvisanationality?.Trim();
 
 
                 Dependent.Opt = "U";
@@ -509,6 +633,29 @@ namespace Starterkit.Controllers
             catch
             {
                 return Json("error");
+            }
+        }
+
+        [HttpDelete]
+        public JsonResult DeleteDependent([FromBody] DependentModel model)
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                InsertDependentModel Dependent = new InsertDependentModel();
+                Dependent.Id = model.Id;
+                Dependent.Opt = "D";
+                //int depId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("DepId")); // Replace with actual logic to fetch user ID
+                //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                var dependentDetail = _companyLogic.DeleteDependent(Dependent);
+
+                var result = new { success = true, dependentDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve dependent detail." };
+                return Json(errorResult);
             }
         }
 
@@ -530,7 +677,6 @@ namespace Starterkit.Controllers
                 return Json(errorResult);
             }
         }
-
 
         [AllowAnonymous]
         [HttpPost]
@@ -563,12 +709,31 @@ namespace Starterkit.Controllers
 
                 addPartner.Opt = "I";
                 _Result = companyLogic.InsertPartner(addPartner);
-
+               
                 return Json(_Result);
             }
             catch
             {
                 return Json("error");
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetPartnerDetail(PartnerRequestModel model)
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                var partnerDetail = _companyLogic.PartnerDetail(model.PartnerKey);
+
+                var result = new { success = true, partnerDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve partner detail." };
+                return Json(errorResult);
             }
         }
 
@@ -584,7 +749,7 @@ namespace Starterkit.Controllers
                 PatnerDetailsModel Partner = new PatnerDetailsModel();
 
                 //this needed to change.
-                //addPartner.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                Partner.PartnerKey = updatePartner.Id; 
                 Partner.CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
                 Partner.UAEResidence = updatePartner.ResidenceUAE;
                 Partner.IsCompanyManager = updatePartner.CompanyManager;
@@ -612,13 +777,36 @@ namespace Starterkit.Controllers
             }
         }
 
+        [HttpDelete]
+        public JsonResult PartnerDelete([FromBody] PartnerModel model)
+        {
+            try
+            {
+                CompanyLogic _companyLogic = new CompanyLogic();
+                PatnerDetailsModel Partner = new PatnerDetailsModel();
+                Partner.PartnerKey = model.Id;
+                Partner.Opt= "D";
+                //int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
+                var partnerDetail = _companyLogic.DeletePartner(Partner);
+
+                
+                var result = new { success = true, partnerDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve partner detail." };
+                return Json(errorResult);
+            }
+        }
+
+
         [AllowAnonymous]
         [HttpPost]
         public JsonResult ResidenceVisaDetails([FromBody] VisaModel insertVisa)
         {
             try
             {
-                string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
                 CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
                 VisaDetailsModel addVisa = new VisaDetailsModel();
@@ -630,8 +818,7 @@ namespace Starterkit.Controllers
                 addVisa.CurrentAddress = insertVisa.CurrentAddress?.Trim();
                 addVisa.ResidenceAddress = insertVisa.ResidenceAddress?.Trim();
                 addVisa.Country = insertVisa.Country?.Trim();
-                addVisa.Nationality= insertVisa.Nationality?.Trim();
-                addVisa.Opt = "I";
+                addVisa.Nationality = insertVisa.Nationality?.Trim();
                 
                 _Result = companyLogic.InsertVisaDetails(addVisa);
 
@@ -643,57 +830,32 @@ namespace Starterkit.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPut]
-        public JsonResult UpdateResidenceVisaDetails([FromBody] VisaModel updateVisa)
-        {
-            try
-            {
-                string ErrorMessage = string.Empty;
-                string _Result = string.Empty;
-                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
-                VisaDetailsModel Visa = new VisaDetailsModel();
-
-                Visa.CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
-                Visa.Name = updateVisa.Name?.Trim();
-                Visa.DateOfBirth = updateVisa.DateOfBirth;
-                Visa.EmiratesId = updateVisa.EmiratesId?.Trim();
-                Visa.CurrentAddress = updateVisa.CurrentAddress?.Trim();
-                Visa.ResidenceAddress = updateVisa.ResidenceAddress?.Trim();
-                Visa.Country = updateVisa.Country?.Trim();
-                Visa.Nationality = updateVisa.Nationality?.Trim();
-                Visa.Opt = "U";
-
-                _Result = companyLogic.UpdateVisaDetails(Visa);
-
-                return Json(_Result);
-            }
-            catch
-            {
-                return Json("error");
-            }
-        }
-
 
         [HttpGet]
-        public JsonResult GetCompanyDetail()
+        public JsonResult GetvisaDetail()
         {
             try
             {
                 CompanyLogic _companyLogic = new CompanyLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                //int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("PartId")); // Replace with actual logic to fetch user ID
                 int CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId")); // Replace with actual logic to fetch user ID
-                var companyDetail = _companyLogic.CompanyDetail(userId, CompId);
+                var visaDetail = _companyLogic.VisaDetail(CompId);
 
-                var result = new { success = true, companyDetail };
+                var result = new { success = true, visaDetail };
                 return Json(result);
             }
             catch (Exception ex)
             {
-                var errorResult = new { success = false, message = "Failed to retrieve company detail." };
+                var errorResult = new { success = false, message = "Failed to retrieve visa detail." };
                 return Json(errorResult);
             }
         }
+
+
+
+        
+      
+       
 
 
     }

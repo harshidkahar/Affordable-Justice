@@ -73,7 +73,7 @@ var KTCaseDetail = function () {
             if (url.includes('caseDetails') && caseId !== null) {
                 fetchCaseDetail();
             }
-             }
+        }
     };
 }();
 

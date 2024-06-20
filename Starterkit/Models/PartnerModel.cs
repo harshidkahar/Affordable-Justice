@@ -3,6 +3,7 @@
     [Serializable]
     public class PartnerModel
     {
+        public int Id { get; set; }
         public bool ResidenceUAE { get; set; }
         /// <summary>
         /// Represent ResidenceUAE
