@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starterkit.Model", "..\Star
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starterkit.Data", "..\Starterkit.Data\Starterkit.Data.csproj", "{D93A295F-3D3C-4820-9E2A-80E1D5AD324F}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterkitAdmin", "..\StarterkitAdmin\StarterkitAdmin.csproj", "{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{D93A295F-3D3C-4820-9E2A-80E1D5AD324F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D93A295F-3D3C-4820-9E2A-80E1D5AD324F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D93A295F-3D3C-4820-9E2A-80E1D5AD324F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

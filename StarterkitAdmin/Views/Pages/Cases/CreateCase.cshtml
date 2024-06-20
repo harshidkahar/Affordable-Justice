@@ -1,0 +1,412 @@
+﻿@{
+    ViewData["Title"] = "Create Case";
+    // KTTheme.AddVendors(new string[] { "amcharts", "amcharts-maps", "amcharts-stock" });
+
+    KTTheme.AddJavascriptFile("js/custom/case/general.js");
+    //KTTheme.AddJavascriptFile("js/custom/case/editCase.js");
+    //KTTheme.AddJavascriptFile("js/custom/case/updateCase.js");
+}
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+        <!--begin::Content wrapper-->
+        <div class="d-flex flex-column flex-column-fluid">
+            <!--begin::Content-->
+            <div id="kt_app_content" class="app-content flex-column-fluid">
+                <!--begin::Content container-->
+                <div id="kt_app_content_container" class="app-container container-xxl">
+                    <!--begin::Navbar-->
+                    <div class="card mb-5 mb-xl-10">
+                        <div class="card-body pt-9 pb-0">
+                            <!--begin::Navs-->
+                            <ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
+                                <!--begin::Nav item-->
+                                <li class="nav-item mt-2">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="createcase" id="lnkCreateCase">Create Case</a>
+                                </li>
+                                <!--end::Nav item-->
+                                <!--begin::Nav item-->
+                                <li class="nav-item mt-2" id="lnkUD">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="uploadCaseDocuments" id="lnkUploadDocs">Upload Documents</a>
+                                </li>
+                                <!--end::Nav item-->
+                                <!--begin::Nav item-->
+                                <li class="nav-item mt-2" id="lnkDL">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="viewCaseDocuments" id="lnkDocList">Document List</a>
+                                </li>
+                                <!--end::Nav item-->
+                                <!--begin::Nav item-->
+                                <li class="nav-item mt-2" id="lnkCO">
+                                    <a class="nav-link text-active-primary ms-0 me-10 py-5" href="caseDetails" id="lnkCaseOverview">Case Overview</a>
+                                </li>
+                                <!--end::Nav item-->
+                            </ul>
+                            <!--begin::Navs-->
+                        </div>
+                    </div>
+                    <!--end::Navbar-->
+                    <div class="card mb-5 mb-xl-10">
+                        <!--begin::Card header-->
+                        <div class="card-header cursor-pointer">
+                            <!--begin::Card title-->
+                            <div class="card-title m-0">
+                                <h3 class="fw-bold m-0">Case Details</h3>
+                            </div>
+                            <!--end::Card title-->
+                        </div>
+                        <!--begin::Card header-->
+                        <!--begin::Card body-->
+                        <div class="card-body p-9">
+                            <!--begin:Form-->
+                            <form id="kt_modal_create_case" class="form" action="#" data-kt-redirect-url="/uploadCaseDocuments">
+                                <!--begin::Heading-->
+                                <!-- <div class="mb-13 text-center">
+                                    <div class="text-gray-400 fw-semibold fs-5">
+                                        If you need more info, please check
+                                        <a href="#" class="fw-bold link-primary">Case Guidelines</a>.
+                                    </div>
+                                  </div>-->
+                                <!--end::Heading-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Col-->
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Case Type</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-8">
+                                        <!--begin::Row-->
+                                        <div class="row">
+                                            <!--begin::Col-->
+                                            <div class="col-lg-3 fv-row">
+                                                <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="primary-case-type" id="ddlCT0">
+                                                    <option value="COMPLAINANT" selected="selected">COMPLAINANT</option>
+                                                    <option value="RESPONDENT">RESPONDENT</option>
+                                                </select>
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-3 fv-row">
+                                                <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" id="caseType1" name="secondary-case-type">
+                                                    <option value="CIVIL" selected="selected">CIVIL</option>
+                                                    <option value="CRIMINAL">CRIMINAL</option>
+                                                    <option value="OTHERS">OTHERS</option>
+                                                    <option value="PERSONAL STATUS">PERSONAL STATUS</option>
+                                                </select>
+                                            </div>
+                                            <!--end::Col-->
+                                            <!--begin::Col-->
+                                            <div class="col-lg-6 fv-row">
+                                                <div id="ddlCivilCase">
+                                                    <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="civil-case">
+                                                        <option value="INDIVIDUAL CONTRACT DISPUTE">INDIVIDUAL CONTRACT DISPUTE</option>
+                                                        <option value="PERSONAL INJURY CLAIMS">PERSONAL INJURY CLAIMS</option>
+                                                        <option value="REAL ESTATE DISPUTES">REAL ESTATE DISPUTES</option>
+                                                        <option value="EMPLOYMENT DISPUTE">EMPLOYMENT DISPUTE</option>
+                                                        <option value="ACCIDENTAL CLAIM DISPUTE">ACCIDENTAL CLAIM DISPUTE</option>
+                                                        <option value="BANKING & FINANCIAL DISPUTE">BANKING & FINANCIAL DISPUTE</option>
+                                                        <option value="INSURANCE DISPUTE">INSURANCE DISPUTE</option>
+                                                        <option value="LABOUR DISPUTE">LABOUR DISPUTE</option>
+                                                        <option value="CONSUMER DISPUTE">CONSUMER DISPUTE</option>
+                                                        <option value="CYBER CRIME">CYBER CRIME</option>
+                                                        <option value="TAXES">TAXES</option>
+                                                    </select>
+                                                </div>
+                                                <div id="ddlCriminalCase">
+                                                    <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="criminal-case">
+                                                        <option value="DEFAMATION">DEFAMATION</option>
+                                                        <option value="CHEQUE BOUNCING">CHEQUE BOUNCING</option>
+                                                        <option value="DRUGS">DRUGS</option>
+                                                        <option value="THEFT">THEFT</option>
+                                                        <option value="ROBBERY">ROBBERY</option>
+                                                        <option value="HUMAN TRAFFICKING">HUMAN TRAFFICKING</option>
+                                                        <option value="EXTRADITION">EXTRADITION</option>
+                                                        <option value="BODILY CRIME">BODILY CRIME</option>
+                                                        <option value="CRIME AGAINST STATE">CRIME AGAINST STATE</option>
+                                                        <option value="SEXUAL CRIME">SEXUAL CRIME</option>
+                                                        <option value="FINANCIAL FRAUD">FINANCIAL FRAUD</option>
+                                                        <option value="INTERPOL">INTERPOL</option>
+                                                        <option value="SMUGGLING">SMUGGLING</option>
+                                                    </select>
+                                                </div>
+                                                <div id="ddlOtherCase">
+                                                    <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="other-case">
+                                                        <option value="NOTICES">NOTICES</option>
+                                                        <option value="AGREEMENTS">AGREEMENTS</option>
+                                                        <option value="CONTRACTS">CONTRACTS</option>
+                                                        <option value="CONSULTATIONS">CONSULTATIONS</option>
+                                                        <option value="FINES">FINES</option>
+                                                    </select>
+                                                </div>
+                                                <div id="ddlPersonalStatus">
+                                                    <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="personal-status-case">
+                                                        <option value="ADULTERY">ADULTERY</option>
+                                                        <option value="ALIMONY">ALIMONY</option>
+                                                        <option value="CHILD CUSTODY">CHILD CUSTODY</option>
+                                                        <option value="DIVORCE">DIVORCE</option>
+                                                        <option value="INHERITANCE">INHERITANCE</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <!--end::Col-->
+                                        </div>
+                                        <!--end::Row-->
+                                    </div>
+                                    <!--end::Col-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <!--begin::Label-->
+                                    <label class="col-lg-4 col-form-label required fw-semibold fs-6">Any proceedings yet</label>
+                                    <!--end::Label-->
+                                    <!--begin::Col-->
+                                    <div class="col-lg-2 fv-row">
+                                        <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="any-proceedings" id="any-proceedings">
+                                            <option value="1">Yes</option>
+                                            <option value="2" selected="selected">No</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!--end::Col-->
+                                <!--end::Input group-->
+                                <div id="yes-proceedings">
+                                    <!--begin::Col-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="">Which Court</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Which Court">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="which-court">
+                                                <option value="Court of First Instance" selected="selected">Court of First Instance</option>
+                                                <option value="Court of Appeal">Court of Appeal</option>
+                                                <option value="Court of Cassation">Court of Cassation</option>
+                                                <option value="Other">Other</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Any legal advice inferred</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-2 fv-row">
+                                            <select class="form-select form-select-solid" data-control="select2" data-placeholder="Open" data-hide-search="true" name="legal-advice-inferred">
+                                                <option value="1">Yes</option>
+                                                <option value="2" selected="selected">No</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <!--begin::Col-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                            <span>Current Case Number</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Current Case Number">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write your Current Case Number" name="current_case_number" />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <!--begin::Col-->
+                                    <div class="row mb-6">
+                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">Date commenced</label>
+                                        <!--begin::Input-->
+                                        <div class="col-lg-2 fv-row">
+                                            <input type="date" class="form-control form-control-solid ps-12" placeholder="Select a date" name="date_commenced" id="kt_datepicker_2"/>
+                                            <!--end::Datepicker-->
+                                        </div>
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--begin::Col-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label required fw-semibold fs-6">
+                                            <span>Previous Case Number</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Write your Previous Case Number">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write your Previous Case Number" name="previous_case_number" />
+                                        </div>
+                                    </div>
+                                    <!--end::Col-->
+
+                                    <!--end::Input group-->
+                                </div>
+                                <div class="separator separator-dashed border-primary my-10"></div>
+                                <div class="py-5">
+                                    <h3>Opposition Details</h3>
+
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="required">Full Name</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition full name">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition full name" name="opposition-fullname" />
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="required">Email Address</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Email Address">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Email Address" name="opposition-email" />
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span class="required">Phone Number</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Phone Number">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Phone Number" name="opposition-phone" />
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span>Emirates ID</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Emirates ID">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Emirates ID" name="opposition-emiratesId" />
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row mb-6">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-4 col-form-label fw-semibold fs-6">
+                                            <span>Passport Number</span>
+                                            <span class="ms-2" data-bs-toggle="tooltip" title="Write opposition Passport Number">
+                                                <i class="ki-duotone ki-information fs-7">
+                                                    <span class="path1"></span>
+                                                    <span class="path2"></span>
+                                                    <span class="path3"></span>
+                                                </i>
+                                            </span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <div class="col-lg-8 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Please write opposition Passport Number" name="opposition-passport" />
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--begin::Input group-->
+                                <div class="row mb-6">
+                                    <label class="col-lg-4 col-form-label fw-semibold fs-6"><span class="required">Description</span> </label>
+
+                                    <div class="col-lg-8 fv-row">
+                                        <textarea class="form-control form-control-solid" rows="4" name="case_description" placeholder="Type your case description"></textarea>
+                                    </div>
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Actions-->
+                                <div class="text-center">
+                                    <a href="My-CaseList" class="btn btn-light me-3">Cancel
+                                    </a>
+                                    <!--<button type="reset" id="kt_modal_new_ticket_cancel" class="btn btn-light me-3">Cancel</button>-->
+                                    <!-- <a href="/uploadCaseDocuments" class="btn btn-primary er fs-6 px-8 py-4">Save & Upload Case Documents
+
+                                <span class="indicator-label">Submit</span>
+                                    <span class="indicator-progress">Please wait...
+                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                    </span>
+                                </a>-->
+                                    <button type="submit" id="kt_modal_create_case_submit" class="btn btn-primary" data-bs-target="/uploadCaseDocuments">
+                                        <span class="indicator-label">Save Case</span>
+                                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <!--end::Actions-->
+                            </form>
+                            <!--end:Form-->
+                        </div>
+                        <!--end::Card body-->
+                    </div>
+                </div>
+                <!--end::Content container-->
+            </div>
+            <!--end::Content-->
+        </div>
+        <!--end::Content wrapper-->
+    </div>
