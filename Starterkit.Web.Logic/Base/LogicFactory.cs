@@ -32,6 +32,12 @@ namespace Starterkit.Web.Logic.Base
                     return new CaseLogic();
                 case LogicType.Company:
                     return new CompanyLogic();
+                case LogicType.AdminLogic:
+                    return new AdminLogic();
+                case LogicType.AdminCommonLogic:
+                    return new AdminCommonLogic();
+                case LogicType.AdminSendEmailLogic:
+                    return new AdminSendEmailLogic();
                 default:
                     //If we get to this point, no logic has bee defined and the code 'SHOULD' fail...
                     throw new ArgumentException("No Logic defined for requested type: '" + logicType + "'");
@@ -42,8 +48,11 @@ namespace Starterkit.Web.Logic.Base
     {
         Customer,
         Client,
+        AdminLogic,
+        AdminCommonLogic,
         Agent,
         Email,
+        AdminSendEmailLogic,
         Common,
         Case,
         Company       

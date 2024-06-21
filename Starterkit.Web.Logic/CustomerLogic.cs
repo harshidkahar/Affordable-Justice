@@ -219,14 +219,14 @@ namespace Starterkit.Web.Logic
 		
 		public string UpdateCustomer(CustomerProfileSettingModel profileUpdate)
 		{
-			CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+			AdminDA customerDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
 			return customerDA.DAL_CustomerNew(profileUpdate);
 		}
 
 
         public string InsertKyc(KycModel kycDocument)
         {
-            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+            AdminDA customerDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
             return customerDA.DAL_KycDocument(kycDocument);
         }
 

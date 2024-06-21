@@ -643,38 +643,7 @@ namespace Starterkit.Controllers
             }
         }
 
-        [AllowAnonymous]
-        [HttpPut]
-        public JsonResult UpdateResidenceVisaDetails([FromBody] VisaModel updateVisa)
-        {
-            try
-            {
-                string ErrorMessage = string.Empty;
-                string _Result = string.Empty;
-                CompanyLogic companyLogic = (CompanyLogic)LogicFactory.GetLogic(LogicType.Company);
-                VisaDetailsModel Visa = new VisaDetailsModel();
-
-                Visa.CompId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("CompId"));
-                Visa.Name = updateVisa.Name?.Trim();
-                Visa.DateOfBirth = updateVisa.DateOfBirth;
-                Visa.EmiratesId = updateVisa.EmiratesId?.Trim();
-                Visa.CurrentAddress = updateVisa.CurrentAddress?.Trim();
-                Visa.ResidenceAddress = updateVisa.ResidenceAddress?.Trim();
-                Visa.Country = updateVisa.Country?.Trim();
-                Visa.Nationality = updateVisa.Nationality?.Trim();
-                Visa.Opt = "U";
-
-                _Result = companyLogic.UpdateVisaDetails(Visa);
-
-                return Json(_Result);
-            }
-            catch
-            {
-                return Json("error");
-            }
-        }
-
-
+       
         [HttpGet]
         public JsonResult GetCompanyDetail()
         {

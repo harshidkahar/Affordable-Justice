@@ -33,6 +33,12 @@ namespace Starterkit.Data.Base
                     return new CaseDA();
                 case DataAccessType.Company:
                     return new CompanyDA();
+                case DataAccessType.AdminCommon:
+                    return new AdminCommonDA();
+                case DataAccessType.AdminEmail:
+                    return new AdminEmailDA();
+                case DataAccessType.Admin:
+                    return new AdminDA();
                default:
                     //If we get to this point, no logic has bee defined and the code 'SHOULD' fail...
                     throw new ArgumentException("No Logic defined for requested type: '" + daType + "'");
@@ -46,6 +52,10 @@ namespace Starterkit.Data.Base
         Email,
         Common,
         Case,
-        Company
+        Company,
+        AdminCommon,
+        AdminEmail,
+        Admin,
+       
     }
 }

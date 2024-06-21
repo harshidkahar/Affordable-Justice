@@ -1,6 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "ProfileOverView";
+	//KTTheme.AddJavascriptFile("js/custom/admin/profileoverview.js");
 }
 
 
@@ -57,7 +58,9 @@
 									<div class="d-flex flex-column">
 										<!--begin::Name-->
 										<div class="d-flex align-items-center mb-2">
-											<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">Admin Name</a>
+											<a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">
+												<label id="ttlFullName" runat="server"></label>
+											</a>
 
 										</div>
 										<!--end::Name-->
@@ -68,19 +71,22 @@
 													<span class="path1"></span>
 													<span class="path2"></span>
 													<span class="path3"></span>
-												</i>Admin -
+												</i>
+												<label id="ttlUsername" runat="server"></label>
 											</a>
 											<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
 												<i class="ki-duotone ki-geolocation fs-4 me-1">
 													<span class="path1"></span>
 													<span class="path2"></span>
-												</i>SF, Bay Area
+												</i>
+												<label id="ttlAddress" runat="server"></label>
 											</a>
 											<a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
 												<i class="ki-duotone ki-sms fs-4">
 													<span class="path1"></span>
 													<span class="path2"></span>
-												</i>admin1@kt.com
+												</i>
+												<label id="ttlEmailId" runat="server"></label>
 											</a>
 										</div>
 										<!--end::Info-->
@@ -106,12 +112,12 @@
 						<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="ProfileOverview">Overview</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="Admin-ProfileOverView">Overview</a>
 							</li>
 							<!--end::Nav item-->
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="ProfileSetting">Settings</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="Admin-ProfileSetting">Settings</a>
 							</li>
 							<!--end::Nav item-->
 
@@ -136,26 +142,14 @@
 					<!--begin::Card header-->
 					<!--begin::Card body-->
 					<div class="card-body p-9">
-						<!--begin::Input group-->
-						<div class="row mb-7">
-							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">ADMIN_ID</label>
-							<!--end::Label-->
-							<!--begin::Col-->
-							<div class="col-lg-8 fv-row">
-								<span class="fw-semibold text-gray-800 fs-6">AD001</span>
-							</div>
-							<!--end::Col-->
-						</div>
-						<!--end::Input group-->
 						<!--begin::Row-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">FULL_NAME</label>
+							<label class="col-lg-4 fw-semibold text-muted">Full Name</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">Admin 1</span>
+								<label class="fw-bold fs-6 text-gray-800" id="lblfullname" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -163,11 +157,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">DATE_OF_BIRTH</label>
+							<label class="col-lg-4 fw-semibold text-muted">Date Of Birth</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-								<span class="fw-semibold text-gray-800 fs-6">05/03/2004</span>
+								<label class="fw-semibold text-gray-800 fs-6" id="lblDateofBirth" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -175,11 +169,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">EMAIL</label>
+							<label class="col-lg-4 fw-semibold text-muted">Email Id</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<a href="#" class="fw-semibold fs-6 text-gray-800 text-hover-primary">Admin1@gmail.com</a>
+								<label class="fw-bold fs-6 text-gray-800" id="lblEmailId" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -187,11 +181,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">CONTACT NO</label>
+							<label class="col-lg-4 fw-semibold text-muted">Contact No</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">+9712589632</span>
+								<label class="fw-bold fs-6 text-gray-800" id="lblPhone" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -199,11 +193,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">USERNAME</label>
+							<label class="col-lg-4 fw-semibold text-muted">Username</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">Admin@01</span>
+								<label class="fw-bold fs-6 text-gray-800" id="lblUsername" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -211,11 +205,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">PASSWORD</label>
+							<label class="col-lg-4 fw-semibold text-muted">Password</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">********</span>
+								<label class="fw-bold fs-6 text-gray-800" id="lblpassword" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -223,11 +217,11 @@
 						<!--begin::Input group-->
 						<div class="row mb-7">
 							<!--begin::Label-->
-							<label class="col-lg-4 fw-semibold text-muted">ADDRESS</label>
+							<label class="col-lg-4 fw-semibold text-muted">Address</label>
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">Yellow Street, Sharjah</span>
+								<label class="fw-bold fs-6 text-gray-800" id="lblAddress" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -236,7 +230,28 @@
 						<div class="row mb-7">
 							<!--begin::Label-->
 							<label class="col-lg-4 fw-semibold text-muted">
-								NATIONALITY
+								Country
+								<span class="ms-1" data-bs-toggle="tooltip" title="Name of Country">
+									<i class="ki-duotone ki-information fs-7">
+										<span class="path1"></span>
+										<span class="path2"></span>
+										<span class="path3"></span>
+									</i>
+								</span>
+							</label>
+							<!--end::Label-->
+							<!--begin::Col-->
+							<div class="col-lg-8">
+								<label class="fw-bold fs-6 text-gray-800" id="lblCountry" runat="server"></label>
+							</div>
+							<!--end::Col-->
+						</div>
+						<!--end::Input group-->
+						<!--begin::Input group-->
+						<div class="row mb-7">
+							<!--begin::Label-->
+							<label class="col-lg-4 fw-semibold text-muted">
+								Nationality
 								<span class="ms-1" data-bs-toggle="tooltip" title="Country of origination">
 									<i class="ki-duotone ki-information fs-7">
 										<span class="path1"></span>
@@ -248,7 +263,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<span class="fw-bold fs-6 text-gray-800">Sharjah</span>
+								<label class="fw-bold fs-6 text-gray-800" id="lblNationality" runat="server"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -270,25 +285,6 @@
 
 </div>
 
-<script src="~/assets/plugins/global/plugins.bundle.js"></script>
-<script src="~/assets/js/scripts.bundle.js"></script>
-<!--end::Global Javascript Bundle-->
-<!--begin::Vendors Javascript(used for this page only)-->
-<script src="~/assets/plugins/custom/datatables/datatables.bundle.js"></script>
-<!--end::Vendors Javascript-->
-<!--begin::Custom Javascript(used for this page only)-->
-<script src="~/assets/js/custom/pages/user-profile/general.js"></script>
-<script src="~/assets/js/widgets.bundle.js"></script>
-<script src="~/assets/js/custom/widgets.js"></script>
-<script src="~/assets/js/custom/apps/chat/chat.js"></script>
-<script src="~/assets/js/custom/utilities/modals/upgrade-plan.js"></script>
-<script src="~/assets/js/custom/utilities/modals/create-app.js"></script>
-<script src="~/assets/js/custom/utilities/modals/offer-a-deal/type.js"></script>
-<script src="~/assets/js/custom/utilities/modals/offer-a-deal/details.js"></script>
-<script src="~/assets/js/custom/utilities/modals/offer-a-deal/finance.js"></script>
-<script src="~/assets/js/custom/utilities/modals/offer-a-deal/complete.js"></script>
-<script src="~/assets/js/custom/utilities/modals/offer-a-deal/main.js"></script>
-<script src="~/assets/js/custom/utilities/modals/users-search.js"></script>
 
 
 

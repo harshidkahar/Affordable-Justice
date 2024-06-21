@@ -25,18 +25,20 @@ namespace Starterkit.Controllers
         }
 
 
-        [HttpGet("/overview")]
-		public IActionResult Index()
-		{
-			return View("Views/Pages/Account/Overview.cshtml");
+      
+        [HttpGet("ProfileOverview/")]
+        public IActionResult ProfileOverview()
+        {
+            return View("Views/Pages/Admin/ProfileOverview.cshtml");
         }
+
 
         [HttpGet]
         public JsonResult profileoverview()
         {
             try
             {
-                CustomerLogic _customerLogic = new CustomerLogic();
+                AdminLogic _customerLogic = new AdminLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 var profileoverview = _customerLogic.Overview(userId);
 
@@ -50,21 +52,21 @@ namespace Starterkit.Controllers
             }
         }
 
-
-        [HttpGet("/settings")]
-        public IActionResult Settings()
+        [HttpGet("ProfileSetting/")]
+        public IActionResult ProfileSetting()
         {
-            return View("Views/Pages/Account/Settings.cshtml");
+            return View("Views/Pages/Admin/ProfileSetting.cshtml");
         }
 
+        
         [HttpGet]
         public JsonResult profilesetting()
         {
             try
             {
-                CustomerLogic _customerLogic = new CustomerLogic();
+                AdminLogic _adminLogic = new AdminLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var profilesetting = _customerLogic.Setting(userId);
+                var profilesetting = _adminLogic.Setting(userId);
 
                 var result = new { success = true, profilesetting };
                 return Json(result);
@@ -79,35 +81,30 @@ namespace Starterkit.Controllers
 
         [AllowAnonymous]
         [HttpPut]
-        public JsonResult UpdateCustomer([FromBody] ProfileSetting updateCustomer)
+        public JsonResult UpdateCustomer([FromBody] AdminProfileSetting updateCustomer)
         {
             try
             {
                 string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
-                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
-                CustomerProfileSettingModel profileUpdate = new CustomerProfileSettingModel();
+                AdminLogic customerLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                AdminProfileSettingModel profileUpdate = new AdminProfileSettingModel();
 
-                string customerGuidString = _contextAccessor.HttpContext.Session.GetString("CustomerGUID");
-                Guid customerGuid = Guid.Parse(customerGuidString);
-                profileUpdate.CustomerGUID = customerGuid;
-
+                
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
                 profileUpdate.UserId = userId;
 
                 profileUpdate.FirstName = updateCustomer.FirstName?.Trim();
                 profileUpdate.LastName = updateCustomer.LastName?.Trim();
-                profileUpdate.Dob = updateCustomer.Dob;
-                profileUpdate.Email = updateCustomer.Email?.Trim();
-                profileUpdate.ContactNo = updateCustomer.ContactNo?.Trim();
+                profileUpdate.DateOfBirth = updateCustomer.DateOfBirth;
+                profileUpdate.EmailId = updateCustomer.EmailId?.Trim();
+                profileUpdate.Phone = updateCustomer.Phone?.Trim();
                 profileUpdate.CountryCode = updateCustomer.CountryCode?.Trim();
                 profileUpdate.Address = updateCustomer.Address?.Trim();
-                profileUpdate.Address_Flat = updateCustomer.Address_Flat?.Trim();
-                profileUpdate.Address_Building = updateCustomer.Address_Building?.Trim();
                 profileUpdate.Country = updateCustomer.Country?.Trim();
                 profileUpdate.Nationality = updateCustomer.Nationality?.Trim();
 
-                _Result = customerLogic.UpdateCustomer(profileUpdate);
+                _Result = customerLogic.UpdateAdmin(profileUpdate);
 
                 return Json(_Result);
             }
@@ -119,81 +116,13 @@ namespace Starterkit.Controllers
 
 
 
-        [HttpGet("/billing")]
-        public IActionResult Billing()
-        {
-            return View("Views/Pages/Account/Billing.cshtml");
-        }
-        [HttpGet("/statements")]
-        public IActionResult Statements()
-        {
-            return View("Views/Pages/Account/Statements.cshtml");
-        }
-        [HttpGet("/referrals")]
-        public IActionResult Referrals()
-        {
-            return View("Views/Pages/Account/Referrals.cshtml");
-        }
-        [HttpGet("/kyc")]
-        public IActionResult KYC()
-        {
-            return View("Views/Pages/Account/KYC.cshtml");
-        }
         [HttpGet("/changeEmail")]
         public IActionResult ChangeEmail()
         {
             return View("Views/Pages/Account/ChangeEmail.cshtml");
         }
 
-        public JsonResult KycDocumentUpload([FromBody] Kyc kycModel)
-        {
-            try
-            {
-                string ErrorMessage = string.Empty;
-                string _Result = string.Empty;
-                CustomerLogic customerLogic = (CustomerLogic)LogicFactory.GetLogic(LogicType.Customer);
-                KycModel kycDocument = new KycModel();
-
-                kycDocument.UserId= Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
-                kycDocument.EmiratesId = kycModel.EmiratesId?.Trim();
-                kycDocument.PassportNo = kycModel.PassportNo?.Trim();
-                kycDocument.PassportFrontUrl = "C://Downloads/passfront.pdf";
-                kycDocument.PassportBackUrl = "C://Downloads/passback.pdf";
-                kycDocument.KycDocumentUrl = "C://Downloads/EmirId.pdf";
-                kycDocument.Opt = "I";
-
-
-
-
-                _Result = customerLogic.InsertKyc(kycDocument);
-
-                return Json(_Result);
-            }
-            catch
-            {
-                return Json("error");
-            }
-        }
-
-        [HttpGet]
-        public JsonResult GetStatus()
-        {
-            try
-            {
-                CustomerLogic _customerLogic = new CustomerLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var getstatus = _customerLogic.KYCStatus(userId);
-
-                var result = new { success = true, getstatus };
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                var errorResult = new { success = false, message = "Failed to retrieve KYC STATUS." };
-                return Json(errorResult);
-            }
-        }
-
+      
 
     }
 }

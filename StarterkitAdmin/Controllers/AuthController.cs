@@ -125,27 +125,25 @@ public class AuthController : Controller
     [HttpPost]
     public string ValidateOtp([FromBody] TfOtpModel otpModel)
     {
-        CustomerLogic customerLogic = new CustomerLogic();
+        AdminLogic adminLogic = new AdminLogic();
         string _Result = string.Empty;
         string email = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
         string phone = ""; // You need to add code to get phone number from session or wherever it is stored
 
         // Call your logic to validate OTP
-        var userModel = customerLogic.ValidateOtp(phone, email, otpModel.otp);
+        var adminModel = adminLogic.ValidateOtp(phone, email, otpModel.otp);
 
-        if (userModel != null)
+        if (adminModel != null)
         {
-            _contextAccessor.HttpContext.Session.SetString("Name", userModel.FirstName + " " + userModel.LastName);
+            _contextAccessor.HttpContext.Session.SetString("Name", adminModel.FirstName + " " + adminModel.LastName);
 
-            _contextAccessor.HttpContext.Session.SetString("Id", userModel.Id.ToString());
+            _contextAccessor.HttpContext.Session.SetString("Id", adminModel.Id.ToString());
 
-            _contextAccessor.HttpContext.Session.SetString("UserName", userModel.Email);
+            _contextAccessor.HttpContext.Session.SetString("UserName", adminModel.EmailId);
 
-            _contextAccessor.HttpContext.Session.SetString("UserEmail", userModel.Email);
+            _contextAccessor.HttpContext.Session.SetString("UserEmail", adminModel.EmailId);
 
-            _contextAccessor.HttpContext.Session.SetString("CustomerGUID", userModel.CustomerGUID.ToString());
-
-            _contextAccessor.HttpContext.Session.SetString("Country", userModel.Country.ToString());
+            _contextAccessor.HttpContext.Session.SetString("Country", adminModel.Country.ToString());
 
             return "done";
 
@@ -159,13 +157,13 @@ public class AuthController : Controller
     [HttpPost]
     public string EmailValidateOtp([FromBody] TfOtpModel otpModel)
     {
-        CustomerLogic customerLogic = new CustomerLogic();
+        AdminLogic adminLogic = new AdminLogic();
         string _Result = string.Empty;
         int Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
         string email = _contextAccessor.HttpContext.Session.GetString("OtpEmail");
 
         // Call your logic to validate OTP
-        string returnValue = customerLogic.UpdateEmail(Id, email, otpModel.otp);
+        string returnValue = adminLogic.UpdateEmail(Id, email, otpModel.otp);
 
         return returnValue;
     }
@@ -186,9 +184,9 @@ public class AuthController : Controller
         string returnValue = string.Empty;
         try
         {
-            CustomerLogic customerLogic = new CustomerLogic();
-            SendEmailLogic sendEmailLogic = new SendEmailLogic();
-            string validateEmail = customerLogic.ValidateEmail(otpModel.Email);
+            AdminLogic adminLogic = new AdminLogic();
+            AdminSendEmailLogic sendEmailLogic = new AdminSendEmailLogic();
+            string validateEmail = adminLogic.ValidateEmail(otpModel.Email);
             if (validateEmail != "invalid" && validateEmail != "" && validateEmail != string.Empty)
             {
                 string subject = validateEmail + " is the OTP for your login.";
