@@ -25,7 +25,7 @@ namespace Starterkit.Data
                 con = DataAccess.OpenConnection();
                 SqlCommand cmd = new SqlCommand("[dbo].[GetLoginId_Admin]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.Add("@Email", SqlDbType.NVarChar).Value = email;
+                cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = email;
                 cmd.Parameters.Add("@Phone", SqlDbType.VarChar).Value = phone;
                 cmd.Parameters.Add("@Otp", SqlDbType.VarChar).Value = otp;
                 SqlDataAdapter da = new SqlDataAdapter(cmd);
@@ -36,8 +36,8 @@ namespace Starterkit.Data
 					adminModel.Id = Convert.ToInt32(ds.Tables["AdminDetails"].Rows[0]["Id"]);
 					adminModel.FirstName = ds.Tables["AdminDetails"].Rows[0]["FirstName"].ToString();
 					adminModel.LastName = ds.Tables["AdminDetails"].Rows[0]["LastName"].ToString();
-					adminModel.EmailId = ds.Tables["AdminDetails"].Rows[0]["Email"].ToString();
-					adminModel.Phone = ds.Tables["AdminDetails"].Rows[0]["ContactNo"].ToString();
+					adminModel.EmailId = ds.Tables["AdminDetails"].Rows[0]["EmailId"].ToString();
+					adminModel.Phone = ds.Tables["AdminDetails"].Rows[0]["Phone"].ToString();
 					adminModel.Nationality = ds.Tables["AdminDetails"].Rows[0]["Nationality"].ToString();
 					adminModel.Country = ds.Tables["AdminDetails"].Rows[0]["Country"].ToString();
                 }

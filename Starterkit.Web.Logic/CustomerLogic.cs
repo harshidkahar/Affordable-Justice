@@ -216,21 +216,21 @@ namespace Starterkit.Web.Logic
 		}
 
 
-		
+
 		public string UpdateCustomer(CustomerProfileSettingModel profileUpdate)
 		{
-			AdminDA customerDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+			CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
 			return customerDA.DAL_CustomerNew(profileUpdate);
 		}
 
 
-        public string InsertKyc(KycModel kycDocument)
-        {
-            AdminDA customerDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
-            return customerDA.DAL_KycDocument(kycDocument);
-        }
+		public string InsertKyc(KycModel kycDocument)
+		{
+            CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
+			return customerDA.DAL_KycDocument(kycDocument);
+		}
 
-        public List<KycstatusModel> KYCStatus(int userId)
+	public List<KycstatusModel> KYCStatus(int userId)
         {
             List<KycstatusModel> getstatus = new List<KycstatusModel>();
             try
