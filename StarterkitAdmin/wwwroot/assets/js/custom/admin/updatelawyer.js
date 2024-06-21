@@ -16,79 +16,104 @@ function convertDateToString(dateString) {
 }
 
 
-function fetchLawyerDetailById(id) {
+
+var lawyerDetailData = [];
+
+var fetchLawyerDetailById = function (id) {
     $.ajax({
+        url: '/Admin/GetLawyerDetail',
         type: 'GET',
-        url: 'Admin/GetLawyerDetailtData',
-        data: JSON.stringify({ id: id }),
+        data: JSON.stringify({ Id: id }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (response) {
-            console.log('Response data:', response);
-            const lawyerDetails = response ? JSON.parse(response) : null;
-            console.log('Fetched lawyer data:', lawyerDetails);
 
-            if (Array.isArray(lawyerDetails)) {
-                // Handle case where response is an array
-                if (lawyerDetails.length > 0) {
-                    populateForm(lawyerDetails[0]); // Take the first object in the array
-                } else {
-                    console.error('Empty array received');
-                }
-            } else if (lawyerDetails && !lawyerDetails.message) {
-                // Handle case where response is a single object
-                populateForm(lawyerDetails);
+        success: function (response) {
+            //const result = JSON.parse(response); // Parse the JSON string response
+            console.log(response)
+            //console.log(result);
+            if (response.success) {
+                lawyerDetailData = response.lawyerDetail;
+                renderTable();
             } else {
-                console.error('Unexpected response format or missing data:', response);
+                Swal.fire({
+                    text: response.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
         },
-        error: function (error) {
-            console.error('Error fetching lawyer data by ID:', error);
+        error: function () {
+            Swal.fire({
+                text: "Failed to retrieve admin detail.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         }
     });
 }
 
-function populateForm(lawyerDetails) {
-    var form = document.querySelector('#kt_update_advocate_form');
-    form.querySelector('[name="FirstName"]').value = lawyerDetails.FirstName;
-    form.querySelector('[name="LastName"]').value = lawyerDetails.LastName;
-    form.querySelector('[name="Email"]').value = lawyerDetails.EmailId;
-    const lawyerDateOfBirth = lawyerDetails.DateOfBirth;
 
-    // Convert the date to "YYYY-MM-DD" format
-    const formattedDOB = convertDateToString(lawyerDateOfBirth);
+// Render table with case list data
+var renderTable = function () {
+    //const table = document.querySelector('table');
+    // const tableBody = document.querySelector('#adminTableBody');
+    //tableBody.innerHTML = ''; // Clear existing rows
 
-    // Find the DateOfBirth input element
-    const dobInput = form.querySelector('[name="DateOfBirth"]');
+    if (lawyerDetailData.length > 0) {
+        var lawyerDetail = lawyerDetailData[0];
 
-    // Set the value of the input element to the formatted date
-    if (dobInput) {
-        dobInput.value = formattedDOB;
-        // Trigger a change event
-        $(dobInput).trigger('change');
-    } else {
-        console.error('Input element with name "DateOfBirth" not found');
+        var form = document.querySelector('#kt_update_advocate_form');
+        form.querySelector('[name="FirstName"]').value = lawyerDetail.FirstName;
+        form.querySelector('[name="LastName"]').value = lawyerDetail.LastName;
+        form.querySelector('[name="Email"]').value = lawyerDetail.EmailId;
+        form.querySelector('[name="lisenceNo"]').value = lawyerDetail.LisenceNumber;
+        const lawyerType = form.querySelector('[name="LawyerType"]');
+        lawyerType.value = lawyerDetail.LawyerType;
+        $(lawyerType).trigger('change');
+        const companyname = form.querySelector('[name="CompanyName"]');
+        companyname.value = lawyerDetail.Company;
+        $(companyname).trigger('change');
+        const lawyerDateOfBirth = lawyerDetail.DateOfBirth;
+
+        /*// Convert the date to "YYYY-MM-DD" format
+        const formattedDOB = convertDateToString(adminDateOfBirth);
+
+        // Find the DateOfBirth input element
+        const dobInput = form.querySelector('[name="DateOfBirth"]');
+
+        // Set the value of the input element to the formatted date
+        if (dobInput) {
+            dobInput.value = formattedDOB;
+            // Trigger a change event
+            $(dobInput).trigger('change');
+        } else {
+            console.error('Input element with name "DateOfBirth" not found');
+        } */
+        form.querySelector('[name="DateOfBirth"]').value = lawyerDateOfBirth;
+        form.querySelector('[name="Phone"]').value = lawyerDetail.Phone;
+        form.querySelector('[name="Address"]').value = lawyerDetail.Address;
+        const countrySelect = form.querySelector('[name="Country"]');
+        countrySelect.value = lawyerDetail.Country;
+        $(countrySelect).trigger('change');
+        const nationselect = form.querySelector('[name="Nationality"]');
+        nationselect.value = lawyerDetail.Nationality;
+        $(nationselect).trigger('change');
+        const countrycodeSelect = form.querySelector('[name="countrycode"]');
+        countrycodeSelect.value = lawyerDetail.CountryCode;
+        $(countrycodeSelect).trigger('change');
+       
+
     }
-    const lawyerType = form.querySelector('[name="LawyerType"]');
-    lawyerType.value = lawyerDetails.LawyerType;
-    $(lawyerType).trigger('change');
-
-    const companyname = form.querySelector('[name="CompanyName"]');
-    companyname.value = lawyerDetails.Company;
-    $(companyname).trigger('change');
-    form.querySelector('[name="lisenceNo"]').value = lawyerDetails.LisenceNumber;
-    form.querySelector('[name="countrycode"]').value = lawyerDetails.CountryCode;
-    form.querySelector('[name="Phone"]').value = lawyerDetails.Phone;
-    form.querySelector('[name="Address"]').value = lawyerDetails.Address;
-    const countrySelect = form.querySelector('[name="Country"]');
-    countrySelect.value = lawyerDetails.Country;
-    $(countrySelect).trigger('change');
-    const nationselect = form.querySelector('[name="Nationality"]');
-    nationselect.value = lawyerDetails.Nationality;
-    $(nationselect).trigger('change');
-
+    KTMenu.createInstances();
 }
-
 
 
 function getLawyerIdFromURL() {

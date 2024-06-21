@@ -104,7 +104,7 @@ var UpdateAdmin = function () {
 
                     // Collect form data
                     var formData = {
-                        id: getAdminIdFromURL(),
+                        //Id: getAdminIdFromURL(),
                         FirstName: form.querySelector('[name="FirstName"]').value,
                         LastName: form.querySelector('[name="LastName"]').value,
                         dateOfBirth: form.querySelector('[name="DateOfBirth"]').value,
@@ -118,45 +118,28 @@ var UpdateAdmin = function () {
 
                     // Send AJAX request to create a new admin account
                     $.ajax({
-                        type: "POST",
+                        type: "PUT",
                         url: "Admin/UpdateAdmin",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(formData),
                         dataType: "json",
-                        success: function (response) {
-                            // Handle success response
-                            if (response === "Admin successfully Updated.") {
+                        success: function (data) {
+                            if (data == "done") {
                                 Swal.fire({
-                                    text: "Admin account updated successfully!",
+                                    text: "Admin Successfully Updated!",
                                     icon: "success",
-                                    confirmButtonText: "OK"
-                                }).then(function () {
-                                    // Redirect to another page (e.g., admin list page) after success
-                                    location.href = "New-Admin";
-                                    form.reset();
-                                });
-                            } else {
-                                // Handle failure response
-                                Swal.fire({
-                                    text: response,
-                                    icon: "error",
-                                    confirmButtonText: "OK"
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function (result) {
+                                    location.href = "New-Admin"
                                 });
                             }
+
                         },
-                        error: function () {
-                            // Handle AJAX request error
-                            Swal.fire({
-                                text: "An error occurred. Please try again later.",
-                                icon: "error",
-                                confirmButtonText: "OK"
-                            });
-                        },
-                        complete: function () {
-                            // Hide loading indication and enable the button
-                            submitButton.removeAttribute("data-kt-indicator");
-                            submitButton.disabled = false;
-                        }
+
                     });
                 } else {
                     // Form validation failed, show error message
@@ -198,70 +181,99 @@ function convertDateToString(dateString) {
 
 
 
-function fetchAdminDetailById(id) {
+
+var adminDetailData = [];
+
+var fetchAdminDetailById = function (id) {
     $.ajax({
+        url: '/Admin/GetAdminDetail',
         type: 'GET',
-        url: 'Admin/GetAdminDetailtData',
-        data: JSON.stringify({ id: id }),
+        data: JSON.stringify({ Id: id }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (response) {
-            console.log('Response data:', response);
-            const adminDetails = response ? JSON.parse(response) : null;
-            console.log('Fetched admin data:', adminDetails);
 
-            if (Array.isArray(adminDetails)) {
-                // Handle case where response is an array
-                if (adminDetails.length > 0) {
-                    populateForm(adminDetails[0]); // Take the first object in the array
-                } else {
-                    console.error('Empty array received');
-                }
-            } else if (adminDetails && !adminDetails.message) {
-                // Handle case where response is a single object
-                populateForm(adminDetails);
+        success: function (response) {
+            //const result = JSON.parse(response); // Parse the JSON string response
+            console.log(response)
+            //console.log(result);
+            if (response.success) {
+                adminDetailData = response.adminDetail;
+                renderTable();
             } else {
-                console.error('Unexpected response format or missing data:', response);
+                Swal.fire({
+                    text: response.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
         },
-        error: function (error) {
-            console.error('Error fetching admin data by ID:', error);
+        error: function () {
+            Swal.fire({
+                text: "Failed to retrieve admin detail.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         }
     });
 }
 
-function populateForm(adminDetails) {
-    var form = document.querySelector('#kt_admin_update_form');
-    form.querySelector('[name="FirstName"]').value = adminDetails.FirstName;
-    form.querySelector('[name="LastName"]').value = adminDetails.LastName;
-    form.querySelector('[name="EmailId"]').value = adminDetails.EmailId;
-    const adminDateOfBirth = adminDetails.DateOfBirth;
 
-    // Convert the date to "YYYY-MM-DD" format
-    const formattedDOB = convertDateToString(adminDateOfBirth);
+// Render table with case list data
+var renderTable = function () {
+    //const table = document.querySelector('table');
+   // const tableBody = document.querySelector('#adminTableBody');
+    //tableBody.innerHTML = ''; // Clear existing rows
 
-    // Find the DateOfBirth input element
-    const dobInput = form.querySelector('[name="DateOfBirth"]');
+    if (adminDetailData.length > 0) {
+        var adminDetail = adminDetailData[0];
 
-    // Set the value of the input element to the formatted date
-    if (dobInput) {
-        dobInput.value = formattedDOB;
-        // Trigger a change event
-        $(dobInput).trigger('change');
-    } else {
-        console.error('Input element with name "DateOfBirth" not found');
+        var form = document.querySelector('#kt_admin_update_form');
+        form.querySelector('[name="FirstName"]').value = adminDetail.FirstName;
+        form.querySelector('[name="LastName"]').value = adminDetail.LastName;
+        form.querySelector('[name="EmailId"]').value = adminDetail.EmailId;
+        const adminDateOfBirth = adminDetail.DateOfBirth;
+
+        /*// Convert the date to "YYYY-MM-DD" format
+        const formattedDOB = convertDateToString(adminDateOfBirth);
+
+        // Find the DateOfBirth input element
+        const dobInput = form.querySelector('[name="DateOfBirth"]');
+
+        // Set the value of the input element to the formatted date
+        if (dobInput) {
+            dobInput.value = formattedDOB;
+            // Trigger a change event
+            $(dobInput).trigger('change');
+        } else {
+            console.error('Input element with name "DateOfBirth" not found');
+        } */
+        form.querySelector('[name="DateOfBirth"]').value = adminDateOfBirth;
+        form.querySelector('[name="Phone"]').value = adminDetail.Phone;
+        form.querySelector('[name="Address"]').value = adminDetail.Address;
+        const countrySelect = form.querySelector('[name="Country"]');
+        countrySelect.value = adminDetail.Country;
+        $(countrySelect).trigger('change');
+        const nationselect = form.querySelector('[name="Nationality"]');
+        nationselect.value = adminDetail.Nationality;
+        $(nationselect).trigger('change');
+        const countrycodeSelect = form.querySelector('[name="countrycode"]');
+        countrycodeSelect.value = adminDetail.CountryCode;
+        $(countrycodeSelect).trigger('change');
+
+
     }
-    form.querySelector('[name="countrycode"]').value= adminDetails.CountryCode;
-    form.querySelector('[name="Phone"]').value = adminDetails.Phone;
-    form.querySelector('[name="Address"]').value = adminDetails.Address;
-    const countrySelect = form.querySelector('[name="Country"]');
-    countrySelect.value = adminDetails.Country;
-    $(countrySelect).trigger('change');
-    const nationselect = form.querySelector('[name="Nationality"]');
-    nationselect.value = adminDetails.Nationality;
-    $(nationselect).trigger('change');
-
+ KTMenu.createInstances();
 }
+
+
 
 function getAdminIdFromURL() {
     // Get the query string from the current URL

@@ -67,8 +67,8 @@ namespace Starterkit.Model
 			set { _Phone = value; }
 		}
 
-		private DateTime _DateOfBirth;
-		public DateTime DateOfBirth
+		private string _DateOfBirth;
+		public string DateOfBirth
 		{
 			get { return _DateOfBirth; }
 			set { _DateOfBirth = value; }

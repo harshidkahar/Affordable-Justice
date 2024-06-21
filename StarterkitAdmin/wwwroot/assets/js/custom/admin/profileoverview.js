@@ -1,4 +1,4 @@
-﻿var UpdateAdmin = function () {
+﻿var ProfileOverview = function () {
     var form;
     var submitButton;
     var validator;
@@ -231,11 +231,14 @@
 
         if (adminDetailData.length > 0) {
             var adminDetail = adminDetailData[0];
+            document.querySelector('#ttlFullName').textContent = adminDetail.FirstName + adminDetail.LastName;
+            document.querySelector('#ttlUsername').textContent = adminDetail.Username;
+            document.querySelector('#ttlAddress').textContent = adminDetail.Address;
+            document.querySelector('#ttlEmailId').textContent = adminDetail.EmailId;
 
-            var form = document.querySelector('#kt_admin_profile_details_form');
-            form.querySelector('[name="txtfname"]').value = adminDetail.FirstName;
-            form.querySelector('[name="txtlname"]').value = adminDetail.LastName;
-            form.querySelector('[name="txtEmail"]').value = adminDetail.EmailId;
+            //var form = document.querySelector('#kt_admin_profile_details_form');
+            document.querySelector('#lblfullname').textContent = adminDetail.FirstName + adminDetail.LastName;
+            document.querySelector('#lblEmailId').textContent = adminDetail.EmailId;
             const adminDateOfBirth = adminDetail.DateOfBirth;
 
             /*// Convert the date to "YYYY-MM-DD" format
@@ -252,21 +255,16 @@
             } else {
                 console.error('Input element with name "DateOfBirth" not found');
             } */
-            form.querySelector('[name="txtdob"]').value = adminDateOfBirth;
-            form.querySelector('[name="txtphone"]').value = adminDetail.Phone;
-            form.querySelector('[name="txtAddress"]').value = adminDetail.Address;
-            form.querySelector('[name="txtusername"]').value.adminDetail.Username;
-            form.querySelector('[name="txtPass"]').value = adminDetail.Watchword;
-            const countrySelect = form.querySelector('[name="ddlCountry"]');
-            countrySelect.value = adminDetail.Country;
-            $(countrySelect).trigger('change');
-            const nationselect = form.querySelector('[name="ddlNationality"]');
-            nationselect.value = adminDetail.Nationality;
-            $(nationselect).trigger('change');
-            const countrycodeSelect = form.querySelector('[name="txtcountrycode"]');
-            countrycodeSelect.value = adminDetail.CountryCode;
-            $(countrycodeSelect).trigger('change');
+            document.querySelector('#lblDateofBirth').textContent = adminDateOfBirth;
+            document.querySelector('#lblPhone').textContent = adminDetail.CountryCode + adminDetail.Phone;
+            document.querySelector('#lblAddress').textContent = adminDetail.Address;
+            document.querySelector('#lblUsername').textContent.adminDetail.Username;
+            document.querySelector('#lblpassword"').textContent = adminDetail.Watchword;
+            document.querySelector('#lblCountry').textContent.adminDetail.Country;
+            document.querySelector('#lblNationality').textContent.adminDetail.Nationality;
 
+
+         
 
         }
         KTMenu.createInstances();
@@ -284,5 +282,5 @@
 
 // Initialize the CreateAdmin script when the DOM is ready
 document.addEventListener("DOMContentLoaded", function () {
-    UpdateAdmin.init();
+    ProfileOverview.init();
 });

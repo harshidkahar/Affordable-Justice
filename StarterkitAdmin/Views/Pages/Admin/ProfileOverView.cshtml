@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "ProfileOverView";
-	//KTTheme.AddJavascriptFile("js/custom/admin/profileoverview.js");
+	KTTheme.AddJavascriptFile("js/custom/admin/profileoverview.js?v=1.0");
 }
 
 
@@ -112,12 +112,12 @@
 						<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="Admin-ProfileOverView">Overview</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="AdminProfileOverview">Overview</a>
 							</li>
 							<!--end::Nav item-->
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="Admin-ProfileSetting">Settings</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="AdminProfileSetting">Settings</a>
 							</li>
 							<!--end::Nav item-->
 
@@ -136,7 +136,7 @@
 						</div>
 						<!--end::Card title-->
 						<!--begin::Action-->
-						<a href="../../demo1/dist/account/settings.html" class="btn btn-sm btn-primary align-self-center">Edit Profile</a>
+						<a href="AdminProfileSetting" class="btn btn-sm btn-primary align-self-center">Edit Profile</a>
 						<!--end::Action-->
 					</div>
 					<!--begin::Card header-->
@@ -149,7 +149,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblfullname" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblfullname"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -161,7 +161,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8 fv-row">
-								<label class="fw-semibold text-gray-800 fs-6" id="lblDateofBirth" runat="server"></label>
+								<label class="fw-semibold text-gray-800 fs-6" id="lblDateofBirth"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -173,7 +173,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblEmailId" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblEmailId"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -185,7 +185,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblPhone" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblPhone"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -197,7 +197,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblUsername" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblUsername"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -209,7 +209,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblpassword" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblpassword"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -221,7 +221,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblAddress" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblAddress"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -242,7 +242,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblCountry" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblCountry"></label>
 							</div>
 							<!--end::Col-->
 						</div>
@@ -263,7 +263,7 @@
 							<!--end::Label-->
 							<!--begin::Col-->
 							<div class="col-lg-8">
-								<label class="fw-bold fs-6 text-gray-800" id="lblNationality" runat="server"></label>
+								<label class="fw-bold fs-6 text-gray-800" id="lblNationality"></label>
 							</div>
 							<!--end::Col-->
 						</div>

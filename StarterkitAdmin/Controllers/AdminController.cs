@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Starterkit.Model;
-using Starterkit.Web.Logic.Base;
 using Starterkit.Web.Logic;
+using Starterkit.Web.Logic.Base;
 
 namespace Starterkit.Controllers
 {
-	public class AdminController : Controller
+    public class AdminController : Controller
 	{
         private readonly ILogger<AdminController> _logger;
         private readonly IKTTheme _theme;
@@ -53,12 +53,14 @@ namespace Starterkit.Controllers
                 _createAdmin.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
                 _createAdmin.FirstName = registerAdmin.FirstName?.Trim();
                 _createAdmin.LastName = registerAdmin.LastName?.Trim();
+                _createAdmin.DateOfBirth = registerAdmin.DateOfBirth?.Trim();
                 _createAdmin.Phone = registerAdmin.Phone?.Trim();
                 _createAdmin.CountryCode = registerAdmin.CountryCode?.Trim();
                 _createAdmin.EmailId = registerAdmin.EmailId?.Trim();
                 _createAdmin.Address = registerAdmin.Address?.Trim();
                 _createAdmin.Country = registerAdmin.Country?.Trim();
                 _createAdmin.Nationality = registerAdmin.Nationality?.Trim();
+                _createAdmin.Opt = "I";
                 _Result = adminLogic.AddAdmin(_createAdmin);
 
                 return Json(_Result);
@@ -83,13 +85,15 @@ namespace Starterkit.Controllers
                 _createAgent.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
                 _createAgent.FirstName = registerAgent.FirstName?.Trim();
                 _createAgent.LastName = registerAgent.LastName?.Trim();
+                _createAgent.DateOfBirth = registerAgent.DateOfBirth?.Trim();
                 _createAgent.Phone = registerAgent.Phone?.Trim();
                 _createAgent.CountryCode = registerAgent.CountryCode?.Trim();
                 _createAgent.EmailId = registerAgent.EmailId?.Trim();
                 _createAgent.Address = registerAgent.Address?.Trim();
                 _createAgent.Country = registerAgent.Country?.Trim();
                 _createAgent.Nationality = registerAgent.Nationality?.Trim();
-                _createAgent.Role = registerAgent.Role; 
+                _createAgent.Role = registerAgent.Role;
+                _createAgent.Opt = "I";
                 _Result = adminLogic.AddAgent(_createAgent);
 
                 return Json(_Result);
@@ -117,12 +121,14 @@ namespace Starterkit.Controllers
                 _createLawyer.LisenceNo = registerLawyer.LisenceNo?.Trim();
                 _createLawyer.LawyerType = registerLawyer.LawyerType?.Trim();
                 _createLawyer.Company = registerLawyer.Company?.Trim();
+                _createLawyer.DateOfBirth = registerLawyer.DateOfBirth?.Trim();
                 _createLawyer.Phone = registerLawyer.Phone?.Trim();
                 _createLawyer.CountryCode = registerLawyer.CountryCode?.Trim();
                 _createLawyer.EmailId = registerLawyer.EmailId?.Trim();
                 _createLawyer.Address = registerLawyer.Address?.Trim();
                 _createLawyer.Country = registerLawyer.Country?.Trim();
                 _createLawyer.Nationality = registerLawyer.Nationality?.Trim();
+                _createLawyer.Opt = "I";
                 _Result = adminLogic.AddLawyer(_createLawyer);
 
                 return Json(_Result);
@@ -140,13 +146,116 @@ namespace Starterkit.Controllers
 			return View("Views/Pages/Admin/ViewAdmin.cshtml");
 		}
 
-		[HttpGet("UpdateAdmin/")]
+        [HttpGet]
+        public JsonResult GetAdminList()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                AdminLogic _adminLogic = new AdminLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var adminList = _adminLogic.GetAdminList(userId);
+                var result = new { success = true, adminList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve admin list." };
+                return Json(errorResult);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetAdminDetail()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                AdminLogic _adminLogic = new AdminLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var adminDetail = _adminLogic.GetAdminDetail(userId);
+                var result = new { success = true, adminDetail };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve admin detail." };
+                return Json(errorResult);
+            }
+        }
+
+
+        [HttpGet("UpdateAdmin/")]
 		public IActionResult UpdateAdmin()
 		{
 			return View("Views/Pages/Admin/UpdateAdmin.cshtml");
 		}
 
-		[HttpGet("DeleteAdmin/")]
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateAdmin([FromBody] AdminUserModel updateAdmin)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                AdminModel _updateAdmin = new AdminModel();
+
+                _updateAdmin.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateAdmin.FirstName = updateAdmin.FirstName?.Trim();
+                _updateAdmin.LastName = updateAdmin.LastName?.Trim();
+                _updateAdmin.DateOfBirth = updateAdmin.DateOfBirth?.Trim();
+                _updateAdmin.Phone = updateAdmin.Phone?.Trim();
+                _updateAdmin.CountryCode = updateAdmin.CountryCode?.Trim();
+                _updateAdmin.EmailId = updateAdmin.EmailId?.Trim();
+                _updateAdmin.Address = updateAdmin.Address?.Trim();
+                _updateAdmin.Country = updateAdmin.Country?.Trim();
+                _updateAdmin.Nationality = updateAdmin.Nationality?.Trim();
+                _updateAdmin.Opt = "U";
+                _Result = adminLogic.UpdateAdmin(_updateAdmin);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        public JsonResult DeleteAdmin([FromBody] AdminUserModel deleteAdmin)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                AdminModel _deleteAdmin = new AdminModel();
+
+                _deleteAdmin.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                //_deleteAdmin.FirstName = deleteAdmin.FirstName?.Trim();
+                //_deleteAdmin.LastName = deleteAdmin.LastName?.Trim();
+                //_deleteAdmin.Phone = deleteAdmin.Phone?.Trim();
+                //_deleteAdmin.CountryCode = deleteAdmin.CountryCode?.Trim();
+                //_deleteAdmin.EmailId = deleteAdmin.EmailId?.Trim();
+                //_deleteAdmin.Address = deleteAdmin.Address?.Trim();
+                //_deleteAdmin.Country = deleteAdmin.Country?.Trim();
+                //_deleteAdmin.Nationality = deleteAdmin.Nationality?.Trim();
+                _deleteAdmin.Opt = "D";
+                _Result = adminLogic.DeleteAdmin(_deleteAdmin);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+        [HttpGet("DeleteAdmin/")]
 		public IActionResult DeleteAdmin()
 		{
 			return View("Views/Pages/Admin/DeleteAdmin.cshtml");
@@ -170,13 +279,117 @@ namespace Starterkit.Controllers
 			return View("Views/Pages/Admin/DeleteAgent.cshtml");
 		}
 
-		[HttpGet("ViewAgent/")]
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateAgent([FromBody] AgentUserModel updateAgent)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                AgentModel _updateAgent = new AgentModel();
+
+                _updateAgent.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateAgent.FirstName = updateAgent.FirstName?.Trim();
+                _updateAgent.LastName = updateAgent.LastName?.Trim();
+                _updateAgent.Phone = updateAgent.Phone?.Trim();
+                _updateAgent.CountryCode = updateAgent.CountryCode?.Trim();
+                _updateAgent.EmailId = updateAgent.EmailId?.Trim();
+                _updateAgent.Address = updateAgent.Address?.Trim();
+                _updateAgent.Country = updateAgent.Country?.Trim();
+                _updateAgent.Nationality = updateAgent.Nationality?.Trim();
+                _updateAgent.Role = updateAgent.Role;
+                _updateAgent.Opt = "U";
+                _Result = adminLogic.UpdateAgent(_updateAgent);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        public JsonResult DeleteAgent([FromBody] AgentUserModel updateAgent)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                AgentModel _updateAgent = new AgentModel();
+
+                _updateAgent.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateAgent.FirstName = updateAgent.FirstName?.Trim();
+                _updateAgent.LastName = updateAgent.LastName?.Trim();
+                _updateAgent.Phone = updateAgent.Phone?.Trim();
+                _updateAgent.CountryCode = updateAgent.CountryCode?.Trim();
+                _updateAgent.EmailId = updateAgent.EmailId?.Trim();
+                _updateAgent.Address = updateAgent.Address?.Trim();
+                _updateAgent.Country = updateAgent.Country?.Trim();
+                _updateAgent.Nationality = updateAgent.Nationality?.Trim();
+                _updateAgent.Role = updateAgent.Role;
+                _updateAgent.Opt = "D";
+                _Result = adminLogic.DeleteAgent(_updateAgent);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+
+        [HttpGet("ViewAgent/")]
 		public IActionResult ViewAgent()
 		{
 			return View("Views/Pages/Admin/ViewAgent.cshtml");
 		}
 
-		[HttpGet("CreateLawyer/")]
+        [HttpGet]
+        public JsonResult GetAgentList()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                AdminLogic _adminLogic = new AdminLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var agentList = _adminLogic.GetAgentList(userId);
+                var result = new { success = true, agentList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve agent list." };
+                return Json(errorResult);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetAgentDetail()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                AdminLogic _adminLogic = new AdminLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var agentList = _adminLogic.GetAgentDetail(userId);
+                var result = new { success = true, agentList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve agent detail." };
+                return Json(errorResult);
+            }
+        }
+
+
+        [HttpGet("CreateLawyer/")]
 		public IActionResult CreateLawyer()
 		{
 			return View("Views/Pages/Admin/CreateLawyer.cshtml");
@@ -188,7 +401,46 @@ namespace Starterkit.Controllers
 			return View("Views/Pages/Admin/ViewLawyer.cshtml");
 		}
 
-		[HttpGet("UpdateLawyer/")]
+        [HttpGet]
+        public JsonResult GetLawyerList()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                AdminLogic _adminLogic = new AdminLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var lawyerList = _adminLogic.GetLawyerList(userId);
+                var result = new { success = true, lawyerList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case list." };
+                return Json(errorResult);
+            }
+        }
+
+        [HttpGet]
+        public JsonResult GetLawyerDetail()
+        {
+            try
+            {
+                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                AdminLogic _adminLogic = new AdminLogic();
+                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
+                var lawyerList = _adminLogic.GetLawyerDetail(userId);
+                var result = new { success = true, lawyerList };
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                var errorResult = new { success = false, message = "Failed to retrieve case list." };
+                return Json(errorResult);
+            }
+        }
+
+
+        [HttpGet("UpdateLawyer/")]
 		public IActionResult UpdateLawyer()
 		{
 			return View("Views/Pages/Admin/UpdateLawyer.cshtml");
@@ -199,6 +451,74 @@ namespace Starterkit.Controllers
 		{
 			return View("Views/Pages/Admin/DeleteLawyer.cshtml");
 		}
+        [AllowAnonymous]
+        [HttpPut]
+        public JsonResult UpdateLawyert([FromBody] LawyerUserModel updateLawyer)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                LawyerModel _updateLawyer = new LawyerModel();
+
+                _updateLawyer.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateLawyer.FirstName = updateLawyer.FirstName?.Trim();
+                _updateLawyer.LastName = updateLawyer.LastName?.Trim();
+                _updateLawyer.LisenceNo = updateLawyer.LisenceNo?.Trim();
+                _updateLawyer.LawyerType = updateLawyer.LawyerType?.Trim();
+                _updateLawyer.Company = updateLawyer.Company?.Trim();
+                _updateLawyer.Phone = updateLawyer.Phone?.Trim();
+                _updateLawyer.CountryCode = updateLawyer.CountryCode?.Trim();
+                _updateLawyer.EmailId = updateLawyer.EmailId?.Trim();
+                _updateLawyer.Address = updateLawyer.Address?.Trim();
+                _updateLawyer.Country = updateLawyer.Country?.Trim();
+                _updateLawyer.Nationality = updateLawyer.Nationality?.Trim();
+                _updateLawyer.Opt = "U";
+                _Result = adminLogic.UpdateLawyer(_updateLawyer);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
+        [AllowAnonymous]
+        [HttpDelete]
+        public JsonResult DeleteLawyer([FromBody] LawyerUserModel deleteLawyer)
+        {
+            try
+            {
+                string ErrorMessage = string.Empty;
+                string _Result = string.Empty;
+                AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
+                LawyerModel _deleteLawyer = new LawyerModel();
+
+                _deleteLawyer.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _deleteLawyer.FirstName = deleteLawyer.FirstName?.Trim();
+                _deleteLawyer.LastName = deleteLawyer.LastName?.Trim();
+                _deleteLawyer.Phone = deleteLawyer.Phone?.Trim();
+                _deleteLawyer.CountryCode = deleteLawyer.CountryCode?.Trim();
+                _deleteLawyer.LisenceNo = deleteLawyer.LisenceNo?.Trim();
+                _deleteLawyer.LawyerType = deleteLawyer.LawyerType?.Trim();
+                _deleteLawyer.Company = deleteLawyer.Company?.Trim();
+                _deleteLawyer.EmailId = deleteLawyer.EmailId?.Trim();
+                _deleteLawyer.Address = deleteLawyer.Address?.Trim();
+                _deleteLawyer.Country = deleteLawyer.Country?.Trim();
+                _deleteLawyer.Nationality = deleteLawyer.Nationality?.Trim();
+                _deleteLawyer.Opt = "D";
+                _Result = adminLogic.DeleteLawyer(_deleteLawyer);
+
+                return Json(_Result);
+            }
+            catch
+            {
+                return Json("error");
+            }
+        }
+
 
         [HttpGet("ProfileOverview/")]
         public IActionResult ProfileOverview()

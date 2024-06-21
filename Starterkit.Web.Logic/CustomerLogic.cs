@@ -224,11 +224,11 @@ namespace Starterkit.Web.Logic
 		}
 
 
-		public string InsertKyc(KycModel kycDocument)
-		{
+        public string InsertKyc(KycModel kycDocument)
+        {
             CustomerDA customerDA = (CustomerDA)DataAccessFactory.GetDataAccess(DataAccessType.Customer);
-			return customerDA.DAL_KycDocument(kycDocument);
-		}
+            return customerDA.DAL_KycDocument(kycDocument);
+        }
 
 	public List<KycstatusModel> KYCStatus(int userId)
         {

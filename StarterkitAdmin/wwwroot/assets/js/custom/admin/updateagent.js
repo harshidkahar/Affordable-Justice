@@ -16,78 +16,101 @@ function convertDateToString(dateString) {
 }
 
 
-function fetchAgentDetailById(id) {
+
+
+var agentDetailData = [];
+
+var fetchAgentDetailById = function (id) {
     $.ajax({
+        url: '/Admin/GetAgentDetail',
         type: 'GET',
-        url: 'Admin/GetAgentDetailtData',
-        data: JSON.stringify({ id: id }),
+        data: JSON.stringify({ Id: id }),
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (response) {
-            console.log('Response data:', response);
-            const agentDetails = response ? JSON.parse(response) : null;
-            console.log('Fetched agent data:', agentDetails);
 
-            if (Array.isArray(agentDetails)) {
-                // Handle case where response is an array
-                if (agentDetails.length > 0) {
-                    populateForm(agentDetails[0]); // Take the first object in the array
-                } else {
-                    console.error('Empty array received');
-                }
-            } else if (agentDetails && !agentDetails.message) {
-                // Handle case where response is a single object
-                populateForm(agentDetails);
+        success: function (response) {
+            //const result = JSON.parse(response); // Parse the JSON string response
+            console.log(response)
+            //console.log(result);
+            if (response.success) {
+                agentDetailData = response.agentDetail;
+                renderTable();
             } else {
-                console.error('Unexpected response format or missing data:', response);
+                Swal.fire({
+                    text: response.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
         },
-        error: function (error) {
-            console.error('Error fetching admin data by ID:', error);
+        error: function () {
+            Swal.fire({
+                text: "Failed to retrieve admin detail.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         }
     });
 }
 
-function populateForm(agentDetails) {
-    var form = document.querySelector('#kt_update_agent_form');
-    form.querySelector('[name="FirstName"]').value = agentDetails.FirstName;
-    form.querySelector('[name="LastName"]').value = agentDetails.LastName;
-    form.querySelector('[name="Email"]').value = agentDetails.EmailId;
-    const agentDateOfBirth = agentDetails.DateOfBirth;
 
-    // Convert the date to "YYYY-MM-DD" format
-    const formattedDOB = convertDateToString(agentDateOfBirth);
+// Render table with case list data
+var renderTable = function () {
+    //const table = document.querySelector('table');
+    // const tableBody = document.querySelector('#adminTableBody');
+    //tableBody.innerHTML = ''; // Clear existing rows
 
-    // Find the DateOfBirth input element
-    const dobInput = form.querySelector('[name="DateOfBirth"]');
+    if (agentDetailData.length > 0) {
+        var agentDetail = agentDetailData[0];
 
-    // Set the value of the input element to the formatted date
-    if (dobInput) {
-        dobInput.value = formattedDOB;
-        // Trigger a change event
-        $(dobInput).trigger('change');
-    } else {
-        console.error('Input element with name "DateOfBirth" not found');
+        var form = document.querySelector('#kt_update_agent_form');
+        form.querySelector('[name="FirstName"]').value = agentDetail.FirstName;
+        form.querySelector('[name="LastName"]').value = agentDetail.LastName;
+        form.querySelector('[name="Email"]').value = agentDetail.EmailId;
+        const agentDateOfBirth = agentDetail.DateOfBirth;
+
+        /*// Convert the date to "YYYY-MM-DD" format
+        const formattedDOB = convertDateToString(adminDateOfBirth);
+
+        // Find the DateOfBirth input element
+        const dobInput = form.querySelector('[name="DateOfBirth"]');
+
+        // Set the value of the input element to the formatted date
+        if (dobInput) {
+            dobInput.value = formattedDOB;
+            // Trigger a change event
+            $(dobInput).trigger('change');
+        } else {
+            console.error('Input element with name "DateOfBirth" not found');
+        } */
+        form.querySelector('[name="DateOfBirth"]').value = agentDateOfBirth;
+        form.querySelector('[name="Phone"]').value = agentDetail.Phone;
+        form.querySelector('[name="Address"]').value = agentDetail.Address;
+        const countrySelect = form.querySelector('[name="Country"]');
+        countrySelect.value = agentDetail.Country;
+        $(countrySelect).trigger('change');
+        const nationselect = form.querySelector('[name="Nationality"]');
+        nationselect.value = agentDetail.Nationality;
+        $(nationselect).trigger('change');
+        const countrycodeSelect = form.querySelector('[name="countrycode"]');
+        countrycodeSelect.value = agentDetail.CountryCode;
+        $(countrycodeSelect).trigger('change');
+        const roleSelect = form.querySelector('[name="Role"]');
+        roleSelect.value = agentDetail.Role;
+        $(roleSelect).trigger('change');
+
+
     }
-    const Role = form.querySelector('[name="Role"]');
-    Role.value = agentDetails.Role;
-    $(Role).trigger('change');
-
-    form.querySelector('[name="countrycode"]').value = agentDetails.CountryCode;
-    form.querySelector('[name="Phone"]').value = agentDetails.Phone;
-    form.querySelector('[name="Address"]').value = agentDetails.Address;
-    const countrySelect = form.querySelector('[name="Country"]');
-    countrySelect.value = agentDetails.Country;
-    $(countrySelect).trigger('change');
-    const nationselect = form.querySelector('[name="Nationality"]');
-    nationselect.value = agentDetails.Nationality;
-    $(nationselect).trigger('change');
-
+    KTMenu.createInstances();
 }
-
-
-
-
 
 
 

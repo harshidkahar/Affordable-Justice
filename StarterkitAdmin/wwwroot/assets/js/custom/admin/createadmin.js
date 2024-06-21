@@ -123,42 +123,26 @@ var CreateAdmin = function () {
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(formData),
                         dataType: "json",
-                        success: function (response) {
-                            // Handle success response
-                            if (response === "Admin successfully registered.") {
+                        success: function (data) {
+                            if (data == "done") {
                                 Swal.fire({
-                                    text: "Admin account created successfully!",
+                                    text: "Admin Successfully Added!",
                                     icon: "success",
-                                    confirmButtonText: "OK"
-                                }).then(function () {
-                                    // Redirect to another page (e.g., admin list page) after success
-                                    location.href = "New-Admin";
-                                    form.reset();
-                                });
-                            } else {
-                                // Handle failure response
-                                Swal.fire({
-                                    text: response,
-                                    icon: "error",
-                                    confirmButtonText: "OK"
+                                    buttonsStyling: false,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn btn-primary"
+                                    }
+                                }).then(function (result) {
+                                    location.href="New-Admin"
                                 });
                             }
+                           
                         },
-                        error: function () {
-                            // Handle AJAX request error
-                            Swal.fire({
-                                text: "An error occurred. Please try again later.",
-                                icon: "error",
-                                confirmButtonText: "OK"
-                            });
-                        },
-                        complete: function () {
-                            // Hide loading indication and enable the button
-                            submitButton.removeAttribute("data-kt-indicator");
-                            submitButton.disabled = false;
-                        }
+
                     });
-                } else {
+                }
+                else {
                     // Form validation failed, show error message
                     Swal.fire({
                         text: "Please fix the errors in the form and try again.",

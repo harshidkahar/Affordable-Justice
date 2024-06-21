@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewData["Title"] = "ProfileSetting";
-	KTTheme.AddJavascriptFile("js/custom/admin/profilesetting.js");
+	KTTheme.AddJavascriptFile("js/custom/admin/profilesetting.js?v=1.0");
 }
 
 
@@ -105,12 +105,12 @@
 						<ul class="nav nav-stretch nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold">
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="Admin-ProfileOverView">Overview</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5" href="AdminProfileOverview">Overview</a>
 							</li>
 							<!--end::Nav item-->
 							<!--begin::Nav item-->
 							<li class="nav-item mt-2">
-								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="Admin-ProfileSetting">Settings</a>
+								<a class="nav-link text-active-primary ms-0 me-10 py-5 active" href="AdminProfileSetting">Settings</a>
 							</li>
 							<!--end::Nav item-->
 
@@ -156,12 +156,12 @@
 										<div class="row">
 											<!--begin::Col-->
 											<div class="col-lg-6 fv-row">
-												<input type="text" name="txtfname" id="txtfname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name" runat="server" />
+												<input type="text" name="txtfname" id="txtfname" class="form-control form-control-lg form-control-solid mb-3 mb-lg-0" placeholder="First name"  />
 											</div>
 											<!--end::Col-->
 											<!--begin::Col-->
 											<div class="col-lg-6 fv-row">
-												<input type="text" name="txtlname" id="txtlname" class="form-control form-control-lg form-control-solid" placeholder="Last name" runat="server" />
+												<input type="text" name="txtlname" id="txtlname" class="form-control form-control-lg form-control-solid" placeholder="Last name" />
 											</div>
 											<!--end::Col-->
 										</div>
@@ -186,7 +186,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<input type="tel" name="txtphone" id="txtphone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" runat="server" />
+										<input type="tel" name="txtphone" id="txtphone" class="form-control form-control-lg form-control-solid" placeholder="Phone number"/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -207,7 +207,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<input type="date" name="txtdob" id="txtdob" class="form-control form-control-lg form-control-solid" placeholder="Enter DOB." runat="server" />
+										<input type="date" name="txtdob" id="txtdob" class="form-control form-control-lg form-control-solid" placeholder="Enter DOB."/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -228,7 +228,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<input type="email" name="txtEmail" id="txtEmail" class="form-control form-control-lg form-control-solid" placeholder="Enter Valid EmailI." runat="server" disabled />
+										<input type="email" name="txtEmail" id="txtEmail" class="form-control form-control-lg form-control-solid" placeholder="Enter Valid EmailI." disabled />
 									</div>
 									<!--end::Col-->
 								</div>
@@ -249,7 +249,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<input type="text" name="txtusername" id="txtusername" class="form-control form-control-lg form-control-solid" placeholder="Enter Username." runat="server" />
+										<input type="text" name="txtusername" id="txtusername" class="form-control form-control-lg form-control-solid" placeholder="Enter Username."/>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -270,7 +270,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<input type="password" name="txtPass" id="txtPass" class="form-control form-control-lg form-control-solid" placeholder="Enter Valid Password." runat="server" />
+										<input type="password" name="txtPass" id="txtPass" class="form-control form-control-lg form-control-solid" placeholder="Enter Valid Password." />
 									</div>
 									<!--end::Col-->
 								</div>
@@ -291,7 +291,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<textarea class="form-control form-control form-control-solid" data-kt-autosize="true" placeholder="Yellow Street, Sharjah" name="txtAddress" id="txtAddress" runat="server"></textarea>
+										<textarea class="form-control form-control form-control-solid" data-kt-autosize="true" placeholder="Yellow Street, Sharjah" name="txtAddress" id="txtAddress"></textarea>
 									</div>
 									<!--end::Col-->
 								</div>
@@ -312,7 +312,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<select class="form-select form-select-solid" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country" name="ddlCountry" id="ddlCountry" runat="server">
+										<select class="form-select form-select-solid" aria-label="Select a Country" data-control="select2" data-placeholder="Select a Country" name="ddlCountry" id="ddlCountry">
 											<option></option>
 											<option value="United States">United States</option>
 											<option value="Afghanistan">Afghanistan</option>
@@ -575,7 +575,7 @@
 									<!--end::Label-->
 									<!--begin::Col-->
 									<div class="col-lg-8 fv-row">
-										<select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select a Country" name="ddlNationality" id="ddlNationality" runat="server">
+										<select class="form-select form-select-solid" aria-label="Select Nationality" data-control="select2" data-placeholder="Select a Country" name="ddlNationality" id="ddlNationality">
 											<option></option>
 											<option value='afghan'>Afghan</option>
 											<option value='albanian'>Albanian</option>

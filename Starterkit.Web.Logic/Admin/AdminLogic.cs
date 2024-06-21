@@ -23,6 +23,16 @@ namespace Starterkit.Web.Logic
 			AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
 			return adminDA.InsertAdmin(creataAdmin);
 		}
+        public string UpdateAdmin(AdminModel updateAdmin)
+        {
+            AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
+            return adminDA.InsertAdmin(updateAdmin);
+        }
+        public string DeleteAdmin(AdminModel DeleteAdmin)
+        {
+            AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
+            return adminDA.InsertAdmin(DeleteAdmin);
+        }
 
         public string AddAgent(AgentModel creataAgent)
         {
@@ -30,10 +40,35 @@ namespace Starterkit.Web.Logic
             return adminDA.InsertAgent(creataAgent);
         }
 
+        public string UpdateAgent(AgentModel updateAgent)
+        {
+            AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
+            return adminDA.InsertAgent(updateAgent);
+        }
+
+        public string DeleteAgent(AgentModel deleteAgent)
+        {
+            AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
+            return adminDA.InsertAgent(deleteAgent);
+        }
+
+
         public string AddLawyer(LawyerModel creataLawyer)
         {
             AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
             return adminDA.InsertLawyer(creataLawyer);
+        }
+
+        public string UpdateLawyer(LawyerModel updateLawyer)
+        {
+            AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
+            return adminDA.InsertLawyer(updateLawyer);
+        }
+
+        public string DeleteLawyer(LawyerModel deleteLawyer)
+        {
+            AdminDA adminDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
+            return adminDA.InsertLawyer(deleteLawyer);
         }
 
 
@@ -208,8 +243,491 @@ namespace Starterkit.Web.Logic
 			}
 			return profilesetting;
 		}
-		
-		public string UpdateAdmin(AdminProfileSettingModel profileUpdate)
+
+        public List<AdminModel> GetAdminList(int userId)
+        {
+            List<AdminModel> profileoverview = new List<AdminModel>();
+            try
+            {
+                AdminCommonDA commonDA = new AdminCommonDA();
+                DataSet ds = commonDA.GetAdminCommonFillData(userId, "", "GetAdminData");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        AdminModel adminprofiloverviewModel = new AdminModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(adminprofiloverviewModel.FirstName))
+                        {
+                            adminprofiloverviewModel.FirstName += " ";
+                        }
+                        adminprofiloverviewModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(adminprofiloverviewModel.LastName))
+                        {
+                            adminprofiloverviewModel.LastName += " ";
+                        }
+                        adminprofiloverviewModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.EmailId = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Phone = Convert.ToString(row["Phone"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Address = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Username = Convert.ToString(row["Username"]);
+                        }
+
+                        profileoverview.Add(adminprofiloverviewModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return profileoverview;
+        }
+
+        public List<AdminModel> GetAdminDetail(int userId)
+        {
+            List<AdminModel> adminDetail = new List<AdminModel>();
+            try
+            {
+                AdminCommonDA commonDA = new AdminCommonDA();
+                DataSet ds = commonDA.GetAdminCommonFillData(userId, "", "GetAdminIdData");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        AdminModel adminprofiloverviewModel = new AdminModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(adminprofiloverviewModel.FirstName))
+                        {
+                            adminprofiloverviewModel.FirstName += " ";
+                        }
+                        adminprofiloverviewModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(adminprofiloverviewModel.LastName))
+                        {
+                            adminprofiloverviewModel.LastName += " ";
+                        }
+                        adminprofiloverviewModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.EmailId = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Phone = Convert.ToString(row["Phone"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Address = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            adminprofiloverviewModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+
+                        adminDetail.Add(adminprofiloverviewModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return adminDetail;
+        }
+
+        public List<LawyerModel> GetLawyerList(int userId)
+        {
+            List<LawyerModel> LawyerList = new List<LawyerModel>();
+            try
+            {
+                AdminCommonDA commonDA = new AdminCommonDA();
+                DataSet ds = commonDA.GetAdminCommonFillData(userId, "", "GetLawyerData");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        LawyerModel lawyerModel = new LawyerModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(lawyerModel.FirstName))
+                        {
+                            lawyerModel.FirstName += " ";
+                        }
+                        lawyerModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(lawyerModel.LastName))
+                        {
+                            lawyerModel.LastName += " ";
+                        }
+                        lawyerModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.EmailId = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("LisenceNumber") && !row["LisenceNumber"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.LisenceNo = Convert.ToString(row["LisenceNumber"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("LawyerType") && !row["LawyerType"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.LawyerType = Convert.ToString(row["LawyerType"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Company") && !row["Company"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Company = Convert.ToString(row["Company"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Phone = Convert.ToString(row["Phone"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Address = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Username = Convert.ToString(row["Username"]);
+                        }
+
+                        LawyerList.Add(lawyerModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return LawyerList;
+        }
+
+        public List<LawyerModel> GetLawyerDetail(int userId)
+        {
+            List<LawyerModel> LawyerDetail = new List<LawyerModel>();
+            try
+            {
+                AdminCommonDA commonDA = new AdminCommonDA();
+                DataSet ds = commonDA.GetAdminCommonFillData(userId, "", "GetLawyerIdData");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        LawyerModel lawyerModel = new LawyerModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(lawyerModel.FirstName))
+                        {
+                            lawyerModel.FirstName += " ";
+                        }
+                        lawyerModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(lawyerModel.LastName))
+                        {
+                            lawyerModel.LastName += " ";
+                        }
+                        lawyerModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.EmailId = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("LisenceNumber") && !row["LisenceNumber"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.LisenceNo = Convert.ToString(row["LisenceNumber"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("LawyerType") && !row["LawyerType"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.LawyerType = Convert.ToString(row["LawyerType"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Company") && !row["Company"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Company = Convert.ToString(row["Company"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Phone = Convert.ToString(row["Phone"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Address = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            lawyerModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+
+                        LawyerDetail.Add(lawyerModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return LawyerDetail;
+        }
+
+        public List<AgentModel> GetAgentList(int userId)
+        {
+            List<AgentModel> AgentList = new List<AgentModel>();
+            try
+            {
+                AdminCommonDA commonDA = new AdminCommonDA();
+                DataSet ds = commonDA.GetAdminCommonFillData(userId, "", "GetAgentData");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        AgentModel agentModel = new AgentModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            agentModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(agentModel.FirstName))
+                        {
+                            agentModel.FirstName += " ";
+                        }
+                        agentModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(agentModel.LastName))
+                        {
+                            agentModel.LastName += " ";
+                        }
+                        agentModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            agentModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            agentModel.EmailId = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                        {
+                            agentModel.Phone = Convert.ToString(row["Phone"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            agentModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+                        {
+                            agentModel.Username = Convert.ToString(row["Username"]);
+                        }
+						if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+						{
+							agentModel.Username = Convert.ToString(row["Username"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            agentModel.Address = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            agentModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            agentModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Role") && !row["Role"].Equals(DBNull.Value))
+                        {
+                            agentModel.Role = Convert.ToInt32(row["Role"]);
+                        }
+
+
+                        AgentList.Add(agentModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return AgentList;
+        }
+
+        public List<AgentModel> GetAgentDetail(int userId)
+        {
+            List<AgentModel> AgentDetail = new List<AgentModel>();
+            try
+            {
+                AdminCommonDA commonDA = new AdminCommonDA();
+                DataSet ds = commonDA.GetAdminCommonFillData(userId, "", "GetAgentIdData");
+
+                if (ds != null && ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    foreach (DataRow row in ds.Tables[0].Rows)
+                    {
+                        AgentModel agentModel = new AgentModel();
+
+                        if (ds.Tables[0].Columns.Contains("Id") && !row["Id"].Equals(DBNull.Value))
+                        {
+                            agentModel.Id = Convert.ToInt32(row["Id"]);
+                        }
+                        if (!string.IsNullOrEmpty(agentModel.FirstName))
+                        {
+                            agentModel.FirstName += " ";
+                        }
+                        agentModel.FirstName += (row["FirstName"] ?? "").ToString();
+
+                        if (!string.IsNullOrEmpty(agentModel.LastName))
+                        {
+                            agentModel.LastName += " ";
+                        }
+                        agentModel.LastName += (row["LastName"] ?? "").ToString();
+
+                        if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
+                        {
+                            agentModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
+                        }
+                        if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
+                        {
+                            agentModel.EmailId = Convert.ToString(row["EmailId"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Phone") && !row["Phone"].Equals(DBNull.Value))
+                        {
+                            agentModel.Phone = Convert.ToString(row["Phone"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("CountryCode") && !row["CountryCode"].Equals(DBNull.Value))
+                        {
+                            agentModel.CountryCode = Convert.ToString(row["CountryCode"]);
+                        }
+						if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+						{
+							agentModel.Username = Convert.ToString(row["Username"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Address") && !row["Address"].Equals(DBNull.Value))
+                        {
+                            agentModel.Address = Convert.ToString(row["Address"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
+                        {
+                            agentModel.Country = Convert.ToString(row["Country"]);
+                        }
+                        if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
+                        {
+                            agentModel.Nationality = Convert.ToString(row["Nationality"]);
+                        }
+
+                        AgentDetail.Add(agentModel);
+
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Handle exception
+            }
+            return AgentDetail;
+        }
+
+
+        public string UpdateAdminProfile(AdminProfileSettingModel profileUpdate)
 		{
 			AdminDA customerDA = (AdminDA)DataAccessFactory.GetDataAccess(DataAccessType.Admin);
 			return customerDA.DAL_AdminNew(profileUpdate);

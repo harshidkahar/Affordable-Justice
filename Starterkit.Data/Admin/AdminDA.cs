@@ -55,20 +55,21 @@ namespace Starterkit.Data
 				Guid guid = Guid.NewGuid();
 
 				con = DataAccess.OpenConnection();
-				SqlCommand cmd = new SqlCommand("[dbo].[Insertadmin]", con);
+				SqlCommand cmd = new SqlCommand("[dbo].[DAL_Admin]", con);
 				cmd.CommandType = CommandType.StoredProcedure;
 
 				// Add parameters for the stored procedure
+                cmd.Parameters.AddWithValue("Id",insertAdmin.Id);
 				cmd.Parameters.AddWithValue("@FirstName", insertAdmin.FirstName);
 				cmd.Parameters.AddWithValue("@LastName", insertAdmin.LastName);
 				cmd.Parameters.AddWithValue("@DateOfBirth", insertAdmin.DateOfBirth);
+                cmd.Parameters.AddWithValue("@CountryCode", insertAdmin.CountryCode);
 				cmd.Parameters.AddWithValue("@Phone", insertAdmin.Phone);
 				cmd.Parameters.AddWithValue("@EmailId", insertAdmin.EmailId);
 				cmd.Parameters.AddWithValue("@Address", insertAdmin.Address);
 				cmd.Parameters.AddWithValue("@Country", insertAdmin.Country);
 				cmd.Parameters.AddWithValue("@Nationality", insertAdmin.Nationality);
-				cmd.Parameters.AddWithValue("@Timestamp", DateTime.Now);
-				cmd.Parameters.AddWithValue("@IsActive", true);
+                cmd.Parameters.AddWithValue("@Opt", insertAdmin.Opt);
 				SqlDataAdapter da = new SqlDataAdapter();
 				da.SelectCommand = cmd;
 				cmd.ExecuteNonQuery();
@@ -90,10 +91,11 @@ namespace Starterkit.Data
                 Guid guid = Guid.NewGuid();
 
                 con = DataAccess.OpenConnection();
-                SqlCommand cmd = new SqlCommand("[dbo].[InsertAgent]", con);
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Agent]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // Add parameters for the stored procedure
+                cmd.Parameters.AddWithValue("@Id", insertAgent.Id);
                 cmd.Parameters.AddWithValue("@FirstName", insertAgent.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", insertAgent.LastName);
                 cmd.Parameters.AddWithValue("@DateOfBirth", insertAgent.DateOfBirth);
@@ -103,8 +105,6 @@ namespace Starterkit.Data
                 cmd.Parameters.AddWithValue("@Country", insertAgent.Country);
                 cmd.Parameters.AddWithValue("@Nationality", insertAgent.Nationality);
                 cmd.Parameters.AddWithValue("@Role", insertAgent.Role);
-                cmd.Parameters.AddWithValue("@Timestamp", DateTime.Now);
-                cmd.Parameters.AddWithValue("@IsActive", true);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
@@ -126,10 +126,11 @@ namespace Starterkit.Data
                 Guid guid = Guid.NewGuid();
 
                 con = DataAccess.OpenConnection();
-                SqlCommand cmd = new SqlCommand("[dbo].[AddLawyer]", con);
+                SqlCommand cmd = new SqlCommand("[dbo].[DAL_Lawyer]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 // Add parameters for the stored procedure
+                cmd.Parameters.AddWithValue("@Id", insertLawyer.Id);
                 cmd.Parameters.AddWithValue("@FirstName", insertLawyer.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", insertLawyer.LastName);
                 cmd.Parameters.AddWithValue("@LisenceNumber", insertLawyer.LisenceNo);

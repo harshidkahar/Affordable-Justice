@@ -26,10 +26,10 @@ namespace Starterkit.Controllers
 
 
       
-        [HttpGet("ProfileOverview/")]
+        [HttpGet("AdminProfileOverview/")]
         public IActionResult ProfileOverview()
         {
-            return View("Views/Pages/Admin/ProfileOverview.cshtml");
+            return View("Views/Pages/Admin/ProfileOverView.cshtml");
         }
 
 
@@ -52,7 +52,7 @@ namespace Starterkit.Controllers
             }
         }
 
-        [HttpGet("ProfileSetting/")]
+        [HttpGet("AdminProfileSetting/")]
         public IActionResult ProfileSetting()
         {
             return View("Views/Pages/Admin/ProfileSetting.cshtml");
@@ -81,7 +81,7 @@ namespace Starterkit.Controllers
 
         [AllowAnonymous]
         [HttpPut]
-        public JsonResult UpdateCustomer([FromBody] AdminProfileSetting updateCustomer)
+        public JsonResult UpdateAdminProfile([FromBody] AdminProfileSetting updateCustomer)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace Starterkit.Controllers
                 profileUpdate.Country = updateCustomer.Country?.Trim();
                 profileUpdate.Nationality = updateCustomer.Nationality?.Trim();
 
-                _Result = customerLogic.UpdateAdmin(profileUpdate);
+                _Result = customerLogic.UpdateAdminProfile(profileUpdate);
 
                 return Json(_Result);
             }

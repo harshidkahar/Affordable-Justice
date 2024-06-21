@@ -1,6 +1,7 @@
 ﻿// Function to fetch admin data from the server and populate the table
 
 // Function to convert a timestamp wrapped in a string to a human-readable date format (e.g., "YYYY-MM-DD")
+var adminListData = [];
 function dateOfBirthFormatted(timestampString) {
     // Extract the timestamp from the string (e.g., "Date(946665000000)" becomes "946665000000")
     const match = timestampString.match(/\d+/); // Find the first sequence of digits
@@ -37,68 +38,78 @@ function dateOfBirthFormatted(timestampString) {
     }
 }
 
-function fetchAdminData() {
-    // Make an AJAX request to the server-side method
+var fetchAdminData = function () {
     $.ajax({
+        url: '/Admin/GetAdminList',
         type: 'GET',
-        url: 'Admin/ViewAdmin',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
         success: function (response) {
-            var data = response.d;
-
-            // Add debug logging to check the data type and structure
-            console.log('Response data:', data);
-            console.log('Is data an array?:', Array.isArray(data));
-
-            // If data is not an array, convert it to an array
-            if (!Array.isArray(data)) {
-                try {
-                    data = JSON.parse(data);
-                } catch (e) {
-                    console.error('Error parsing data as JSON:', e);
-                    return;
-                }
+            //const result = JSON.parse(response); // Parse the JSON string response
+            console.log(response)
+            //console.log(result);
+            if (response.success) {
+                adminListData = response.adminList;
+                renderTable();
+            } else {
+                Swal.fire({
+                    text: response.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
-
-            // Proceed to populate the admin table if data is now an array
-            populateAdminTable(data);
         },
-        error: function (error) {
-            console.error('Error fetching admin data:', error);
+        error: function () {
+            Swal.fire({
+                text: "Failed to retrieve case list.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         }
     });
 }
 
-function populateAdminTable(data) {
-    // Get the table body element
-    var adminTableBody = document.getElementById('adminTableBody');
+// Render table with case list data
+var renderTable = function () {
+    //const table = document.querySelector('table');
+    const tableBody = document.querySelector('#adminTableBody');
+    tableBody.innerHTML = ''; // Clear existing rows
 
-    // Clear existing rows
-    adminTableBody.innerHTML = '';
+    adminListData.forEach((adminItem, index) => {
+        const row = tableBody.insertRow();
 
-    // Iterate through the data and create rows
-    data.forEach(function (admin) {
-        var row = document.createElement('tr');
-        // Convert timestamp to date format
-
-
-        // Add columns to the row
-        row.innerHTML = `
-            <td>${admin.FullName}</td>
-            <td>${admin.EmailId}</td>
-            <td>${admin.Phone}</td>
-            <td>${admin.Username}</td>
-            <td>
-                <a href='/UpdateAdmin?id=${admin.Id}' class="btn btn-light btn-sm btn-flex btn-center me-1">Edit</a>
-                <a href='/DeleteAdmin?id=${admin.Id}' class="btn btn-light btn-sm btn-flex btn-center">Delete</a>
-            </td>
-        `;
-
-        // Append the row to the table body
-        adminTableBody.appendChild(row);
+        row.insertCell(0).textContent = adminItem.FirstName + adminItem.LastName;
+        row.insertCell(1).textContent = adminItem.EmailId;
+        row.insertCell(2).textContent = adminItem.Phone;
+        row.insertCell(3).textContent = adminItem.Username;
+        row.insertCell(4).innerHTML = '<a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions'
+            + '<i class="ki-duotone ki-down fs-5 ms-1" ></i>'
+            + '</a>'
+            + '<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">'
+            + '<!--begin::Menu item-->'
+            + '<div class="menu-item px-3">'
+            + '<a href="/UpdateAdmin?id=' + adminItem.Id + '" class="menu-link px3">Edit</a>'
+            + '</div>'
+            + '<!--end::Menu item-->'
+            + '<!--begin::Menu item-->'
+            + '<div class="menu-item px-3">'
+            + '<a href="/DeleteAdmin?id=' + adminItem.Id + '" class="menu-link px3">Delete</a>'
+            + '</div>'
+            + '<!--end::Menu item-->'
+            + '</div>';
     });
+    KTMenu.createInstances();
 }
+
+
+
+
 function getAdminIdFromURL() {
     const url = window.location.pathname; // Example: '/Admin/ManageAdmin/Update-Admin/123'
     const parts = url.split('/');
@@ -113,8 +124,6 @@ function getAdminIdFromURL() {
 // Call the function to fetch admin data when the page loads
 document.addEventListener('DOMContentLoaded', function () {
     fetchAdminData();
-
-
 });
 
 

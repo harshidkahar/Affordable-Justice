@@ -1,5 +1,5 @@
 ﻿// Function to fetch admin data from the server and populate the table
-
+var agentListData = [];
 // Function to convert a timestamp wrapped in a string to a human-readable date format (e.g., "YYYY-MM-DD")
 function convertTimestampToDate(timestampString) {
     // Extract the timestamp from the string (e.g., "Date(946665000000)" becomes "946665000000")
@@ -38,68 +38,75 @@ function convertTimestampToDate(timestampString) {
 }
 
 
-function fetchAgentData() {
-    // Make an AJAX request to the server-side method
+
+var fetchAgentData = function () {
     $.ajax({
+        url: '/Admin/GetAgentList',
         type: 'GET',
-        url: 'Admin/ViewAgent',
-        contentType: 'application/json; charset=utf-8',
-        dataType: 'json',
         success: function (response) {
-            var data = response.d;
-
-            // Add debug logging to check the data type and structure
-            console.log('Response data:', data);
-            console.log('Is data an array?:', Array.isArray(data));
-
-            // If data is not an array, convert it to an array
-            if (!Array.isArray(data)) {
-                try {
-                    data = JSON.parse(data);
-                } catch (e) {
-                    console.error('Error parsing data as JSON:', e);
-                    return;
-                }
+            //const result = JSON.parse(response); // Parse the JSON string response
+            console.log(response)
+            //console.log(result);
+            if (response.success) {
+                agentListData = response.agentList;
+                renderTable();
+            } else {
+                Swal.fire({
+                    text: response.message,
+                    icon: "error",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                });
             }
-
-            // Proceed to populate the admin table if data is now an array
-            populateAgentTable(data);
         },
-        error: function (error) {
-            console.error('Error fetching agent data:', error);
+        error: function () {
+            Swal.fire({
+                text: "Failed to retrieve agent list.",
+                icon: "error",
+                buttonsStyling: false,
+                confirmButtonText: "Ok, got it!",
+                customClass: {
+                    confirmButton: "btn btn-primary"
+                }
+            });
         }
     });
 }
 
-function populateAgentTable(data) {
-    // Get the table body element
-    var agentTableBody = document.getElementById('agentTableBody');
+// Render table with case list data
+var renderTable = function () {
+    //const table = document.querySelector('table');
+    const tableBody = document.querySelector('#agentTableBody');
+    tableBody.innerHTML = ''; // Clear existing rows
 
-    // Clear existing rows
-    agentTableBody.innerHTML = '';
+    agentListData.forEach((agentItem, index) => {
+        const row = tableBody.insertRow();
 
-    // Iterate through the data and create rows
-    data.forEach(function (agent) {
-        var row = document.createElement('tr');
-        // Convert timestamp to date format
-
-
-        // Add columns to the row
-        row.innerHTML = `
-            <td>${agent.FullName}</td>
-            <td>${agent.EmailId}</td>
-            <td>${agent.Phone}</td>
-            <td>${agent.Role}</td>
-            <td>${agent.Username}</td>
-            <td>
-                <a href='/UpdateAgent?id=${agent.Id}' class="btn btn-light btn-sm btn-flex btn-center me-1">Edit</a>
-                <a href='/DeleteAgent?id=${agent.Id}' class="btn btn-light btn-sm btn-flex btn-center">Delete</a>
-            </td>
-        `;
-
-        // Append the row to the table body
-        agentTableBody.appendChild(row);
+        row.insertCell(0).textContent = agentItem.FirstName + agentItem.LastName;
+        row.insertCell(1).textContent = agentItem.EmailId;
+        row.insertCell(2).textContent = agentItem.Phone;
+        row.insertCell(3).textContent = agentItem.Role
+        row.insertCell(4).textContent = agentItem.Username;
+        row.insertCell(5).innerHTML = '<a href="#" class="btn btn-light btn-active-light-primary btn-flex btn-center btn-sm" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Actions'
+            + '<i class="ki-duotone ki-down fs-5 ms-1" ></i>'
+            + '</a>'
+            + '<div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-semibold fs-7 w-125px py-4" data-kt-menu="true">'
+            + '<!--begin::Menu item-->'
+            + '<div class="menu-item px-3">'
+            + '<a href="/UpdateAgent?id=' + agentItem.Id + '" class="menu-link px3">Edit</a>'
+            + '</div>'
+            + '<!--end::Menu item-->'
+            + '<!--begin::Menu item-->'
+            + '<div class="menu-item px-3">'
+            + '<a href="/DeleteAgent?id=' + agentItem.Id + '" class="menu-link px3">Delete</a>'
+            + '</div>'
+            + '<!--end::Menu item-->'
+            + '</div>';
     });
+    KTMenu.createInstances();
 }
 
 
