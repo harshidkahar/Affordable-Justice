@@ -101,14 +101,61 @@ var renderTable = function () {
             + '<!--end::Menu item-->'
             + '<!--begin::Menu item-->'
             + '<div class="menu-item px-3">'
-            + '<a href="/DeleteAgent?id=' + agentItem.Id + '" class="menu-link px3">Delete</a>'
+            + '<a class="menu-link px3 agentdelete" onclick="deleteAgentById(' + agentItem.Id + ');">Delete</a>'
             + '</div>'
             + '<!--end::Menu item-->'
             + '</div>';
+
+
+        const deleteButton = row.querySelector('.agentdelete');
+        deleteButton.addEventListener('click', () => {
+            // Add your edit functionality here
+            console.log('delete button clicked for index:', index);
+            deleteAgentById(agentItem.Id);
+
+        });
     });
     KTMenu.createInstances();
 }
 
+function deleteAgentById(Id) {
+    var model = {
+        Id: Id
+        /*FirstName: document.querySelector('[name="FirstName"]').value,
+        LastName: document.querySelector('[name="LastName"]').value,
+        DateOfBirth: document.querySelector('[name="DateOfBirth"]').value,
+        CountryCode: document.querySelector('[name="countrycode"]').value,
+        Role: document.querySelector('[name="Role"]').value,
+        Phone: document.querySelector('[name="Phone"]').value,
+        EmailId: document.querySelector('[name="Email"]').value,
+        Address: document.querySelector('[name="Address"]').value,
+        Country: document.querySelector('[name="Country"]').value,
+        Nationality: document.querySelector('[name="Nationality"]').value, */
+    };
+
+    // Perform an AJAX request to delete the admin by ID
+    $.ajax({
+        type: 'DELETE',
+        url: 'Admin/DeleteAgent', // URL of the Web Method
+        data: JSON.stringify(model), // Send the ID as JSON data
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            if (data == "done") {
+                fetchAgentData();
+            }
+
+        },
+
+        error: function (error) {
+            Swal.fire({
+                text: 'An error occurred. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+}
 
 function getAgentIdFromURL() {
     const url = window.location.pathname; // Example: '/Admin/ManageAdmin/Update-Agent/123'

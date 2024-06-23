@@ -153,7 +153,7 @@ function deleteLawyerById(id) {
                         confirmButton: "btn btn-primary"
                     }
                 }).then(function (result) {
-                    location.href = "dashboard"
+                    location.href = "ViewAgent"
                 });
             }
 

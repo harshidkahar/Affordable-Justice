@@ -99,25 +99,108 @@ var renderTable = function () {
             + '<!--end::Menu item-->'
             + '<!--begin::Menu item-->'
             + '<div class="menu-item px-3">'
-            + '<a href="/DeleteAdmin?id=' + adminItem.Id + '" class="menu-link px3">Delete</a>'
+            + '<a class="menu-link px3 admindelete" onclick="deleteAdminById(' + adminItem.Id + ');">Delete</a>'
             + '</div>'
             + '<!--end::Menu item-->'
             + '</div>';
+
+        const deleteButton = row.querySelector('.admindelete');
+        deleteButton.addEventListener('click', () => {
+            // Add your edit functionality here
+            console.log('delete button clicked for index:', index);
+            deleteAdminById(adminItem.Id);
+
+        });
+       
     });
     KTMenu.createInstances();
 }
 
+function deleteAdminById(Id) {
+    var model = {
+        Id: Id
+    /*    FirstName: document.querySelector('[name="FirstName"]').value,
+        LastName: document.querySelector('[name="LastName"]').value,
+        DateOfBirth: document.querySelector('[name="DateOfBirth"]').value,
+        CountryCode: document.querySelector('[name="countrycode"]').value,
+        Phone: document.querySelector('[name="Phone"]').value,
+        EmailId: document.querySelector('[name="EmailId"]').value,
+        Address: document.querySelector('[name="Address"]').value,
+        Country: document.querySelector('[name="Country"]').value,
+        Nationality: document.querySelector('[name="Nationality"]').value, */
+    };
+    // Perform an AJAX request to delete the admin by ID
+    $.ajax({
+        type: 'DELETE',
+        url: 'Admin/DeleteAdmin', // URL of the Web Method
+        data: JSON.stringify(model), // Send the ID as JSON data
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        success: function (data) {
+            if (data == "done") {
+
+                fetchAdminData();
+            }
+
+        },
+
+        error: function (error) {
+            Swal.fire({
+                text: 'An error occurred. Please try again later.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+}
+
+
+function handleDeleteAdmin() {
+    // Get the form element by its ID
+    const form = document.getElementById('kt_admin_delete_form');
+
+    // Add a submit event listener to the form
+    form.addEventListener('submit', function (event) {
+        // Prevent the default form submission behavior
+        event.preventDefault();
+
+        // Get the admin ID from a hidden field or other source
+        const adminId = getAdminIdFromURL();
+
+        // Ensure the ID is valid
+        if (adminId !== null) {
+            // Call the function to delete the admin by ID
+            //deleteAdminById(adminId);
+
+        } else {
+            console.error('Invalid admin ID');
+            Swal.fire({
+                text: 'Invalid admin ID. Unable to delete admin.',
+                icon: 'error',
+                confirmButtonText: 'OK'
+            });
+        }
+    });
+}
 
 
 
 function getAdminIdFromURL() {
-    const url = window.location.pathname; // Example: '/Admin/ManageAdmin/Update-Admin/123'
-    const parts = url.split('/');
-    // Assuming the ID is the last part of the URL path
-    const Id = parts[parts.length - 1];
-    return Id;
-}
+    // Get the query string from the current URL
+    const queryString = window.location.search;
 
+    // Create a URLSearchParams object to parse the query string
+    const params = new URLSearchParams(queryString);
+
+    // Get the value of the 'id' parameter
+    const adminId = params.get('id');
+
+    // Convert the retrieved ID to an integer using parseInt
+    const id = parseInt(adminId, 10);
+
+    // Check if the parsed ID is a valid number and return it
+    return !isNaN(id) ? id : null;
+}
 
 
 

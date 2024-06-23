@@ -134,7 +134,7 @@ var UpdateAdmin = function () {
                                         confirmButton: "btn btn-primary"
                                     }
                                 }).then(function (result) {
-                                    location.href = "New-Admin"
+                                    location.href = "ViewAdmin";
                                 });
                             }
 

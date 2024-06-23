@@ -248,15 +248,15 @@ namespace Starterkit.Controllers
                 AdminModel _deleteAdmin = new AdminModel();
 
                 _deleteAdmin.Id = deleteAdmin.Id;
-                _deleteAdmin.FirstName = deleteAdmin.FirstName?.Trim();
-                _deleteAdmin.LastName = deleteAdmin.LastName?.Trim();
-                _deleteAdmin.Phone = deleteAdmin.Phone?.Trim();
-                _deleteAdmin.DateOfBirth = deleteAdmin.DateOfBirth?.Trim();
-                _deleteAdmin.CountryCode = deleteAdmin.CountryCode?.Trim();
-                _deleteAdmin.EmailId = deleteAdmin.EmailId?.Trim();
-                _deleteAdmin.Address = deleteAdmin.Address?.Trim();
-                _deleteAdmin.Country = deleteAdmin.Country?.Trim();
-                _deleteAdmin.Nationality = deleteAdmin.Nationality?.Trim();
+                //_deleteAdmin.FirstName = deleteAdmin.FirstName?.Trim();
+                //_deleteAdmin.LastName = deleteAdmin.LastName?.Trim();
+                //_deleteAdmin.Phone = deleteAdmin.Phone?.Trim();
+                //_deleteAdmin.DateOfBirth = deleteAdmin.DateOfBirth?.Trim();
+                //_deleteAdmin.CountryCode = deleteAdmin.CountryCode?.Trim();
+                //_deleteAdmin.EmailId = deleteAdmin.EmailId?.Trim();
+                //_deleteAdmin.Address = deleteAdmin.Address?.Trim();
+                //_deleteAdmin.Country = deleteAdmin.Country?.Trim();
+                //_deleteAdmin.Nationality = deleteAdmin.Nationality?.Trim();
                 _deleteAdmin.Opt = "D";
                 _Result = adminLogic.DeleteAdmin(_deleteAdmin);
 
@@ -372,7 +372,7 @@ namespace Starterkit.Controllers
                 AgentModel _deleteAgent = new AgentModel();
 
                 _deleteAgent.Id = deleteAgent.Id;
-				_deleteAgent.FirstName = deleteAgent.FirstName?.Trim();
+				/*_deleteAgent.FirstName = deleteAgent.FirstName?.Trim();
 				_deleteAgent.LastName = deleteAgent.LastName?.Trim();
 				_deleteAgent.Phone = deleteAgent.Phone?.Trim();
 				_deleteAgent.CountryCode = deleteAgent.CountryCode?.Trim();
@@ -380,7 +380,7 @@ namespace Starterkit.Controllers
 				_deleteAgent.Address = deleteAgent.Address?.Trim();
 				_deleteAgent.Country = deleteAgent.Country?.Trim();
 				_deleteAgent.Nationality = deleteAgent.Nationality?.Trim();
-				_deleteAgent.Role = deleteAgent.Role;
+				_deleteAgent.Role = deleteAgent.Role; */
                 _deleteAgent.Opt = "D";
                 _Result = adminLogic.DeleteAgent(_deleteAgent);
 
@@ -586,18 +586,6 @@ namespace Starterkit.Controllers
                 LawyerModel _deleteLawyer = new LawyerModel();
 
                 _deleteLawyer.Id = deleteLawyer.Id;
-                _deleteLawyer.FirstName = deleteLawyer.FirstName?.Trim();
-                _deleteLawyer.LastName = deleteLawyer.LastName?.Trim();
-                _deleteLawyer.Phone = deleteLawyer.Phone?.Trim();
-                _deleteLawyer.DateOfBirth = deleteLawyer.DateOfBirth?.Trim();
-                _deleteLawyer.CountryCode = deleteLawyer.CountryCode?.Trim();
-                _deleteLawyer.LisenceNo = deleteLawyer.LisenceNo?.Trim();
-                _deleteLawyer.LawyerType = deleteLawyer.LawyerType?.Trim();
-                _deleteLawyer.Company = deleteLawyer.Company?.Trim();
-                _deleteLawyer.EmailId = deleteLawyer.EmailId?.Trim();
-                _deleteLawyer.Address = deleteLawyer.Address?.Trim();
-                _deleteLawyer.Country = deleteLawyer.Country?.Trim();
-                _deleteLawyer.Nationality = deleteLawyer.Nationality?.Trim();
                 _deleteLawyer.Opt = "D";
                 _Result = adminLogic.DeleteLawyer(_deleteLawyer);
 

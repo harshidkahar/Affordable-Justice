@@ -157,7 +157,8 @@ var CreateLawyer = function () {
                                         confirmButton: "btn btn-primary"
                                     }
                                 }).then(function (result) {
-                                    location.href = "New-Admin"
+                                    form.reset();
+                                    location.href = "ViewLawyer";
                                 });
                             }
 

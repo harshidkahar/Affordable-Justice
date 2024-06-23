@@ -168,7 +168,7 @@ var updateLawyer = function () {
                                     confirmButton: "btn btn-primary"
                                 }
                             }).then(function (result) {
-                                location.href = "dashboard"
+                                location.href = "ViewLawyer";
                             });
                         }
 

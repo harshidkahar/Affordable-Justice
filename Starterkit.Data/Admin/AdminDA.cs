@@ -59,17 +59,17 @@ namespace Starterkit.Data
 				cmd.CommandType = CommandType.StoredProcedure;
 
 				// Add parameters for the stored procedure
-                cmd.Parameters.AddWithValue("Id",insertAdmin.Id);
-				cmd.Parameters.AddWithValue("@FirstName", insertAdmin.FirstName);
-				cmd.Parameters.AddWithValue("@LastName", insertAdmin.LastName);
-                cmd.Parameters.AddWithValue("@DateOfBirth", insertAdmin.DateOfBirth);
-				cmd.Parameters.AddWithValue("@CountryCode", insertAdmin.CountryCode);
-				cmd.Parameters.AddWithValue("@Phone", insertAdmin.Phone);
-				cmd.Parameters.AddWithValue("@EmailId", insertAdmin.EmailId);
-				cmd.Parameters.AddWithValue("@Address", insertAdmin.Address);
-				cmd.Parameters.AddWithValue("@Country", insertAdmin.Country);
-				cmd.Parameters.AddWithValue("@Nationality", insertAdmin.Nationality);
-                cmd.Parameters.AddWithValue("@Opt", insertAdmin.Opt);
+				cmd.Parameters.AddWithValue("@Id", insertAdmin.Id);
+				cmd.Parameters.AddWithValue("@FirstName", (object)insertAdmin.FirstName ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@LastName", (object)insertAdmin.LastName ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@DateOfBirth", (object)insertAdmin.DateOfBirth ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@CountryCode", (object)insertAdmin.CountryCode ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Phone", (object)insertAdmin.Phone ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@EmailId", (object)insertAdmin.EmailId ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Address", (object)insertAdmin.Address ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Country", (object)insertAdmin.Country ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Nationality", (object)insertAdmin.Nationality ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Opt", (object)insertAdmin.Opt ?? DBNull.Value);
 				SqlDataAdapter da = new SqlDataAdapter();
 				da.SelectCommand = cmd;
 				cmd.ExecuteNonQuery();
@@ -94,20 +94,20 @@ namespace Starterkit.Data
                 SqlCommand cmd = new SqlCommand("[dbo].[DAL_Agent]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                // Add parameters for the stored procedure
-                cmd.Parameters.AddWithValue("@Id", insertAgent.Id);
-                cmd.Parameters.AddWithValue("@FirstName", insertAgent.FirstName);
-                cmd.Parameters.AddWithValue("@LastName", insertAgent.LastName);
-                cmd.Parameters.AddWithValue("@DateOfBirth", insertAgent.DateOfBirth);
-                cmd.Parameters.AddWithValue("@CountryCode", insertAgent.CountryCode);
-                cmd.Parameters.AddWithValue("@Phone", insertAgent.Phone);
-                cmd.Parameters.AddWithValue("@EmailId", insertAgent.EmailId);
-                cmd.Parameters.AddWithValue("@Address", insertAgent.Address);
-                cmd.Parameters.AddWithValue("@Country", insertAgent.Country);
-                cmd.Parameters.AddWithValue("@Nationality", insertAgent.Nationality);
-                cmd.Parameters.AddWithValue("@Role", insertAgent.Role);
-                cmd.Parameters.AddWithValue("@Opt", insertAgent.Opt);
-                SqlDataAdapter da = new SqlDataAdapter();
+				// Add parameters for the stored procedure
+				cmd.Parameters.AddWithValue("@Id", insertAgent.Id);
+				cmd.Parameters.AddWithValue("@FirstName", (object)insertAgent.FirstName ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@LastName", (object)insertAgent.LastName ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@DateOfBirth", (object)insertAgent.DateOfBirth ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@CountryCode", (object)insertAgent.CountryCode ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Phone", (object)insertAgent.Phone ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@EmailId", (object)insertAgent.EmailId ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Address", (object)insertAgent.Address ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Country", (object)insertAgent.Country ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Nationality", (object)insertAgent.Nationality ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Role", (object)insertAgent.Role ?? DBNull.Value);
+				cmd.Parameters.AddWithValue("@Opt", (object)insertAgent.Opt ?? DBNull.Value);
+				SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
                 con.Close();
@@ -131,22 +131,22 @@ namespace Starterkit.Data
                 SqlCommand cmd = new SqlCommand("[dbo].[DAL_Lawyer]", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                // Add parameters for the stored procedure
-                cmd.Parameters.AddWithValue("@Id", insertLawyer.Id);
-                cmd.Parameters.AddWithValue("@FirstName", insertLawyer.FirstName);
-                cmd.Parameters.AddWithValue("@LastName", insertLawyer.LastName);
-                cmd.Parameters.AddWithValue("@LisenceNumber", insertLawyer.LisenceNo);
-                cmd.Parameters.AddWithValue("@LawyerType", insertLawyer.LawyerType);
-                cmd.Parameters.AddWithValue("@Company", insertLawyer.Company);
-                cmd.Parameters.AddWithValue("@DateOfBirth", insertLawyer.DateOfBirth);
-                cmd.Parameters.AddWithValue("@Phone", insertLawyer.Phone);
-                cmd.Parameters.AddWithValue("@CountryCode",insertLawyer.CountryCode);
-                cmd.Parameters.AddWithValue("@EmailId", insertLawyer.EmailId);
-                cmd.Parameters.AddWithValue("@Address", insertLawyer.Address);
-                cmd.Parameters.AddWithValue("@Country", insertLawyer.Country);
-                cmd.Parameters.AddWithValue("@Nationality", insertLawyer.Nationality);
-                cmd.Parameters.AddWithValue("@Opt", insertLawyer.Opt);
-                SqlDataAdapter da = new SqlDataAdapter();
+				// Add parameters for the stored procedure
+				cmd.Parameters.AddWithValue("@Id", insertLawyer.Id);
+				cmd.Parameters.AddWithValue("@FirstName", insertLawyer.FirstName ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@LastName", insertLawyer.LastName ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@LisenceNumber", insertLawyer.LisenceNo ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@LawyerType", insertLawyer.LawyerType ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@Company", insertLawyer.Company ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@DateOfBirth", insertLawyer.DateOfBirth ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@Phone", insertLawyer.Phone ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@CountryCode", insertLawyer.CountryCode ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@EmailId", insertLawyer.EmailId ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@Address", insertLawyer.Address ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@Country", insertLawyer.Country ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@Nationality", insertLawyer.Nationality ?? (object)DBNull.Value);
+				cmd.Parameters.AddWithValue("@Opt", insertLawyer.Opt);
+				SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
                 con.Close();

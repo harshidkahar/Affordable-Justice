@@ -119,13 +119,13 @@ namespace Starterkit.Controllers
         }
 
 
-
+        /*
         [HttpGet("/changeEmail")]
         public IActionResult ChangeEmail()
         {
             return View("Views/Pages/Account/ChangeEmail.cshtml");
         }
-
+        */
       
 
     }
