@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Starterkit.Data", "..\Start
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterkitAdmin", "..\StarterkitAdmin\StarterkitAdmin.csproj", "{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterkitAgent", "..\StarterkitAgent\StarterkitAgent.csproj", "{E0337F77-6964-4F21-88C8-06D839C8C569}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StarterkitLawyers", "..\StarterkitLawyers\StarterkitLawyers.csproj", "{5DADD508-8129-42F1-BA07-5766957D4019}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2C618454-73F6-427E-88A4-9BE3FF6A8EA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0337F77-6964-4F21-88C8-06D839C8C569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0337F77-6964-4F21-88C8-06D839C8C569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0337F77-6964-4F21-88C8-06D839C8C569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0337F77-6964-4F21-88C8-06D839C8C569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DADD508-8129-42F1-BA07-5766957D4019}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DADD508-8129-42F1-BA07-5766957D4019}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DADD508-8129-42F1-BA07-5766957D4019}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DADD508-8129-42F1-BA07-5766957D4019}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

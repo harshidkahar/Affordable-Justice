@@ -1,0 +1,55 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor _contextAccessor
+<!--begin::Details-->
+<div class="d-flex flex-wrap flex-sm-nowrap">
+    <!--begin::Info-->
+    <div class="flex-grow-1">
+        <!--begin::Title-->
+        <div class="d-flex justify-content-between align-items-start flex-wrap mb-2">
+            <!--begin::User-->
+            <div class="d-flex flex-column">
+                <!--begin::Name-->
+                <div class="d-flex align-items-center mb-2">
+                    <a href="#" class="text-gray-900 text-hover-primary fs-2 fw-bold me-1">
+                        @_contextAccessor.HttpContext.Session.GetString("Name")
+                    </a>
+                </div>
+                <!--end::Name-->
+                <!--begin::Info-->
+                <div class="d-flex flex-wrap fw-semibold fs-6 mb-4 pe-2">
+                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
+                        <i class="ki-duotone ki-geolocation fs-4 me-1">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                        @_contextAccessor.HttpContext.Session.GetString("Country")
+                    </a>
+                    <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary mb-2">
+                        <i class="ki-duotone ki-sms fs-4">
+                            <span class="path1"></span>
+                            <span class="path2"></span>
+                        </i>
+                        @_contextAccessor.HttpContext.Session.GetString("UserEmail")
+                    </a>
+                </div>
+                <!--end::Info-->
+            </div>
+            <!--end::User-->
+        </div>
+        <!--end::Title-->
+        <!--begin::Stats-->
+        <div class="d-flex flex-wrap flex-stack">
+            <!--begin::Wrapper-->
+            <div class="d-flex flex-column flex-grow-1 pe-8">
+            </div>
+            <!--end::Wrapper-->
+        </div>
+        <!--end::Stats-->
+    </div>
+    <!--end::Info-->
+</div>
+<!--end::Details-->
+
+<!--begin::Navs-->
+<partial name='~/views/layout/demo1/partials/account/_accountnav.cshtml' />
+<!--begin::Navs-->

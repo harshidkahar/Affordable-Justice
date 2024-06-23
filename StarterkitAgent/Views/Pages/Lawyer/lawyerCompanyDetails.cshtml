@@ -1,0 +1,360 @@
+﻿
+@{
+    ViewData["Title"] = "lawyerCompanyDetails";
+    KTTheme.AddJavascriptFile("js/custom/lawyer/lawyerdropzone.js");
+}
+
+<h1>lawyer Company Details</h1>
+
+
+<div class="app-main flex-column flex-row-fluid" id="kt_app_main">
+    <br>
+    <!--begin::Content wrapper-->
+    <div class="d-flex flex-column flex-column-fluid">
+
+        <!--begin::Content-->
+        <div id="kt_app_content" class="app-content flex-column-fluid">
+            <!--begin::Content container-->
+            <div id="kt_app_content_container" class="app-container container-xxl">
+
+                <!--begin::Basic info-->
+                <div class="card mb-5 mb-xl-10">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
+                        <!--begin::Card title-->
+                        <div class="card-title m-0">
+                            <h3 class="fw-bold m-0">VIEW CASE DETAILS</h3>
+                        </div>
+                        <!--end::Card title-->
+                    </div>
+                    <!--begin::Card header-->
+                    <!--begin::Content-->
+                    <div id="kt_account_settings_profile_details" class="collapse show">
+                        <!--begin::Form-->
+                        <form id="kt_account_profile_details_form" class="form">
+                            <!--begin::Card body-->
+                            <div class="card-body border-top p-9">
+
+
+                                <!--begin::Dropzone-->
+                                <div class="dropzone" id="kt_dropzonejs_example_1">
+                                    <!--begin::Message-->
+                                    <div class="dz-message needsclick">
+                                        <i class="ki-duotone ki-file-up fs-3x text-primary"><span class="path1"></span><span class="path2"></span></i>
+
+                                        <!--begin::Info-->
+                                        <div class="ms-4">
+                                            <h3 class="fs-5 fw-bold text-gray-900 mb-1">Upload Case-Paper here.</h3>
+                                            <span class="fs-7 fw-semibold text-gray-500">Upload up to 10 files</span>
+                                        </div>
+                                        <!--end::Info-->
+                                    </div>
+                                </div>
+                                <!--end::Dropzone-->
+                                <br>
+                                <br>
+
+                                <h3>Case Details</h3>
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_ID : </label>
+                                            C001
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_NUMBER : </label>
+                                            8021032407
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_TYPE : </label>
+                                            Company Setup
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CASE_DOCUMENTS </label>
+                                            Uploaded
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+
+
+
+                                <br>
+
+                                <h3>Company Details</h3>
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">APPLICATION_TYPE : </label>
+                                            New
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">COMPANY_TYPE : </label>
+                                            Mainland
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">MAINLAND_CITY : </label>
+                                            Sharjah
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ML_BUSINESS_TYPE : </label>
+                                            Civil Company
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FREEZONE_CITY : </label>
+                                            -
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FREEZONE_LOCATION : </label>
+                                            -
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FZ_BUSINESS_TYPE:</label>
+
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">RESIDENCE_VISA : </label>
+                                            2
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">VISA_DEPENDENTS : </label>
+                                            No
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">OFFICE_TYPE : </label>
+                                            Shared Office
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">JURISDICTION_TYPE : </label>
+                                            Mainland
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">BUSINESS_STARTUP : </label>
+                                            This Month
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-2 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ANY_OTHER_BUSINESS :</label>
+                                            NO
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">OTHER_SERVICES : </label>
+                                            PRO Services
+                                        </div>
+                                        <!--end::Col-->
+
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+
+
+
+
+
+                                <br>
+
+                                <h3>Personal Details</h3>
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">FULL_NAME : </label>
+                                            XYZ Corporation
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">EMAIL:</label>
+                                            xyz@gmail.com
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">CONTACT_NO: </label>
+                                            +971 258 936 2020
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">ADDRESS : </label>
+                                            97, White Street
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">PASSPORT : </label>
+                                            Uploaded
+                                        </div>
+                                        <!--end::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">PASSPORT_PHOTO : </label>
+                                            Uploaded
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+                                <!--begin::Input group-->
+                                <div class="row mb-0 mb-xl-6">
+                                    <!--begin::Row-->
+                                    <div class="row">
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 col-md-12 fv-row">
+                                            <label class="col-lg-4 col-md-4 col-form-label required fw-bold fs-6">NATIONALITY : </label>
+                                            UAE
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <!--end::Input group-->
+
+
+
+
+
+
+                            </div>
+                            <!--end::Card body-->
+                            <!--begin::Actions-->
+                            <div class="card-footer d-flex justify-content-end py-6 px-9">
+                                <button type="submit" class="btn btn-primary" id="kt_account_profile_details_submit">Save Changes</button>
+                            </div>
+                            <!--end::Actions-->
+                        </form>
+                        <!--end::Form-->
+                    </div>
+                    <!--end::Content-->
+                </div>
+                <!--end::Basic info-->
+
+            </div>
+            <!--end::Content container-->
+        </div>
+        <!--end::Content-->
+    </div>
+    <!--end::Content wrapper-->
+
+</div>
+

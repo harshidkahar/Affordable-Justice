@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewData["Title"] = "ViewDocument";
+    KTTheme.AddJavascriptFile("js/custom/case/Documentdetail.js");
+    KTTheme.AddJavascriptFile("js/custom/case/DocDetail.js");
+}
+
+<!--begin::Content-->
+<div id="kt_app_content" class="app-content flex-column-fluid">
+    <!--begin::Content container-->
+    <div id="kt_app_content_container" classs="app-container container-xxl">
+        <!--begin::Card-->
+        <div class="card">
+            <!--begin::Card body-->
+            <div class="card-body">
+                <!--begin::Heading-->
+                <div class="card-px text-center pt-15 pb-15">
+                    <!--begin::Title-->
+                    <h3 class="fs-2x fw-bold mb-0">
+                        Manage Document Description
+                    </h3>
+                    <br />
+                    <br />
+                    <!--end::Title-->
+                    <div class="w-100">
+                        <!--begin::Input group-->
+
+                        <div class="row mb-6">
+                            <!--begin::Files-->
+                            <form id="docDetail">
+                                <div id="doc_playe" class="card mb-xl-8">
+                                    <div class="row">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-3 col-form-label fw-semibold fs-6">Document Name</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <input type="text" class="form-control form-control-solid" placeholder="Type your document description" name="txtDocName" id="txtDocName" />
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <br />
+                                    <div class="row">
+                                        <!--begin::Label-->
+                                        <label class="col-lg-3 col-form-label fw-semibold fs-6">Document Description</label>
+                                        <!--end::Label-->
+                                        <!--begin::Col-->
+                                        <div class="col-lg-6 fv-row">
+                                            <textarea class="form-control form-control-solid" rows="4" placeholder="Type your document description" name="txtDocDescription" id="txtDocDescription"></textarea>
+                                        </div>
+                                        <!--end::Col-->
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-3 fv-row">
+                                            <!-- <Button ID="Button1" Text="Save Changes" class="btn btn-primary" OnClick="btnSaveDescription_Click" /> -->
+                                            <button Id="Button1"  class="btn btn-primary" >Save Changes</button>
+                                            <a href="viewCaseDocuments" class="btn btn-lg btn-light me-3">Cancel</a>
+                                        </div>
+                                    </div>
+                                    <!--end::Row-->
+                                </div>
+                                <div id="doc_player" class="card mb-5 mb-xl-8">
+                                    <div class="text-center pb-15 px-5" id="doc_img_div" style="visibility: hidden;">
+                                        <img src="~/assets/media/illustrations/sketchy-1/6.png" alt="" class="mw-100 h-200px h-sm-325px" id="doc_image" />
+                                    </div>
+                                    <!--end::Image-->
+                                    <div class="mb-5" id="doc_video_div" style="visibility: hidden;">
+                                        <!-- <iframe class="embed-responsive-item rounded h-300px w-100" src="https://www.youtube.com/embed/qIHXpnASPAA" allowfullscreen="allowfullscreen" id="doc_video"></iframe>-->
+
+                                        <video controls width="640" height="360" id="videoPlayer" autoplay="autoplay">
+                                            <source id="videoSource" src="#">
+                                            <!-- Add additional source elements for different video formats -->
+                                            Your browser does not support the video tag.
+                                        </video>
+
+                                    </div>
+
+                                </div>
+
+                                <input type="hidden" id="hdnDocId" />
+                            </form>
+                            <!--end::Files-->
+                        </div>
+                        <!--end::Input group-->
+                    </div>
+                </div>
+                <!--end::Heading-->
+                <!--begin::Illustration-->
+                <!--end::Illustration-->
+            </div>
+            <!--end::Card body-->
+        </div>
+        <!--end::Card-->
+    </div>
+    <!--end::Content container-->
+</div>
+<!--end::Content-->
+<script type="text/javascript">
+    var baseUrl = '@Url.Content("~/")';
+</script>
