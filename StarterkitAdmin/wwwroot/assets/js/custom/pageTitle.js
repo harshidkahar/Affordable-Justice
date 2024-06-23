@@ -27,77 +27,78 @@ switch (page) {
         pageTitle = "Dashboard";
         pageBreadcrum = "Dashboard";
         break;
-    case "overview":
+    case "AdminProfileOverview":
         pageTitle = "Account Overview";
         pageBreadcrum = "Account";
         overview.classList.add("active");
         break;
-    case "settings":
+    case "AdminProfileSettings":
         pageTitle = "Account - Edit Profile";
         pageBreadcrum = "Account - Edit Profile";
         settings.classList.add("active");
-        break;
-    case "kyc":
-        pageTitle = "Accouint - KYC";
-        pageBreadcrum = "Account - KYC";
-        kyc.classList.add("active");
-        break;
-    case "billing":
-        pageTitle = "Account Billing";
-        pageBreadcrum = "Account - Billing";
-        billing.classList.add("active");
-        break;
-    case "statements":
-        pageTitle = "Statements";
-        pageBreadcrum = "Account";
-        statements.classList.add("active");
-        break;
-    case "referrals":
-        pageTitle = "Referrals";
-        pageBreadcrum = "Account";
-        referrals.classList.add("active");
         break;
     case "changeEmail":
         pageTitle = "Account - Change Email";
         pageBreadcrum = "Account - Change Email";
         changeEmail.classList.add("active");
         break;
-    case "createcase":
-        pageTitle = "Create Case";
-        pageBreadcrum = "Create Case";
+    case "CreateAdmin":
+        pageTitle = "Create Admin";
+        pageBreadcrum = "Create Admin";
         break;
-    case "viewCaseList":
-        pageTitle = "View Case List";
-        pageBreadcrum = "View Case List";
+    case "ViewAdmin":
+        pageTitle = "Admin List";
+        pageBreadcrum = "Admin List";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-    case "uploadCaseDocuments":
-        pageTitle = "Upload Case Documents";
-        pageBreadcrum = "Upload Case Documents";
+    case "UpdateAdmin":
+        pageTitle = "Update Admin";
+        pageBreadcrum = "Update Admin";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-    case "viewCaseDocuments":
-        pageTitle = "View Case Documents";
-        pageBreadcrum = "View Case Documents";
+    case "DeleteAdmin":
+        pageTitle = "Delete Admin";
+        pageBreadcrum = "Delete Admin";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-    case "caseDetails":
-        pageTitle = "Case Details";
-        pageBreadcrum = "Case Details";
+    case "CreateAgent":
+        pageTitle = "Create Agent";
+        pageBreadcrum = "Create Agent";
+        break;
+    case "ViewAgent":
+        pageTitle = "Agent List";
+        pageBreadcrum = "Agent List";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-    case "createcompany":
-        pageTitle = "Create Company";
-        pageBreadcrum = "Create Company";
+    case "UpdateAgent":
+        pageTitle = "Update Agent";
+        pageBreadcrum = "Update Agent";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-    case "companyList":
-        pageTitle = "Company List";
-        pageBreadcrum = "Company List";
+    case "DeleteAgent":
+        pageTitle = "Delete Agent";
+        pageBreadcrum = "Delete Agent";
         document.getElementById("action_status").style.visibility = "visible";
         break;
-
-        
+    case "CreateLawyer":
+        pageTitle = "Create Lawyer";
+        pageBreadcrum = "Create Lawyer";
+        break;
+    case "ViewLawyer":
+        pageTitle = "Lawyer List";
+        pageBreadcrum = "Lawyer List";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "UpdateLawyer":
+        pageTitle = "Update Lawyer";
+        pageBreadcrum = "Update Lawyer";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;
+    case "DeleteLawyer":
+        pageTitle = "Delete Lawyer";
+        pageBreadcrum = "Delete Lawyer";
+        document.getElementById("action_status").style.visibility = "visible";
+        break;       
 }
 
 document.getElementById("pageTitle").innerHTML = pageTitle;

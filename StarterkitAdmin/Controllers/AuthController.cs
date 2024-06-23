@@ -221,7 +221,7 @@ public class AuthController : Controller
         string returnValue = string.Empty;
         try
         {
-            CustomerLogic customerLogic = new CustomerLogic();
+            AdminLogic customerLogic = new AdminLogic();
             SendEmailLogic sendEmailLogic = new SendEmailLogic();
             string validateEmail = customerLogic.ValidateChangeEmail(otpModel.Email, Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")));
             if (validateEmail != "invalid" && validateEmail != "" && validateEmail != string.Empty)

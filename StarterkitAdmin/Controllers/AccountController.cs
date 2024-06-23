@@ -29,7 +29,7 @@ namespace Starterkit.Controllers
         [HttpGet("AdminProfileOverview/")]
         public IActionResult ProfileOverview()
         {
-            return View("Views/Pages/Admin/ProfileOverView.cshtml");
+            return View("Views/Pages/Account/Overview.cshtml");
         }
 
 
@@ -55,25 +55,25 @@ namespace Starterkit.Controllers
         [HttpGet("AdminProfileSetting/")]
         public IActionResult ProfileSetting()
         {
-            return View("Views/Pages/Admin/ProfileSetting.cshtml");
+            return View("Views/Pages/Account/Settings.cshtml");
         }
 
         
         [HttpGet]
-        public JsonResult profilesetting()
+        public JsonResult Adminprofilesetting()
         {
             try
             {
                 AdminLogic _adminLogic = new AdminLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var profilesetting = _adminLogic.Setting(userId);
+                var adminprofilesetting = _adminLogic.Setting(userId);
 
-                var result = new { success = true, profilesetting };
+                var result = new { success = true, adminprofilesetting };
                 return Json(result);
             }
             catch (Exception ex)
             {
-                var errorResult = new { success = false, message = "Failed to retrieve overview." };
+                var errorResult = new { success = false, message = "Failed to retrieve ssetting." };
                 return Json(errorResult);
             }
         }
@@ -96,13 +96,17 @@ namespace Starterkit.Controllers
 
                 profileUpdate.FirstName = updateCustomer.FirstName?.Trim();
                 profileUpdate.LastName = updateCustomer.LastName?.Trim();
-                profileUpdate.DateOfBirth = updateCustomer.DateOfBirth;
+                profileUpdate.DateOfBirth = updateCustomer.DateOfBirth?.Trim();
                 profileUpdate.EmailId = updateCustomer.EmailId?.Trim();
                 profileUpdate.Phone = updateCustomer.Phone?.Trim();
                 profileUpdate.CountryCode = updateCustomer.CountryCode?.Trim();
                 profileUpdate.Address = updateCustomer.Address?.Trim();
+                profileUpdate.Address_Flat = updateCustomer.Address_Flat?.Trim();
+                profileUpdate.Address_Building = updateCustomer.Address_Building?.Trim();
                 profileUpdate.Country = updateCustomer.Country?.Trim();
                 profileUpdate.Nationality = updateCustomer.Nationality?.Trim();
+                profileUpdate.Username = updateCustomer.Username?.Trim();
+                profileUpdate.Watchword = updateCustomer.Watchword?.Trim();
 
                 _Result = customerLogic.UpdateAdminProfile(profileUpdate);
 

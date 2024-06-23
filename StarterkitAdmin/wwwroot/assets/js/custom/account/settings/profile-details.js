@@ -1,24 +1,21 @@
 "use strict";
 
 // Class definition
-var KTAccountSettingsProfileDetails = function () {
-    // Private variables
+var KTAccountSettingsOverview = function () {
+    var ProfileOverview = [];
     var form;
     var submitButton;
     var validation;
-    var jsonPostData=null;
-    var ProfileSetting = [];
-    //KTMenu.createInstances();
-    // Private functions
+    var jsonPostData;
 
-    var fetchprofilesetting = function () {
+    var fetchprofile = function () {
         $.ajax({
-            url: '/Account/profilesetting',
+            url: '/Account/Adminprofilesetting',
             type: 'GET',
             success: function (response) {
                 console.log(response);
                 if (response.success) {
-                    ProfileSetting = response.profilesetting;
+                    ProfileOverview = response.adminprofilesetting;
                     renderData();
                 } else {
                     Swal.fire({
@@ -45,56 +42,55 @@ var KTAccountSettingsProfileDetails = function () {
             }
         });
     };
-
     var renderData = function () {
-        $(document).ready(function () {
-            $('#ddlCountryCode').select2({
-                placeholder: "Select Country Code",
-                allowClear: true
-            });
+        //const table = document.querySelector('table');
+        // const tableBody = document.querySelector('#adminTableBody');
+        //tableBody.innerHTML = ''; // Clear existing rows
 
-            $('#ddlCountry').select2({
-                placeholder: "Select Country",
-                allowClear: true
-            });
+        if (ProfileOverview.length > 0) {
+            var profilesetting = ProfileOverview[0];
 
-            $('#ddlNationality').select2({
-                placeholder: "Select Nationality",
-                allowClear: true
-            });
-            if (ProfileSetting.length > 0) {
-                var profile = ProfileSetting[0];
+            var form = document.querySelector('#kt_admin_profile_details_form');
+            form.querySelector('[name="txtfname"]').value = profilesetting.FirstName;
+            form.querySelector('[name="txtlname"]').value = profilesetting.LastName;
+            form.querySelector('[name="txtEmail"]').value = profilesetting.EmailId;
+            const adminDateOfBirth = profilesetting.DateOfBirth;
 
-                // Assigning values to HTML elements
-                $('#ddlCountry').val(profile.Country).trigger('change');
-                $('#ddlNationality').val(profile.Nationality).trigger('change');
-                document.getElementById('txtFirstName').value = profile.FirstName || '';
-                document.getElementById('txtLastName').value = profile.LastName || '';
-                document.getElementById('txtPhone').value = profile.ContactNo || '';
-                document.getElementById('txtEmail').value = profile.Email || '';
-                try {
-                    let date = new Date(profile.Dob);
-                    document.getElementById('txtDob').value = formatDateToDDMMYYYY(date).toString();
-                }
-                catch { document.getElementById('txtDob').value = ''; }
-                //document.getElementById('txtDob').value = profile.Dob;
-                document.getElementById('txtFlatno').value = profile.Address_Flat || '';
-                document.getElementById('txtStreetname').value = profile.Address_Building || '';
-                document.getElementById('txtAddress').value = profile.Address || '';
-                $('#ddlCountryCode').val(profile.CountryCode).trigger('change');
+            /*// Convert the date to "YYYY-MM-DD" format
+            const formattedDOB = convertDateToString(adminDateOfBirth);
+    
+            // Find the DateOfBirth input element
+            const dobInput = form.querySelector('[name="DateOfBirth"]');
+    
+            // Set the value of the input element to the formatted date
+            if (dobInput) {
+                dobInput.value = formattedDOB;
+                // Trigger a change event
+                $(dobInput).trigger('change');
+            } else {
+                console.error('Input element with name "DateOfBirth" not found');
+            } */
+            form.querySelector('[name="txtdob"]').value = adminDateOfBirth;
+            form.querySelector('[name="txtphone"]').value = profilesetting.Phone;
+            form.querySelector('[name="flatno"]').value = profilesetting.Address_Flat;
+            form.querySelector('[name="streetname"]').value = profilesetting.Address_Building;
+            form.querySelector('[name="txtAddress"]').value = profilesetting.Address;
+            form.querySelector('[name="txtusername"]').value = profilesetting.Username;
+            form.querySelector('[name="txtPass"]').value = profilesetting.Watchword;
+            const countrySelect = form.querySelector('[name="ddlCountry"]');
+            countrySelect.value = profilesetting.Country;
+            $(countrySelect).trigger('change');
+            const nationselect = form.querySelector('[name="ddlNationality"]');
+            nationselect.value = profilesetting.Nationality;
+            $(nationselect).trigger('change');
+            const countrycodeSelect = form.querySelector('[name="countrycode"]');
+            countrycodeSelect.value = profilesetting.CountryCode;
+            $(countrycodeSelect).trigger('change');
 
-               // const countrySelect = document.getElementById('#ddlCountry');
-                //countrySelect.value = profile.Country;
-                //$(countrySelect).trigger('change');
-                //const nationselect = document.getElementById('#ddlNationality');
-                //nationselect.value = profile.Nationality || '';
-                //$(nationselect).trigger('change');
 
-                // Set select2 dropdown values
-                //document.getElementById('lblNationality').textContent = profile.Nationality || '';
-            }
-        });
-    };
+        }
+        KTMenu.createInstances();
+    }
 
     var initValidation = function () {
         // Init form validation rules. For more info check the FormValidation plugin's official documentation:https://formvalidation.io/
@@ -102,59 +98,59 @@ var KTAccountSettingsProfileDetails = function () {
             form,
             {
                 fields: {
-                    fname: {
+                    FirstName: {
                         validators: {
                             notEmpty: {
                                 message: 'First name is required'
                             }
                         }
                     },
-                    lname: {
+                    LastName: {
                         validators: {
                             notEmpty: {
                                 message: 'Last name is required'
                             }
                         }
                     },
-                    company: {
+                    countrycode: {
                         validators: {
                             notEmpty: {
                                 message: 'Company name is required'
                             }
                         }
                     },
-                    phone: {
+                    Phone: {
                         validators: {
                             notEmpty: {
                                 message: 'Contact phone number is required'
                             }
                         }
                     },
-                    countryC: {
+                    Country: {
                         validators: {
                             notEmpty: {
-                                message: 'Please select a country'
+                                message: 'Country is required'
                             }
                         }
                     },
-                    timezone: {
+                    Address: {
                         validators: {
                             notEmpty: {
-                                message: 'Please select a timezone'
+                                message: 'Address is required'
                             }
                         }
                     },
-                    'communication[]': {
+                    'Nationality': {
                         validators: {
                             notEmpty: {
-                                message: 'Please select at least one communication method'
+                                message: 'Nationality is required'
                             }
                         }
                     },
-                    language: {
+                    DateOfBirth: {
                         validators: {
                             notEmpty: {
-                                message: 'Please select a language'
+                                message: 'Date Of Birth is required '
                             }
                         }
                     },
@@ -173,17 +169,17 @@ var KTAccountSettingsProfileDetails = function () {
         );
 
         // Select2 validation integration
-        $(form.querySelector('[name="country"]')).on('change', function() {
+        $(form.querySelector('[name="country"]')).on('change', function () {
             // Revalidate the color field when an option is chosen
             validation.revalidateField('country');
         });
 
-        $(form.querySelector('[name="language"]')).on('change', function() {
+        $(form.querySelector('[name="language"]')).on('change', function () {
             // Revalidate the color field when an option is chosen
             validation.revalidateField('language');
         });
 
-        $(form.querySelector('[name="timezone"]')).on('change', function() {
+        $(form.querySelector('[name="timezone"]')).on('change', function () {
             // Revalidate the color field when an option is chosen
             validation.revalidateField('timezone');
         });
@@ -203,27 +199,29 @@ var KTAccountSettingsProfileDetails = function () {
                         // Enable button
                         submitButton.disabled = false;
 
-                       
+
 
                         // Show message popup. For more info check the plugin's official documentation: https://sweetalert2.github.io/
                         jsonPostData = {
-                            FirstName: document.getElementById("txtFirstName").value.trim(),
-                            LastName: document.getElementById("txtLastName").value.trim(),
-                            Email: document.getElementById("txtEmail").value.trim(),
-                            ContactNo: document.getElementById("txtPhone").value.trim(),
-                            CountryCode: document.getElementById("ddlCountryCode").value.trim(),
+                            FirstName: document.getElementById("txtfname").value.trim(),
+                            LastName: document.getElementById("txtlname").value.trim(),
+                            EmailId: document.getElementById("txtEmail").value.trim(),
+                            Phone: document.getElementById("txtphone").value.trim(),
+                            Username: document.getElementById("txtusername").value.trim(),
+                            Watchword: document.getElementById("txtPass").value.trim(),
+                            CountryCode: document.getElementById("ddlCountryCodeadmin").value.trim(),
                             Address: document.getElementById("txtAddress").value.trim(),
                             Address_Flat: document.getElementById("txtFlatno").value.trim(),
                             Address_Building: document.getElementById("txtStreetname").value.trim(),
                             Country: document.getElementById("ddlCountry").value.trim(),
                             Nationality: document.getElementById("ddlNationality").value.trim(),
-                            Dob: document.getElementById("txtDob").value.trim()
-                            }
+                            DateOfBirth: document.getElementById("txtdob").value.trim()
+                        }
 
 
                         $.ajax({
                             type: "PUT",
-                            url: "/Account/UpdateCustomer",
+                            url: "/Account/UpdateAdminProfile",
                             contentType: "application/json; charset=utf-8",
                             data: JSON.stringify(jsonPostData),
                             dataType: "json",
@@ -281,40 +279,29 @@ var KTAccountSettingsProfileDetails = function () {
         });
     }
 
-   
+
+
+
+
     // Public methods
     return {
         init: function () {
-            form = document.getElementById('kt_account_profile_details_form');
-            
+            form = document.querySelector('#kt_admin_profile_details_form');
+
             if (!form) {
                 return;
             }
-           
-            submitButton = form.querySelector('#kt_account_profile_details_submit');
-            fetchprofilesetting();
+
+            submitButton = form.querySelector('#kt_admin_profile_settings_submit');
+
+            fetchprofile();
             initValidation();
             handleForm();
-            
         }
     }
 }();
 
 // On document ready
-KTUtil.onDOMContentLoaded(function() {
-    KTAccountSettingsProfileDetails.init();
-    
+KTUtil.onDOMContentLoaded(function () {
+    KTAccountSettingsOverview.init();
 });
-function formatDateToDDMMYYYY(date) {
-    // Get the day, month, and year from the date object
-    let day = date.getDate();
-    let month = date.getMonth() + 1; // Months are zero-based
-    let year = date.getFullYear();
-
-    // Pad day and month with leading zeros if necessary
-    day = day < 10 ? '0' + day : day;
-    month = month < 10 ? '0' + month : month;
-
-    // Return the formatted date string
-    return `${year}-${month}-${day}`;
-}

@@ -82,8 +82,8 @@ namespace Starterkit.Web.Logic
 
 		public string ValidateChangeEmail(string email, int id)
 		{
-			AdminCommonLogic commonLogic = (AdminCommonLogic)LogicFactory.GetLogic(LogicType.AdminCommonLogic);
-			return commonLogic.GetAdminValue(id, email, "ValidateAdminChangeEmail");
+			AdminCommonLogic adminLogic = (AdminCommonLogic)LogicFactory.GetLogic(LogicType.AdminCommonLogic);
+			return adminLogic.GetAdminValue(id, email, "ValidateAdminChangeEmail");
 		}
 
 		public AdminModel ValidateOtp(string phone, string email, string otp)
@@ -131,7 +131,7 @@ namespace Starterkit.Web.Logic
 
 						if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
 						{
-                            adminprofiloverviewModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]);
+                            adminprofiloverviewModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
 						}
 						if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
 						{
@@ -150,6 +150,14 @@ namespace Starterkit.Web.Logic
 						{
                             adminprofiloverviewModel.Address = Convert.ToString(row["Address"]);
 						}
+						if (ds.Tables[0].Columns.Contains("Address_Flat") && !row["Address_Flat"].Equals(DBNull.Value))
+						{
+							adminprofiloverviewModel.Address_Flat = Convert.ToString(row["Address_Flat"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Address_Building") && !row["Address_Building"].Equals(DBNull.Value))
+						{
+							adminprofiloverviewModel.Address_Building = Convert.ToString(row["Address_Building"]);
+						}
 						if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
 						{
                             adminprofiloverviewModel.Country = Convert.ToString(row["Country"]);
@@ -157,6 +165,14 @@ namespace Starterkit.Web.Logic
 						if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
 						{
                             adminprofiloverviewModel.Nationality = Convert.ToString(row["Nationality"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+						{
+							adminprofiloverviewModel.Username = Convert.ToString(row["Username"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Watchword") && !row["Watchword"].Equals(DBNull.Value))
+						{
+							adminprofiloverviewModel.Watchword = Convert.ToString(row["Watchword"]);
 						}
 
 						profileoverview.Add(adminprofiloverviewModel);
@@ -204,7 +220,7 @@ namespace Starterkit.Web.Logic
 
 						if (ds.Tables[0].Columns.Contains("DateOfBirth") && !row["DateOfBirth"].Equals(DBNull.Value))
 						{
-							profilsettingModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]);
+							profilsettingModel.DateOfBirth = Convert.ToDateTime(row["DateOfBirth"]).ToString("yyyy-MM-dd");
 						}
 						if (ds.Tables[0].Columns.Contains("EmailId") && !row["EmailId"].Equals(DBNull.Value))
 						{
@@ -222,6 +238,14 @@ namespace Starterkit.Web.Logic
 						{
 							profilsettingModel.Address = Convert.ToString(row["Address"]);
 						}
+						if (ds.Tables[0].Columns.Contains("Address_Flat") && !row["Address_Flat"].Equals(DBNull.Value))
+						{
+							profilsettingModel.Address_Flat = Convert.ToString(row["Address_Flat"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Address_Building") && !row["Address_Building"].Equals(DBNull.Value))
+						{
+							profilsettingModel.Address_Building = Convert.ToString(row["Address_Building"]);
+						}
 						if (ds.Tables[0].Columns.Contains("Country") && !row["Country"].Equals(DBNull.Value))
 						{
 							profilsettingModel.Country = Convert.ToString(row["Country"]);
@@ -229,6 +253,14 @@ namespace Starterkit.Web.Logic
 						if (ds.Tables[0].Columns.Contains("Nationality") && !row["Nationality"].Equals(DBNull.Value))
 						{
 							profilsettingModel.Nationality = Convert.ToString(row["Nationality"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+						{
+							profilsettingModel.Username = Convert.ToString(row["Username"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Watchword") && !row["Watchword"].Equals(DBNull.Value))
+						{
+							profilsettingModel.Watchword = Convert.ToString(row["Watchword"]);
 						}
 
 						profilesetting.Add(profilsettingModel);
@@ -379,8 +411,17 @@ namespace Starterkit.Web.Logic
                         {
                             adminprofiloverviewModel.Nationality = Convert.ToString(row["Nationality"]);
                         }
+						if (ds.Tables[0].Columns.Contains("Username") && !row["Username"].Equals(DBNull.Value))
+						{
+							adminprofiloverviewModel.Username = Convert.ToString(row["Username"]);
+						}
+						if (ds.Tables[0].Columns.Contains("Watchword") && !row["Watchword"].Equals(DBNull.Value))
+						{
+							adminprofiloverviewModel.Watchword = Convert.ToString(row["Watchword"]);
+						}
 
-                        adminDetail.Add(adminprofiloverviewModel);
+
+						adminDetail.Add(adminprofiloverviewModel);
 
 
                     }
@@ -712,8 +753,12 @@ namespace Starterkit.Web.Logic
                         {
                             agentModel.Nationality = Convert.ToString(row["Nationality"]);
                         }
+						if (ds.Tables[0].Columns.Contains("Role") && !row["Role"].Equals(DBNull.Value))
+						{
+							agentModel.Role = Convert.ToInt32(row["Role"]);
+						}
 
-                        AgentDetail.Add(agentModel);
+						AgentDetail.Add(agentModel);
 
 
                     }

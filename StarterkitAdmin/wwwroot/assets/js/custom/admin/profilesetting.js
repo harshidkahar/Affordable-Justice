@@ -126,11 +126,11 @@
 
                     var sessionId = getSessionId();
                     var formData = {
-                        Id: sessionId,
+                        //Id: sessionId,
                         FirstName: getValueOrFallback('[name="txtfname"]', form.querySelector('[name="txtfname"]').value),
                         LastName: getValueOrFallback('[name="txtlname"]', form.querySelector('[name="txtlname"]').value),
                         EmailId: getValueOrFallback('[name="txtEmail"]', form.querySelector('[name="txtEmail"]').value),
-                        countrycode: getValueOrFallback('[name="txtcountrycode"]', form.querySelector('[name="txtcountrycode"]').value),
+                        CountryCode: getValueOrFallback('[name="txtcountrycode"]', form.querySelector('[name="txtcountrycode"]').value),
                         Phone: getValueOrFallback('[name="txtphone"]', form.querySelector('[name="txtphone"]').value),
                         DateOfBirth: getValueOrFallback('[name="txtdob"]', form.querySelector('[name="txtdob"]').value),
                         Address: getValueOrFallback('[name="txtAddress"]', form.querySelector('[name="txtAddress"]').value),
@@ -142,7 +142,7 @@
 
                     $.ajax({
                         type: "PUT",
-                        url: "Admin/UpdateAdminProfile" + sessionId,
+                        url: "Admin/UpdateAdminProfile",
                         contentType: "application/json; charset=utf-8",
                         data: JSON.stringify(formData),
                         dataType: "json",
@@ -181,14 +181,11 @@
 
     var adminDetailData = [];
 
-    var fetchAdminDetailById = function (id) {
+    var fetchAdminDetailById = function () {
         $.ajax({
             url: '/Admin/GetAdminDetail',
             type: 'GET',
-            data: JSON.stringify({ Id: id }),
-            contentType: 'application/json; charset=utf-8',
-            dataType: 'json',
-
+          
             success: function (response) {
                 //const result = JSON.parse(response); // Parse the JSON string response
                 console.log(response)
@@ -255,6 +252,8 @@
             form.querySelector('[name="txtdob"]').value = adminDateOfBirth;
             form.querySelector('[name="txtphone"]').value = adminDetail.Phone;
             form.querySelector('[name="txtAddress"]').value = adminDetail.Address;
+            form.querySelector('[name="flatno"]').value = adminDetail.Address_Flat || NA;
+            form.querySelector('[name="streetname"]').value = adminDetail.Address_Building || NA;
             form.querySelector('[name="txtusername"]').value.adminDetail.Username;
             form.querySelector('[name="txtPass"]').value = adminDetail.Watchword;
             const countrySelect = form.querySelector('[name="ddlCountry"]');
@@ -263,7 +262,7 @@
             const nationselect = form.querySelector('[name="ddlNationality"]');
             nationselect.value = adminDetail.Nationality;
             $(nationselect).trigger('change');
-            const countrycodeSelect = form.querySelector('[name="txtcountrycode"]');
+            const countrycodeSelect = form.querySelector('[name="countrycode"]');
             countrycodeSelect.value = adminDetail.CountryCode;
             $(countrycodeSelect).trigger('change');
 

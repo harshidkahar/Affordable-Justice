@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Starterkit.Model;
+using Starterkit.Models;
 using Starterkit.Web.Logic;
 using Starterkit.Web.Logic.Base;
 
@@ -165,29 +166,41 @@ namespace Starterkit.Controllers
             }
         }
 
-        [HttpGet]
-        public JsonResult GetAdminDetail()
-        {
-            try
-            {
-                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
-                AdminLogic _adminLogic = new AdminLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var adminDetail = _adminLogic.GetAdminDetail(userId);
-                var result = new { success = true, adminDetail };
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                var errorResult = new { success = false, message = "Failed to retrieve admin detail." };
-                return Json(errorResult);
-            }
-        }
+       
+		[HttpGet]
+		public JsonResult GetAdminDetail(AdminIdRequestModel model)
+		{
+			try
+			{
+				AdminLogic _adminLogic = new AdminLogic();
+				var adminDetail = _adminLogic.GetAdminDetail(model.Id);
+
+				var result = new { success = true, adminDetail };
+				return Json(result);
+			}
+			catch (Exception ex)
+			{
+				var errorResult = new { success = false, message = "Failed to retrieve admin detail." };
+				return Json(errorResult);
+			}
+		}
 
 
-        [HttpGet("UpdateAdmin/")]
+		[HttpGet("UpdateAdmin/")]
 		public IActionResult UpdateAdmin()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["AdminId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("AdminId", HttpContext.Request.Query["AdminId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("AdminId", "");
+			}
+
 			return View("Views/Pages/Admin/UpdateAdmin.cshtml");
 		}
 
@@ -202,7 +215,7 @@ namespace Starterkit.Controllers
                 AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
                 AdminModel _updateAdmin = new AdminModel();
 
-                _updateAdmin.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateAdmin.Id =updateAdmin.Id;
                 _updateAdmin.FirstName = updateAdmin.FirstName?.Trim();
                 _updateAdmin.LastName = updateAdmin.LastName?.Trim();
                 _updateAdmin.DateOfBirth = updateAdmin.DateOfBirth?.Trim();
@@ -234,15 +247,16 @@ namespace Starterkit.Controllers
                 AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
                 AdminModel _deleteAdmin = new AdminModel();
 
-                _deleteAdmin.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
-                //_deleteAdmin.FirstName = deleteAdmin.FirstName?.Trim();
-                //_deleteAdmin.LastName = deleteAdmin.LastName?.Trim();
-                //_deleteAdmin.Phone = deleteAdmin.Phone?.Trim();
-                //_deleteAdmin.CountryCode = deleteAdmin.CountryCode?.Trim();
-                //_deleteAdmin.EmailId = deleteAdmin.EmailId?.Trim();
-                //_deleteAdmin.Address = deleteAdmin.Address?.Trim();
-                //_deleteAdmin.Country = deleteAdmin.Country?.Trim();
-                //_deleteAdmin.Nationality = deleteAdmin.Nationality?.Trim();
+                _deleteAdmin.Id = deleteAdmin.Id;
+                _deleteAdmin.FirstName = deleteAdmin.FirstName?.Trim();
+                _deleteAdmin.LastName = deleteAdmin.LastName?.Trim();
+                _deleteAdmin.Phone = deleteAdmin.Phone?.Trim();
+                _deleteAdmin.DateOfBirth = deleteAdmin.DateOfBirth?.Trim();
+                _deleteAdmin.CountryCode = deleteAdmin.CountryCode?.Trim();
+                _deleteAdmin.EmailId = deleteAdmin.EmailId?.Trim();
+                _deleteAdmin.Address = deleteAdmin.Address?.Trim();
+                _deleteAdmin.Country = deleteAdmin.Country?.Trim();
+                _deleteAdmin.Nationality = deleteAdmin.Nationality?.Trim();
                 _deleteAdmin.Opt = "D";
                 _Result = adminLogic.DeleteAdmin(_deleteAdmin);
 
@@ -264,18 +278,52 @@ namespace Starterkit.Controllers
 		[HttpGet("CreateAgent/")]
 		public IActionResult CreateAgent()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["AgentId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("AgentId", HttpContext.Request.Query["AgentId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("AgentId", "");
+			}
+
 			return View("Views/Pages/Admin/CreateAgent.cshtml");
 		}
 
 		[HttpGet("UpdateAgent/")]
 		public IActionResult UpdateAgent()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["AgentId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("AgentId", HttpContext.Request.Query["AgentId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("AgentId", "");
+			}
 			return View("Views/Pages/Admin/UpdateAgent.cshtml");
 		}
 
 		[HttpGet("DeleteAgent/")]
 		public IActionResult DeleteAgent()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["AgentId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("AgentId", HttpContext.Request.Query["AgentId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("AgentId", "");
+			}
 			return View("Views/Pages/Admin/DeleteAgent.cshtml");
 		}
 
@@ -290,10 +338,11 @@ namespace Starterkit.Controllers
                 AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
                 AgentModel _updateAgent = new AgentModel();
 
-                _updateAgent.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateAgent.Id = updateAgent.Id;
                 _updateAgent.FirstName = updateAgent.FirstName?.Trim();
                 _updateAgent.LastName = updateAgent.LastName?.Trim();
                 _updateAgent.Phone = updateAgent.Phone?.Trim();
+                _updateAgent.DateOfBirth = updateAgent.DateOfBirth?.Trim();
                 _updateAgent.CountryCode = updateAgent.CountryCode?.Trim();
                 _updateAgent.EmailId = updateAgent.EmailId?.Trim();
                 _updateAgent.Address = updateAgent.Address?.Trim();
@@ -313,27 +362,27 @@ namespace Starterkit.Controllers
 
         [AllowAnonymous]
         [HttpDelete]
-        public JsonResult DeleteAgent([FromBody] AgentUserModel updateAgent)
+        public JsonResult DeleteAgent([FromBody] AgentUserModel deleteAgent)
         {
             try
             {
                 string ErrorMessage = string.Empty;
                 string _Result = string.Empty;
                 AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
-                AgentModel _updateAgent = new AgentModel();
+                AgentModel _deleteAgent = new AgentModel();
 
-                _updateAgent.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
-                _updateAgent.FirstName = updateAgent.FirstName?.Trim();
-                _updateAgent.LastName = updateAgent.LastName?.Trim();
-                _updateAgent.Phone = updateAgent.Phone?.Trim();
-                _updateAgent.CountryCode = updateAgent.CountryCode?.Trim();
-                _updateAgent.EmailId = updateAgent.EmailId?.Trim();
-                _updateAgent.Address = updateAgent.Address?.Trim();
-                _updateAgent.Country = updateAgent.Country?.Trim();
-                _updateAgent.Nationality = updateAgent.Nationality?.Trim();
-                _updateAgent.Role = updateAgent.Role;
-                _updateAgent.Opt = "D";
-                _Result = adminLogic.DeleteAgent(_updateAgent);
+                _deleteAgent.Id = deleteAgent.Id;
+				_deleteAgent.FirstName = deleteAgent.FirstName?.Trim();
+				_deleteAgent.LastName = deleteAgent.LastName?.Trim();
+				_deleteAgent.Phone = deleteAgent.Phone?.Trim();
+				_deleteAgent.CountryCode = deleteAgent.CountryCode?.Trim();
+				_deleteAgent.EmailId = deleteAgent.EmailId?.Trim();
+				_deleteAgent.Address = deleteAgent.Address?.Trim();
+				_deleteAgent.Country = deleteAgent.Country?.Trim();
+				_deleteAgent.Nationality = deleteAgent.Nationality?.Trim();
+				_deleteAgent.Role = deleteAgent.Role;
+                _deleteAgent.Opt = "D";
+                _Result = adminLogic.DeleteAgent(_deleteAgent);
 
                 return Json(_Result);
             }
@@ -355,7 +404,7 @@ namespace Starterkit.Controllers
         {
             try
             {
-                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                _contextAccessor.HttpContext.Session.SetString("AgentId", "");
                 AdminLogic _adminLogic = new AdminLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 var agentList = _adminLogic.GetAgentList(userId);
@@ -369,29 +418,42 @@ namespace Starterkit.Controllers
             }
         }
 
-        [HttpGet]
-        public JsonResult GetAgentDetail()
-        {
-            try
-            {
-                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
-                AdminLogic _adminLogic = new AdminLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var agentList = _adminLogic.GetAgentDetail(userId);
-                var result = new { success = true, agentList };
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                var errorResult = new { success = false, message = "Failed to retrieve agent detail." };
-                return Json(errorResult);
-            }
-        }
+
+     
+		[HttpGet]
+		public JsonResult GetAgentDetail(AgentIdRequestModel model)
+		{
+			try
+			{
+				AdminLogic _adminLogic = new AdminLogic();
+				var agentDetail = _adminLogic.GetAgentDetail(model.Id);
+
+				var result = new { success = true, agentDetail };
+				return Json(result);
+			}
+			catch (Exception ex)
+			{
+				var errorResult = new { success = false, message = "Failed to retrieve agent detail." };
+				return Json(errorResult);
+			}
+		}
 
 
-        [HttpGet("CreateLawyer/")]
+		[HttpGet("CreateLawyer/")]
 		public IActionResult CreateLawyer()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["LawyerId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("LawyerId", HttpContext.Request.Query["LawyerId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("LawyerId", "");
+			}
+
 			return View("Views/Pages/Admin/CreateLawyer.cshtml");
 		}
 
@@ -406,7 +468,7 @@ namespace Starterkit.Controllers
         {
             try
             {
-                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
+                _contextAccessor.HttpContext.Session.SetString("LawyerId", "");
                 AdminLogic _adminLogic = new AdminLogic();
                 int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
                 var lawyerList = _adminLogic.GetLawyerList(userId);
@@ -415,45 +477,71 @@ namespace Starterkit.Controllers
             }
             catch (Exception ex)
             {
-                var errorResult = new { success = false, message = "Failed to retrieve case list." };
+                var errorResult = new { success = false, message = "Failed to retrieve lawyer list." };
                 return Json(errorResult);
             }
         }
 
-        [HttpGet]
-        public JsonResult GetLawyerDetail()
-        {
-            try
-            {
-                _contextAccessor.HttpContext.Session.SetString("AdminId", "");
-                AdminLogic _adminLogic = new AdminLogic();
-                int userId = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id")); // Replace with actual logic to fetch user ID
-                var lawyerList = _adminLogic.GetLawyerDetail(userId);
-                var result = new { success = true, lawyerList };
-                return Json(result);
-            }
-            catch (Exception ex)
-            {
-                var errorResult = new { success = false, message = "Failed to retrieve case list." };
-                return Json(errorResult);
-            }
-        }
+      
+		[HttpGet]
+		public JsonResult GetLawyerDetail(LawyerIdRequestModel model)
+		{
+			try
+			{
+				AdminLogic _adminLogic = new AdminLogic();
+				var lawyerDetail = _adminLogic.GetLawyerDetail(model.Id);
+
+				var result = new { success = true, lawyerDetail };
+				return Json(result);
+			}
+			catch (Exception ex)
+			{
+				var errorResult = new { success = false, message = "Failed to retrieve lawyer detail." };
+				return Json(errorResult);
+			}
+		}
 
 
-        [HttpGet("UpdateLawyer/")]
+
+
+
+		[HttpGet("UpdateLawyer/")]
 		public IActionResult UpdateLawyer()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["LawyerId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("LawyerId", HttpContext.Request.Query["LawyerId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("LawyerId", "");
+			}
 			return View("Views/Pages/Admin/UpdateLawyer.cshtml");
 		}
 
 		[HttpGet("DeleteLawyer/")]
 		public IActionResult DeleteLawyer()
 		{
+			try
+			{
+				if (!String.IsNullOrEmpty(HttpContext.Request.Query["LawyerId"]))
+				{
+					_contextAccessor.HttpContext.Session.SetString("LawyerId", HttpContext.Request.Query["LawyerId"].ToString());
+				}
+			}
+			catch
+			{
+				_contextAccessor.HttpContext.Session.SetString("LawyerId", "");
+			}
 			return View("Views/Pages/Admin/DeleteLawyer.cshtml");
 		}
+
         [AllowAnonymous]
         [HttpPut]
-        public JsonResult UpdateLawyert([FromBody] LawyerUserModel updateLawyer)
+        public JsonResult UpdateLawyer([FromBody] LawyerUserModel updateLawyer)
         {
             try
             {
@@ -462,11 +550,12 @@ namespace Starterkit.Controllers
                 AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
                 LawyerModel _updateLawyer = new LawyerModel();
 
-                _updateLawyer.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _updateLawyer.Id =updateLawyer.Id;
                 _updateLawyer.FirstName = updateLawyer.FirstName?.Trim();
                 _updateLawyer.LastName = updateLawyer.LastName?.Trim();
                 _updateLawyer.LisenceNo = updateLawyer.LisenceNo?.Trim();
                 _updateLawyer.LawyerType = updateLawyer.LawyerType?.Trim();
+                _updateLawyer.DateOfBirth = updateLawyer.DateOfBirth?.Trim();
                 _updateLawyer.Company = updateLawyer.Company?.Trim();
                 _updateLawyer.Phone = updateLawyer.Phone?.Trim();
                 _updateLawyer.CountryCode = updateLawyer.CountryCode?.Trim();
@@ -496,10 +585,11 @@ namespace Starterkit.Controllers
                 AdminLogic adminLogic = (AdminLogic)LogicFactory.GetLogic(LogicType.AdminLogic);
                 LawyerModel _deleteLawyer = new LawyerModel();
 
-                _deleteLawyer.Id = Convert.ToInt32(_contextAccessor.HttpContext.Session.GetString("Id"));
+                _deleteLawyer.Id = deleteLawyer.Id;
                 _deleteLawyer.FirstName = deleteLawyer.FirstName?.Trim();
                 _deleteLawyer.LastName = deleteLawyer.LastName?.Trim();
                 _deleteLawyer.Phone = deleteLawyer.Phone?.Trim();
+                _deleteLawyer.DateOfBirth = deleteLawyer.DateOfBirth?.Trim();
                 _deleteLawyer.CountryCode = deleteLawyer.CountryCode?.Trim();
                 _deleteLawyer.LisenceNo = deleteLawyer.LisenceNo?.Trim();
                 _deleteLawyer.LawyerType = deleteLawyer.LawyerType?.Trim();
@@ -520,18 +610,7 @@ namespace Starterkit.Controllers
         }
 
 
-        [HttpGet("ProfileOverview/")]
-        public IActionResult ProfileOverview()
-        {
-            return View("Views/Pages/Admin/ProfileOverview.cshtml");
-        }
-
-        [HttpGet("ProfileSetting/")]
-        public IActionResult ProfileSetting()
-        {
-            return View("Views/Pages/Admin/ProfileSetting.cshtml");
-        }
-
+       
 		[HttpGet("CreateRole/")]
 		public IActionResult CreateRole()
 		{

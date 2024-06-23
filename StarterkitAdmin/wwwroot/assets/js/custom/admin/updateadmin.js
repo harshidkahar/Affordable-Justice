@@ -104,16 +104,16 @@ var UpdateAdmin = function () {
 
                     // Collect form data
                     var formData = {
-                        //Id: getAdminIdFromURL(),
+                        Id: getAdminIdFromURL(),
                         FirstName: form.querySelector('[name="FirstName"]').value,
                         LastName: form.querySelector('[name="LastName"]').value,
-                        dateOfBirth: form.querySelector('[name="DateOfBirth"]').value,
-                        countrycode: form.querySelector('[name="countrycode"]').value,
-                        phone: form.querySelector('[name="Phone"]').value,
-                        email: form.querySelector('[name="EmailId"]').value,
-                        address: form.querySelector('[name="Address"]').value,
-                        country: form.querySelector('[name="Country"]').value,
-                        nationality: form.querySelector('[name="Nationality"]').value,
+                        DateOfBirth: form.querySelector('[name="DateOfBirth"]').value,
+                        CountryCode: form.querySelector('[name="countrycode"]').value,
+                        Phone: form.querySelector('[name="Phone"]').value,
+                        EmailId: form.querySelector('[name="EmailId"]').value,
+                        Address: form.querySelector('[name="Address"]').value,
+                        Country: form.querySelector('[name="Country"]').value,
+                        Nationality: form.querySelector('[name="Nationality"]').value,
                     };
 
                     // Send AJAX request to create a new admin account
@@ -185,10 +185,12 @@ function convertDateToString(dateString) {
 var adminDetailData = [];
 
 var fetchAdminDetailById = function (id) {
+    var model = { Id: id };
+
     $.ajax({
         url: '/Admin/GetAdminDetail',
         type: 'GET',
-        data: JSON.stringify({ Id: id }),
+        data: model,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
 
@@ -300,6 +302,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Retrieve the admin ID from the URL
     const adminId = getAdminIdFromURL();
 
+    console.log('adminId', adminId);
     // Ensure the ID is valid
     if (adminId !== null) {
         // Call the function to fetch admin data by ID and populate the form

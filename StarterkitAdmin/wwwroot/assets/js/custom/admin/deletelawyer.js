@@ -20,10 +20,11 @@ function convertDateToString(dateString) {
 var lawyerDetailData = [];
 
 var fetchLawyerDetailById = function (id) {
+    var model = { Id: id };
     $.ajax({
         url: '/Admin/GetLawyerDetail',
         type: 'GET',
-        data: JSON.stringify({ Id: id }),
+        data: model,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
 
@@ -70,7 +71,7 @@ var renderTable = function () {
     if (lawyerDetailData.length > 0) {
         var lawyerDetail = lawyerDetailData[0];
 
-        var form = document.querySelector('#kt_update_advocate_form');
+        var form = document.querySelector('#kt_delete_advocate_form');
         form.querySelector('[name="FirstName"]').value = lawyerDetail.FirstName;
         form.querySelector('[name="LastName"]').value = lawyerDetail.LastName;
         form.querySelector('[name="Email"]').value = lawyerDetail.EmailId;
@@ -118,35 +119,46 @@ var renderTable = function () {
 
 
 function deleteLawyerById(id) {
+    var model = {
+        Id: id,
+        FirstName: document.querySelector('[name="FirstName"]').value,
+        LastName: document.querySelector('[name="LastName"]').value,
+        LisenceNo: document.querySelector('[name="lisenceNo"]').value,
+        LawyerType: document.querySelector('[name="LawyerType"]').value,
+        Company: document.querySelector('[name="CompanyName"]').value,
+        DateOfBirth: document.querySelector('[name="DateOfBirth"]').value,
+        CountryCode: document.querySelector('[name="countrycode"]').value,
+        Phone: document.querySelector('[name="Phone"]').value,
+        EmailId: document.querySelector('[name="Email"]').value,
+        Address: document.querySelector('[name="Address"]').value,
+        Country: document.querySelector('[name="Country"]').value,
+        Nationality: document.querySelector('[name="Nationality"]').value,
+    };
+
     // Perform an AJAX request to delete the admin by ID
     $.ajax({
         type: 'DELETE',
         url: 'Admin/DeleteLawyer', // URL of the Web Method
-        data: JSON.stringify({ id: id }), // Send the ID as JSON data
+        data: JSON.stringify(model), // Send the ID as JSON data
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (response) {
-            // Parse the JSON response
-            const serverMessage = response ? JSON.parse(response) : null;
-
-            // Check the response for success or error
-            if (serverMessage && serverMessage.message === "Lawyer deleted successfully.") {
+        success: function (data) {
+            if (data.success == true) {
                 Swal.fire({
-                    text: serverMessage.message,
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then(function () {
-                    // Optional: Redirect to another page or refresh the page after success
-                    location.href = "Lawyer-List";
-                });
-            } else {
-                Swal.fire({
-                    text: serverMessage.message || 'An error occurred while deleting the lawyer.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
+                    text: "Lawyer Successfully Deleted!",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                }).then(function (result) {
+                    location.href = "dashboard"
                 });
             }
+
         },
+
         error: function (error) {
             Swal.fire({
                 text: 'An error occurred. Please try again later.',

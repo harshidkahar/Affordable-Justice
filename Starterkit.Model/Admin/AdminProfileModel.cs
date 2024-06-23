@@ -31,7 +31,7 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Phone no
         /// </summary>
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         /// <summary>
         /// Represents Date of BIrth
         /// </summary>
@@ -57,12 +57,16 @@ namespace Starterkit.Model
         /// </summary>
 
         public string Address { get; set; }
-        /// <summary>
-        /// Represents Whole Address
-        /// </summary>
+		/// <summary>
+		/// Represents Whole Address
+		/// </summary>
+		public string Username { get; set; }
+		/// <summary>
+		/// Represents Password
+		/// </summary>
 
 
-        public string Watchword { get; set; }
+		public string Watchword { get; set; }
         /// <summary>
         /// Represents Password
         /// </summary>
@@ -95,7 +99,7 @@ namespace Starterkit.Model
         /// <summary>
         /// Represents Phone no
         /// </summary>
-        public DateTime? DateOfBirth { get; set; }
+        public string DateOfBirth { get; set; }
         /// <summary>
         /// Represents Date of BIrth
         /// </summary>
@@ -113,11 +117,27 @@ namespace Starterkit.Model
         /// </summary>
         
         public string Address { get; set; }
-        /// <summary>
-        /// Represents Whole Address
-        /// </summary>
+		/// <summary>
+		/// Represents Whole Address
+		/// </summary>
+		/// 
 
-        public string Watchword { get; set; }
+		public string Address_Flat { get; set; }
+		/// <summary>
+		/// Represents Address Flat
+		/// </summary>
+		public string Address_Building { get; set; }
+		/// <summary>
+		/// Represents Address Building
+		/// </summary>
+
+
+		public string Username { get; set; }
+		/// <summary>
+		/// Represents Username
+		/// </summary>
+
+		public string Watchword { get; set; }
         /// <summary>
         /// Represents Password
         /// </summary>

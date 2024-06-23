@@ -62,8 +62,8 @@ namespace Starterkit.Data
                 cmd.Parameters.AddWithValue("Id",insertAdmin.Id);
 				cmd.Parameters.AddWithValue("@FirstName", insertAdmin.FirstName);
 				cmd.Parameters.AddWithValue("@LastName", insertAdmin.LastName);
-				cmd.Parameters.AddWithValue("@DateOfBirth", insertAdmin.DateOfBirth);
-                cmd.Parameters.AddWithValue("@CountryCode", insertAdmin.CountryCode);
+                cmd.Parameters.AddWithValue("@DateOfBirth", insertAdmin.DateOfBirth);
+				cmd.Parameters.AddWithValue("@CountryCode", insertAdmin.CountryCode);
 				cmd.Parameters.AddWithValue("@Phone", insertAdmin.Phone);
 				cmd.Parameters.AddWithValue("@EmailId", insertAdmin.EmailId);
 				cmd.Parameters.AddWithValue("@Address", insertAdmin.Address);
@@ -99,12 +99,14 @@ namespace Starterkit.Data
                 cmd.Parameters.AddWithValue("@FirstName", insertAgent.FirstName);
                 cmd.Parameters.AddWithValue("@LastName", insertAgent.LastName);
                 cmd.Parameters.AddWithValue("@DateOfBirth", insertAgent.DateOfBirth);
+                cmd.Parameters.AddWithValue("@CountryCode", insertAgent.CountryCode);
                 cmd.Parameters.AddWithValue("@Phone", insertAgent.Phone);
                 cmd.Parameters.AddWithValue("@EmailId", insertAgent.EmailId);
                 cmd.Parameters.AddWithValue("@Address", insertAgent.Address);
                 cmd.Parameters.AddWithValue("@Country", insertAgent.Country);
                 cmd.Parameters.AddWithValue("@Nationality", insertAgent.Nationality);
                 cmd.Parameters.AddWithValue("@Role", insertAgent.Role);
+                cmd.Parameters.AddWithValue("@Opt", insertAgent.Opt);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
@@ -138,12 +140,12 @@ namespace Starterkit.Data
                 cmd.Parameters.AddWithValue("@Company", insertLawyer.Company);
                 cmd.Parameters.AddWithValue("@DateOfBirth", insertLawyer.DateOfBirth);
                 cmd.Parameters.AddWithValue("@Phone", insertLawyer.Phone);
+                cmd.Parameters.AddWithValue("@CountryCode",insertLawyer.CountryCode);
                 cmd.Parameters.AddWithValue("@EmailId", insertLawyer.EmailId);
                 cmd.Parameters.AddWithValue("@Address", insertLawyer.Address);
                 cmd.Parameters.AddWithValue("@Country", insertLawyer.Country);
                 cmd.Parameters.AddWithValue("@Nationality", insertLawyer.Nationality);
-                cmd.Parameters.AddWithValue("@Timestamp", DateTime.Now);
-                cmd.Parameters.AddWithValue("@IsActive", true);
+                cmd.Parameters.AddWithValue("@Opt", insertLawyer.Opt);
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
@@ -156,7 +158,6 @@ namespace Starterkit.Data
 
             }
         }
-
 
         public string DAL_AdminNew(AdminProfileSettingModel profileUpdate)
         {
@@ -175,8 +176,13 @@ namespace Starterkit.Data
                 cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = profileUpdate.Phone;
                 cmd.Parameters.Add("@DateOfBirth", SqlDbType.DateTime).Value = profileUpdate.DateOfBirth;
                 cmd.Parameters.Add("@Address", SqlDbType.NVarChar).Value = profileUpdate.Address;
+                cmd.Parameters.Add("@Address_Flat", SqlDbType.NVarChar).Value = profileUpdate.Address_Flat;
+                cmd.Parameters.Add("@Address_Building", SqlDbType.NVarChar).Value = profileUpdate.Address_Building;
                 cmd.Parameters.Add("@Country", SqlDbType.NVarChar).Value = profileUpdate.Country;
                 cmd.Parameters.Add("@Nationality", SqlDbType.NVarChar).Value = profileUpdate.Nationality;
+                cmd.Parameters.Add("@EmailId", SqlDbType.NVarChar).Value = profileUpdate.EmailId;
+                cmd.Parameters.Add("@Username", SqlDbType.NVarChar).Value = profileUpdate.Username;
+                cmd.Parameters.Add("@Watchword", SqlDbType.NVarChar).Value = profileUpdate.Watchword;
                 SqlDataAdapter da = new SqlDataAdapter();
                 da.SelectCommand = cmd;
                 cmd.ExecuteNonQuery();
@@ -189,7 +195,6 @@ namespace Starterkit.Data
 
             }
         }
-
       
         public string UpdateEmail(int Id, string email, string otp)
         {

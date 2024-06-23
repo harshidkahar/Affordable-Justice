@@ -18,35 +18,42 @@ function convertToDateFormat(dateString) {
 }
 
 function deleteAdminById(id) {
+    var model = {
+        Id: id,
+        FirstName: document.querySelector('[name="FirstName"]').value,
+        LastName: document.querySelector('[name="LastName"]').value,
+        DateOfBirth: document.querySelector('[name="DateOfBirth"]').value,
+        CountryCode: document.querySelector('[name="countrycode"]').value,
+        Phone: document.querySelector('[name="Phone"]').value,
+        EmailId: document.querySelector('[name="EmailId"]').value,
+        Address: document.querySelector('[name="Address"]').value,
+        Country: document.querySelector('[name="Country"]').value,
+        Nationality: document.querySelector('[name="Nationality"]').value,
+    };
     // Perform an AJAX request to delete the admin by ID
     $.ajax({
         type: 'DELETE',
         url: 'Admin/DeleteAdmin', // URL of the Web Method
-        data: JSON.stringify({ Id: id }), // Send the ID as JSON data
+        data: JSON.stringify(model), // Send the ID as JSON data
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
-        success: function (response) {
-            // Parse the JSON response
-            const serverMessage = response ? JSON.parse(response) : null;
-
-            // Check the response for success or error
-            if (serverMessage && serverMessage.message === "Admin deleted successfully.") {
+        success: function (data) {
+            if (data.success == true) {
                 Swal.fire({
-                    text: serverMessage.message,
-                    icon: 'success',
-                    confirmButtonText: 'OK'
-                }).then(function () {
-                    // Optional: Redirect to another page or refresh the page after success
-                    location.href = "Admin-List";
-                });
-            } else {
-                Swal.fire({
-                    text: serverMessage.message || 'An error occurred while deleting the admin.',
-                    icon: 'error',
-                    confirmButtonText: 'OK'
+                    text: "Admin Successfully Deleted!",
+                    icon: "success",
+                    buttonsStyling: false,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn btn-primary"
+                    }
+                }).then(function (result) {
+                    location.href = "New-Admin"
                 });
             }
+
         },
+
         error: function (error) {
             Swal.fire({
                 text: 'An error occurred. Please try again later.',
@@ -107,10 +114,12 @@ function convertDateToString(dateString) {
 var adminDetailData = [];
 
 var fetchAdminDetailById = function (id) {
+    var model = { Id: id };
+
     $.ajax({
         url: '/Admin/GetAdminDetail',
         type: 'GET',
-        data: JSON.stringify({ Id: id }),
+        data: model,
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
 
@@ -135,7 +144,7 @@ var fetchAdminDetailById = function (id) {
         },
         error: function () {
             Swal.fire({
-                text: "Failed to retrieve case list.",
+                text: "Failed to retrieve admin detail.",
                 icon: "error",
                 buttonsStyling: false,
                 confirmButtonText: "Ok, got it!",
@@ -146,7 +155,6 @@ var fetchAdminDetailById = function (id) {
         }
     });
 }
-
 
 // Render table with case list data
 var renderTable = function () {
@@ -178,7 +186,6 @@ var renderTable = function () {
             console.error('Input element with name "DateOfBirth" not found');
         } */
         form.querySelector('[name="DateOfBirth"]').value = adminDateOfBirth;
-
         form.querySelector('[name="Phone"]').value = adminDetail.Phone;
         form.querySelector('[name="Address"]').value = adminDetail.Address;
         const countrySelect = form.querySelector('[name="Country"]');
@@ -195,7 +202,6 @@ var renderTable = function () {
     }
     KTMenu.createInstances();
 }
-
 
 function getAdminIdFromURL() {
     // Get the query string from the current URL
