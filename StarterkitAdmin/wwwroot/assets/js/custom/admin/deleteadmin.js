@@ -38,7 +38,7 @@ function deleteAdminById(id) {
         contentType: 'application/json; charset=utf-8',
         dataType: 'json',
         success: function (data) {
-            if (data.success == true) {
+            if (data == "done") {
                 Swal.fire({
                     text: "Admin Successfully Deleted!",
                     icon: "success",
@@ -48,7 +48,7 @@ function deleteAdminById(id) {
                         confirmButton: "btn btn-primary"
                     }
                 }).then(function (result) {
-                    location.href = "New-Admin"
+                    location.href = "ViewAdmin"
                 });
             }
 
