@@ -14,7 +14,7 @@ namespace Starterkit.Data.Base
     internal static class DataAccess
     {
          public static string CONNECTION_STRING_KEY = "Server=DESKTOP-OSME1C4;Database=AffordableJustice;User Id=sa;password=admin@123;";
-        public static string LIVE_CONNECTION_STRING = "Server=69.57.172.110;Database=LawHere;User Id=LawHere;password=admin@250821";
+        public static string LIVE_CONNECTION_STRING = "Server=103.154.185.160;Database=LawHere;User Id=LawHere;password=admin@250821";
 
         public static SqlConnection OpenConnection()
         {
